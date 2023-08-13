@@ -9,6 +9,7 @@ import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
+import 'package:haraj/utils/get/general_getx_controller.dart';
 import 'package:haraj/widgets/app_elevated_button.dart';
 import 'package:haraj/widgets/app_image.dart';
 import 'package:haraj/widgets/app_text.dart';
@@ -25,6 +26,7 @@ part '../components/text_button.dart';
 
 class LoginScreen extends GetView<LoginController> {
   LoginController loginController = Get.put(LoginController());
+  GeneralGetxController generalController = Get.put(GeneralGetxController());
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,7 @@ class LoginScreen extends GetView<LoginController> {
                                 child: LoginButton(
                                   title: context.localizations.login,
                                   onPressed: () async {
-                                    await controller.performRegister();
+                                      await controller.performRegister();
                                   },
                                 ),
                               );

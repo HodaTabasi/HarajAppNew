@@ -248,7 +248,12 @@
   "passwords_not_equal": "Passwords do not match",
   "password_lenght": "Password cannot be less than 8 characters",
   "select_princedom": "Select The Princedom",
-  "edit_profile": "Edit Profile"
+  "edit_profile": "Edit Profile",
+   "lenght_condation": "this field is require",
+    "valid_phone": "must contain 10 diget",
+    "valid_email": "invalid email",
+    "valid_password": "must contain 8 diget",
+    "valid_name": "must contain 4 char at least"
 
 
 }
