@@ -8,6 +8,9 @@ class BottomSheet extends StatefulWidget {
 }
 
 class _BottomSheetState extends State<BottomSheet> {
+  CompleteProfileBuyerController completeProfileBuyerController =
+      Get.put(CompleteProfileBuyerController());
+
   int _selectedRadio = 0;
   bool isSelected = false;
 
@@ -98,9 +101,7 @@ class _BottomSheetState extends State<BottomSheet> {
           RegisterButton(
             title: context.localizations.create,
             onPressed: () {
-              Get.toNamed(KeyRoutes.completeProfileBuyerScreen);
-              // Navigator.pushNamed(
-              //     context, KeyRoutes.completeProfileBuyerScreen);
+              Get.offAll(CompleteProfileBuyerScreen());
             },
           ),
         ],
