@@ -1,9 +1,9 @@
-library complete_buyer_profile_view;
+library complete_profile_seller_view;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/profile/complete_buyer_profile/controller/complete_profile_buyer_screen.dart';
+import 'package:haraj/feature/app/profile/complete_profile_buyer/controller/complete_profile_buyer_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
@@ -21,7 +21,7 @@ part '../components/image_profile.dart';
 part '../components/input_field.dart';
 part '../components/save_button.dart';
 
-class CompleteProfileBuyerScreen
+class CompleteProfileSellerScreen
     extends GetView<CompleteProfileBuyerController> {
   CompleteProfileBuyerController completeProfileBuyerController =
       Get.put(CompleteProfileBuyerController());
@@ -53,7 +53,7 @@ class CompleteProfileBuyerScreen
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 20.w),
                                   child: SaveButton(
-                                    title: context.localizations.save_changes,
+                                    title: context.localizations.register,
                                     onPressed: () async {
                                       // await controller.performRegister();
                                     },

@@ -9,4 +9,5 @@ class IconsApp {
   static const String buyerAccount = 'assets/icons/buyer_account.svg';
   static const String mobile = 'assets/icons/mobile.svg';
   static const String person = 'assets/icons/person.svg';
+  static const String id = 'assets/icons/id.svg';
 }

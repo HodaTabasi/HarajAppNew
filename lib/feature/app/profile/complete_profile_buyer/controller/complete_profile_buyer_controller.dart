@@ -16,24 +16,32 @@ class CompleteProfileBuyerController extends GetxController {
 
   late TextEditingController nameController;
   late TextEditingController phoneController;
+  late TextEditingController idController;
+  late TextEditingController nickNameController;
 
   @override
   void onInit() {
     super.onInit();
     nameController = TextEditingController();
     phoneController = TextEditingController();
+    idController = TextEditingController();
+    nickNameController = TextEditingController();
   }
 
   @override
   void dispose() {
     nameController.dispose();
     phoneController.dispose();
+    idController.dispose();
+    nickNameController.dispose();
     super.dispose();
   }
 
   void clear() {
     nameController.clear();
     phoneController.clear();
+    idController.clear();
+    nickNameController.clear();
   }
 
   Future<void> performRegister() async {
@@ -45,7 +53,10 @@ class CompleteProfileBuyerController extends GetxController {
   }
 
   bool checkData() {
-    if (nameController.text.isNotEmpty && phoneController.text.isNotEmpty) {
+    if (nameController.text.isNotEmpty &&
+        phoneController.text.isNotEmpty &&
+        idController.text.isNotEmpty &&
+        nickNameController.text.isNotEmpty) {
       return true;
     }
     Get.snackbar(

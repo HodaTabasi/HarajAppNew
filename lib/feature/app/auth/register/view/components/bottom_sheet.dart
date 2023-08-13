@@ -101,7 +101,11 @@ class _BottomSheetState extends State<BottomSheet> {
           RegisterButton(
             title: context.localizations.create,
             onPressed: () {
-              Get.offAll(CompleteProfileBuyerScreen());
+              if (_selectedRadio == 0) {
+                Get.offAll(CompleteProfileBuyerScreen());
+              } else {
+                Get.offAll(CompleteProfileSellerScreen());
+              }
             },
           ),
         ],
