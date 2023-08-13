@@ -60,6 +60,7 @@ class LoginScreen extends GetView<LoginController> {
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                                 child: LoginButton(
                                   title: context.localizations.login,
+                                  validate: controller.emailController.text.isNotEmpty && controller.passwordController.text.isNotEmpty,
                                   onPressed: () async {
                                       await controller.performRegister();
                                   },
