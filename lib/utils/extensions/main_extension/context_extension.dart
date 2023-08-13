@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:haraj/feature/app/auth/login/view/screen/login_Screen.dart';
+import 'package:haraj/feature/app/auth/login/view/screen/login_screen.dart';
+import 'package:haraj/feature/app/auth/register/view/screen/register_screen.dart';
 import 'package:haraj/feature/core/launch_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/routes/key_routes.dart';
@@ -71,6 +72,7 @@ extension ContextExtension on BuildContext {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             minimumSize: Size(double.infinity, 48.h),
+            backgroundColor: ColorResource.mainColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(6.r),
             ),
@@ -85,7 +87,7 @@ extension ContextExtension on BuildContext {
         KeyRoutes.launchScreen: (context) => const LaunchScreen(),
         //---------------------------AUTH SCREENS-------------------------------
         KeyRoutes.loginScreen: (context) => LoginScreen(),
-        // KeyRoutes.registerScreen: (context) => const RegisterScreen(),
+        KeyRoutes.registerScreen: (context) => RegisterScreen(),
         // KeyRoutes.otpScreen: (context) => const OTPFirstScreen(),
         // KeyRoutes.afterOtpScreen: (context) => const OTPAfterScreen(),
         // KeyRoutes.changeEmailScreen: (context) => const ChangeEmailScreen(),

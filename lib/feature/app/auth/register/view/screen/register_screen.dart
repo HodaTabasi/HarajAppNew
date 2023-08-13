@@ -1,30 +1,34 @@
-library login_view;
+library register_view;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/auth/login/controller/login_controller.dart';
+import 'package:haraj/feature/app/auth/register/controller/register_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/widgets/app_elevated_button.dart';
 import 'package:haraj/widgets/app_image.dart';
+import 'package:haraj/widgets/app_svg_picture.dart';
 import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_textformfiled.dart';
 import 'package:haraj/widgets/row_divider_widget.dart';
 import 'package:haraj/widgets/social_container_widget.dart';
 
+part '../components/back_button.dart';
+part '../components/bottom_sheet.dart';
 part '../components/header_image.dart';
 part '../components/header_logo.dart';
 part '../components/input_field.dart';
-part '../components/login_button.dart';
+part '../components/register_button.dart';
+part '../components/register_type.dart';
 part '../components/terms_and_conditions.dart';
 part '../components/text_button.dart';
 
-class LoginScreen extends GetView<LoginController> {
-  LoginController loginController = Get.put(LoginController());
+class RegisterScreen extends GetView<RegisterController> {
+  RegisterController registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -43,34 +47,25 @@ class LoginScreen extends GetView<LoginController> {
                       const HeaderLogo(),
                       SizedBox(height: 30.h),
                       InputField(),
-                      SizedBox(height: 5.h),
-                      TextButtonApp(
-                        onPressed: () {},
-                        title: context.localizations.forget_password,
-                        color: ColorResource.gray,
-                        alignment: Alignment.topLeft,
-                      ),
-                      SizedBox(height: 10.h),
+                      SizedBox(height: 15.h),
                       Obx(() {
                         return controller.loading.isTrue
                             ? const Center(child: CircularProgressIndicator())
                             : Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
-                                child: LoginButton(
-                                  title: context.localizations.login,
+                                child: RegisterButton(
+                                  title: context.localizations.register,
                                   onPressed: () async {
-                                    await controller.performRegister();
+                                    // await controller.performRegister();
+                                    Get.bottomSheet(const BottomSheet(),
+                                        enterBottomSheetDuration:
+                                            const Duration(milliseconds: 500),
+                                        exitBottomSheetDuration:
+                                            const Duration(milliseconds: 400));
                                   },
                                 ),
                               );
                       }),
-                      SizedBox(height: 10.h),
-                      TextButtonApp(
-                        onPressed: () {},
-                        title: context.localizations.new_register,
-                        color: ColorResource.mainColor,
-                        alignment: Alignment.center,
-                      ),
                     ],
                   ),
                 ),
