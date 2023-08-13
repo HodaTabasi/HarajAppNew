@@ -1,11 +1,12 @@
 part of login_view;
 
 class LoginButton extends StatefulWidget {
-  const LoginButton({Key? key, required this.title, required this.onPressed})
+   LoginButton({Key? key, required this.title, required this.onPressed,this.validate = false})
       : super(key: key);
 
   final String title;
   final void Function() onPressed;
+  bool validate = false;
 
   @override
   State<LoginButton> createState() => _LoginButtonState();
@@ -22,7 +23,7 @@ class _LoginButtonState extends State<LoginButton> {
       widthButton: double.infinity,
       heightButton: 50.h,
       radius: 5.r,
-      backgroundColor: ColorResource.mainColor,
+      backgroundColor: widget.validate ?ColorResource.mainColor:ColorResource.white,
       onPressed: widget.onPressed,
       assetName: '',
       fontWeight: FontWeight.w500,

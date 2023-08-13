@@ -45,4 +45,5 @@ class ColorResource {
   static const Color green = Color(0xFF00B74E);
   static const Color red = Color(0xffFF6262);
   static const Color warring = Color(0xffFFE033);
+  static const Color dividerVirticalColor = Color(0xffD0D0D0);
 }

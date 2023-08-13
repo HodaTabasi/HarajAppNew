@@ -9,7 +9,6 @@ import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
-import 'package:haraj/utils/extensions/routes/key_routes.dart';
 import 'package:haraj/widgets/app_elevated_button.dart';
 import 'package:haraj/widgets/app_image.dart';
 import 'package:haraj/widgets/app_text.dart';
@@ -67,10 +66,7 @@ class LoginScreen extends GetView<LoginController> {
                       }),
                       SizedBox(height: 10.h),
                       TextButtonApp(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, KeyRoutes.registerScreen);
-                        },
+                        onPressed: () {},
                         title: context.localizations.new_register,
                         color: ColorResource.mainColor,
                         alignment: Alignment.center,

@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/extensions/routes/key_routes.dart';
+import 'package:haraj/utils/get/general_getx_controller.dart';
 import 'package:haraj/utils/get/localizations/language_getx_controller.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
+import 'package:haraj/utils/translation_file.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: context.appTheme,
+        translations: TranslateApp(), // your translations
+        fallbackLocale: Locale('en', 'UK'),
         localizationsDelegates: context.localizationsDelegate,
         supportedLocales: context.supportedLocales,
         locale: Locale(_languageGetxController.language.value),
