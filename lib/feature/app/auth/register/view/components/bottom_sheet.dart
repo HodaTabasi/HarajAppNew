@@ -95,7 +95,14 @@ class _BottomSheetState extends State<BottomSheet> {
             color: ColorResource.lightGray,
             thickness: 2,
           ),
-          RegisterButton(title: context.localizations.create, onPressed: () {}),
+          RegisterButton(
+            title: context.localizations.create,
+            onPressed: () {
+              Get.toNamed(KeyRoutes.completeProfileBuyerScreen);
+              // Navigator.pushNamed(
+              //     context, KeyRoutes.completeProfileBuyerScreen);
+            },
+          ),
         ],
       ),
     );

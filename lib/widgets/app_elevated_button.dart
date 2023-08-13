@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
-import 'package:haraj/widgets/app_svg_picture.dart';
 import 'package:haraj/widgets/app_text.dart';
 
 class AppElevatedButton extends StatelessWidget {
@@ -44,8 +41,8 @@ class AppElevatedButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          AppSvgPicture(assetName: assetName!, color: ColorResource.white),
-          SizedBox(width: 5.w),
+          // AppSvgPicture(assetName: assetName!, color: ColorResource.white),
+          // SizedBox(width: 5.w),
           AppText(
             text: title,
             textAlign: TextAlign.center,

@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haraj/feature/app/auth/login/view/screen/login_screen.dart';
 import 'package:haraj/feature/app/auth/register/view/screen/register_screen.dart';
+import 'package:haraj/feature/app/profile/complete_buyer_profile/view/screen/complete_profile_buyer_screen.dart';
 import 'package:haraj/feature/core/launch_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/routes/key_routes.dart';
@@ -106,8 +107,8 @@ extension ContextExtension on BuildContext {
         // KeyRoutes.filterBuyerScreen: (context) => const BuyerFilterScreen(),
         // KeyRoutes.editProfileBuyerScreen: (context) =>
         //     const EditProfileBuyerScreen(),
-        // KeyRoutes.completeProfileBuyerScreen: (context) =>
-        //     const CompleteProfileBuyerScreen(),
+        KeyRoutes.completeProfileBuyerScreen: (context) =>
+            CompleteProfileBuyerScreen(),
         // KeyRoutes.favoriteBuyerScreen: (context) => const FavoriteBuyerScreen(),
         // KeyRoutes.productDetailsBuyerScreen: (context) =>
         //     const productDetailsBuyerScreen(),

@@ -9,16 +9,19 @@ class InputField extends GetView<RegisterController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppTextFomField(
-            controller: controller.emailController,
+            textController: controller.emailController,
             textInputType: TextInputType.emailAddress,
             title: context.localizations.email,
             radius: 6.r,
             prefixIcon: IconsApp.email,
+            focusNode: FocusNode(),
+            errorTitle: GeneralGetxController.to.emailErrorText.value,
+            type: 'email',
           ),
           SizedBox(height: 20.h),
           Obx(() {
             return AppTextFomField(
-              controller: controller.passwordController,
+              textController: controller.passwordController,
               textInputType: TextInputType.visiblePassword,
               title: context.localizations.password,
               radius: 6.r,
@@ -43,12 +46,15 @@ class InputField extends GetView<RegisterController> {
                       : ColorResource.black,
                 ),
               ),
+              focusNode: FocusNode(),
+              errorTitle: GeneralGetxController.to.passwordErrorText.value,
+              type: 'password',
             );
           }),
           SizedBox(height: 20.h),
           Obx(() {
             return AppTextFomField(
-              controller: controller.confirmPasswordController,
+              textController: controller.confirmPasswordController,
               textInputType: TextInputType.visiblePassword,
               title: context.localizations.retype_password,
               radius: 6.r,
@@ -73,6 +79,9 @@ class InputField extends GetView<RegisterController> {
                       : ColorResource.black,
                 ),
               ),
+              focusNode: FocusNode(),
+              errorTitle: GeneralGetxController.to.passwordErrorText.value,
+              type: 'password',
             );
           }),
         ],
