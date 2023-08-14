@@ -2,6 +2,7 @@ class IconsApp {
   IconsApp._();
 
   static const String logoApp = 'assets/icons/logo.svg';
+  static const String logoSeller = 'assets/icons/logo_seller.svg';
   static const String email = 'assets/icons/email.svg';
   static const String password = 'assets/icons/password.svg';
   static const String questionMark = 'assets/icons/question_mark.svg';
@@ -10,4 +11,6 @@ class IconsApp {
   static const String mobile = 'assets/icons/mobile.svg';
   static const String person = 'assets/icons/person.svg';
   static const String id = 'assets/icons/id.svg';
+  static const String commercialRegisterNumber =
+      'assets/icons/commercial_register_number.svg';
 }

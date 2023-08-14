@@ -1,14 +1,13 @@
-part of login_view;
+part of complete_profile_buyer_view;
 
 class HeaderImage extends StatelessWidget {
   const HeaderImage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppImage(
+    return const AppImage(
       imageName: ImagesApp.background,
       width: double.infinity,
-      height: 550.h,
       fit: BoxFit.fill,
     );
   }

@@ -10,6 +10,8 @@ class BottomSheet extends StatefulWidget {
 class _BottomSheetState extends State<BottomSheet> {
   CompleteProfileBuyerController completeProfileBuyerController =
       Get.put(CompleteProfileBuyerController());
+  CompleteProfileSellerController completeProfileSellerController =
+      Get.put(CompleteProfileSellerController());
 
   int _selectedRadio = 0;
   bool isSelected = false;
@@ -102,9 +104,9 @@ class _BottomSheetState extends State<BottomSheet> {
             title: context.localizations.create,
             onPressed: () {
               if (_selectedRadio == 0) {
-                Get.offAll(CompleteProfileBuyerScreen());
-              } else {
                 Get.offAll(CompleteProfileSellerScreen());
+              } else {
+                Get.offAll(CompleteProfileBuyerScreen());
               }
             },
           ),

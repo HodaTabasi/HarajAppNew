@@ -1,4 +1,4 @@
-part of complete_buyer_profile_view;
+part of complete_store_seller_view;
 
 class SaveButton extends StatefulWidget {
   const SaveButton({Key? key, required this.title, required this.onPressed})

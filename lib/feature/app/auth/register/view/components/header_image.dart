@@ -5,9 +5,10 @@ class HeaderImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AppImage(
+    return AppImage(
       imageName: ImagesApp.background,
       width: double.infinity,
+      height: 560.h,
       fit: BoxFit.fill,
     );
   }

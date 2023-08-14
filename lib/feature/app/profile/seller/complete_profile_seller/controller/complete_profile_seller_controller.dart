@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 
-class CompleteProfileBuyerController extends GetxController {
-  static CompleteProfileBuyerController get to =>
-      Get.find<CompleteProfileBuyerController>();
+class CompleteProfileSellerController extends GetxController {
+  static CompleteProfileSellerController get to =>
+      Get.find<CompleteProfileSellerController>();
 
   RxBool loading = false.obs;
   RxBool isVisibility = false.obs;

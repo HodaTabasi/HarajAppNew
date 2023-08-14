@@ -3,7 +3,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haraj/feature/app/auth/login/view/screen/login_screen.dart';
 import 'package:haraj/feature/app/auth/register/view/screen/register_screen.dart';
-import 'package:haraj/feature/app/profile/complete_profile_buyer/view/screen/complete_profile_buyer_screen.dart';
+import 'package:haraj/feature/app/profile/buyer/complete_profile_buyer/view/screen/complete_profile_buyer_screen.dart';
+import 'package:haraj/feature/app/profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
+import 'package:haraj/feature/app/profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
 import 'package:haraj/feature/core/launch_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/routes/key_routes.dart';
@@ -132,10 +134,10 @@ extension ContextExtension on BuildContext {
         //     const PersonalInfoSellerScreen(),
         // KeyRoutes.editPersonalSellerScreen: (context) =>
         //     const EditPersonalSellerScreen(),
-        // KeyRoutes.completeProfileSellerScreen: (context) =>
-        //     const CompletePersonalSellerScreen(),
-        // KeyRoutes.completeStoreSellerScreen: (context) =>
-        //     const CompleteStoreSellerScreen(),
+        KeyRoutes.completeProfileSellerScreen: (context) =>
+            CompleteProfileSellerScreen(),
+        KeyRoutes.completeStoreSellerScreen: (context) =>
+            CompleteStoreSellerScreen(),
         // KeyRoutes.imageStoreSellerScreen: (context) =>
         //     const ImageStoreSellerScreen(),
         // KeyRoutes.addAddressSellerScreen: (context) =>

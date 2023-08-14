@@ -1,4 +1,4 @@
-part of complete_buyer_profile_view;
+part of complete_profile_buyer_view;
 
 class CloseButton extends StatefulWidget {
   const CloseButton({Key? key}) : super(key: key);

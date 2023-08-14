@@ -1,8 +1,8 @@
 part of complete_profile_seller_view;
 
-class InputField extends GetView<CompleteProfileBuyerController> {
-  CompleteProfileBuyerController completeProfileBuyerController =
-      Get.put(CompleteProfileBuyerController());
+class InputField extends GetView<CompleteProfileSellerController> {
+  CompleteProfileSellerController completeProfileSellerController =
+      Get.put(CompleteProfileSellerController());
   @override
   Widget build(BuildContext context) {
     return Padding(

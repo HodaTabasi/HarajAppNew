@@ -3,7 +3,8 @@ library complete_profile_seller_view;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/profile/complete_profile_buyer/controller/complete_profile_buyer_controller.dart';
+import 'package:haraj/feature/app/profile/seller/complete_profile_seller/controller/complete_profile_seller_controller.dart';
+import 'package:haraj/feature/app/profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
@@ -22,9 +23,9 @@ part '../components/input_field.dart';
 part '../components/save_button.dart';
 
 class CompleteProfileSellerScreen
-    extends GetView<CompleteProfileBuyerController> {
-  CompleteProfileBuyerController completeProfileBuyerController =
-      Get.put(CompleteProfileBuyerController());
+    extends GetView<CompleteProfileSellerController> {
+  CompleteProfileSellerController completeProfileSellerController =
+      Get.put(CompleteProfileSellerController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +57,7 @@ class CompleteProfileSellerScreen
                                     title: context.localizations.register,
                                     onPressed: () async {
                                       // await controller.performRegister();
+                                      Get.to(CompleteStoreSellerScreen());
                                     },
                                   ),
                                 );
