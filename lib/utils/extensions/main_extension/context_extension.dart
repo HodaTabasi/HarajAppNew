@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haraj/feature/app/auth/login/view/screen/login_screen.dart';
 import 'package:haraj/feature/app/auth/register/view/screen/register_screen.dart';
 import 'package:haraj/feature/app/profile/buyer/complete_profile_buyer/view/screen/complete_profile_buyer_screen.dart';
+import 'package:haraj/feature/app/profile/seller/add_address_seller/view/screen/add_address_seller_screen.dart';
 import 'package:haraj/feature/app/profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
 import 'package:haraj/feature/app/profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
 import 'package:haraj/feature/core/launch_screen.dart';
@@ -140,8 +141,7 @@ extension ContextExtension on BuildContext {
             CompleteStoreSellerScreen(),
         // KeyRoutes.imageStoreSellerScreen: (context) =>
         //     const ImageStoreSellerScreen(),
-        // KeyRoutes.addAddressSellerScreen: (context) =>
-        //     const AddAddressSellerScreen(),
+        KeyRoutes.addAddressSellerScreen: (context) => AddAddressSellerScreen(),
         // KeyRoutes.subscriptionSellerScreen: (context) =>
         //     const SubscriptionSellerScreen(),
         // KeyRoutes.adsDetailSellerScreen: (context) =>

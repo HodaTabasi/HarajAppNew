@@ -1,31 +1,39 @@
-library complete_store_seller_view;
+library add_address_seller_view;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/profile/seller/add_address_seller/view/screen/add_address_seller_screen.dart';
-import 'package:haraj/feature/app/profile/seller/complete_store_seller/controller/complete_store_seller_controller.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:haraj/feature/app/profile/seller/add_address_seller/controller/add_address_seller_controller.dart';
+import 'package:haraj/feature/app/profile/seller/add_address_seller/view/components/custom_rich_text.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/get/general_getx_controller.dart';
+import 'package:haraj/widgets/app_divider.dart';
 import 'package:haraj/widgets/app_elevated_button.dart';
 import 'package:haraj/widgets/app_image.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
 import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_textformfiled.dart';
 
+part '../components/address_component.dart';
 part '../components/back_button.dart';
+part '../components/bottom_sheet.dart';
+part '../components/bottom_sheet_success.dart';
+part '../components/city_selection.dart';
+part '../components/done_button.dart';
 part '../components/header_image.dart';
 part '../components/header_title.dart';
-part '../components/image_profile.dart';
 part '../components/input_field.dart';
 part '../components/save_button.dart';
+part '../screen/map_screen.dart';
 
-class CompleteStoreSellerScreen extends GetView<CompleteStoreSellerController> {
-  CompleteStoreSellerController completeStoreSellerController =
-      Get.put(CompleteStoreSellerController());
+class AddAddressSellerScreen extends GetView<AddAddressSellerController> {
+  AddAddressSellerController addAddressSellerController =
+      Get.put(AddAddressSellerController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +50,6 @@ class CompleteStoreSellerScreen extends GetView<CompleteStoreSellerController> {
                     child: Column(
                       children: [
                         const HeaderTitle(),
-                        SizedBox(height: 24.h),
-                        const ImageProfile(),
                         SizedBox(height: 30.h),
                         InputField(),
                         SizedBox(height: 15.h),
@@ -57,8 +63,14 @@ class CompleteStoreSellerScreen extends GetView<CompleteStoreSellerController> {
                                     title: context.localizations.register,
                                     onPressed: () async {
                                       // await controller.performRegister();
-                                      // Get.to(AddAddressSellerScreen());
-                                      Get.to(() => AddAddressSellerScreen());
+                                      // Get.to(() => AddAddressSellerScreen());
+                                      Get.bottomSheet(
+                                          const BottomSheetSuccess(),
+                                          enterBottomSheetDuration:
+                                              const Duration(milliseconds: 500),
+                                          exitBottomSheetDuration:
+                                              const Duration(
+                                                  milliseconds: 400));
                                     },
                                   ),
                                 );

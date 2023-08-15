@@ -14,8 +14,9 @@ class RowDividerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(
-          child: AppDivider(),
+        Expanded(
+          child: AppDivider(
+              height: 1.h, color: ColorResource.lightGray, thickness: 1),
         ),
         SizedBox(width: 5.w),
         AppText(
@@ -25,8 +26,9 @@ class RowDividerWidget extends StatelessWidget {
           fontSize: 14.sp,
         ),
         SizedBox(width: 5.w),
-        const Expanded(
-          child: AppDivider(),
+        Expanded(
+          child: AppDivider(
+              height: 1.h, color: ColorResource.lightGray, thickness: 1),
         ),
       ],
     );

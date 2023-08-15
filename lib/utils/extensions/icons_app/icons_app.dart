@@ -13,4 +13,11 @@ class IconsApp {
   static const String id = 'assets/icons/id.svg';
   static const String commercialRegisterNumber =
       'assets/icons/commercial_register_number.svg';
+  static const String buildingNumber = 'assets/icons/building_number.svg';
+  static const String emirate = 'assets/icons/emirate.svg';
+  static const String location = 'assets/icons/location.svg';
+  static const String postalCode = 'assets/icons/postal_code.svg';
+  static const String street = 'assets/icons/street.svg';
+  static const String city = 'assets/icons/city.svg';
+  static const String character = 'assets/icons/character.svg';
 }

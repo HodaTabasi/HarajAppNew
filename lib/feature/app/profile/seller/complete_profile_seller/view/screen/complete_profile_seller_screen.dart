@@ -57,7 +57,7 @@ class CompleteProfileSellerScreen
                                     title: context.localizations.register,
                                     onPressed: () async {
                                       // await controller.performRegister();
-                                      Get.to(CompleteStoreSellerScreen());
+                                      Get.to(() => CompleteStoreSellerScreen());
                                     },
                                   ),
                                 );

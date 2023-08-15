@@ -53,5 +53,20 @@
     <string>Our App requires temporary access to Camera</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Our App requires temporary access to Camera</string>
+
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Can I have location always?</string>
+	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
+	<dict>
+		<key>AIzaSyATbrvhjn62W9z5xLPFpurj5-nPr4UBMg0</key>
+		<string>Our App requires temporary access to the device's precise location.</string>
+	</dict>
+	<key>NSLocationUsageDescription</key>
+	<string>Older devices need location.</string>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Our App needs access to your geographical location to build services</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>
