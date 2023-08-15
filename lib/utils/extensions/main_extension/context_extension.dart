@@ -59,8 +59,9 @@ extension ContextExtension on BuildContext {
         appBarTheme: const AppBarTheme(
           backgroundColor: ColorResource.lightGray,
           elevation: 0,
-          centerTitle: false,
+          centerTitle: true,
           iconTheme: IconThemeData(color: ColorResource.black),
+          // toolbarHeight: 48,
         ),
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(

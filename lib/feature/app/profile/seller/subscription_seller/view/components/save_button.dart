@@ -1,22 +1,21 @@
-part of add_address_seller_view;
+part of subscription_seller_view;
 
-class DoneButton extends StatefulWidget {
-  const DoneButton({Key? key, required this.title, required this.onPressed})
+class SaveButton extends StatefulWidget {
+  const SaveButton({Key? key, required this.title, required this.onPressed})
       : super(key: key);
 
   final String title;
   final void Function() onPressed;
 
   @override
-  State<DoneButton> createState() => _RegisterButtonState();
+  State<SaveButton> createState() => _SaveButtonState();
 }
 
-class _RegisterButtonState extends State<DoneButton> {
+class _SaveButtonState extends State<SaveButton> {
   @override
   Widget build(BuildContext context) {
     return AppElevatedButton(
       title: widget.title,
-      // title: 'SignUp',
       titleColor: ColorResource.white,
       fontSize: 15.sp,
       widthButton: double.infinity,
@@ -24,7 +23,6 @@ class _RegisterButtonState extends State<DoneButton> {
       radius: 5.r,
       backgroundColor: ColorResource.mainColor,
       onPressed: widget.onPressed,
-      assetName: '',
       fontWeight: FontWeight.w500,
     );
   }

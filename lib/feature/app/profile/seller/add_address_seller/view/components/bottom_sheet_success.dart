@@ -95,9 +95,11 @@ class _BottomSheetSuccessState extends State<BottomSheetSuccess> {
             fontSize: 15.0, // Set the desired font size
           ),
           const Spacer(),
-          DoneButton(
+          SaveButton(
             title: context.localizations.accept,
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => SubscriptionSellerScreen());
+            },
           ),
         ],
       ),

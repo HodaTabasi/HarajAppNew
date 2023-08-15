@@ -51,7 +51,7 @@ class _MapScreenState extends State<MapScreen> {
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: DoneButton(
+                child: SaveButton(
                   title: context.localizations.completed,
                   onPressed: () {
                     Get.back();

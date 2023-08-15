@@ -20,9 +20,9 @@ dependencies:
   flutter_screenutil: ^5.7.0
   shared_preferences: ^2.2.0
   http: ^0.13.6
-  flutter_svg: ^1.1.4
+  flutter_svg: ^2.0.5
   image_picker: ^1.0.2
-  carousel_slider: ^4.2.1
+  card_swiper: ^3.0.1
   share_plus: ^7.0.2
 
 

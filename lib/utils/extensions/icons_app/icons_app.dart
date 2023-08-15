@@ -20,4 +20,10 @@ class IconsApp {
   static const String street = 'assets/icons/street.svg';
   static const String city = 'assets/icons/city.svg';
   static const String character = 'assets/icons/character.svg';
+  static const String copy = 'assets/icons/copy.svg';
+  static const String locationMini = 'assets/icons/location_mini.svg';
+  static const String locationMap = 'assets/icons/location_map.svg';
+  static const String distance = 'assets/icons/distance.svg';
+  static const String stop = 'assets/icons/stop.svg';
+  static const String backgroundCard = 'assets/icons/backgroundCard.svg';
 }
