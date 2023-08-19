@@ -6,9 +6,9 @@ import 'package:haraj/widgets/app_text.dart';
 
 class RowDividerWidget extends StatelessWidget {
   final String text;
-  final Color? color;
+  final Color? lineColor;
 
-  const RowDividerWidget({super.key, required this.text, this.color});
+  const RowDividerWidget({super.key, required this.text, this.lineColor});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,11 @@ class RowDividerWidget extends StatelessWidget {
       children: [
         Expanded(
           child: AppDivider(
-              height: 1.h, color: ColorResource.lightGray, thickness: 1),
+            height: 1.h,
+            color: lineColor ?? ColorResource.lightGray,
+            // color: ColorResource.lightGray,
+            thickness: 1,
+          ),
         ),
         SizedBox(width: 5.w),
         AppText(
@@ -28,7 +32,11 @@ class RowDividerWidget extends StatelessWidget {
         SizedBox(width: 5.w),
         Expanded(
           child: AppDivider(
-              height: 1.h, color: ColorResource.lightGray, thickness: 1),
+            height: 1.h,
+            color: lineColor ?? ColorResource.lightGray,
+            // color: ColorResource.lightGray,
+            thickness: 1,
+          ),
         ),
       ],
     );

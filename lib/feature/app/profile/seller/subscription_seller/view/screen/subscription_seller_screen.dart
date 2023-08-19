@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/dashboard_screen.dart';
 import 'package:haraj/feature/app/profile/seller/subscription_seller/controller/subscription_seller_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
@@ -36,6 +37,7 @@ class SubscriptionSellerScreen extends GetView<SubscriptionSellerController> {
       appBar: CustomAppBar(
         title: context.localizations.subscription_data,
         showSearch: false,
+        showLeading: false,
         imageHeight: 100.h,
       ),
       body: Column(

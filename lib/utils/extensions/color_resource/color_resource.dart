@@ -35,6 +35,8 @@ class ColorResource {
   static const Color switchActiveColor = Color(0xFF008556);
   static const Color lightgreen = Color(0x1A41938B);
   static const Color iconGrey = Color(0xFF8B8B8B);
+  static const Color blueLight1 = Color(0xffdfe8ee);
+  static const Color blueLight2 = Color(0xffcce2f1);
 
   static const Color lightBlack = Color(0xff08090C);
   static const Color gray = Color(0xffB3B8C5);

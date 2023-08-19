@@ -26,4 +26,19 @@ class IconsApp {
   static const String distance = 'assets/icons/distance.svg';
   static const String stop = 'assets/icons/stop.svg';
   static const String backgroundCard = 'assets/icons/backgroundCard.svg';
+  static const String homeOutline = 'assets/icons/home_outline.svg';
+  static const String homeFill = 'assets/icons/home_fill.svg';
+  static const String chatOutline = 'assets/icons/chat_outline.svg';
+  static const String chatFill = 'assets/icons/chat_fill.svg';
+  static const String offersSubmittedOutline =
+      'assets/icons/offers_submitted_outline.svg';
+  static const String offersSubmittedFill =
+      'assets/icons/offers_submitted_fill.svg';
+  static const String profileOutline = 'assets/icons/profile_outline.svg';
+  static const String profileFill = 'assets/icons/profile_fill.svg';
+  static const String edit = 'assets/icons/edit.svg';
+  static const String remove = 'assets/icons/remove.svg';
+  static const String fillScreen = 'assets/icons/fill_screen.svg';
+  static const String cross = 'assets/icons/cross.svg';
+  static const String check = 'assets/icons/check.svg';
 }
