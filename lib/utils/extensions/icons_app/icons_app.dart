@@ -61,4 +61,9 @@ class IconsApp {
       'assets/icons/year_of_manufacture.svg';
   static const String car = 'assets/icons/car.svg';
   static const String exclamationMark = 'assets/icons/exclamation_mark.svg';
+  static const String addNewCommunication =
+      'assets/icons/add_new_communication.svg';
+  static const String facebookOld = 'assets/icons/facebook_old.svg';
+  static const String whatsapp = 'assets/icons/whatsapp.svg';
+  static const String orangeCar = 'assets/icons/orange_car.svg';
 }

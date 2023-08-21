@@ -1,7 +1,7 @@
-part of add_seller_view;
+part of add_contact_information_seller_view;
 
-class BottomSheetBodySuccess extends StatelessWidget {
-  const BottomSheetBodySuccess({super.key});
+class BottomSheetBody extends StatelessWidget {
+  const BottomSheetBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +28,10 @@ class BottomSheetBodySuccess extends StatelessWidget {
         Container(
           alignment: Alignment.center,
           child: CircleAvatar(
-            radius: 50.r,
+            radius: 60.r,
             backgroundColor: ColorResource.lightGray,
             child: AppSvgPicture(
-              assetName: IconsApp.character,
+              assetName: IconsApp.orangeCar,
             ),
           ),
         ),
@@ -46,18 +46,7 @@ class BottomSheetBodySuccess extends StatelessWidget {
         AppText(
           fontSize: 16.sp,
           fontWeight: FontWeight.w500,
-          text: context.localizations.add_car_data_successfully,
-          color: ColorResource.mainFontColor,
-        ),
-        AppDivider(
-          color: ColorResource.secondaryColor,
-          height: 41.h,
-          thickness: 1.h,
-        ),
-        AppText(
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-          text: context.localizations.new_contact_info,
+          text: context.localizations.add_ad_successfully,
           color: ColorResource.mainFontColor,
         ),
         const Spacer(),
@@ -74,7 +63,8 @@ class BottomSheetBodySuccess extends StatelessWidget {
             SizedBox(width: 16.w),
             Expanded(
               child: DoneButton(
-                title: context.localizations.noo,
+                //TODO:Make Lang Here
+                title: "لاحقا",
                 onPressed: () {
                   Get.back();
                 },
