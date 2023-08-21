@@ -6,32 +6,31 @@ import 'package:haraj/utils/get/general_getx_controller.dart';
 import '../utils/extensions/color_resource/color_resource.dart';
 import 'app_svg_picture.dart';
 
-
 class AppTextFomField extends GetView<GeneralGetxController> {
   AppTextFomField(
       {super.key,
-        required this.title,
-        // this.validator,
-        this.onFieldSubmitted,
-        this.textController,
-        this.suffix,
-        this.secure = false,
-        this.prefix,
-        this.suffixIcon,
-        this.radius,
-        this.prefixIcon,
-        this.fontFamily,
-        this.errorTitle,
-        this.floatingLabelBehavior,
-        this.color,
-        this.fillColor,
-        this.mainColor,
-        this.fontSize,
-        this.maxline,
-        this.fontWeight,
-        this.type = 'name',
-        required this.focusNode,
-        this.textInputType});
+      required this.title,
+      // this.validator,
+      this.onFieldSubmitted,
+      this.textController,
+      this.suffix,
+      this.secure = false,
+      this.prefix,
+      this.suffixIcon,
+      this.radius,
+      this.prefixIcon,
+      this.fontFamily,
+      this.errorTitle,
+      this.floatingLabelBehavior,
+      this.color,
+      this.fillColor,
+      this.mainColor,
+      this.fontSize,
+      this.maxline,
+      this.fontWeight,
+      this.type = 'name',
+      required this.focusNode,
+      this.textInputType});
 
   final TextEditingController? textController;
   final TextInputType? textInputType;
@@ -46,6 +45,7 @@ class AppTextFomField extends GetView<GeneralGetxController> {
   final String? prefixIcon;
   final String? fontFamily;
   final FontWeight? fontWeight;
+
   // final String? Function(String?) validator;
   final Function? onFieldSubmitted;
   final FloatingLabelBehavior? floatingLabelBehavior;
@@ -63,59 +63,62 @@ class AppTextFomField extends GetView<GeneralGetxController> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color:ColorResource.fillgrey,
+            color: ColorResource.white,
             borderRadius: BorderRadius.circular(8.r),
-            border: errorTitle!.isNotEmpty ?Border.all(color: ColorResource.red,width: 0.5.r):null
+            border: errorTitle!.isNotEmpty
+                ? Border.all(color: ColorResource.red, width: 0.5.r)
+                : Border.all(color: ColorResource.lightGray, width: 0.5.r),
           ),
           child: IntrinsicHeight(
             child: Row(
               children: [
-                Padding(
-                  padding:  EdgeInsets.all(16.0.r),
-                  child: SizedBox(
+                Container(
+                  height: 48.h,
+                  width: 48.w,
+                  alignment: Alignment.center,
+                  color: ColorResource.transparent,
+                  child: AppSvgPicture(
+                    assetName: prefixIcon ?? '',
                     height: 22.h,
                     width: 22.w,
-                    child: AppSvgPicture(
-                      assetName: prefixIcon ?? '',
-                      height: 22.h,
-                      width: 22.w,
-                    ),
                   ),
                 ),
-                VerticalDivider(
-                  width: 0.5.r,
-                  color: ColorResource.dividerVirticalColor,
+                const VerticalDivider(
+                  color: ColorResource.gray,
+                  width: 0,
                 ),
+                SizedBox(width: 10.w),
                 Expanded(
                   child: TextFormField(
                     // validator: validator,
                     focusNode: focusNode,
-                    onChanged:(value){
-                      errorTitle = controller.validator(value,type) ?? '';
+                    onChanged: (value) {
+                      errorTitle = controller.validator(value, type) ?? '';
                       focusNode.requestFocus();
-                    } ,
+                    },
                     obscureText: secure,
                     cursorColor: mainColor,
                     controller: textController,
                     keyboardType: textInputType,
+                    textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(radius ?? 6.0),
-                          borderSide: BorderSide.none,
-                        ),
-                        labelText: title,
-                        floatingLabelBehavior: floatingLabelBehavior,
-                        labelStyle: TextStyle(
-                            color: ColorResource.borderGray1,
-                            fontFamily: 'Avenir',
-                            fontSize: fontSize ?? 14.sp,
-                            fontWeight: fontWeight ?? FontWeight.w400),
-                        floatingLabelStyle: TextStyle(
-                            height: 7.h,
-                            color: ColorResource.borderGray1,
-                            fontFamily: 'Avenir',
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(radius ?? 6.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      labelText: title,
+                      floatingLabelBehavior: floatingLabelBehavior,
+                      labelStyle: TextStyle(
+                          color: ColorResource.borderGray1,
+                          fontFamily: 'Avenir',
+                          fontSize: fontSize ?? 14.sp,
+                          fontWeight: fontWeight ?? FontWeight.w400),
+                      floatingLabelStyle: TextStyle(
+                          height: 7.h,
+                          color: ColorResource.borderGray1,
+                          fontFamily: 'Avenir',
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400),
                     ),
                   ),
                 ),
@@ -126,10 +129,10 @@ class AppTextFomField extends GetView<GeneralGetxController> {
         ),
         Visibility(
           visible: errorTitle != null,
-          child: Text(errorTitle?? '',style: TextStyle(
-            color: ColorResource.red,
-            fontSize: 12.sp
-          ),),
+          child: Text(
+            errorTitle ?? '',
+            style: TextStyle(color: ColorResource.red, fontSize: 12.sp),
+          ),
         )
       ],
     );

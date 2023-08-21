@@ -41,4 +41,24 @@ class IconsApp {
   static const String fillScreen = 'assets/icons/fill_screen.svg';
   static const String cross = 'assets/icons/cross.svg';
   static const String check = 'assets/icons/check.svg';
+  static const String carBody = 'assets/icons/car_body.svg';
+  static const String carCategory = 'assets/icons/car_category.svg';
+  static const String carColorInside = 'assets/icons/car_color_inside.svg';
+  static const String carColorOutside = 'assets/icons/car_color_outside.svg';
+  static const String carMechanic = 'assets/icons/car_mechanic.svg';
+  static const String carName = 'assets/icons/car_name.svg';
+  static const String carPrice = 'assets/icons/car_price.svg';
+  static const String carSpeed = 'assets/icons/car_speed.svg';
+  static const String carStatus = 'assets/icons/car_status.svg';
+  static const String enginePower = 'assets/icons/engine_power.svg';
+  static const String fuelType = 'assets/icons/fuel_type.svg';
+  static const String image = 'assets/icons/image.svg';
+  static const String info = 'assets/icons/info.svg';
+  static const String regionalSpecifications =
+      'assets/icons/regional_specifications.svg';
+  static const String tradeMark = 'assets/icons/trade_mark.svg';
+  static const String yearOfManufacture =
+      'assets/icons/year_of_manufacture.svg';
+  static const String car = 'assets/icons/car.svg';
+  static const String exclamationMark = 'assets/icons/exclamation_mark.svg';
 }
