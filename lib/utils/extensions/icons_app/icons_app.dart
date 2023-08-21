@@ -66,4 +66,5 @@ class IconsApp {
   static const String facebookOld = 'assets/icons/facebook_old.svg';
   static const String whatsapp = 'assets/icons/whatsapp.svg';
   static const String orangeCar = 'assets/icons/orange_car.svg';
+  static const String chatting = 'assets/icons/chatting.svg';
 }

@@ -1,24 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
+import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/extensions/routes/custom_shap.dart';
 import 'package:haraj/widgets/app_divider.dart';
 import 'package:haraj/widgets/app_popup_menu_button.dart';
 import 'package:haraj/widgets/app_popup_menu_item.dart';
+import 'package:haraj/widgets/app_svg_picture.dart';
 import 'package:haraj/widgets/app_switch_button.dart';
 import 'package:haraj/widgets/app_text.dart';
 
 class AppCarContainer extends StatefulWidget {
-  const AppCarContainer(
-      {super.key,
-      required this.nameCar,
-      required this.imageCar,
-      required this.priceCar,
-      required this.conditionCar,
-      required this.showCar,
-      required this.postingTime,
-      required this.menuItem,
-      required this.onSelected});
+  const AppCarContainer({
+    super.key,
+    required this.nameCar,
+    required this.imageCar,
+    required this.priceCar,
+    required this.conditionCar,
+    required this.showCar,
+    required this.postingTime,
+    required this.menuItem,
+    required this.onSelected,
+    this.showLocation = false,
+    this.nameLocation = '',
+    this.iconLocation = '',
+    this.showOfferedPrice = false,
+    this.offerPrice = '',
+    this.discountPrice = '',
+    this.showStatus = false,
+    this.showSeller = false,
+    this.sellerName = 'Mahmoud',
+    this.imageSeller = '',
+  });
 
   final String nameCar;
   final String imageCar;
@@ -28,6 +41,16 @@ class AppCarContainer extends StatefulWidget {
   final String postingTime;
   final List<AppPopupMenuItem> menuItem;
   final void Function(int) onSelected;
+  final bool showLocation;
+  final String nameLocation;
+  final String iconLocation;
+  final bool showOfferedPrice;
+  final String offerPrice;
+  final String discountPrice;
+  final bool showStatus;
+  final bool showSeller;
+  final String sellerName;
+  final String imageSeller;
 
   @override
   State<AppCarContainer> createState() => _AppCarContainerState();
@@ -57,16 +80,48 @@ class _AppCarContainerState extends State<AppCarContainer> {
         children: [
           Column(
             children: [
-              SizedBox(
-                width: 127.w,
-                height: 151.h,
-                child: ClipPath(
-                  clipper: RPSCustomPainter(),
-                  child: Image.network(
-                    widget.imageCar,
-                    fit: BoxFit.fill,
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  SizedBox(
+                    width: 127.w,
+                    height: 151.h,
+                    child: ClipPath(
+                      clipper: RPSCustomPainter(),
+                      child: Image.network(
+                        widget.imageCar,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ),
-                ),
+                  widget.showLocation
+                      ? Container(
+                          width: 62.w,
+                          height: 27.h,
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 10.h),
+                          decoration: BoxDecoration(
+                            color: ColorResource.white,
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AppSvgPicture(
+                                assetName: widget.iconLocation,
+                              ),
+                              SizedBox(width: 5.w),
+                              AppText(
+                                text: widget.nameLocation,
+                                color: ColorResource.mainFontColor,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ],
+                          ),
+                        )
+                      : const SizedBox(),
+                ],
               ),
             ],
           ),
@@ -92,62 +147,131 @@ class _AppCarContainerState extends State<AppCarContainer> {
                           onSelected: widget.onSelected),
                     ],
                   ),
-                  AppText(
-                    text: widget.priceCar,
-                    color: ColorResource.mainFontColor,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      AppText(
-                        //TODO: make lang here
-                        text: 'الحالة : ',
-                        color: ColorResource.gray,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      AppText(
-                        text: widget.conditionCar,
-                        color: ColorResource.green,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      const Spacer(),
-                      AppText(
-                        //TODO: make lang here
-                        text: '4K ${widget.showCar}',
-                        // text: '4K زائر',
-                        color: ColorResource.green,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ],
-                  ),
+                  widget.showOfferedPrice
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            AppText(
+                              text: "${context.localizations.price_offer} :",
+                              color: ColorResource.gray,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            AppText(
+                              text: widget.offerPrice,
+                              color: ColorResource.mainFontColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            const Spacer(),
+                            AppText(
+                              text: widget.discountPrice,
+                              color: ColorResource.gray,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                              textDecoration: TextDecoration.lineThrough,
+                            ),
+                          ],
+                        )
+                      : AppText(
+                          text: widget.priceCar,
+                          color: ColorResource.mainFontColor,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                  widget.showStatus
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.access_time_rounded,
+                              color: ColorResource.gray,
+                              size: 18.w,
+                            ),
+                            SizedBox(width: 5.w),
+                            AppText(
+                              text: widget.postingTime,
+                              color: ColorResource.gray,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        )
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            AppText(
+                              //TODO: make lang here
+                              text: 'الحالة : ',
+                              color: ColorResource.gray,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            AppText(
+                              text: widget.conditionCar,
+                              color: ColorResource.green,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            const Spacer(),
+                            AppText(
+                              //TODO: make lang here
+                              text: '4K ${widget.showCar}',
+                              // text: '4K زائر',
+                              color: ColorResource.green,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        ),
                   AppDivider(
                       height: 18.h,
                       color: ColorResource.lightGrey,
                       thickness: 1),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.access_time_rounded,
-                        color: ColorResource.gray,
-                        size: 18.w,
-                      ),
-                      SizedBox(width: 5.w),
-                      AppText(
-                        text: widget.postingTime,
-                        color: ColorResource.gray,
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      const Spacer(),
-                      AppSwitchButton(),
-                    ],
-                  ),
+                  widget.showSeller
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              alignment: Alignment.bottomCenter,
+                              color: Colors.white,
+                              height: 24.h,
+                              width: 24.w,
+                              child: CircleAvatar(
+                                radius: 20.r,
+                                backgroundColor: ColorResource.lightGray,
+                                backgroundImage:
+                                    NetworkImage(widget.imageSeller),
+                              ),
+                            ),
+                            SizedBox(width: 8.w),
+                            AppText(
+                              text: widget.sellerName,
+                              color: ColorResource.mainFontColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        )
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.access_time_rounded,
+                              color: ColorResource.gray,
+                              size: 18.w,
+                            ),
+                            SizedBox(width: 5.w),
+                            AppText(
+                              text: widget.postingTime,
+                              color: ColorResource.gray,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            const Spacer(),
+                            AppSwitchButton(),
+                          ],
+                        ),
                 ],
               ),
             ),
