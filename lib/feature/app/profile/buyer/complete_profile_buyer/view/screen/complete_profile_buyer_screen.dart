@@ -3,6 +3,7 @@ library complete_profile_buyer_view;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/dashboard_screen.dart';
 import 'package:haraj/feature/app/profile/buyer/complete_profile_buyer/controller/complete_profile_buyer_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
@@ -25,6 +26,8 @@ class CompleteProfileBuyerScreen
     extends GetView<CompleteProfileBuyerController> {
   CompleteProfileBuyerController completeProfileBuyerController =
       Get.put(CompleteProfileBuyerController());
+  GeneralGetxController generalGetxController =
+      Get.put(GeneralGetxController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +59,8 @@ class CompleteProfileBuyerScreen
                                     title: context.localizations.save_changes,
                                     onPressed: () async {
                                       // await controller.performRegister();
+                                      Get.offAll(
+                                          () => const DashboardBuyerScreen());
                                     },
                                   ),
                                 );

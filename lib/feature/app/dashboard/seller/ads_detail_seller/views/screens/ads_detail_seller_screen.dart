@@ -42,11 +42,11 @@ class AdsDetailSellerScreen extends GetView<AdsDetailSellerController> {
       appBar: CustomAppBar(
         //TODO:make lang here
         title: 'تفاصيل الاعلان',
-        imageHeight: 100.h,
+        heightBackground: 100.h,
         showLeading: true,
         showSearch: false,
         showActions: true,
-        leadingAction: () {},
+        actionOnTap: () {},
       ),
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),

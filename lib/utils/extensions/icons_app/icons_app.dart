@@ -67,4 +67,10 @@ class IconsApp {
   static const String whatsapp = 'assets/icons/whatsapp.svg';
   static const String orangeCar = 'assets/icons/orange_car.svg';
   static const String chatting = 'assets/icons/chatting.svg';
+  static const String favoriteFill = 'assets/icons/favorite_fill.svg';
+  static const String favoriteOutline = 'assets/icons/favorite_outline.svg';
+  static const String searchFill = 'assets/icons/search_fill.svg';
+  static const String searchOutline = 'assets/icons/search_outline.svg';
+  static const String notification = 'assets/icons/notification.svg';
+  static const String filter = 'assets/icons/filter.svg';
 }

@@ -50,7 +50,7 @@ class AddSellerScreen extends GetView<AddSellerController> {
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
         title: context.localizations.add_Ad,
-        imageHeight: 130.h,
+        heightBackground: 130.h,
         showLeading: false,
         showSearch: false,
         showActions: false,

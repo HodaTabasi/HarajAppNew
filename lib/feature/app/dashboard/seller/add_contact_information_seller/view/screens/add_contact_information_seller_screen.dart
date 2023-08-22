@@ -34,7 +34,7 @@ class AddContactInformationSellerScreen
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
         title: context.localizations.add_contact_information,
-        imageHeight: 130.h,
+        heightBackground: 130.h,
         showLeading: true,
         showSearch: false,
         showActions: false,

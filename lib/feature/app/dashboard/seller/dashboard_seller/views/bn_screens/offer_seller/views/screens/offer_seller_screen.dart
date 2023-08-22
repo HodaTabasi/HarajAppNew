@@ -27,7 +27,7 @@ class OfferSellerScreen extends GetView<OfferSellerController> {
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
         title: context.localizations.offers_submitted,
-        imageHeight: 130.h,
+        heightBackground: 130.h,
         showLeading: false,
         showSearch: false,
         showActions: false,

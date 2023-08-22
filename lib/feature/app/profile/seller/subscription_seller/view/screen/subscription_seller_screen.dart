@@ -38,7 +38,7 @@ class SubscriptionSellerScreen extends GetView<SubscriptionSellerController> {
         title: context.localizations.subscription_data,
         showSearch: false,
         showLeading: false,
-        imageHeight: 100.h,
+        heightBackground: 100.h,
       ),
       body: Column(
         children: [

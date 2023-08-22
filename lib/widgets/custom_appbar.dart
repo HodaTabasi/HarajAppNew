@@ -5,27 +5,46 @@ import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/widgets/app_image.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
+import 'package:haraj/widgets/app_swiper.dart';
 import 'package:haraj/widgets/app_text.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final double imageHeight;
+  final double heightBackground;
   final bool showSearch;
   final bool showLeading;
   final bool showActions;
-  final Function()? leadingAction;
+  final Function()? actionOnTap;
   final TextEditingController? searchController;
+  final bool showSwiper;
+  final double heightSwiper;
+  final int itemCountSwiper;
+  final double viewportFractionSwiper;
+  final String imageSwiper;
+  final bool showActionHomeBuyer;
+  final Function()? actionOnTapHomeBuyer;
+  final bool showLeadingHomeBuyer;
+  final Function()? leadingOnTapHomeBuyer;
 
   const CustomAppBar({
     Key? key,
     required this.title,
-    required this.imageHeight,
-    this.leadingAction,
+    required this.heightBackground,
+    this.actionOnTap,
     this.showLeading =
         true, // Set this to true to show the leading icon by default
     this.showActions = false, // Set this to false to hide the Actions icon
     this.showSearch = false,
     this.searchController,
+    this.showSwiper = false,
+    this.heightSwiper = 160,
+    this.itemCountSwiper = 3,
+    this.viewportFractionSwiper = 0.8,
+    this.imageSwiper = '',
+    this.showActionHomeBuyer = false,
+    this.actionOnTapHomeBuyer,
+    this.showLeadingHomeBuyer = false,
+    this.leadingOnTapHomeBuyer,
   }) : super(key: key);
 
   // @override
@@ -34,11 +53,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize {
     double appBarHeight = kToolbarHeight;
+
+    // Constants for height values
+    final searchFieldHeight = 100.h;
+    final withoutSearchHeight = 30.h;
+    final swiperHeight = 180.h;
+
     if (showSearch) {
-      appBarHeight += 100.h; // Height for the search field container
+      appBarHeight += searchFieldHeight;
     } else {
-      appBarHeight += 30.h; // Height for the without search field container
+      appBarHeight += withoutSearchHeight;
     }
+
+    if (showSwiper) {
+      appBarHeight += swiperHeight;
+    }
+
     return Size.fromHeight(appBarHeight);
   }
 
@@ -49,7 +79,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         AppImage(
           imageName: ImagesApp.appBarBackground, // Replace with your image name
           width: double.infinity,
-          height: imageHeight,
+          height: heightBackground,
           fit: BoxFit.fill,
         ),
         Column(
@@ -65,42 +95,79 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       icon: const Icon(Icons.arrow_back_ios,
                           color: ColorResource.black),
                     )
-                  : null,
+                  : showLeadingHomeBuyer
+                      ? Container(
+                          width: 28.w,
+                          height: 28.h,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: ColorResource.transparent,
+                            borderRadius: BorderRadius.circular(16.r),
+                          ),
+                          child: InkWell(
+                            onTap: actionOnTapHomeBuyer,
+                            child: AppSvgPicture(
+                              assetName: IconsApp.filter,
+                              width: 20.w,
+                              height: 18.h,
+                              color: ColorResource.gray,
+                            ),
+                          ),
+                        )
+                      : null,
               centerTitle: true,
               title: AppText(
                 text: title,
               ),
               actions: [
                 if (showActions) // Add this condition
-                  showActions
-                      ? Container(
-                          width: 28.w,
-                          height: 28.h,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.symmetric(horizontal: 16.w),
-                          decoration: BoxDecoration(
-                            color: ColorResource.white,
-                            borderRadius: BorderRadius.circular(16.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: ColorResource.gray,
-                                blurRadius: 15.r,
-                                spreadRadius: 1,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: InkWell(
-                            onTap: leadingAction,
-                            child: AppSvgPicture(
-                              assetName: IconsApp.edit,
-                              width: 16.w,
-                              height: 16.h,
-                              color: ColorResource.mainColor,
-                            ),
-                          ),
-                        )
-                      : const SizedBox(),
+                  Container(
+                    width: 28.w,
+                    height: 28.h,
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
+                    decoration: BoxDecoration(
+                      color: ColorResource.white,
+                      borderRadius: BorderRadius.circular(16.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: ColorResource.gray,
+                          blurRadius: 15.r,
+                          spreadRadius: 1,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: InkWell(
+                      onTap: actionOnTap,
+                      child: AppSvgPicture(
+                        assetName: IconsApp.edit,
+                        width: 16.w,
+                        height: 16.h,
+                        color: ColorResource.mainColor,
+                      ),
+                    ),
+                  ),
+                if (showActionHomeBuyer) // Add this condition
+                  Container(
+                    width: 28.w,
+                    height: 28.h,
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
+                    decoration: BoxDecoration(
+                      color: ColorResource.transparent,
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                    child: InkWell(
+                      onTap: actionOnTapHomeBuyer,
+                      child: AppSvgPicture(
+                        assetName: IconsApp.notification,
+                        width: 17.w,
+                        height: 18.h,
+                        color: ColorResource.gray,
+                      ),
+                    ),
+                  ),
                 // Empty space when showActionButton is false
               ],
             ),
@@ -114,6 +181,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     border: OutlineInputBorder(),
                   ),
                 ),
+              ),
+            if (showSwiper)
+              AppSwiper(
+                height: heightSwiper,
+                itemCount: itemCountSwiper,
+                viewportFraction: viewportFractionSwiper,
+                imageSwiper: imageSwiper,
               ),
           ],
         ),

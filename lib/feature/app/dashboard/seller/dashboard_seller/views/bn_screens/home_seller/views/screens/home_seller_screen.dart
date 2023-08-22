@@ -36,7 +36,7 @@ class HomeSellerScreen extends GetView<HomeSellerController> {
       appBar: CustomAppBar(
         //TODO:make lang here
         title: 'المحفوظات',
-        imageHeight: 210.h,
+        heightBackground: 210.h,
         showLeading: false,
         showSearch: true,
       ),
