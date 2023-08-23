@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/home_buyer/controllers/home_buyer_controller.dart';
+import 'package:haraj/feature/app/dashboard/buyer/filter_buyer/view/screens/filter_buyer_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
@@ -35,7 +36,9 @@ class HomeBuyerScreen extends GetView<HomeBuyerController> {
         showActionHomeBuyer: true,
         actionOnTapHomeBuyer: () {},
         showLeadingHomeBuyer: true,
-        leadingOnTapHomeBuyer: () {},
+        leadingOnTapHomeBuyer: () {
+          Get.to(() => FilterBuyerScreen());
+        },
       ),
       body: Column(
           mainAxisAlignment: MainAxisAlignment.start,

@@ -105,7 +105,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                             borderRadius: BorderRadius.circular(16.r),
                           ),
                           child: InkWell(
-                            onTap: actionOnTapHomeBuyer,
+                            onTap: leadingOnTapHomeBuyer,
                             child: AppSvgPicture(
                               assetName: IconsApp.filter,
                               width: 20.w,
