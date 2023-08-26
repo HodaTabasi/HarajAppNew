@@ -31,6 +31,7 @@ class AppCarContainer extends StatefulWidget {
     this.showSeller = false,
     this.sellerName = 'Mahmoud',
     this.imageSeller = '',
+    // this.showMenuItem = false,
   });
 
   final String nameCar;
@@ -51,6 +52,7 @@ class AppCarContainer extends StatefulWidget {
   final bool showSeller;
   final String sellerName;
   final String imageSeller;
+  // final bool showMenuItem;
 
   @override
   State<AppCarContainer> createState() => _AppCarContainerState();
@@ -142,6 +144,7 @@ class _AppCarContainerState extends State<AppCarContainer> {
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w500,
                       ),
+                      // widget.showMenuItem
                       AppPopupMenuButton(
                           menuItems: widget.menuItem,
                           onSelected: widget.onSelected),
@@ -183,23 +186,6 @@ class _AppCarContainerState extends State<AppCarContainer> {
                       ? Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(
-                              Icons.access_time_rounded,
-                              color: ColorResource.gray,
-                              size: 18.w,
-                            ),
-                            SizedBox(width: 5.w),
-                            AppText(
-                              text: widget.postingTime,
-                              color: ColorResource.gray,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ],
-                        )
-                      : Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
                             AppText(
                               //TODO: make lang here
                               text: 'الحالة : ',
@@ -220,6 +206,23 @@ class _AppCarContainerState extends State<AppCarContainer> {
                               // text: '4K زائر',
                               color: ColorResource.green,
                               fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        )
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.access_time_rounded,
+                              color: ColorResource.gray,
+                              size: 18.w,
+                            ),
+                            SizedBox(width: 5.w),
+                            AppText(
+                              text: widget.postingTime,
+                              color: ColorResource.gray,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w500,
                             ),
                           ],

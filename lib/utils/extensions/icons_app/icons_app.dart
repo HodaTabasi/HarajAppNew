@@ -80,4 +80,6 @@ class IconsApp {
   static const String twitter = 'assets/icons/twitter.svg';
   static const String price = 'assets/icons/price.svg';
   static const String bigCheck = 'assets/icons/big_check.svg';
+  static const String trash = 'assets/icons/trash.svg';
+  static const String resend = 'assets/icons/resend.svg';
 }
