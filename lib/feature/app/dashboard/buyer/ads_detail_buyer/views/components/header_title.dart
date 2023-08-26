@@ -39,7 +39,9 @@ class _HeaderTitleState extends State<HeaderTitle> {
                 subName: 'يعرض 100 سيارة للبيع الان',
                 image: ImagesApp.brandLogo,
                 posting: 'قبل 1 ساعة',
-                onTab: () {},
+                onTab: () {
+                  Get.to(() => GalleryBuyerScreen());
+                },
               ),
             ),
           ],

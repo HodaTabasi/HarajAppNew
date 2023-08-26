@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/dashboard/buyer/ads_detail_buyer/controllers/ads_detail_buyer_controller.dart';
+import 'package:haraj/feature/app/dashboard/buyer/gallery_buyer/views/screens/gallery_buyer_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
