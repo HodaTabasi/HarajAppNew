@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
-import 'package:haraj/widgets/app_image.dart';
+import 'package:haraj/widgets/app_svg_picture.dart';
 
 class SocialContainer extends StatelessWidget {
   final String nameIcon;
@@ -28,8 +28,8 @@ class SocialContainer extends StatelessWidget {
           borderRadius: BorderRadius.circular(50.r),
         ),
         child: Center(
-          child: AppImage(
-            imageName: nameIcon,
+          child: AppSvgPicture(
+            assetName: nameIcon,
             width: 22.w,
             height: 22.h,
           ),

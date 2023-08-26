@@ -15,8 +15,8 @@ class _HeaderLogoState extends State<HeaderLogo> {
       children: [
         const BackButton(),
         Center(
-          child: AppImage(
-            imageName: ImagesApp.logo,
+          child: AppSvgPicture(
+            assetName: IconsApp.logo,
             height: 95.h,
             width: 131.w,
           ),

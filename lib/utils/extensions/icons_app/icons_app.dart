@@ -73,4 +73,11 @@ class IconsApp {
   static const String searchOutline = 'assets/icons/search_outline.svg';
   static const String notification = 'assets/icons/notification.svg';
   static const String filter = 'assets/icons/filter.svg';
+  static const String call = 'assets/icons/call.svg';
+  static const String facebook = 'assets/icons/facebook.svg';
+  static const String google = 'assets/icons/google.svg';
+  static const String logo = 'assets/icons/logo.svg';
+  static const String twitter = 'assets/icons/twitter.svg';
+  static const String price = 'assets/icons/price.svg';
+  static const String bigCheck = 'assets/icons/big_check.svg';
 }

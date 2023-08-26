@@ -10,8 +10,8 @@ class HeaderLogo extends StatefulWidget {
 class _HeaderLogoState extends State<HeaderLogo> {
   @override
   Widget build(BuildContext context) {
-    return AppImage(
-      imageName: ImagesApp.logo,
+    return AppSvgPicture(
+      assetName: IconsApp.logo,
       height: 95.h,
       width: 131.w,
     );

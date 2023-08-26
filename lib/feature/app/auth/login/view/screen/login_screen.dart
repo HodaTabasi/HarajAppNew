@@ -13,6 +13,7 @@ import 'package:haraj/utils/extensions/routes/key_routes.dart';
 import 'package:haraj/utils/get/general_getx_controller.dart';
 import 'package:haraj/widgets/app_elevated_button.dart';
 import 'package:haraj/widgets/app_image.dart';
+import 'package:haraj/widgets/app_svg_picture.dart';
 import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_textformfiled.dart';
 import 'package:haraj/widgets/row_divider_widget.dart';
@@ -106,15 +107,15 @@ class LoginScreen extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SocialContainer(
-                        nameIcon: ImagesApp.twitter,
+                        nameIcon: IconsApp.twitter,
                         onPressed: () {},
                       ),
                       SocialContainer(
-                        nameIcon: ImagesApp.facebook,
+                        nameIcon: IconsApp.facebook,
                         onPressed: () {},
                       ),
                       SocialContainer(
-                        nameIcon: ImagesApp.google,
+                        nameIcon: IconsApp.google,
                         onPressed: () {},
                       ),
                     ],

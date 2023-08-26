@@ -25,6 +25,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function()? actionOnTapHomeBuyer;
   final bool showLeadingHomeBuyer;
   final Function()? leadingOnTapHomeBuyer;
+  final String actionAssetName;
+  final Color? actionIconColor;
 
   const CustomAppBar({
     Key? key,
@@ -45,6 +47,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actionOnTapHomeBuyer,
     this.showLeadingHomeBuyer = false,
     this.leadingOnTapHomeBuyer,
+    this.actionAssetName = '',
+    this.actionIconColor,
   }) : super(key: key);
 
   // @override
@@ -141,10 +145,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     child: InkWell(
                       onTap: actionOnTap,
                       child: AppSvgPicture(
-                        assetName: IconsApp.edit,
+                        assetName: actionAssetName,
                         width: 16.w,
                         height: 16.h,
-                        color: ColorResource.mainColor,
+                        color: actionIconColor,
                       ),
                     ),
                   ),

@@ -101,15 +101,15 @@ class RegisterScreen extends GetView<RegisterController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SocialContainer(
-                        nameIcon: ImagesApp.twitter,
+                        nameIcon: IconsApp.twitter,
                         onPressed: () {},
                       ),
                       SocialContainer(
-                        nameIcon: ImagesApp.facebook,
+                        nameIcon: IconsApp.facebook,
                         onPressed: () {},
                       ),
                       SocialContainer(
-                        nameIcon: ImagesApp.google,
+                        nameIcon: IconsApp.google,
                         onPressed: () {},
                       ),
                     ],
