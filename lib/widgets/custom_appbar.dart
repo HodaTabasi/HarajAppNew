@@ -59,7 +59,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     double appBarHeight = kToolbarHeight;
 
     // Constants for height values
-    final searchFieldHeight = 100.h;
+    final searchFieldHeight = 80.h;
     final withoutSearchHeight = 30.h;
     final swiperHeight = 180.h;
 
