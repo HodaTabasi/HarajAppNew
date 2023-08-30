@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "212432731339",
+    "project_id": "haraj-8b11e",
+    "storage_bucket": "haraj-8b11e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212432731339:android:84e9f564ae711d47242f4e",
+        "android_client_info": {
+          "package_name": "com.app.harage.hatage_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212432731339-0qceecakuif7dd2frf5n541tgq1p0voj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgW0BipvOihOaMS88ZMW8BZAn5neX5FyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212432731339-0qceecakuif7dd2frf5n541tgq1p0voj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -82,4 +82,5 @@ class IconsApp {
   static const String bigCheck = 'assets/icons/big_check.svg';
   static const String trash = 'assets/icons/trash.svg';
   static const String resend = 'assets/icons/resend.svg';
+  static const String hi = 'assets/icons/hi.svg';
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/chat_buyer/views/screens/chat_buyer_screen.dart';
+import 'package:haraj/feature/app/chat/view/screen/home_chat_screen.dart';
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/favorite_buyer/views/screens/favorite_buyer_screen.dart';
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/home_buyer/views/screens/home_buyer_screen.dart';
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/profile_buyer/views/screens/profile_buyer_screen.dart';
@@ -23,7 +23,7 @@ class _DashboardBuyerScreenState extends State<DashboardBuyerScreen> {
   final List<BnModel> _bnScreen = <BnModel>[
     BnModel(widget: HomeBuyerScreen()),
     BnModel(widget: FavoriteBuyerScreen()),
-    BnModel(widget: ChatBuyerScreen()),
+    BnModel(widget: HomeChatScreen()),
     BnModel(widget: SearchBuyerScreen()),
     BnModel(widget: ProfileBuyerScreen()),
   ];

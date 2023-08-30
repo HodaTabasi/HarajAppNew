@@ -13,6 +13,7 @@ class AppElevatedButton extends StatelessWidget {
     required this.onPressed,
     required this.fontWeight,
     this.assetName,
+    this.borderColor = Colors.transparent,
     Key? key,
   }) : super(key: key);
 
@@ -22,6 +23,7 @@ class AppElevatedButton extends StatelessWidget {
   double radius;
   Color titleColor;
   Color backgroundColor;
+  Color? borderColor;
   double fontSize;
   FontWeight fontWeight;
   final void Function() onPressed;
@@ -31,13 +33,15 @@ class AppElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      // style: ElevatedButton.styleFrom(
-      //   backgroundColor: backgroundColor,
-      //   minimumSize: Size(widthButton, heightButton),
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.all(Radius.circular(radius)),
-      //   ),
-      // ),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor,
+        minimumSize: Size(widthButton, heightButton),
+        foregroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
+            side: BorderSide(color: borderColor!)),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

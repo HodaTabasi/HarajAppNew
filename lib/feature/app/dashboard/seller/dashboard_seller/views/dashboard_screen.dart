@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:haraj/feature/app/chat/view/screen/home_chat_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_seller/views/screens/add_seller_screen.dart';
-import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/chat_seller/views/screens/chat_seller_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/home_seller/views/screens/home_seller_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/views/screens/offer_seller_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/profile_seller/views/screens/profile_seller_screen.dart';
@@ -22,7 +22,7 @@ class _DashboardSellerScreenState extends State<DashboardSellerScreen> {
 
   final List<BnModel> _bnScreen = <BnModel>[
     BnModel(widget: HomeSellerScreen()),
-    BnModel(widget: ChatSellerScreen()),
+    BnModel(widget: HomeChatScreen()),
     BnModel(widget: AddSellerScreen()),
     BnModel(widget: OfferSellerScreen()),
     BnModel(widget: ProfileSellerScreen()),

@@ -20,6 +20,7 @@ class _AppPopupMenuButtonState extends State<AppPopupMenuButton> {
   Widget build(BuildContext context) {
     return PopupMenuButton<int>(
       offset: const Offset(20, 40),
+      constraints: const BoxConstraints(),
       shadowColor: ColorResource.gray,
       color: ColorResource.white,
       surfaceTintColor: ColorResource.white,
