@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
@@ -31,6 +34,7 @@ mixin Helpers {
   Map<String, String> get headers {
     var headers = {
       'Accept': 'application/json',
+      'Accept-Language':SharedPrefController().language
     };
     if (SharedPrefController().loggedIn) {
       headers['Authorization'] = SharedPrefController().token;
@@ -40,5 +44,16 @@ mixin Helpers {
       // headers['Authorization'] = 'Bearer TOKEN';
     }
     return headers;
+  }
+
+  Future<String?> getId() async {
+    var deviceInfo = DeviceInfoPlugin();
+    if (Platform.isIOS) { // import 'dart:io'
+      var iosDeviceInfo = await deviceInfo.iosInfo;
+      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
+    } else if(Platform.isAndroid) {
+      var androidDeviceInfo = await deviceInfo.androidInfo;
+      return androidDeviceInfo.id; // unique ID on Android
+    }
   }
 }

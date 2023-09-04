@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../../../../../../utils/errors/error_const.dart';
+import '../../../../../../utils/models/seller_info/store_model.dart';
+import '../../../../../../utils/prefs/shared_pref_controller.dart';
+import '../../../../../../utils/repository/complete_user_repo.dart';
+import '../../add_address_seller/view/screen/add_address_seller_screen.dart';
+import '../use_case/complete_store_use_case.dart';
 
 class CompleteStoreSellerController extends GetxController {
+  var responseMessage = "";
+
   static CompleteStoreSellerController get to =>
       Get.find<CompleteStoreSellerController>();
 
   RxBool loading = false.obs;
   RxBool isVisibility = false.obs;
+  XFile? file;
+
+  Store get store => Store(
+      name: nameController.text,
+      email: emailController.text,
+      mobile: phoneController.text,
+      commercialRegister: commercialRegistrationNumController.text,
+      description: briefController.text);
 
   void toggleVisibility() {
     isVisibility.value = !isVisibility.value;
@@ -48,10 +66,10 @@ class CompleteStoreSellerController extends GetxController {
     briefController.clear();
   }
 
-  Future<void> performRegister() async {
+  Future<void> performAddStoreData() async {
     loading.value = true;
     if (checkData()) {
-      // await completeProfile();
+      await completeProfile();
     }
     loading.value = false;
   }
@@ -73,11 +91,21 @@ class CompleteStoreSellerController extends GetxController {
     return false;
   }
 
-// Future<void> completeProfile() async {
-//   bool status = await AuthApiController().completeProfile();
-//   if (status) {
-//     Get.to(const HomeScreen());
-//     clear();
-//   }
-// }
+  Future<void> completeProfile() async {
+    return CompleteStoreUseCase(
+            repository: Get.find<CompletePersonalInfoRepo>())
+        .call(store, file!.path)
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (user) async {
+             SharedPrefController().isCompleteAddress = false;
+             Get.to(() => AddAddressSellerScreen());
+    }));
+  }
 }

@@ -1,1 +1,1 @@
-enum PrefKeys { language, loggedIn, login, register, token }
+enum PrefKeys { language, loggedIn, login, register, token,verifyCode,type,isVerify,isCompleteAddress }

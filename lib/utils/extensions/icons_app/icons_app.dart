@@ -83,4 +83,20 @@ class IconsApp {
   static const String trash = 'assets/icons/trash.svg';
   static const String resend = 'assets/icons/resend.svg';
   static const String hi = 'assets/icons/hi.svg';
+  static const String background = 'assets/icons/background.svg';
+  static const String editProfile = 'assets/icons/editprofile.svg';
+  static const String profilePhone = 'assets/icons/prfile_phone.svg';
+  static const String profileEmail = 'assets/icons/profile_email.svg';
+  static const String addressIcon = 'assets/icons/address_icon.svg';
+  static const String profileImages = 'assets/icons/profile_image.svg';
+  static const String aboutUs = 'assets/icons/about_us.svg';
+  static const String aboutApp = 'assets/icons/aboutApp.svg';
+  static const String contactUs = 'assets/icons/contact_us.svg';
+  static const String share = 'assets/icons/share.svg';
+  static const String policy = 'assets/icons/policy.svg';
+  static const String condations = 'assets/icons/condations.svg';
+  static const String setting = 'assets/icons/setting.svg';
+  static const String logout = 'assets/icons/logout.svg';
+  static const String tabBar = 'assets/icons/tab_bar.svg';
+  static const String editIcon = 'assets/icons/edit_icon.svg';
 }

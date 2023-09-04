@@ -1,7 +1,8 @@
 part of register_view;
 
 class BottomSheet extends StatefulWidget {
-  const BottomSheet({Key? key}) : super(key: key);
+  RegisterController controller;
+   BottomSheet(this.controller, {Key? key}) : super(key: key);
 
   @override
   State<BottomSheet> createState() => _BottomSheetState();
@@ -13,7 +14,7 @@ class _BottomSheetState extends State<BottomSheet> {
   CompleteProfileSellerController completeProfileSellerController =
       Get.put(CompleteProfileSellerController());
 
-  int _selectedRadio = 0;
+  int _selectedRadio = 1;
   bool isSelected = false;
 
   void _handleRadioValueChange(int? value) {
@@ -75,7 +76,7 @@ class _BottomSheetState extends State<BottomSheet> {
             thickness: 2,
           ),
           RegisterType(
-            value: 0,
+            value: 1,
             groupValue: _selectedRadio,
             onChange: _handleRadioValueChange,
             title: context.localizations.seller_account,
@@ -88,7 +89,7 @@ class _BottomSheetState extends State<BottomSheet> {
             thickness: 2,
           ),
           RegisterType(
-            value: 1,
+            value: 2,
             groupValue: _selectedRadio,
             onChange: _handleRadioValueChange,
             title: context.localizations.buyer_account,
@@ -102,12 +103,11 @@ class _BottomSheetState extends State<BottomSheet> {
           ),
           RegisterButton(
             title: context.localizations.create,
-            onPressed: () {
-              if (_selectedRadio == 0) {
-                Get.offAll(CompleteProfileSellerScreen());
-              } else {
-                Get.offAll(CompleteProfileBuyerScreen());
-              }
+            onPressed: () async {
+              widget.controller.type = _selectedRadio.toString();
+              Get.back();
+              await widget.controller.performRegister();
+
             },
           ),
         ],

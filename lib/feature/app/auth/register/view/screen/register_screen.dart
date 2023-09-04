@@ -64,7 +64,7 @@ class RegisterScreen extends GetView<RegisterController> {
                                   title: context.localizations.register,
                                   onPressed: () async {
                                     // await controller.performRegister();
-                                    Get.bottomSheet(const BottomSheet(),
+                                    Get.bottomSheet( BottomSheet(controller),
                                         enterBottomSheetDuration:
                                             const Duration(milliseconds: 500),
                                         exitBottomSheetDuration:

@@ -10,13 +10,17 @@ class CloseButton extends StatefulWidget {
 class _CloseButtonState extends State<CloseButton> {
   @override
   Widget build(BuildContext context) {
-    return Align(
-        alignment: Alignment.topRight,
-        child: IconButton(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.close, color: ColorResource.mainColor)));
+    return Opacity(
+      opacity: SharedPrefController().type != 1 ?1:0,
+      child: Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              onPressed: () {
+                  Get.offAll(() => const DashboardBuyerScreen());
+                // Navigator.pop(context);
+              },
+              icon: const Icon(Icons.close, color: ColorResource.mainColor))),
+    );
   }
 }

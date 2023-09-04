@@ -56,9 +56,10 @@ class CompleteStoreSellerScreen extends GetView<CompleteStoreSellerController> {
                                   child: SaveButton(
                                     title: context.localizations.register,
                                     onPressed: () async {
-                                      // await controller.performRegister();
+                                      //SharedPrefController().isCompleteAddress = false;
+                                      await controller.performAddStoreData();
                                       // Get.to(AddAddressSellerScreen());
-                                      Get.to(() => AddAddressSellerScreen());
+                                      // Get.to(() => AddAddressSellerScreen());
                                     },
                                   ),
                                 );

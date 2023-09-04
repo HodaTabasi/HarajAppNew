@@ -1,9 +1,15 @@
-class ProcessResponse {
-  final bool success;
-  final String message;
+import 'package:json_annotation/json_annotation.dart';
+part 'process_response.g.dart';
 
-  ProcessResponse({
-    required this.message,
-    this.success = false,
-  });
+@JsonSerializable()
+class ProcessResponse {
+  @JsonKey(name:"status")
+   bool? status;
+  @JsonKey(name:"message")
+   String? message;
+
+  // ProcessResponse({
+  //   required this.message,
+  //   this.status = false,
+  // });
 }

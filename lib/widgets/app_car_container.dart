@@ -63,7 +63,7 @@ class _AppCarContainerState extends State<AppCarContainer> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity.w,
-      height: 153.h,
+      height: 155.h,
       margin: EdgeInsets.symmetric(vertical: 10.h),
       decoration: BoxDecoration(
         color: ColorResource.white,

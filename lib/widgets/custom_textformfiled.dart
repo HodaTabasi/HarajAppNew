@@ -91,10 +91,10 @@ class AppTextFomField extends GetView<GeneralGetxController> {
                 Expanded(
                   child: TextFormField(
                     // validator: validator,
-                    focusNode: focusNode,
+                    // focusNode: focusNode,
                     onChanged: (value) {
                       errorTitle = controller.validator(value, type) ?? '';
-                      focusNode.requestFocus();
+                      // focusNode.requestFocus();
                     },
                     obscureText: secure,
                     cursorColor: mainColor,

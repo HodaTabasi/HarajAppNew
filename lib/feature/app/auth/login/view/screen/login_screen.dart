@@ -64,7 +64,7 @@ class LoginScreen extends GetView<LoginController> {
                                 child: LoginButton(
                                   title: context.localizations.login,
                                   onPressed: () async {
-                                    await controller.performRegister();
+                                    await controller.performLogin();
                                   },
                                 ),
                               );

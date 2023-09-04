@@ -4,7 +4,13 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 
+import '../../../../../../utils/errors/error_const.dart';
+import '../../../../../../utils/repository/general_repo.dart';
+import '../use_case/get_governortates_use_case.dart';
+
 class AddAddressSellerController extends GetxController {
+  var responseMessage = "";
+
   static AddAddressSellerController get to =>
       Get.find<AddAddressSellerController>();
 
@@ -96,6 +102,7 @@ class AddAddressSellerController extends GetxController {
     nameStreetController = TextEditingController();
     buildNumberController = TextEditingController();
     postalCodeController = TextEditingController();
+    getGovernorate();
     getData();
   }
 
@@ -119,6 +126,23 @@ class AddAddressSellerController extends GetxController {
       // await completeProfile();
     }
     loading.value = false;
+  }
+
+  Future<void> getGovernorate() async {
+    return GetGovernorateUseCase(repository: Get.find<GeneralRepository>())
+        .call()
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              // SharedPrefController().isCompleteAddress = false;
+              // Get.to(() => AddAddressSellerScreen());
+            }));
   }
 
   bool checkData() {

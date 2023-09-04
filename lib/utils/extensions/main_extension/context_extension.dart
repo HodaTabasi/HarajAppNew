@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:haraj/feature/app/auth/login/view/screen/login_screen.dart';
 import 'package:haraj/feature/app/auth/register/view/screen/register_screen.dart';
 import 'package:haraj/feature/app/profile/buyer/complete_profile_buyer/view/screen/complete_profile_buyer_screen.dart';
 import 'package:haraj/feature/app/profile/seller/add_address_seller/view/screen/add_address_seller_screen.dart';
 import 'package:haraj/feature/app/profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
 import 'package:haraj/feature/app/profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
+import 'package:haraj/feature/app/profile/seller/public_profile_seller/view/screen/profile_seller_screen.dart';
 import 'package:haraj/feature/core/launch_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/routes/key_routes.dart';
+
 
 ///General Extension App
 extension ContextExtension on BuildContext {
@@ -131,7 +134,7 @@ extension ContextExtension on BuildContext {
         //     const EditCarInfoSellerScreen(),
         // KeyRoutes.editCarImageSellerScreen: (context) =>
         //     const EditCarImageSellerScreen(),
-        // KeyRoutes.profileSellerScreen: (context) => const ProfileSellerScreen(),
+        KeyRoutes.profileSellerScreen: (context) => ProfileSellerScreen(),
         // KeyRoutes.personalInfoSellerScreen: (context) =>
         //     const PersonalInfoSellerScreen(),
         // KeyRoutes.editPersonalSellerScreen: (context) =>
@@ -150,4 +153,6 @@ extension ContextExtension on BuildContext {
         // KeyRoutes.infoAddressSellerScreen: (context) =>
         //     const InfoAddressSellerScreen(),
       };
+
+
 }
