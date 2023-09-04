@@ -10,7 +10,8 @@ class GeneralRepository {
   final GeneralApiController remoteDataSource;
   final NetworkInfo networkInfo;
 
-  GeneralRepository({required this.remoteDataSource, required this.networkInfo});
+  GeneralRepository(
+      {required this.remoteDataSource, required this.networkInfo});
 
   Future<Either<Failure, GovernoratesResponse>> getGovernorate() async {
     if (await networkInfo.isConnected) {

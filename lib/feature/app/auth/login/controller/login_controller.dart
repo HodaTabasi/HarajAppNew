@@ -6,13 +6,8 @@ import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/utils/repository/auth_repo.dart';
 
 import '../../../../../utils/errors/error_const.dart';
-import '../../../../../utils/extensions/routes/key_routes.dart';
 import '../../../dashboard/buyer/dashboard_buyer/views/dashboard_screen.dart';
-import '../../../dashboard/seller/dashboard_seller/views/dashboard_screen.dart';
-import '../../../profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
-import '../../register/view/screen/register_screen.dart';
 import '../use_case/login_use_case.dart';
-import '../../register/use_case/verify_use_case.dart';
 
 class LoginController extends GetxController {
   String responseMessage = "";
@@ -86,18 +81,16 @@ class LoginController extends GetxController {
             }, (user) async {
               SharedPrefController().save(user: user);
               if (user.data?.type == 1) {
-                if(user.data?.store!= null){
-                  Get.offAll(() => DashboardSellerScreen());
-                }else {
-                  Get.offAll(() => CompleteProfileSellerScreen());
-                }
-
+                Get.offAll(() => DashboardBuyerScreen());
+                // if(user.data?.store!= null){
+                //   Get.offAll(() => DashboardSellerScreen());
+                // }else {
+                //   Get.offAll(() => CompleteProfileSellerScreen());
+                // }
               } else {
                 Get.offAll(() => DashboardBuyerScreen());
               }
               // EasyLoading.dismiss();
             }));
   }
-
-
 }

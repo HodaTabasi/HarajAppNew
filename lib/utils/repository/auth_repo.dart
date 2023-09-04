@@ -19,11 +19,12 @@ class AuthRepository {
         () => remoteDataSource.login(email: email, password: password));
   }
 
-  Future<Either<Failure, verifiyResponse>> register({email, password,type}) async {
+  Future<Either<Failure, verifiyResponse>> register(
+      {email, password, type}) async {
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.registration(
-            email: email, password: password,type:type);
+            email: email, password: password, type: type);
 
         return Right(response);
       } on ServerException {
@@ -35,7 +36,8 @@ class AuthRepository {
   }
 
   Future<Either<Failure, UserModel>> verifyAndRegister({code}) async {
-    return _getMessage(() => remoteDataSource.verify(code: code, hashKey: SharedPrefController().vierifyCode));
+    return _getMessage(() => remoteDataSource.verify(
+        code: code, hashKey: SharedPrefController().vierifyCode));
   }
 
   Future<Either<Failure, verifiyResponse>> resendCode({email}) async {

@@ -25,14 +25,13 @@ dependencies:
   card_swiper: ^3.0.1
   share_plus: ^7.0.2
   internet_connection_checker: ^1.0.0+1
-  stream_transform: ^2.1.0
+#  stream_transform: ^2.1.0
   json_serializable: ^6.6.2
   dartz: ^0.10.1
   device_info_plus: ^9.0.3
 
   # STATE MANAGEMENT
   get: ^4.6.5
-  carousel_slider: ^4.2.1
   expandable: ^5.0.1
 
   # DATABASE
@@ -47,6 +46,7 @@ dependencies:
 
   #FIREBASE
   firebase_core: ^2.15.1
+  firebase_auth: ^4.8.0
   cloud_firestore: ^4.0.4
   firebase_storage: ^11.0.3
   firebase_messaging: ^14.0.4
