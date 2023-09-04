@@ -1,5 +1,7 @@
 library complete_store_seller_view;
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,7 @@ import 'package:haraj/widgets/app_image.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
 import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_textformfiled.dart';
+import 'package:image_picker/image_picker.dart';
 
 part '../components/back_button.dart';
 part '../components/header_image.dart';
@@ -57,9 +60,9 @@ class CompleteStoreSellerScreen extends GetView<CompleteStoreSellerController> {
                                     title: context.localizations.register,
                                     onPressed: () async {
                                       //SharedPrefController().isCompleteAddress = false;
-                                      await controller.performAddStoreData();
+                                       //await controller.performAddStoreData();
                                       // Get.to(AddAddressSellerScreen());
-                                      // Get.to(() => AddAddressSellerScreen());
+                                      Get.to(() => AddAddressSellerScreen());
                                     },
                                   ),
                                 );
