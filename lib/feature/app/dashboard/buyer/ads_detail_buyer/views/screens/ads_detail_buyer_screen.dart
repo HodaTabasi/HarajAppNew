@@ -37,8 +37,12 @@ part '../components/offer_card.dart';
 part '../components/swiper_component.dart';
 
 class AdsDetailBuyerScreen extends GetView<AdsDetailBuyerController> {
-  final AdsDetailBuyerController adsDetailBuyerController =
-      Get.put(AdsDetailBuyerController());
+  int? idDetails;
+  late AdsDetailBuyerController adsDetailBuyerController;
+
+  AdsDetailBuyerScreen({this.idDetails}) {
+    adsDetailBuyerController = Get.put(AdsDetailBuyerController(idDetails!));
+  }
 
   @override
   Widget build(BuildContext context) {

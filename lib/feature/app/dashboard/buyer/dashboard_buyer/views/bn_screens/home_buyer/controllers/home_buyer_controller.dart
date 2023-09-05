@@ -39,7 +39,7 @@ class HomeBuyerController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (response) async {
-              print("mmm home seller controller 💯=> i am here ");
+              print("mmm home buyer controller 💯=> i am here ");
             }));
   }
 }

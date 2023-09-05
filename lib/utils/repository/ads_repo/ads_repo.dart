@@ -24,4 +24,17 @@ class AdsRepository {
       return Left(OfflineFailure());
     }
   }
+
+  Future<Either<Failure, AdsModel>> getShow(id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.show(id);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
 }

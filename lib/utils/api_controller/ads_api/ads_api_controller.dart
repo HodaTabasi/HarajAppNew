@@ -23,4 +23,19 @@ class AdsApiController with Helpers {
       throw ServerException();
     }
   }
+
+  show(int id) async {
+    // Add id as a query parameter
+    var url = Uri.parse('${ApiSettings.index}/$id');
+    http.Response response = await http.get(url, headers: headers);
+    var decodedJson = json.decode(response.body);
+
+    debugPrint("mmm show 💯=> $decodedJson");
+    if (response.statusCode == 200) {
+      return AdsModel.fromJson(decodedJson);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
 }

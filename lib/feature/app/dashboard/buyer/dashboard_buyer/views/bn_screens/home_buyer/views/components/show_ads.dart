@@ -14,7 +14,7 @@ class _ShowAdsState extends State<ShowAds> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => AdsDetailBuyerScreen());
+        Get.to(() => AdsDetailBuyerScreen(idDetails: 5));
       },
       child: GridView.builder(
         shrinkWrap: true,
