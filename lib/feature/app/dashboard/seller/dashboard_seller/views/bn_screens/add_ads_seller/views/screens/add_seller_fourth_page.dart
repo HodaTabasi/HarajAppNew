@@ -1,8 +1,8 @@
-part of add_seller_view;
+part of add_ads_seller_view;
 
-class AddSellerFourthPage extends GetView<AddSellerController> {
-  final AddSellerController addSellerController =
-      Get.put(AddSellerController());
+class AddSellerFourthPage extends GetView<AddAdsSellerController> {
+  final AddAdsSellerController addAdsSellerController =
+      Get.put(AddAdsSellerController());
 
   @override
   Widget build(BuildContext context) {

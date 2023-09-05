@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ads_seller/use_case/add_ads_seller_use_case.dart';
+import 'package:haraj/utils/errors/error_const.dart';
+import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
+import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-class AddSellerController extends GetxController {
-  static AddSellerController get to => Get.find<AddSellerController>();
+class AddAdsSellerController extends GetxController {
+  static AddAdsSellerController get to => Get.find<AddAdsSellerController>();
 
   RxBool loading = true.obs;
   Rx<DateTime> selectedDate = DateTime.now().obs;
@@ -17,6 +21,8 @@ class AddSellerController extends GetxController {
 
   late TextEditingController carPriceController;
   late TextEditingController kilometerController;
+
+  var responseMessage = "";
 
   Future<void> selectDate() async {
     final DateTime? picked = await showDatePicker(
@@ -51,6 +57,7 @@ class AddSellerController extends GetxController {
     pageController = PageController();
     carPriceController = TextEditingController();
     kilometerController = TextEditingController();
+    addStoreAds();
     super.onInit();
   }
 
@@ -65,5 +72,52 @@ class AddSellerController extends GetxController {
   void clear() {
     carPriceController.clear();
     kilometerController.clear();
+  }
+
+  Future<void> addStoreAds() async {
+    return AddAdsSellerUseCase(repository: Get.find<AdsRepository>())
+        .call(
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "2023",
+          "1",
+          "1500",
+          "1",
+          "1",
+          "details",
+          "true",
+          "true",
+          "true",
+          "0592659279",
+          "facebook",
+          "true",
+          "true",
+          "true",
+          "true",
+        )
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              print("mmm Add Ads Detail Buyer Controller 💯=>  ");
+            }));
   }
 }

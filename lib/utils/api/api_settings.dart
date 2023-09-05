@@ -24,5 +24,5 @@ class ApiSettings {
   static const String governorates =
       '${_apiUrl}/governorates'; //المدن والمحافظات
   // ***************************POST LINKS**************************************
-  static const String index = '${_apiUrl}/posts';
+  static const String post = '${_apiUrl}/posts';
 }

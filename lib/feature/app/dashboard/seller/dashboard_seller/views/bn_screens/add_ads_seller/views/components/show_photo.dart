@@ -1,4 +1,4 @@
-part of add_seller_view;
+part of add_ads_seller_view;
 
 class ShowPhoto extends StatefulWidget {
   const ShowPhoto({super.key});
@@ -8,7 +8,7 @@ class ShowPhoto extends StatefulWidget {
 }
 
 class _ShowPhotoState extends State<ShowPhoto> {
-  final AddSellerController controller = Get.put(AddSellerController());
+  final AddAdsSellerController controller = Get.put(AddAdsSellerController());
 
   @override
   Widget build(BuildContext context) {

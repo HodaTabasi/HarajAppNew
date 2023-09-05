@@ -8,7 +8,7 @@ class AdsShowUseCase {
 
   AdsShowUseCase({required this.repository});
 
-  Future<Either<Failure, AdsModel>> call(id) async {
+  Future<Either<Failure, AdsModel>> call(int id) async {
     return await repository.getShow(id);
   }
 }

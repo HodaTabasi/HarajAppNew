@@ -37,4 +37,79 @@ class AdsRepository {
       return Left(OfflineFailure());
     }
   }
+
+  Future<Either<Failure, AdsModel>> store({
+    price,
+    carId,
+    brandId,
+    bodyId,
+    mechanicalStatusId,
+    standardId,
+    generalStatusId,
+    fuelId,
+    gearId,
+    drivingSideId,
+    sellerTypeId,
+    technicalAdvantageId,
+    seatId,
+    cylinderId,
+    doorId,
+    year,
+    engineId,
+    distance,
+    outColor,
+    inColor,
+    details,
+    guarantee,
+    finance,
+    exportable,
+    whatsapp,
+    facebook,
+    whatsappConnection,
+    facebookConnection,
+    call,
+    chat,
+  }) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.store(
+            price: price,
+            carId: carId,
+            brandId: brandId,
+            bodyId: bodyId,
+            mechanicalStatusId: mechanicalStatusId,
+            standardId: standardId,
+            generalStatusId: generalStatusId,
+            fuelId: fuelId,
+            gearId: gearId,
+            drivingSideId: drivingSideId,
+            sellerTypeId: sellerTypeId,
+            technicalAdvantageId: technicalAdvantageId,
+            seatId: seatId,
+            cylinderId: cylinderId,
+            doorId: doorId,
+            year: year,
+            engineId: engineId,
+            distance: distance,
+            outColor: outColor,
+            inColor: inColor,
+            details: details,
+            guarantee: guarantee,
+            finance: finance,
+            exportable: exportable,
+            whatsapp: whatsapp,
+            facebook: facebook,
+            whatsappConnection: whatsappConnection,
+            facebookConnection: facebookConnection,
+            call: call,
+            chat: chat);
+
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
 }

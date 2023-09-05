@@ -1,4 +1,4 @@
-part of add_seller_view;
+part of add_ads_seller_view;
 
 class CarBrandSelection extends StatelessWidget {
   final String title;
