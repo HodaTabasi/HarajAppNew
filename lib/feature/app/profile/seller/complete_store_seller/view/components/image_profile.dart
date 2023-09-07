@@ -8,6 +8,14 @@ class ImageProfile extends StatefulWidget {
 }
 
 class _ImageProfileState extends State<ImageProfile> {
+  late ImagePicker picker;
+
+  @override
+  void initState() {
+    picker = ImagePicker();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,17 +29,28 @@ class _ImageProfileState extends State<ImageProfile> {
             CircleAvatar(
               radius: 50.r,
               backgroundColor: ColorResource.lightGray,
-              child: AppSvgPicture(
-                assetName: IconsApp.logoSeller,
-              ),
+              backgroundImage: CompleteStoreSellerController.to.file != null
+                  ? ResizeImage.resizeIfNeeded(
+                      1024,
+                      null,
+                      FileImage(
+                          File(CompleteStoreSellerController.to.file!.path)))
+                  : const AssetImage(ImagesApp.person),
             ),
-            CircleAvatar(
-              radius: 18.r,
-              backgroundColor: ColorResource.mainColor,
-              child: Icon(
-                Icons.camera_alt_rounded,
-                size: 24.w,
-                color: ColorResource.white,
+            InkWell(
+              onTap: () async {
+                CompleteStoreSellerController.to.file =
+                    await picker.pickImage(source: ImageSource.gallery);
+                setState(() {});
+              },
+              child: CircleAvatar(
+                radius: 18.r,
+                backgroundColor: ColorResource.mainColor,
+                child: Icon(
+                  Icons.camera_alt_rounded,
+                  size: 24.w,
+                  color: ColorResource.white,
+                ),
               ),
             ),
           ],
