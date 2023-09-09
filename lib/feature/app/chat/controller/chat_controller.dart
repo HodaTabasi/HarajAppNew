@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 class HomeChatController extends GetxController {
   static HomeChatController get to => Get.find<HomeChatController>();
-
   RxBool loading = true.obs;
   String seller = 'seller';
 

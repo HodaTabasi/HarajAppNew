@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:haraj/utils/api_controller/ads_api/ads_api_controller.dart';
 import 'package:haraj/utils/api_controller/auth_api_controller.dart';
+import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
 import 'package:haraj/utils/repository/auth_repo.dart';
 import 'package:haraj/utils/repository/complete_user_repo.dart';
 import 'package:haraj/utils/repository/general_repo.dart';
@@ -15,16 +17,19 @@ class MainInjection implements Bindings {
   void dependencies() {
     NetworkInfoImpl networkInfoImpl =
         NetworkInfoImpl(InternetConnectionChecker());
+    //AuthRepository(networkInfo: NetworkInfoImpl(InternetConnectionChecker()),remoteDataSource: AuthController());
 
     Get.put(AuthRepository(
-        remoteDataSource: AuthController(),
-        networkInfo: networkInfoImpl));
+        remoteDataSource: AuthController(), networkInfo: networkInfoImpl));
 
     Get.put(CompletePersonalInfoRepo(
         remoteDataSource: CompleteUserProfileController(),
         networkInfo: networkInfoImpl));
 
     Get.put(OTPGetxController());
+
+    Get.put(AdsRepository(
+        networkInfo: networkInfoImpl, remoteDataSource: AdsApiController()));
     Get.put(GeneralRepository(remoteDataSource: GeneralApiController(),networkInfo: networkInfoImpl));
   }
 }

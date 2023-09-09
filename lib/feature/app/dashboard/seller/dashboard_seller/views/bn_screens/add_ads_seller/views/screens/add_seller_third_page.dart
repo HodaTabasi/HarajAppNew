@@ -1,6 +1,6 @@
-part of add_seller_view;
+part of add_ads_seller_view;
 
-class AddSellerThirdPage extends GetView<AddSellerController> {
+class AddSellerThirdPage extends GetView<AddAdsSellerController> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

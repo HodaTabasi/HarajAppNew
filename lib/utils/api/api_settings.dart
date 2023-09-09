@@ -23,4 +23,6 @@ class ApiSettings {
   //***************************FEATURES LINKS***********************************
   static const String governorates = '${_apiUrl}/governorates'; //المدن والمحافظات
   static const String updateAddress = '${_apiUrl}/update-address'; //المدن والمحافظات
+  // ***************************POST LINKS**************************************
+  static const String post = '${_apiUrl}/posts';
 }

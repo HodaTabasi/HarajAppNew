@@ -1,4 +1,4 @@
-library add_seller_view;
+library add_ads_seller_view;
 
 import 'dart:io';
 
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/dashboard/seller/add_contact_information_seller/view/screens/add_contact_information_seller_screen.dart';
-import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_seller/controllers/add_seller_controller.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ads_seller/controllers/add_ads_seller_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
@@ -40,9 +40,9 @@ part '../screens/add_seller_fourth_page.dart';
 part '../screens/add_seller_second_page.dart';
 part '../screens/add_seller_third_page.dart';
 
-class AddSellerScreen extends GetView<AddSellerController> {
-  final AddSellerController addSellerController =
-      Get.put(AddSellerController());
+class AddAdsSellerScreen extends GetView<AddAdsSellerController> {
+  final AddAdsSellerController addAdsSellerController =
+      Get.put(AddAdsSellerController());
 
   @override
   Widget build(BuildContext context) {

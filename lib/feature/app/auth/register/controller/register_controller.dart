@@ -75,19 +75,19 @@ class RegisterController extends GetxController {
 
   Future<void> register() async {
     return VerifyUseCase(repository: Get.find<AuthRepository>())
-        .call(emailController.text, passwordController.text,type)
+        .call(emailController.text, passwordController.text, type)
         .then((value) => value.fold((failure) {
-      responseMessage = mapFailureToMessage(failure);
-      Get.snackbar(
-        'Requires',
-        responseMessage,
-        backgroundColor: ColorResource.red,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }, (response) async {
-          OTPGetxController.to.emailText = emailController.text;
-      SharedPrefController().vierifyCode = response.data?.id;
-      Get.off(()=>OTPScreen());
-    }));
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              OTPGetxController.to.emailText = emailController.text;
+              SharedPrefController().vierifyCode = response.data?.id;
+              Get.off(() => OTPScreen());
+            }));
   }
 }

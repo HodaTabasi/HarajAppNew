@@ -1,4 +1,4 @@
-part of add_seller_view;
+part of add_ads_seller_view;
 
 class PageTimeLine extends StatefulWidget {
   const PageTimeLine({super.key});
@@ -8,8 +8,8 @@ class PageTimeLine extends StatefulWidget {
 }
 
 class _PageTimeLineState extends State<PageTimeLine> {
-  final AddSellerController addSellerController =
-      Get.put(AddSellerController());
+  final AddAdsSellerController addAdsSellerController =
+      Get.put(AddAdsSellerController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,24 +19,28 @@ class _PageTimeLineState extends State<PageTimeLine> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TimeLineIndicator(
-                selected: addSellerController.currentPage == 0, endMargin: 4.w),
+                selected: addAdsSellerController.currentPage == 0,
+                endMargin: 4.w),
             TimeLineIndicator(
-                selected: addSellerController.currentPage == 1, endMargin: 4.w),
+                selected: addAdsSellerController.currentPage == 1,
+                endMargin: 4.w),
             TimeLineIndicator(
-                selected: addSellerController.currentPage == 2, endMargin: 4.w),
-            TimeLineIndicator(selected: addSellerController.currentPage == 3),
+                selected: addAdsSellerController.currentPage == 2,
+                endMargin: 4.w),
+            TimeLineIndicator(
+                selected: addAdsSellerController.currentPage == 3),
           ],
         ),
         SizedBox(height: 24.h),
         SizedBox(
           height: 382,
           child: PageView.builder(
-            controller: addSellerController.pageController,
+            controller: addAdsSellerController.pageController,
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             onPageChanged: (value) {
               setState(() {
-                addSellerController.currentPage = value;
+                addAdsSellerController.currentPage = value;
               });
             },
             itemCount: 4,
