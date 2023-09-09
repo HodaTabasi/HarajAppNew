@@ -10,13 +10,12 @@ class BottomSheet extends StatefulWidget {
 
 class _BottomSheetScState extends State<BottomSheet> {
   AddAddressSellerController addAddressSellerController =
-      Get.put(AddAddressSellerController());
-
-  int _selectedRadio = 0;
+      Get.find();
 
   void _handleRadioValueChange(int? value) {
     setState(() {
-      _selectedRadio = value!;
+      addAddressSellerController.selectId(value);
+      addAddressSellerController.selectedRadio = value!;
     });
   }
 
@@ -60,6 +59,7 @@ class _BottomSheetScState extends State<BottomSheet> {
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
           ),
+
           // Wrap the scrollable part in a Flexible widget to take the remaining space
           Flexible(
             child: ListView.builder(
@@ -68,10 +68,10 @@ class _BottomSheetScState extends State<BottomSheet> {
                 return Column(
                   children: [
                     CitySelection(
-                      value: index,
-                      groupValue: _selectedRadio,
+                      value: addAddressSellerController.getValue(index),
+                      groupValue: addAddressSellerController.selectedRadio,
                       onChange: _handleRadioValueChange,
-                      title: addAddressSellerController.currentList[index],
+                      title: addAddressSellerController.currentList[index].toString(),
                     ),
                     Divider(
                       height: 10.h,
@@ -85,7 +85,20 @@ class _BottomSheetScState extends State<BottomSheet> {
           ),
           SaveButton(
             title: context.localizations.create,
-            onPressed: () {},
+            onPressed: () {
+              if(addAddressSellerController.showEmirates.value){
+                addAddressSellerController.cities.value = addAddressSellerController.emirates[addAddressSellerController.selectedRadio].cities!;
+                int index = addAddressSellerController.emirates.indexWhere((element) => element.id == addAddressSellerController.selectedRadio);
+                addAddressSellerController.emira.value = addAddressSellerController.emirates[index].name ?? '';
+                print(addAddressSellerController.emira.value);
+              } else {
+                int index = addAddressSellerController.cities.indexWhere((element) => element.id == addAddressSellerController.selectedRadio);
+                addAddressSellerController.city.value = addAddressSellerController.cities[index].name ?? '';
+                print(addAddressSellerController.city.value);
+              }
+              //print(addAddressSellerController.emira?.value);
+             Get.back();
+            },
           ),
         ],
       ),

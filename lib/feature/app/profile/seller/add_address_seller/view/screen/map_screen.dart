@@ -7,7 +7,29 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   AddAddressSellerController addAddressSellerController =
-      Get.put(AddAddressSellerController());
+      Get.find();
+  String _currentAddress = '';
+  // Position? _currentPosition;
+  var camera;
+  bool isLoading = false;
+
+  final Completer<GoogleMapController> _controllerGoogleMap = Completer();
+
+  final ValueNotifier<CameraPosition> currentCameraPosition = ValueNotifier(
+  const CameraPosition(target: LatLng(15.508457, 32.522854), zoom: 18));
+
+  LatLng? center;
+
+
+  onCameraMove(CameraPosition position) {
+    print("On Camera Move method $position");
+
+    currentCameraPosition.value = position;
+  }
+
+  onCameraIdle() {
+    print("On Camera Idle method");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +41,45 @@ class _MapScreenState extends State<MapScreen> {
               child: GoogleMap(
                 mapType: MapType.normal,
                 padding: EdgeInsets.all(1.w),
-                initialCameraPosition:
-                    addAddressSellerController.initialCameraPosition(),
+                // initialCameraPosition:
+                //     addAddressSellerController.initialCameraPosition(),
                 onMapCreated: onMapCreated,
                 markers: addAddressSellerController.markers,
-                myLocationEnabled: true,
                 myLocationButtonEnabled: false,
                 compassEnabled: false,
-                // onTap: onTapMap,
+                minMaxZoomPreference: const MinMaxZoomPreference(8, 19),
+                zoomControlsEnabled: false,
+                zoomGesturesEnabled: true,
+                scrollGesturesEnabled: true,
+                mapToolbarEnabled: false,
+                rotateGesturesEnabled: false,
+                tiltGesturesEnabled: false,
+                myLocationEnabled: true,
+                onCameraMove: onCameraMove,
+                onCameraIdle: onCameraIdle,
+                initialCameraPosition: currentCameraPosition.value,
+
+                gestureRecognizers: Set()
+                  ..add(Factory<PanGestureRecognizer>(
+                          () => PanGestureRecognizer())),
+                onTap: (argument) {
+                 addAddressSellerController.center = argument;
+                  addAddressSellerController.markers.clear();
+                  addAddressSellerController.markers.add(Marker(
+                    markerId: MarkerId(argument.toString()),
+                    position: argument,
+                    infoWindow: const InfoWindow(
+                      //popup info
+                      title: 'My Custom Title ',
+                      snippet: 'My Custom Subtitle',
+                    ),
+                    icon: BitmapDescriptor.defaultMarker,
+                  ));
+                  _getAddressFromLatLng();
+                  setState(() {});
+                },
               ),
+
             ),
             Container(
               alignment: Alignment.topLeft,
@@ -70,4 +122,20 @@ class _MapScreenState extends State<MapScreen> {
       addAddressSellerController.mapController = controller;
     });
   }
+
+  Future<void> _getAddressFromLatLng() async {
+    // Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+    await placemarkFromCoordinates(addAddressSellerController.center!.latitude, addAddressSellerController.center!.longitude)
+        .then((List<Placemark> placemarks) {
+      Placemark place = placemarks[0];
+      setState(() {
+        addAddressSellerController.currentAddress.value =
+        '${place.street}, ${place.subLocality}';
+      });
+    }).catchError((e) {
+      debugPrint(e);
+    });
+  }
+
 }

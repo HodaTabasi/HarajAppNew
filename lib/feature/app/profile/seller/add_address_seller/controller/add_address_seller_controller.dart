@@ -3,9 +3,16 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
+import 'package:haraj/utils/models/governorates_model/citiey_model.dart';
+import 'package:haraj/utils/models/seller_info/address_model.dart';
 
 import '../../../../../../utils/errors/error_const.dart';
+import '../../../../../../utils/models/governorates_model/country.dart';
+import '../../../../../../utils/models/governorates_model/governorate_model.dart';
+import '../../../../../../utils/prefs/shared_pref_controller.dart';
+import '../../../../../../utils/repository/complete_user_repo.dart';
 import '../../../../../../utils/repository/general_repo.dart';
+import '../use_case/complete_store_use_case.dart';
 import '../use_case/get_governortates_use_case.dart';
 
 class AddAddressSellerController extends GetxController {
@@ -19,76 +26,47 @@ class AddAddressSellerController extends GetxController {
   late Position currentPosition;
   late GoogleMapController mapController;
   Set<Marker> markers = <Marker>{};
+  RxString currentAddress = "".obs;
+  LatLng? center;
 
   RxBool showEmirates = true.obs;
   String currentState = 'emirate';
 
-  List<String> emirates = [
-    'أبو ظبي',
-    'دبي',
-    'الشارقة',
-    'عجمان',
-    'أم القيوين',
-    'رأس الخيمة',
-    'الفجيرة',
-  ];
+  List<GovernorateModel> emirates = [];
 
-  List<String> cities = [
-    'أبو ظبي',
-    'دبي',
-    'الشارقة',
-    'عجمان',
-    'أم القيوين',
-    'رأس الخيمة',
-    'الفجيرة',
-    'خورفكان',
-    'كلباء',
-    'العين',
-    'العذيبة',
-    'الظفرة',
-    'المدام',
-    'الرويس',
-    'حتا',
-    'خدمة الزاهية',
-    'دبا الفجيرة',
-    'دبا الحصن',
-    'المدينة الشيخ خليفة الطبية',
-    'المدينة محمد بن زايد',
-    'الوقن',
-    'نعمة',
-    'قدفع',
-    'رأس الخور',
-    'رماح',
-    'شعب الينابيع',
-    'ظفارة',
-    'سلمة',
-    'شحن',
-    'صيدا',
-    'صورفل',
-    'تنورة',
-    'ميناء زايد',
-    'مطرح',
-    'مرفأ خليفة',
-    'زايد الصناعية',
-    'مدينة زايد',
-    'جبل علي',
-    'جبل حفيت',
-    'شحة',
-    'وادي غلام',
-    'يس',
-    'ليوا',
-    'كيمة',
-    'واحة مدبي',
-    'العزيزية',
-  ];
+  RxList<CityModel> cities =<CityModel>[].obs;
 
-  RxList<String> currentList = <String>[].obs;
+  RxList<Country> currentList = <Country>[].obs;
+
+  int? cityId;
+  int? emiraId;
+
+  Rx<String?> city = "".obs;
+  Rx<String?> emira = "".obs;
+
+  int selectedRadio = 0;
+
+
+  Address get address => Address(
+    lng: center?.longitude,
+    lat: center?.latitude,
+    street: nameStreetController.text,
+    governorateId: emiraId,
+    buildingNo: buildNumberController.text,
+    postCode: postalCodeController.text,
+    cityId: cityId
+  );
+
+  int getValue(index){
+    return showEmirates.value?emirates[index].id!:cities[index].id!;
+  }
 
   void toggleList(String title) {
     if (title != currentState) {
       currentState = title;
       showEmirates.toggle();
-      currentList.value = showEmirates.value ? emirates : cities;
+      selectedRadio = showEmirates.value ? emiraId ?? 0 : cityId  ?? 0;
+      currentList.value = showEmirates.value ? emirates : cities.value;
     }
   }
 
@@ -120,12 +98,12 @@ class AddAddressSellerController extends GetxController {
     postalCodeController.clear();
   }
 
-  Future<void> performRegister() async {
+  Future<bool?> performAddress() async {
     loading.value = true;
     if (checkData()) {
-      // await completeProfile();
+       return await completeAddress();
     }
-    loading.value = false;
+
   }
 
   Future<void> getGovernorate() async {
@@ -140,6 +118,9 @@ class AddAddressSellerController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (response) async {
+                  emirates = response.data!;
+                  cities.value = emirates[0].cities!;
+                  currentList.value = emirates;
               // SharedPrefController().isCompleteAddress = false;
               // Get.to(() => AddAddressSellerScreen());
             }));
@@ -225,5 +206,33 @@ class AddAddressSellerController extends GetxController {
       target: LatLng(currentPosition.latitude, currentPosition.longitude),
       zoom: 15,
     );
+  }
+
+  Future<bool> completeAddress() async {
+      return await CompleteAddressUseCase(
+          repository: Get.find<CompletePersonalInfoRepo>())
+          .call(address)
+          .then((value) => value.fold((failure) {
+        responseMessage = mapFailureToMessage(failure);
+        Get.snackbar(
+          'Requires',
+          responseMessage,
+          backgroundColor: ColorResource.red,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        loading.value = false;
+        return false;
+      }, (user) async {
+            print("ss");
+        SharedPrefController().isCompleteAddress = true;
+        loading.value = false;
+        return true;
+
+        // Get.to(() => AddAddressSellerScreen());
+      }));
+  }
+
+  void selectId(int? value) {
+    showEmirates.value? emiraId = value! : cityId = value!;
   }
 }

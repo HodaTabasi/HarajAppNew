@@ -19,18 +19,24 @@ class Address {
   int? governorateId;
 
   //
-  Address(this.lat,
-        this.lng,
-        this.street,
-        this.cityId,
-        this.postCode,
-        this.buildingNo,
-        this.governorateId);
+  Address(
+      {this.lat,
+      this.lng,
+      this.street,
+      this.cityId,
+      this.postCode,
+      this.buildingNo,
+      this.governorateId});
 
   factory Address.fromJson(Map<String,dynamic> json) =>_$AddressFromJson(json);
 
   Map<String,dynamic> toJson() => _$AddressToJson(this);
-  //
+
+  @override
+  String toString() {
+    return 'Address{lat: $lat, lng: $lng, street: $street, cityId: $cityId, postCode: $postCode, buildingNo: $buildingNo, governorateId: $governorateId}';
+  }
+//
   // Address.fromJson(Map<String, dynamic> json) {
   //   lat = json['lat'];
   //   lng = json['lng'];
@@ -52,4 +58,6 @@ class Address {
   //   data['governorate_id'] = this.governorateId;
   //   return data;
   // }
+
+
 }

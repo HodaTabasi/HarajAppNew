@@ -104,6 +104,7 @@ class CompleteStoreSellerController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (user) async {
+             SharedPrefController().isCompleteStore = true;
              SharedPrefController().isCompleteAddress = false;
              Get.to(() => AddAddressSellerScreen());
     }));

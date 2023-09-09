@@ -1,5 +1,6 @@
 
 import 'package:dartz/dartz.dart';
+import 'package:haraj/utils/models/seller_info/address_model.dart';
 
 import '../../../../../../utils/errors/failures.dart';
 import '../../../../../../utils/models/seller_info/seller_user_model.dart';
@@ -7,12 +8,12 @@ import '../../../../../../utils/models/seller_info/store_model.dart';
 import '../../../../../../utils/models/user/user_model.dart';
 import '../../../../../../utils/repository/complete_user_repo.dart';
 
-class CompleteStoreUseCase {
+class CompleteAddressUseCase {
   CompletePersonalInfoRepo repository;
 
-  CompleteStoreUseCase({required this.repository});
+  CompleteAddressUseCase({required this.repository});
 
-  Future<Either<Failure, UserModel>> call(Store store,String imagePath) async {
-    return await repository.completeStoreData(storeData: store,imageFile: imagePath);
+  Future<Either<Failure, UserModel>> call(Address address) async {
+    return await repository.completeAddressData(addressData: address);
   }
 }

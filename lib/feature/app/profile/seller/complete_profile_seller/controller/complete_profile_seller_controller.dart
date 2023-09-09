@@ -101,6 +101,7 @@ class CompleteProfileSellerController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (user) async {
+                SharedPrefController().isCompleteStore = false;
                 Get.to(() => CompleteStoreSellerScreen());
                }));
   }

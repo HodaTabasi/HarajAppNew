@@ -30,6 +30,8 @@ dependencies:
   dartz: ^0.10.1
   device_info_plus: ^9.0.3
 
+
+
   # STATE MANAGEMENT
   get: ^4.6.5
   carousel_slider: ^4.2.1
@@ -44,6 +46,7 @@ dependencies:
   google_maps_flutter: ^2.1.12
   # permission_handler: ^10.0.0
   geolocator: ^9.0.1
+  geocoding: ^2.0.4
 
   #FIREBASE
   firebase_core: ^2.15.1

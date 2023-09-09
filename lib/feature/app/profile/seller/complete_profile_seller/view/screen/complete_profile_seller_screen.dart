@@ -63,7 +63,7 @@ class CompleteProfileSellerScreen
                                   child: SaveButton(
                                     title: context.localizations.register,
                                     onPressed: () async {
-                                      // await controller.performUpdateProfile();
+                                       // await controller.performUpdateProfile();
                                       Get.to(() => CompleteStoreSellerScreen());
                                     },
                                   ),

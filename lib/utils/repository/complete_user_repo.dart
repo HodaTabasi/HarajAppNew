@@ -39,4 +39,17 @@ class CompletePersonalInfoRepo {
       return Left(OfflineFailure());
     }
   }
+
+  Future<Either<Failure, UserModel>> completeAddressData({addressData}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.updateAddressInfo(address: addressData);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
 }

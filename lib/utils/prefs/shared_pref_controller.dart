@@ -31,12 +31,18 @@ class SharedPrefController {
   }
 
 
-  //
+  //address
   set isCompleteAddress(code) {
     _sharedPreferences.setBool(PrefKeys.isCompleteAddress.toString(), code);
   }
   bool get isCompleteAddress =>
       _sharedPreferences.getBool(PrefKeys.isCompleteAddress.toString()) ?? false;
+//store Completed
+  set isCompleteStore(code) {
+    _sharedPreferences.setBool(PrefKeys.isCompleteStore.toString(), code);
+  }
+  bool get isCompleteStore =>
+      _sharedPreferences.getBool(PrefKeys.isCompleteStore.toString()) ?? false;
 
 
 

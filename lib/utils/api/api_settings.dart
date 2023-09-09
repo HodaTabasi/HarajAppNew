@@ -22,4 +22,5 @@ class ApiSettings {
   static const String gallery = '${_apiUrl}user/gallery';
   //***************************FEATURES LINKS***********************************
   static const String governorates = '${_apiUrl}/governorates'; //المدن والمحافظات
+  static const String updateAddress = '${_apiUrl}/update-address'; //المدن والمحافظات
 }
