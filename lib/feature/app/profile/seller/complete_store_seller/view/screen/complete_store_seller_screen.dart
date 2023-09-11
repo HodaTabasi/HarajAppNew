@@ -57,7 +57,7 @@ class CompleteStoreSellerScreen extends GetView<CompleteStoreSellerController> {
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 20.w),
                                   child: SaveButton(
-                                    title: context.localizations.register,
+                                    title: context.localizations.save_changes,
                                     onPressed: () async {
                                       //SharedPrefController().isCompleteAddress = false;
                                        //await controller.performAddStoreData();

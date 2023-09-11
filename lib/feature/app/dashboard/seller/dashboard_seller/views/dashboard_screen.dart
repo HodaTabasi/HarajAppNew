@@ -4,11 +4,12 @@ import 'package:haraj/feature/app/chat/view/screen/home_chat_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ads_seller/views/screens/add_seller_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/home_seller/views/screens/home_seller_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/views/screens/offer_seller_screen.dart';
-import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/profile_seller/views/screens/profile_seller_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/models/bn_model/bn_model.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
+
+import 'bn_screens/profile_seller/view/screen/profile_seller_screen.dart';
 
 class DashboardSellerScreen extends StatefulWidget {
   const DashboardSellerScreen({Key? key}) : super(key: key);

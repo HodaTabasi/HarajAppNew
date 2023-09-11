@@ -2,13 +2,17 @@ library public_profile_seller_view;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 
-import '../../../../../../../utils/extensions/color_resource/color_resource.dart';
-import '../../../../../../../utils/extensions/icons_app/icons_app.dart';
-import '../../../../../../../widgets/app_elevated_button_withImage.dart';
-import '../../../../../../../widgets/app_svg_picture.dart';
-import '../../../../../../../widgets/app_text.dart';
-import '../../../../../auth/login/view/screen/login_screen.dart';
+import '../../../../../../../../../../utils/extensions/color_resource/color_resource.dart';
+import '../../../../../../../../../../utils/extensions/icons_app/icons_app.dart';
+import '../../../../../../../../../../widgets/app_elevated_button_withImage.dart';
+import '../../../../../../../../../../widgets/app_svg_picture.dart';
+import '../../../../../../../../../../widgets/app_text.dart';
+import '../../../../../../../../auth/login/view/screen/login_screen.dart';
+import '../../controllers/profile_seller_controller.dart';
+import '../../profile_part_seller/info_view/view/screens/personal_info_seller.dart';
 
 part '../components/header_image.dart';
 part '../components/main_list_tile.dart';
@@ -16,38 +20,17 @@ part '../components/app_bar_widget.dart';
 part '../components/header_user_info.dart';
 part '../components/sliver_appbar_widget.dart';
 
-class ProfileSellerScreen extends StatefulWidget {
-  const ProfileSellerScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ProfileSellerScreen> createState() => _ProfileSellerScreenState();
-}
-
-class _ProfileSellerScreenState extends State<ProfileSellerScreen> {
-  double opacity = 0.0;
-  late ScrollController controller;
-
-  @override
-  void initState() {
-    controller = ScrollController();
-    controller.addListener(_listener);
-    super.initState();
-  }
-
-  void _listener() {
-    setState(() {
-      opacity = controller.position.pixels/controller.position.maxScrollExtent;
-    });
-  }
+class ProfileSellerScreen extends  GetView<ProfileSellerController> {
+  ProfileSellerController profileSellerController = Get.put(ProfileSellerController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
-        controller: controller,
+        controller: controller.controller1,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
-            SliverAppBarWidget(opacity: opacity),
+            SliverAppBarWidget(opacity: controller.opacity.value),
           ];
         },
         body: ListView(

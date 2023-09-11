@@ -4,19 +4,19 @@ part 'address_model.g.dart';
 @JsonSerializable()
 class Address {
   @JsonKey(name: "lat")
-  double? lat;
+  String? lat;
   @JsonKey(name: "lng")
-  double? lng;
+  String? lng;
   @JsonKey(name: "street")
   String? street;
   @JsonKey(name: "city_id")
-  int? cityId;
+  String? cityId;
   @JsonKey(name: "post_code")
   String? postCode;
   @JsonKey(name: "building_no")
   String? buildingNo;
   @JsonKey(name: "governorate_id")
-  int? governorateId;
+  String? governorateId;
 
   //
   Address(

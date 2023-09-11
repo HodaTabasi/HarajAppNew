@@ -14,8 +14,8 @@ class ApiSettings {
   static const String changePassword = '${_apiUrl}user/change-password';
   static const String deleteAccount = '${_apiUrl}user/delete';
   //***************************PROFILE LINKS************************************
-  static const String profile = '${_apiUrl}user/profile?user_id=';
-  static const String getProfile = '${_apiUrl}user/profile';
+  // static const String profile = '${_apiUrl}user/profile?user_id=';
+  static const String getProfile = '${_apiUrl}/profile';
   static const String updatePersonalData = '${_apiUrl}/update-profile';
   static const String updateStoreData = '${_apiUrl}/update-store';
   //***************************GALLERY LINKS************************************

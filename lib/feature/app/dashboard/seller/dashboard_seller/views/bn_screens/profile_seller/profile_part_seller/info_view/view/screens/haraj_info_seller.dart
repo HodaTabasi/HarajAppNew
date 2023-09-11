@@ -9,45 +9,50 @@ import '../components/info_appbar_widget.dart';
 import '../components/info_item_widget.dart';
 
 
-class PersonalInfoSellerScreen extends StatefulWidget {
-  const PersonalInfoSellerScreen({Key? key}) : super(key: key);
+class HarajInfoSellerScreen extends StatefulWidget {
+  const HarajInfoSellerScreen({Key? key}) : super(key: key);
 
   @override
-  State<PersonalInfoSellerScreen> createState() =>
-      _PersonalInfoSellerScreenState();
+  State<HarajInfoSellerScreen> createState() =>
+      _HarajInfoSellerScreenState();
 }
 
-class _PersonalInfoSellerScreenState extends State<PersonalInfoSellerScreen> {
+class _HarajInfoSellerScreenState extends State<HarajInfoSellerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorResource.backgroundColor,
       appBar: PreferredSize(
         preferredSize: Size(MediaQuery.of(context).size.width, 120.h),
-        child: InfoAppBarWidget(text: 'البيانات الشخصية'),
+        child: InfoAppBarWidget(text: 'بيانات المعرض'),
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20.r),
         children: [
-          const ImageProfile(),
+          ImageProfile(),
           SizedBox(height: 20.h),
           InfoItemWidget(
-            title: 'الاسم الحقيقي',
+            title: 'اسم المعرض',
             text: 'محمد احمد',
             icon: IconsApp.person,
           ),
           InfoItemWidget(
-            title: 'رقم الهاتف الرسمي ',
+            title: 'رقم هاتف المعرض',
             text: '+971 5211043',
             icon: IconsApp.mobile,
           ),
           InfoItemWidget(
-            title: 'البريد الالكتروني',
+            title: 'رقم السجل التجاري',
+            text: 'sdefh142',
+            icon: IconsApp.vendorAccount,
+          ),
+          InfoItemWidget(
+            title: '  البريد الالكتروني الرسمي للمعرض',
             text: 'Mona Fadl@gmail.com',
             icon: IconsApp.email,
           ),
           InfoItemWidget(
-            title: 'رقم الهوية',
+            title: 'نبذه عن المعرض ',
             text: '9966885566',
             icon: IconsApp.id,
           ),

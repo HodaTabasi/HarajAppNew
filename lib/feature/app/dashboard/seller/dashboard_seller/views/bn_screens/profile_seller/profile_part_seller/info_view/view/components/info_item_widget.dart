@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../../../utils/extensions/color_resource/color_resource.dart';
-import '../../../../../../../../widgets/app_svg_picture.dart';
-import '../../../../../../../../widgets/app_text.dart';
+import '../../../../../../../../../../../../utils/extensions/color_resource/color_resource.dart';
+import '../../../../../../../../../../../../widgets/app_svg_picture.dart';
+import '../../../../../../../../../../../../widgets/app_text.dart';
 
 class InfoItemWidget extends StatelessWidget {
   final String text;

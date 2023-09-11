@@ -29,6 +29,7 @@ dependencies:
   json_serializable: ^6.6.2
   dartz: ^0.10.1
   device_info_plus: ^9.0.3
+  flutter_easyloading: ^3.0.5
 
 
 

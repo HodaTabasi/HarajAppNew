@@ -11,7 +11,7 @@ class CompleteProfileUseCase {
 
   CompleteProfileUseCase({required this.repository});
 
-  Future<Either<Failure, UserModel>> call(SellerUserModel userModel,String imagePath) async {
+  Future<Either<Failure, UserModel>> call(SellerUserModel userModel,String? imagePath) async {
     return await repository.completePersonalProfile(user: userModel,imageFile: imagePath);
   }
 }

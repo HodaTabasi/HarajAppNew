@@ -2,11 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../../../../utils/extensions/color_resource/color_resource.dart';
-import '../../../../../../../../utils/extensions/icons_app/icons_app.dart';
-import '../../../../../../../../widgets/app_svg_picture.dart';
-import '../../../../../../../../widgets/app_text.dart';
+import '../../../../../../../../../../../../utils/extensions/color_resource/color_resource.dart';
+import '../../../../../../../../../../../../utils/extensions/icons_app/icons_app.dart';
+import '../../../../../../../../../../../../widgets/app_svg_picture.dart';
+import '../../../../../../../../../../../../widgets/app_text.dart';
+import '../../../../../../../../../../profile/seller/complete_profile_seller/controller/complete_profile_seller_controller.dart';
+import '../../../../../../../../../../profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
+import '../../../../controllers/profile_seller_controller.dart';
+
 
 class InfoAppBarWidget extends StatelessWidget {
   final String text;
@@ -36,13 +41,18 @@ class InfoAppBarWidget extends StatelessWidget {
               centerTitle: true,
               title: AppText(text: text, fontSize: 18.sp),
               leading: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.back();
+                },
                 icon: Icon(Icons.arrow_back_ios,
                     color: ColorResource.black, size: 18.r),
               ),
               actions: [
                 InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      CompleteProfileSellerController.to.putDataToTextField(user: ProfileSellerController.to.userModel?.data);
+                      Get.to(()=>CompleteProfileSellerScreen());
+                    },
                     child: AppSvgPicture(
                       assetName: IconsApp.editIcon,
                       width: 30.r,

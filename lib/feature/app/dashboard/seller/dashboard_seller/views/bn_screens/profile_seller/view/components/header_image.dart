@@ -1,13 +1,14 @@
 part of public_profile_seller_view;
 
-class HeaderWidget extends StatelessWidget {
+class HeaderWidget extends GetView<ProfileSellerController> {
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(8.0.r),
       child: Column(
         children: [
-          AppBarWidget(),
+          const AppBarWidget(),
           SizedBox(
             height: 8.h,
           ),
@@ -20,7 +21,7 @@ class HeaderWidget extends StatelessWidget {
             height: 8.h,
           ),
           AppText(
-            text: 'د.محمد محمد',
+            text: '${controller.userModel?.data!.name}',
             fontWeight: FontWeight.w600,
             fontSize: 18.sp,
           ),

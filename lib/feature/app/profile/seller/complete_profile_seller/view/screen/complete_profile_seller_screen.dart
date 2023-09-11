@@ -61,10 +61,13 @@ class CompleteProfileSellerScreen
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 20.w),
                                   child: SaveButton(
-                                    title: context.localizations.register,
+                                    title: context.localizations.save_changes,
                                     onPressed: () async {
-                                       // await controller.performUpdateProfile();
-                                      Get.to(() => CompleteStoreSellerScreen());
+
+                                        await controller.performUpdateProfile();
+                                        // Get.to(() => CompleteStoreSellerScreen());
+
+
                                     },
                                   ),
                                 );

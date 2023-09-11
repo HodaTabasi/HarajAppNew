@@ -26,7 +26,7 @@ class SliverAppBarWidget extends StatelessWidget {
                 assetName: IconsApp.tabBar,
                 width: MediaQuery.of(context).size.width,
               ),
-              AppBarWidget(),
+              const AppBarWidget(),
             ],
           ),
         ),
@@ -38,6 +38,7 @@ class SliverAppBarWidget extends StatelessWidget {
                 top: 0.h,
                 child: AppSvgPicture(
                   assetName: IconsApp.background,
+                  fit: BoxFit.fill,
                 )),
             PositionedDirectional(
                 child: HeaderWidget())

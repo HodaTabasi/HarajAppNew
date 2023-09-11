@@ -17,27 +17,41 @@ import '../models/seller_info/store_model.dart';
 
 class CompleteUserProfileController with Helpers {
 
-  updatePersonalInfo({required SellerUserModel userModel,required path}) async {
+  updatePersonalInfo({required SellerUserModel userModel, path}) async {
     var url = Uri.parse(ApiSettings.updatePersonalData);
-    print(SharedPrefController().token);
+    var decodedJson;
+    var response;
+    if(path == null){
+      var map = {
+      'ssn':userModel.ssn ??"",
+      'mobile':userModel.mobile!,
+      'nick_name':userModel.nickName ?? "",
+      'name': userModel.name!,
+      'type':SharedPrefController().type.toString()
+    };
+      response = await http.post(url,body: map,headers:headers);
+      decodedJson = jsonDecode(response.body);
 
-    var request = http.MultipartRequest('POST', url);
-    http.MultipartFile imageFile =
-    await http.MultipartFile.fromPath('avatar', path);
-    request.files.add(imageFile);
-    request.headers['Accept'] = 'application/json';
-    request.headers['Content-Type'] = 'application/json';
-    request.headers['Authorization'] = SharedPrefController().token;
-    request.headers['Accept-Language'] = SharedPrefController().language;
-    request.fields['ssn'] = userModel.ssn ??"";
-    request.fields['mobile'] = userModel.mobile!;
-    request.fields['nick_name'] = userModel.nickName ?? "";
-    request.fields['name'] = userModel.name!;
-    request.fields['type'] = SharedPrefController().type.toString();
+    }else {
+      var request = http.MultipartRequest('POST', url);
+      http.MultipartFile imageFile =
+      await http.MultipartFile.fromPath('avatar', path);
+      request.files.add(imageFile);
+      request.headers['Accept'] = 'application/json';
+      request.headers['Content-Type'] = 'application/json';
+      request.headers['Authorization'] = SharedPrefController().token;
+      request.headers['Accept-Language'] = SharedPrefController().language;
+      request.fields['ssn'] = userModel.ssn ??"";
+      request.fields['mobile'] = userModel.mobile!;
+      request.fields['nick_name'] = userModel.nickName ?? "";
+      request.fields['name'] = userModel.name!;
+      request.fields['type'] = SharedPrefController().type.toString();
 
-    var response = await request.send();
-    var body = await response.stream.transform(utf8.decoder).first;
-    var decodedJson = jsonDecode(body);
+      response = await request.send();
+      var body = await response.stream.transform(utf8.decoder).first;
+      decodedJson = jsonDecode(body);
+    }
+
 
     print(decodedJson);
     print(response.statusCode);

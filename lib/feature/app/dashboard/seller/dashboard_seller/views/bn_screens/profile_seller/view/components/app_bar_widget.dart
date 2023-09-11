@@ -13,10 +13,12 @@ class AppBarWidget extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: AppText(text: 'بياناتي'),
+        title: const AppText(text: 'بياناتي'),
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Get.to(()=>const PersonalInfoSellerScreen());
+            },
             child: AppSvgPicture(assetName: IconsApp.editProfile),
           ),
         ],

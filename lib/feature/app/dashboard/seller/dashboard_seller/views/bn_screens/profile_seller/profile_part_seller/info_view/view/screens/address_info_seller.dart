@@ -9,50 +9,55 @@ import '../components/info_appbar_widget.dart';
 import '../components/info_item_widget.dart';
 
 
-class HarajInfoSellerScreen extends StatefulWidget {
-  const HarajInfoSellerScreen({Key? key}) : super(key: key);
+class AddressInfoSellerScreen extends StatefulWidget {
+  const AddressInfoSellerScreen({Key? key}) : super(key: key);
 
   @override
-  State<HarajInfoSellerScreen> createState() =>
-      _HarajInfoSellerScreenState();
+  State<AddressInfoSellerScreen> createState() =>
+      _AddressInfoSellerScreenState();
 }
 
-class _HarajInfoSellerScreenState extends State<HarajInfoSellerScreen> {
+class _AddressInfoSellerScreenState extends State<AddressInfoSellerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorResource.backgroundColor,
       appBar: PreferredSize(
         preferredSize: Size(MediaQuery.of(context).size.width, 120.h),
-        child: InfoAppBarWidget(text: 'بيانات المعرض'),
+        child: InfoAppBarWidget(text: 'بيانات العنوان'),
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20.r),
         children: [
-          const ImageProfile(),
+           ImageProfile(),
           SizedBox(height: 20.h),
           InfoItemWidget(
-            title: 'اسم المعرض',
+            title: 'المنطقة',
             text: 'محمد احمد',
             icon: IconsApp.person,
           ),
           InfoItemWidget(
-            title: 'رقم هاتف المعرض',
-            text: '+971 5211043',
+            title: 'المدينة',
+            text: 'الرياض ',
             icon: IconsApp.mobile,
           ),
           InfoItemWidget(
-            title: 'رقم السجل التجاري',
+            title: 'الموقع',
             text: 'sdefh142',
             icon: IconsApp.vendorAccount,
           ),
           InfoItemWidget(
-            title: '  البريد الالكتروني الرسمي للمعرض',
+            title: 'اسم الشارع',
             text: 'Mona Fadl@gmail.com',
             icon: IconsApp.email,
           ),
           InfoItemWidget(
-            title: 'نبذه عن المعرض ',
+            title: 'رقم المبني',
+            text: '9966885566',
+            icon: IconsApp.id,
+          ),
+          InfoItemWidget(
+            title: 'رقم الرمز البريدي',
             text: '9966885566',
             icon: IconsApp.id,
           ),

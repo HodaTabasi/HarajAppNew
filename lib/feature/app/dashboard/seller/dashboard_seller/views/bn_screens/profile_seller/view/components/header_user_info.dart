@@ -1,6 +1,6 @@
 part of public_profile_seller_view;
 
-class HeaderUserInfo extends StatelessWidget {
+class HeaderUserInfo extends GetView<ProfileSellerController> {
   const HeaderUserInfo({
     super.key,
   });
@@ -12,11 +12,13 @@ class HeaderUserInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           buildUserCell(
-              icon: IconsApp.profileEmail, data: 'Mona Fadl@gmail.com'),
+              icon: IconsApp.profileEmail,
+              data: '${controller.userModel?.data!.email}'),
           const VerticalDivider(
             color: ColorResource.mainColor,
           ),
-          buildUserCell(icon: IconsApp.profilePhone, data: '+971 521104344')
+          buildUserCell(
+              icon: IconsApp.profilePhone, data: '${controller.userModel?.data!.mobile}')
         ],
       ),
     );

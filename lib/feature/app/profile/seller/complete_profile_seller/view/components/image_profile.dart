@@ -26,7 +26,8 @@ class _ImageProfileState extends State<ImageProfile> {
         backgroundImage: CompleteProfileSellerController.to.file != null
             ? ResizeImage.resizeIfNeeded(1024, null,
                 FileImage(File(CompleteProfileSellerController.to.file!.path)))
-            : const AssetImage(ImagesApp.person),
+            : NetworkImage(CompleteProfileSellerController.to.imageUrl ??
+                'https://1.bp.blogspot.com/-kK7Fxm7U9o0/YN0bSIwSLvI/AAAAAAAACFk/aF4EI7XU_ashruTzTIpifBfNzb4thUivACLcBGAsYHQ/s1280/222.jpg'),
         child: InkWell(
           onTap: () async {
             CompleteProfileSellerController.to.file =

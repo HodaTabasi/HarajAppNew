@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/profile_seller/controllers/profile_seller_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/models/seller_info/seller_user_model.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
@@ -20,6 +21,8 @@ class CompleteProfileSellerController extends GetxController {
   RxBool loading = false.obs;
   RxBool isVisibility = false.obs;
   XFile? file;
+  String? imageUrl;
+  bool fromEditPage = false;
 
   SellerUserModel get userModel => SellerUserModel(
         nickName: nickNameController.text,
@@ -33,6 +36,23 @@ class CompleteProfileSellerController extends GetxController {
     update();
   }
 
+  putDataToTextField({SellerUserModel? user}) {
+    if (user != null) {
+      nameController.text = user.name!;
+      phoneController.text = user.mobile!;
+      idController.text = user.ssn!;
+      nickNameController.text = user.nickName!;
+      imageUrl = user.avatar;
+      fromEditPage = true;
+    } else {
+      nameController = TextEditingController();
+      phoneController = TextEditingController();
+      idController = TextEditingController();
+      nickNameController = TextEditingController();
+      fromEditPage = false;
+    }
+  }
+
   late TextEditingController nameController;
   late TextEditingController phoneController;
   late TextEditingController idController;
@@ -41,10 +61,7 @@ class CompleteProfileSellerController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    nameController = TextEditingController();
-    phoneController = TextEditingController();
-    idController = TextEditingController();
-    nickNameController = TextEditingController();
+    putDataToTextField();
   }
 
   @override
@@ -75,8 +92,18 @@ class CompleteProfileSellerController extends GetxController {
     if (nameController.text.isNotEmpty &&
         phoneController.text.isNotEmpty &&
         idController.text.isNotEmpty &&
-        nickNameController.text.isNotEmpty &&
-        file != null) {
+        nickNameController.text.isNotEmpty ) {
+      if(!fromEditPage){
+        if(file != null){
+          Get.snackbar(
+            'Requires',
+            'select image',
+            backgroundColor: ColorResource.red,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+          return false;
+        }
+      }
       return true;
     }
     Get.snackbar(
@@ -91,7 +118,7 @@ class CompleteProfileSellerController extends GetxController {
   completeProfile() async {
     return CompleteProfileUseCase(
             repository: Get.find<CompletePersonalInfoRepo>())
-        .call(userModel, file!.path)
+        .call(userModel, file?.path)
         .then((value) => value.fold((failure) {
               responseMessage = mapFailureToMessage(failure);
               Get.snackbar(
@@ -101,8 +128,13 @@ class CompleteProfileSellerController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (user) async {
+              if (fromEditPage) {
+                ProfileSellerController.to.userModel = user;
+                Get.back();
+              } else {
                 SharedPrefController().isCompleteStore = false;
                 Get.to(() => CompleteStoreSellerScreen());
-               }));
+              }
+            }));
   }
 }

@@ -48,13 +48,13 @@ class AddAddressSellerController extends GetxController {
 
 
   Address get address => Address(
-    lng: center?.longitude,
-    lat: center?.latitude,
+    lng: center?.longitude.toString(),
+    lat: center?.latitude.toString(),
     street: nameStreetController.text,
-    governorateId: emiraId,
+    governorateId: emiraId.toString(),
     buildingNo: buildNumberController.text,
     postCode: postalCodeController.text,
-    cityId: cityId
+    cityId: cityId.toString()
   );
 
   int getValue(index){

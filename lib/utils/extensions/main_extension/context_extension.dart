@@ -8,7 +8,6 @@ import 'package:haraj/feature/app/profile/buyer/complete_profile_buyer/view/scre
 import 'package:haraj/feature/app/profile/seller/add_address_seller/view/screen/add_address_seller_screen.dart';
 import 'package:haraj/feature/app/profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
 import 'package:haraj/feature/app/profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
-import 'package:haraj/feature/app/profile/seller/public_profile_seller/view/screen/profile_seller_screen.dart';
 import 'package:haraj/feature/core/launch_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/routes/key_routes.dart';
@@ -134,7 +133,7 @@ extension ContextExtension on BuildContext {
         //     const EditCarInfoSellerScreen(),
         // KeyRoutes.editCarImageSellerScreen: (context) =>
         //     const EditCarImageSellerScreen(),
-        KeyRoutes.profileSellerScreen: (context) => ProfileSellerScreen(),
+        // KeyRoutes.profileSellerScreen: (context) => ProfileSellerScreen(),
         // KeyRoutes.personalInfoSellerScreen: (context) =>
         //     const PersonalInfoSellerScreen(),
         // KeyRoutes.editPersonalSellerScreen: (context) =>
