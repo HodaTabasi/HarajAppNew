@@ -8,6 +8,8 @@ import '../../../../../../../../../../../../utils/extensions/color_resource/colo
 import '../../../../../../../../../../../../utils/extensions/icons_app/icons_app.dart';
 import '../../../../../../../../../../../../widgets/app_svg_picture.dart';
 import '../../../../../../../../../../../../widgets/app_text.dart';
+import '../../../../../../../../../../profile/seller/add_address_seller/controller/add_address_seller_controller.dart';
+import '../../../../../../../../../../profile/seller/add_address_seller/view/screen/add_address_seller_screen.dart';
 import '../../../../../../../../../../profile/seller/complete_profile_seller/controller/complete_profile_seller_controller.dart';
 import '../../../../../../../../../../profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
 import '../../../../controllers/profile_seller_controller.dart';
@@ -50,8 +52,16 @@ class InfoAppBarWidget extends StatelessWidget {
               actions: [
                 InkWell(
                     onTap: () {
-                      CompleteProfileSellerController.to.putDataToTextField(user: ProfileSellerController.to.userModel?.data);
-                      Get.to(()=>CompleteProfileSellerScreen());
+                      if(text == 'البيانات الشخصية'){
+                        CompleteProfileSellerController.to.putDataToTextField(user: ProfileSellerController.to.userModel?.data);
+                        Get.to(()=>CompleteProfileSellerScreen());
+                      }else if(text == 'بيانات العنوان'){
+                        AddAddressSellerController.to.putDataToTextField(user: ProfileSellerController.to.userModel?.data);
+                        Get.to(()=>AddAddressSellerScreen());
+                      }else {
+
+                      }
+
                     },
                     child: AppSvgPicture(
                       assetName: IconsApp.editIcon,

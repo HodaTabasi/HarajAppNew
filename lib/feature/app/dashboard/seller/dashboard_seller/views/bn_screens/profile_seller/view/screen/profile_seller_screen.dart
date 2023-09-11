@@ -12,6 +12,7 @@ import '../../../../../../../../../../widgets/app_svg_picture.dart';
 import '../../../../../../../../../../widgets/app_text.dart';
 import '../../../../../../../../auth/login/view/screen/login_screen.dart';
 import '../../controllers/profile_seller_controller.dart';
+import '../../profile_part_seller/info_view/view/screens/address_info_seller.dart';
 import '../../profile_part_seller/info_view/view/screens/personal_info_seller.dart';
 
 part '../components/header_image.dart';
@@ -40,7 +41,7 @@ class ProfileSellerScreen extends  GetView<ProfileSellerController> {
               image: IconsApp.addressIcon,
               text: 'عنواني',
               onPress: () {
-
+                Get.to(()=>AddressInfoSellerScreen());
               },
             ),
             MainListTile(

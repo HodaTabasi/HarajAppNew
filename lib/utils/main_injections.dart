@@ -11,6 +11,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../feature/app/auth/otp/controller/otp_controller.dart';
 import '../feature/app/dashboard/seller/dashboard_seller/views/bn_screens/profile_seller/controllers/profile_seller_controller.dart';
+import '../feature/app/profile/seller/add_address_seller/controller/add_address_seller_controller.dart';
 import '../feature/app/profile/seller/complete_profile_seller/controller/complete_profile_seller_controller.dart';
 import 'api/network_info.dart';
 import 'api_controller/complete_user_profile_controller.dart';
@@ -36,7 +37,7 @@ class MainInjection implements Bindings {
     Get.put(OTPGetxController());
     //Get.put(ProfileSellerController());
     Get.put(CompleteProfileSellerController());
-
+    Get.put(AddAddressSellerController());
     Get.put(AdsRepository(
         networkInfo: networkInfoImpl, remoteDataSource: AdsApiController()));
 

@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/models/governorates_model/citiey_model.dart';
 import 'package:haraj/utils/models/seller_info/address_model.dart';
+import 'package:haraj/utils/models/seller_info/seller_user_model.dart';
 
 import '../../../../../../utils/errors/error_const.dart';
 import '../../../../../../utils/models/governorates_model/country.dart';
@@ -45,6 +46,7 @@ class AddAddressSellerController extends GetxController {
   Rx<String?> emira = "".obs;
 
   int selectedRadio = 0;
+  bool fromEditPage = false;
 
 
   Address get address => Address(
@@ -74,14 +76,32 @@ class AddAddressSellerController extends GetxController {
   late TextEditingController buildNumberController;
   late TextEditingController postalCodeController;
 
+  putDataToTextField({SellerUserModel? user}){
+    if(user != null){
+      nameStreetController.text = user.store!.address!.street!;
+      buildNumberController.text = user.store!.address!.buildingNo!;
+      postalCodeController.text = user.store!.address!.postCode!;
+      cityId = int.tryParse(user.store!.address!.cityId!);
+      emiraId =int.tryParse(user.store!.address!.governorateId!);
+      selectedRadio = emiraId ?? 0;
+      city.value =user.store!.address!.city!.name;
+      emira.value =user.store!.address!.governorate!.name;
+      fromEditPage = true;
+      center = LatLng(double.parse(user.store!.address!.lng!), double.parse(user.store!.address!.lng!));
+    } else {
+      nameStreetController = TextEditingController();
+      buildNumberController = TextEditingController();
+      postalCodeController = TextEditingController();
+      getGovernorate();
+      getData();
+      fromEditPage = false;
+    }
+  }
+
   @override
   void onInit() {
     super.onInit();
-    nameStreetController = TextEditingController();
-    buildNumberController = TextEditingController();
-    postalCodeController = TextEditingController();
-    getGovernorate();
-    getData();
+    putDataToTextField();
   }
 
   @override
@@ -223,10 +243,14 @@ class AddAddressSellerController extends GetxController {
         loading.value = false;
         return false;
       }, (user) async {
-            print("ss");
-        SharedPrefController().isCompleteAddress = true;
         loading.value = false;
-        return true;
+            if(fromEditPage){
+              Get.back();
+              return false;
+            }else {
+              SharedPrefController().isCompleteAddress = true;
+              return true;
+            }
 
         // Get.to(() => AddAddressSellerScreen());
       }));

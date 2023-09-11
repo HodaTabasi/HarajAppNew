@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+
+import '../governorates_model/citiey_model.dart';
 part 'address_model.g.dart';
 
 @JsonSerializable()
@@ -17,6 +19,10 @@ class Address {
   String? buildingNo;
   @JsonKey(name: "governorate_id")
   String? governorateId;
+  @JsonKey(name:"governorate")
+  CityModel? governorate;
+  @JsonKey(name:"city")
+  CityModel? city;
 
   //
   Address(
@@ -26,7 +32,9 @@ class Address {
       this.cityId,
       this.postCode,
       this.buildingNo,
-      this.governorateId});
+      this.governorateId,
+      this.city,
+      this.governorate});
 
   factory Address.fromJson(Map<String,dynamic> json) =>_$AddressFromJson(json);
 
