@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
+import 'package:haraj/utils/models/seller_info/seller_user_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../../../utils/errors/error_const.dart';
@@ -19,6 +20,8 @@ class CompleteStoreSellerController extends GetxController {
   RxBool loading = false.obs;
   RxBool isVisibility = false.obs;
   XFile? file;
+  String? imageUrl;
+  bool fromEditPage = false;
 
   Store get store => Store(
       name: nameController.text,
@@ -38,14 +41,30 @@ class CompleteStoreSellerController extends GetxController {
   late TextEditingController emailController;
   late TextEditingController briefController;
 
+  void putDataToTextField({SellerUserModel? user}) {
+    if(user != null){
+        nameController.text = user.store!.name ?? '';
+        emailController.text = user.store!.email ?? '';
+        phoneController.text = user.store!.mobile ?? '';
+        commercialRegistrationNumController.text = user.store!.commercialRegister ?? '';
+        briefController.text = user.store!.description ??'';
+        fromEditPage = true;
+        imageUrl = user.store!.avatar;
+    }else {
+      nameController = TextEditingController();
+      phoneController = TextEditingController();
+      commercialRegistrationNumController = TextEditingController();
+      emailController = TextEditingController();
+      briefController = TextEditingController();
+      fromEditPage = false;
+    }
+
+  }
+
   @override
   void onInit() {
     super.onInit();
-    nameController = TextEditingController();
-    phoneController = TextEditingController();
-    commercialRegistrationNumController = TextEditingController();
-    emailController = TextEditingController();
-    briefController = TextEditingController();
+    putDataToTextField();
   }
 
   @override
@@ -74,12 +93,25 @@ class CompleteStoreSellerController extends GetxController {
     loading.value = false;
   }
 
+
+
   bool checkData() {
     if (nameController.text.isNotEmpty &&
         phoneController.text.isNotEmpty &&
         commercialRegistrationNumController.text.isNotEmpty &&
         emailController.text.isNotEmpty &&
         briefController.text.isNotEmpty) {
+      if(!fromEditPage){
+        if(file == null){
+          Get.snackbar(
+            'Requires',
+            'select image',
+            backgroundColor: ColorResource.red,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+          return false;
+        }
+      }
       return true;
     }
     Get.snackbar(
@@ -94,7 +126,7 @@ class CompleteStoreSellerController extends GetxController {
   Future<void> completeProfile() async {
     return CompleteStoreUseCase(
             repository: Get.find<CompletePersonalInfoRepo>())
-        .call(store, file!.path)
+        .call(store, file?.path)
         .then((value) => value.fold((failure) {
               responseMessage = mapFailureToMessage(failure);
               Get.snackbar(
@@ -104,9 +136,16 @@ class CompleteStoreSellerController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (user) async {
-             SharedPrefController().isCompleteStore = true;
-             SharedPrefController().isCompleteAddress = false;
-             Get.to(() => AddAddressSellerScreen());
+          if(fromEditPage){
+            Get.back();
+          }else {
+            SharedPrefController().isCompleteStore = true;
+            SharedPrefController().isCompleteAddress = false;
+            Get.to(() => AddAddressSellerScreen());
+          }
+
     }));
   }
+
+
 }

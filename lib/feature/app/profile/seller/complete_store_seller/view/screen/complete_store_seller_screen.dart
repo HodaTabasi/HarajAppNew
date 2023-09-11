@@ -60,9 +60,9 @@ class CompleteStoreSellerScreen extends GetView<CompleteStoreSellerController> {
                                     title: context.localizations.save_changes,
                                     onPressed: () async {
                                       //SharedPrefController().isCompleteAddress = false;
-                                       //await controller.performAddStoreData();
+                                       await controller.performAddStoreData();
                                       // Get.to(AddAddressSellerScreen());
-                                      Get.to(() => AddAddressSellerScreen());
+                                      // Get.to(() => AddAddressSellerScreen());
                                     },
                                   ),
                                 );

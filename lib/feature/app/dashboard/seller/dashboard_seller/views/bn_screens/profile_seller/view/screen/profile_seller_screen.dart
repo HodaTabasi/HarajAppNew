@@ -13,6 +13,7 @@ import '../../../../../../../../../../widgets/app_text.dart';
 import '../../../../../../../../auth/login/view/screen/login_screen.dart';
 import '../../controllers/profile_seller_controller.dart';
 import '../../profile_part_seller/info_view/view/screens/address_info_seller.dart';
+import '../../profile_part_seller/info_view/view/screens/haraj_info_seller.dart';
 import '../../profile_part_seller/info_view/view/screens/personal_info_seller.dart';
 
 part '../components/header_image.dart';
@@ -41,7 +42,7 @@ class ProfileSellerScreen extends  GetView<ProfileSellerController> {
               image: IconsApp.addressIcon,
               text: 'عنواني',
               onPress: () {
-                Get.to(()=>AddressInfoSellerScreen());
+                Get.to(()=>const AddressInfoSellerScreen());
               },
             ),
             MainListTile(
@@ -52,7 +53,9 @@ class ProfileSellerScreen extends  GetView<ProfileSellerController> {
             MainListTile(
               image: IconsApp.vendorAccount,
               text: 'بيانات المعرض',
-              onPress: () {},
+              onPress: () {
+                Get.to(()=>const HarajInfoSellerScreen());
+              },
             ),
             MainListTile(
               image: IconsApp.aboutUs,

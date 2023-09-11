@@ -64,26 +64,39 @@ class CompleteUserProfileController with Helpers {
     }
   }
 
-  updateStoreInfo({required Store store,required path}) async {
+  updateStoreInfo({required Store store,path}) async {
     var url = Uri.parse(ApiSettings.updateStoreData);
+    var response;
+    var decodedJson;
 
-    var request = http.MultipartRequest('POST', url);
-    http.MultipartFile imageFile =
-    await http.MultipartFile.fromPath('avatar', path);
-    request.files.add(imageFile);
-    request.headers[HttpHeaders.acceptHeader] = 'application/json';
-    request.headers[HttpHeaders.authorizationHeader] = SharedPrefController().token;
-    request.headers[HttpHeaders.acceptLanguageHeader] = SharedPrefController().language;
-    request.fields['name'] = store.name ??"";
-    request.fields['email'] = store.email!;
-    request.fields['mobile'] = store.mobile ?? "";
-    request.fields['commercial_register'] = store.commercialRegister!;
-    request.fields['description'] = store.description ?? "";
+    if(path == null){
+      var map = {
+      'name': store.name ??"",
+      'email': store.email!,
+      'mobile':store.mobile ?? "",
+      'commercial_register': store.commercialRegister!,
+      'description': store.description ?? ""
+      };
+        response = await http.post(url,body: map,headers: headers);
+        decodedJson = jsonDecode(response.body);
+    }else {
+      var request = http.MultipartRequest('POST', url);
+      http.MultipartFile imageFile =
+      await http.MultipartFile.fromPath('avatar', path);
+      request.files.add(imageFile);
+      request.headers[HttpHeaders.acceptHeader] = 'application/json';
+      request.headers[HttpHeaders.authorizationHeader] = SharedPrefController().token;
+      request.headers[HttpHeaders.acceptLanguageHeader] = SharedPrefController().language;
+      request.fields['name'] = store.name ??"";
+      request.fields['email'] = store.email!;
+      request.fields['mobile'] = store.mobile ?? "";
+      request.fields['commercial_register'] = store.commercialRegister!;
+      request.fields['description'] = store.description ?? "";
 
-
-    var response = await request.send();
-    var body = await response.stream.transform(utf8.decoder).first;
-    var decodedJson = jsonDecode(body);
+      response = await request.send();
+      var body = await response.stream.transform(utf8.decoder).first;
+      decodedJson = jsonDecode(body);
+    }
 
     print(decodedJson);
     print(response.statusCode);

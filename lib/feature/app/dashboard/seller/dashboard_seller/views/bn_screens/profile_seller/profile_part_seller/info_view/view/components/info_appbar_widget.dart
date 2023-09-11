@@ -12,6 +12,8 @@ import '../../../../../../../../../../profile/seller/add_address_seller/controll
 import '../../../../../../../../../../profile/seller/add_address_seller/view/screen/add_address_seller_screen.dart';
 import '../../../../../../../../../../profile/seller/complete_profile_seller/controller/complete_profile_seller_controller.dart';
 import '../../../../../../../../../../profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
+import '../../../../../../../../../../profile/seller/complete_store_seller/controller/complete_store_seller_controller.dart';
+import '../../../../../../../../../../profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
 import '../../../../controllers/profile_seller_controller.dart';
 
 
@@ -58,8 +60,9 @@ class InfoAppBarWidget extends StatelessWidget {
                       }else if(text == 'بيانات العنوان'){
                         AddAddressSellerController.to.putDataToTextField(user: ProfileSellerController.to.userModel?.data);
                         Get.to(()=>AddAddressSellerScreen());
-                      }else {
-
+                      }else if(text == 'بيانات المعرض'){
+                        CompleteStoreSellerController.to.putDataToTextField(user: ProfileSellerController.to.userModel?.data);
+                        Get.to(()=>CompleteStoreSellerScreen());
                       }
 
                     },

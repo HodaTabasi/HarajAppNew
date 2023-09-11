@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 
+import '../../../../controllers/profile_seller_controller.dart';
 import '../components/image_profile.dart';
 import '../components/info_appbar_widget.dart';
 import '../components/info_item_widget.dart';
@@ -18,6 +20,9 @@ class HarajInfoSellerScreen extends StatefulWidget {
 }
 
 class _HarajInfoSellerScreenState extends State<HarajInfoSellerScreen> {
+  ProfileSellerController profileSellerController =
+  Get.find<ProfileSellerController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,31 +34,31 @@ class _HarajInfoSellerScreenState extends State<HarajInfoSellerScreen> {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20.r),
         children: [
-          ImageProfile(),
+          ImageProfile(avatar: profileSellerController.userModel?.data!.store?.avatar,),
           SizedBox(height: 20.h),
           InfoItemWidget(
             title: 'اسم المعرض',
-            text: 'محمد احمد',
+            text: '${profileSellerController.userModel?.data!.store?.name}',
             icon: IconsApp.person,
           ),
           InfoItemWidget(
             title: 'رقم هاتف المعرض',
-            text: '+971 5211043',
+            text: '${profileSellerController.userModel?.data!.store?.mobile}',
             icon: IconsApp.mobile,
           ),
           InfoItemWidget(
             title: 'رقم السجل التجاري',
-            text: 'sdefh142',
+            text: '${profileSellerController.userModel?.data!.store?.commercialRegister}',
             icon: IconsApp.vendorAccount,
           ),
           InfoItemWidget(
             title: '  البريد الالكتروني الرسمي للمعرض',
-            text: 'Mona Fadl@gmail.com',
+            text: '${profileSellerController.userModel?.data!.store?.mobile}',
             icon: IconsApp.email,
           ),
           InfoItemWidget(
             title: 'نبذه عن المعرض ',
-            text: '9966885566',
+            text: '${profileSellerController.userModel?.data!.store?.description}',
             icon: IconsApp.id,
           ),
         ],
