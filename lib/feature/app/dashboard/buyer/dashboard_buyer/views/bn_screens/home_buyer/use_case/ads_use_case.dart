@@ -8,7 +8,7 @@ class AdsUseCase {
 
   AdsUseCase({required this.repository});
 
-  Future<Either<Failure, AdsModel>> call() async {
-    return await repository.getIndex();
+  Future<Either<Failure, AdsModel>> call(int pageNumber) async {
+    return await repository.getIndex(page: pageNumber);
   }
 }

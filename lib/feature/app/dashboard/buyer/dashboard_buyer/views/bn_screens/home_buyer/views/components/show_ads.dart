@@ -12,34 +12,48 @@ class _ShowAdsState extends State<ShowAds> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Get.to(() => AdsDetailBuyerScreen(idDetails: 5));
-      },
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
-        padding:
-            EdgeInsetsDirectional.symmetric(horizontal: 20.w, vertical: 4.h),
-        itemCount: 20,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 17.h, // Add spacing between grid items.
-          crossAxisSpacing: 15.w, // Add spacing between grid items.
-          childAspectRatio: 160.w / 281.h, // Width on Height
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          return const AppAdsCarContainer(
-            nameCar: 'بوغاتي شيرون',
-            imageCar: ImagesApp.imageSwiper,
-            priceCar: '5000 درهم',
-            conditionCar: 'ممتازة',
-            imageSeller: ImagesApp.imageSwiper,
-            sellerName: 'معرض النور لبيع السيارات',
-            nameLocation: 'دبي',
-          );
-        },
-      ),
-    );
+    return Obx(() {
+      if (controller.loading.value) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (controller.ads.isNotEmpty) {
+        return GridView.builder(
+          controller: controller.scrollController,
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          padding:
+              EdgeInsetsDirectional.symmetric(horizontal: 20.w, vertical: 4.h),
+          itemCount: controller.ads.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 17.h, // Add spacing between grid items.
+            crossAxisSpacing: 15.w, // Add spacing between grid items.
+            childAspectRatio: 160.w / 281.h, // Width on Height
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            return InkWell(
+              onTap: () {
+                Get.to(() =>
+                    AdsDetailBuyerScreen(idDetails: controller.ads[index].id!));
+              },
+              child: AppAdsCarContainer(
+                nameCar: controller.ads[index].car!.name!,
+                imageCar: controller.ads[index].gallery!.first.image!,
+                priceCar: controller.ads[index].price!,
+                conditionCar: controller.ads[index].mechanicalStatus!.name!,
+                imageSeller: controller.ads[index].store!.avatar!,
+                sellerName: controller.ads[index].sellerType!.name!,
+                nameLocation:
+                    controller.ads[index].store!.address!.governorate!.name!,
+                isFavorite: controller.ads[index].isFavorite!,
+              ),
+            );
+          },
+        );
+      } else {
+        return Center(
+          child: Text('No data'),
+        );
+      }
+    });
   }
 }

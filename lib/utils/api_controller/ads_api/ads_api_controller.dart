@@ -10,12 +10,11 @@ import '../../errors/error_const.dart';
 import '../../errors/exceptions.dart';
 
 class AdsApiController with Helpers {
-  index() async {
-    var url = Uri.parse(ApiSettings.post);
+  index({page}) async {
+    var url = Uri.parse('${ApiSettings.post}?page=$page');
     http.Response response = await http.get(url, headers: headers);
     var decodedJson = json.decode(response.body);
 
-    debugPrint("mmm 💯=> $decodedJson");
     if (response.statusCode == 200) {
       return AdsModel.fromJson(decodedJson);
     } else {

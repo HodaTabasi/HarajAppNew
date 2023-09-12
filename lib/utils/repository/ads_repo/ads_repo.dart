@@ -12,10 +12,10 @@ class AdsRepository {
 
   AdsRepository({required this.remoteDataSource, required this.networkInfo});
 
-  Future<Either<Failure, AdsModel>> getIndex() async {
+  Future<Either<Failure, AdsModel>> getIndex({page}) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await remoteDataSource.index();
+        final response = await remoteDataSource.index(page: page);
         return Right(response);
       } on ServerException {
         return Left(ServerFailure());

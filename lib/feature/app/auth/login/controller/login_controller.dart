@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/dashboard_screen.dart';
 import 'package:haraj/feature/app/profile/seller/add_address_seller/view/screen/add_address_seller_screen.dart';
 import 'package:haraj/feature/app/profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
@@ -8,13 +9,9 @@ import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/utils/repository/auth_repo.dart';
 
 import '../../../../../utils/errors/error_const.dart';
-import '../../../../../utils/extensions/routes/key_routes.dart';
 import '../../../dashboard/buyer/dashboard_buyer/views/dashboard_screen.dart';
-import '../../../dashboard/seller/dashboard_seller/views/dashboard_screen.dart';
 import '../../../profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
-import '../../register/view/screen/register_screen.dart';
 import '../use_case/login_use_case.dart';
-import '../../register/use_case/verify_use_case.dart';
 
 class LoginController extends GetxController {
   String responseMessage = "";
@@ -95,10 +92,10 @@ class LoginController extends GetxController {
                 } else if (!SharedPrefController().isCompleteAddress) {
                   Get.offAll(() => AddAddressSellerScreen());
                 } else {
-                  Get.offAll(() => DashboardSellerScreen());
+                  Get.offAll(() => const DashboardSellerScreen());
                 }
               } else {
-                Get.offAll(() => DashboardBuyerScreen());
+                Get.offAll(() => const DashboardBuyerScreen());
               }
               // EasyLoading.dismiss();
             }));

@@ -35,7 +35,7 @@ class AddAddressSellerController extends GetxController {
 
   List<GovernorateModel> emirates = [];
 
-  RxList<CityModel> cities =<CityModel>[].obs;
+  RxList<CityModel> cities = <CityModel>[].obs;
 
   RxList<Country> currentList = <Country>[].obs;
 
@@ -48,26 +48,24 @@ class AddAddressSellerController extends GetxController {
   int selectedRadio = 0;
   bool fromEditPage = false;
 
-
   Address get address => Address(
-    lng: center?.longitude.toString(),
-    lat: center?.latitude.toString(),
-    street: nameStreetController.text,
-    governorateId: emiraId.toString(),
-    buildingNo: buildNumberController.text,
-    postCode: postalCodeController.text,
-    cityId: cityId.toString()
-  );
+      lng: center?.longitude,
+      lat: center?.latitude,
+      street: nameStreetController.text,
+      governorateId: emiraId,
+      buildingNo: buildNumberController.text,
+      postCode: postalCodeController.text,
+      cityId: cityId);
 
-  int getValue(index){
-    return showEmirates.value?emirates[index].id!:cities[index].id!;
+  int getValue(index) {
+    return showEmirates.value ? emirates[index].id! : cities[index].id!;
   }
 
   void toggleList(String title) {
     if (title != currentState) {
       currentState = title;
       showEmirates.toggle();
-      selectedRadio = showEmirates.value ? emiraId ?? 0 : cityId  ?? 0;
+      selectedRadio = showEmirates.value ? emiraId ?? 0 : cityId ?? 0;
       currentList.value = showEmirates.value ? emirates : cities.value;
     }
   }
@@ -76,18 +74,18 @@ class AddAddressSellerController extends GetxController {
   late TextEditingController buildNumberController;
   late TextEditingController postalCodeController;
 
-  putDataToTextField({SellerUserModel? user}){
-    if(user != null){
+  putDataToTextField({SellerUserModel? user}) {
+    if (user != null) {
       nameStreetController.text = user.store!.address!.street!;
       buildNumberController.text = user.store!.address!.buildingNo!;
       postalCodeController.text = user.store!.address!.postCode!;
-      cityId = int.tryParse(user.store!.address!.cityId!);
-      emiraId =int.tryParse(user.store!.address!.governorateId!);
+      cityId = user.store!.address!.cityId!;
+      emiraId = user.store!.address!.governorateId!;
       selectedRadio = emiraId ?? 0;
-      city.value =user.store!.address!.city!.name;
-      emira.value =user.store!.address!.governorate!.name;
+      city.value = user.store!.address!.city!.name;
+      emira.value = user.store!.address!.governorate!.name;
       fromEditPage = true;
-      center = LatLng(double.parse(user.store!.address!.lng!), double.parse(user.store!.address!.lng!));
+      center = LatLng(user.store!.address!.lng!, user.store!.address!.lng!);
     } else {
       nameStreetController = TextEditingController();
       buildNumberController = TextEditingController();
@@ -121,9 +119,8 @@ class AddAddressSellerController extends GetxController {
   Future<bool?> performAddress() async {
     loading.value = true;
     if (checkData()) {
-       return await completeAddress();
+      return await completeAddress();
     }
-
   }
 
   Future<void> getGovernorate() async {
@@ -138,9 +135,9 @@ class AddAddressSellerController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (response) async {
-                  emirates = response.data!;
-                  cities.value = emirates[0].cities!;
-                  currentList.value = emirates;
+              emirates = response.data!;
+              cities.value = emirates[0].cities!;
+              currentList.value = emirates;
               // SharedPrefController().isCompleteAddress = false;
               // Get.to(() => AddAddressSellerScreen());
             }));
@@ -229,34 +226,34 @@ class AddAddressSellerController extends GetxController {
   }
 
   Future<bool> completeAddress() async {
-      return await CompleteAddressUseCase(
-          repository: Get.find<CompletePersonalInfoRepo>())
-          .call(address)
-          .then((value) => value.fold((failure) {
-        responseMessage = mapFailureToMessage(failure);
-        Get.snackbar(
-          'Requires',
-          responseMessage,
-          backgroundColor: ColorResource.red,
-          snackPosition: SnackPosition.BOTTOM,
-        );
-        loading.value = false;
-        return false;
-      }, (user) async {
-        loading.value = false;
-            if(fromEditPage){
-              Get.back();
+    return await CompleteAddressUseCase(
+            repository: Get.find<CompletePersonalInfoRepo>())
+        .call(address)
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+              loading.value = false;
               return false;
-            }else {
-              SharedPrefController().isCompleteAddress = true;
-              return true;
-            }
+            }, (user) async {
+              loading.value = false;
+              if (fromEditPage) {
+                Get.back();
+                return false;
+              } else {
+                SharedPrefController().isCompleteAddress = true;
+                return true;
+              }
 
-        // Get.to(() => AddAddressSellerScreen());
-      }));
+              // Get.to(() => AddAddressSellerScreen());
+            }));
   }
 
   void selectId(int? value) {
-    showEmirates.value? emiraId = value! : cityId = value!;
+    showEmirates.value ? emiraId = value! : cityId = value!;
   }
 }

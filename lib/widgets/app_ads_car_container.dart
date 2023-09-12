@@ -14,8 +14,9 @@ class AppAdsCarContainer extends StatefulWidget {
     required this.priceCar,
     required this.conditionCar,
     this.nameLocation = '',
-    this.sellerName = 'Mahmoud',
+    this.sellerName = '',
     this.imageSeller = '',
+    this.isFavorite = false,
   });
 
   final String nameCar;
@@ -25,6 +26,7 @@ class AppAdsCarContainer extends StatefulWidget {
   final String nameLocation;
   final String sellerName;
   final String imageSeller;
+  final bool isFavorite;
 
   @override
   State<AppAdsCarContainer> createState() => _AppAdsCarContainerState();
@@ -72,7 +74,9 @@ class _AppAdsCarContainerState extends State<AppAdsCarContainer> {
                         radius: 15.r,
                         backgroundColor: ColorResource.lightGray,
                         child: AppSvgPicture(
-                          assetName: IconsApp.favoriteOutline,
+                          assetName: widget.isFavorite
+                              ? IconsApp.favoriteFill
+                              : IconsApp.favoriteOutline,
                           width: 12.w,
                           height: 14.h,
                         ),
@@ -81,7 +85,7 @@ class _AppAdsCarContainerState extends State<AppAdsCarContainer> {
                   ),
                   SizedBox(height: 37.h),
                   Container(
-                    width: 62.w,
+                    width: 80.w,
                     height: 27.h,
                     margin:
                         EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
@@ -98,11 +102,14 @@ class _AppAdsCarContainerState extends State<AppAdsCarContainer> {
                           height: 14.h,
                         ),
                         SizedBox(width: 5.w),
-                        AppText(
-                          text: widget.nameLocation,
-                          color: ColorResource.mainFontColor,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w300,
+                        Flexible(
+                          child: AppText(
+                            text: widget.nameLocation,
+                            color: ColorResource.mainFontColor,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w300,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),
@@ -123,6 +130,7 @@ class _AppAdsCarContainerState extends State<AppAdsCarContainer> {
                     color: ColorResource.mainFontColor,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 8.h),
                   Row(
@@ -130,16 +138,19 @@ class _AppAdsCarContainerState extends State<AppAdsCarContainer> {
                     children: [
                       AppText(
                         //TODO: make lang here
-                        text: 'الحالة : ',
+                        text: 'الحالة :',
                         color: ColorResource.gray,
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w500,
                       ),
-                      AppText(
-                        text: widget.conditionCar,
-                        color: ColorResource.green,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
+                      Flexible(
+                        child: AppText(
+                          text: widget.conditionCar,
+                          color: ColorResource.green,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
