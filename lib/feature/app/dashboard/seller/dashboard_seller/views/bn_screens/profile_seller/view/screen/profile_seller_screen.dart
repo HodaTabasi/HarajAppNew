@@ -15,6 +15,7 @@ import '../../controllers/profile_seller_controller.dart';
 import '../../profile_part_seller/info_view/view/screens/address_info_seller.dart';
 import '../../profile_part_seller/info_view/view/screens/haraj_info_seller.dart';
 import '../../profile_part_seller/info_view/view/screens/personal_info_seller.dart';
+import '../../profile_part_seller/store_image/seller_gallary_page.dart';
 
 part '../components/header_image.dart';
 part '../components/main_list_tile.dart';
@@ -48,7 +49,9 @@ class ProfileSellerScreen extends  GetView<ProfileSellerController> {
             MainListTile(
               image: IconsApp.profileImages,
               text: 'صور المعرض',
-              onPress: () {},
+              onPress: () {
+                Get.to(()=> SellerGallaryPage());
+              },
             ),
             MainListTile(
               image: IconsApp.vendorAccount,

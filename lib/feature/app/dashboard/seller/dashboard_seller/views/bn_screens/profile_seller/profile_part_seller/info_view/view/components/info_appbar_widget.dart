@@ -66,9 +66,12 @@ class InfoAppBarWidget extends StatelessWidget {
                       }
 
                     },
-                    child: AppSvgPicture(
-                      assetName: IconsApp.editIcon,
-                      width: 30.r,
+                    child: Opacity(
+                      opacity: text == 'صور المعرض' ?0:1,
+                      child: AppSvgPicture(
+                        assetName: IconsApp.editIcon,
+                        width: 30.r,
+                      ),
                     ))
               ]),
         )

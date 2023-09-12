@@ -54,8 +54,7 @@ class CompleteStoreSellerScreen extends GetView<CompleteStoreSellerController> {
                           return controller.loading.isTrue
                               ? const Center(child: CircularProgressIndicator())
                               : Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 20.w),
+                                  padding: EdgeInsets.symmetric(horizontal: 20.w),
                                   child: SaveButton(
                                     title: context.localizations.save_changes,
                                     onPressed: () async {

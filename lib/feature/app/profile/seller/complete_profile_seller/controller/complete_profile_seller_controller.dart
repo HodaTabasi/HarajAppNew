@@ -94,7 +94,7 @@ class CompleteProfileSellerController extends GetxController {
         idController.text.isNotEmpty &&
         nickNameController.text.isNotEmpty ) {
       if(!fromEditPage){
-        if(file != null){
+        if(file == null){
           Get.snackbar(
             'Requires',
             'select image',
@@ -133,6 +133,7 @@ class CompleteProfileSellerController extends GetxController {
                 Get.back();
               } else {
                 SharedPrefController().isCompleteStore = false;
+                SharedPrefController().isCompleteProfile = true;
                 Get.to(() => CompleteStoreSellerScreen());
               }
             }));

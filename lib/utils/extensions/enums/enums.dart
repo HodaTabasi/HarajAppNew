@@ -9,4 +9,5 @@ enum PrefKeys {
   isVerify,
   isCompleteAddress,
   isCompleteStore,
+  isCompleteProfile,
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/profile/seller/add_address_seller/view/screen/add_address_seller_screen.dart';
+import 'package:haraj/feature/app/profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/utils/repository/auth_repo.dart';
@@ -86,18 +88,19 @@ class LoginController extends GetxController {
             }, (user) async {
               SharedPrefController().save(user: user);
               if (user.data?.type == 1) {
-                if(user.data?.store!= null){
-                  Get.offAll(() => DashboardSellerScreen());
-                }else {
+                if (!SharedPrefController().isCompleteProfile) {
                   Get.offAll(() => CompleteProfileSellerScreen());
+                } else if (!SharedPrefController().isCompleteStore) {
+                  Get.offAll(() => CompleteStoreSellerScreen());
+                } else if (!SharedPrefController().isCompleteAddress) {
+                  Get.offAll(() => AddAddressSellerScreen());
+                } else {
+                  Get.offAll(() => DashboardSellerScreen());
                 }
-
               } else {
                 Get.offAll(() => DashboardBuyerScreen());
               }
               // EasyLoading.dismiss();
             }));
   }
-
-
 }

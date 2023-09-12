@@ -85,6 +85,7 @@ class OTPGetxController extends GetxController {
       );
     }, (user) async {
       SharedPrefController().save(user: user);
+      SharedPrefController().isCompleteProfile = false;
       if (user.data?.type == 1) {
         Get.offAll(CompleteProfileSellerScreen());
       } else {

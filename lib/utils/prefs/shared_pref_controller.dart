@@ -30,6 +30,12 @@ class SharedPrefController {
         PrefKeys.token.toString(), 'Bearer ${user.data?.token}');
   }
 
+   //profileComplete
+  set isCompleteProfile(code) {
+    _sharedPreferences.setBool(PrefKeys.isCompleteProfile.toString(), code);
+  }
+  bool get isCompleteProfile =>
+      _sharedPreferences.getBool(PrefKeys.isCompleteProfile.toString()) ?? false;
 
   //address
   set isCompleteAddress(code) {
