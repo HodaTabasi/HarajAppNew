@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:haraj/feature/app/dashboard/buyer/ads_detail_buyer/controllers/ads_detail_buyer_controller.dart';
 import 'package:haraj/feature/app/dashboard/buyer/ads_detail_buyer/views/screens/ads_detail_buyer_screen.dart';
 import 'package:haraj/feature/app/dashboard/buyer/gallery_buyer/controllers/gallery_buyer_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
@@ -25,9 +26,27 @@ part '../components/header_image.dart';
 part '../components/images_gallery_component.dart';
 part '../screens/map_screen.dart';
 
-class GalleryBuyerScreen extends GetView<GalleryBuyerController> {
-  final GalleryBuyerController galleryBuyerController =
-      Get.put(GalleryBuyerController());
+class GalleryBuyerScreen extends StatefulWidget {
+  const GalleryBuyerScreen({super.key, required this.storeId});
+
+  final int storeId;
+
+  @override
+  State<GalleryBuyerScreen> createState() => _GalleryBuyerScreenState();
+}
+
+class _GalleryBuyerScreenState extends State<GalleryBuyerScreen> {
+  late GalleryBuyerController galleryBuyerController;
+  late AdsDetailBuyerController adsDetailBuyerController;
+
+  @override
+  void initState() {
+    super.initState();
+    galleryBuyerController =
+        Get.put(GalleryBuyerController(storeId: widget.storeId));
+    adsDetailBuyerController =
+        Get.put(AdsDetailBuyerController(productId: widget.storeId));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,30 +59,36 @@ class GalleryBuyerScreen extends GetView<GalleryBuyerController> {
         showSearch: false,
         showActions: false,
       ),
-      body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TabBarComponent(
-                tabTitles: [
-                  //TODO:Make Lang Here
-                  "حول المعرض",
-                  context.localizations.exhibition_images,
-                  context.localizations.ads,
-                ],
-                tabViews: const [
-                  AboutGalleryComponent(),
-                  ImagesGalleryComponent(),
-                  AdsGalleryComponent(),
-                  // Other tab views
-                ],
-                height: 630.h,
-              ),
-            ]),
-      ),
+      body: Obx(() {
+        return adsDetailBuyerController.loading.value
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TabBarComponent(
+                        tabTitles: [
+                          //TODO:Make Lang Here
+                          "حول المعرض",
+                          context.localizations.exhibition_images,
+                          context.localizations.ads,
+                        ],
+                        tabViews: [
+                          AboutGalleryComponent(id: widget.storeId),
+                          ImagesGalleryComponent(id: widget.storeId),
+                          AdsGalleryComponent(id: widget.storeId),
+                          // Other tab views
+                        ],
+                        height: 630.h,
+                      ),
+                    ]),
+              );
+      }),
     );
   }
 }

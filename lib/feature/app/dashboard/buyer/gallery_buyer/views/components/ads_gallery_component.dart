@@ -1,13 +1,26 @@
 part of gallery_buyer_view;
 
 class AdsGalleryComponent extends StatefulWidget {
-  const AdsGalleryComponent({super.key});
+  const AdsGalleryComponent({super.key, required this.id});
+  final int id;
 
   @override
   State<AdsGalleryComponent> createState() => _AdsGalleryComponentState();
 }
 
 class _AdsGalleryComponentState extends State<AdsGalleryComponent> {
+  late GalleryBuyerController galleryBuyerController;
+  late AdsDetailBuyerController adsDetailBuyerController;
+
+  @override
+  void initState() {
+    super.initState();
+    galleryBuyerController =
+        Get.put(GalleryBuyerController(storeId: widget.id));
+    adsDetailBuyerController =
+        Get.put(AdsDetailBuyerController(productId: widget.id));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,37 +28,46 @@ class _AdsGalleryComponentState extends State<AdsGalleryComponent> {
       child: Column(
         children: [
           RowDividerWidget(
-            text: '010 ${context.localizations.ad}',
+            text:
+                '${galleryBuyerController.storePost.length} ${context.localizations.ad}',
             lineColor: ColorResource.gray,
           ),
           Expanded(
-            child: InkWell(
-              onTap: () {
-                Get.to(() => AdsDetailBuyerScreen());
-              },
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                padding: EdgeInsetsDirectional.symmetric(vertical: 16.h),
-                itemCount: 10,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 17.h, // Add spacing between grid items.
-                  crossAxisSpacing: 15.w, // Add spacing between grid items.
-                  childAspectRatio: 160.w / 281.h, // Width on Height
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return const AppAdsCarContainer(
-                    nameCar: 'بوغاتي شيرون',
-                    imageCar: ImagesApp.imageSwiper,
-                    priceCar: '5000 درهم',
-                    conditionCar: 'ممتازة',
-                    imageSeller: ImagesApp.imageSwiper,
-                    sellerName: 'معرض النور لبيع السيارات',
-                    nameLocation: 'دبي',
-                  );
-                },
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsetsDirectional.symmetric(vertical: 16.h),
+              itemCount: galleryBuyerController.storePost.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 17.h, // Add spacing between grid items.
+                crossAxisSpacing: 15.w, // Add spacing between grid items.
+                childAspectRatio: 160.w / 281.h, // Width on Height
               ),
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: () {
+                    Get.to(() => AdsDetailBuyerScreen(
+                          productId:
+                              galleryBuyerController.storePost[index].id!,
+                        ));
+                  },
+                  child: AppAdsCarContainer(
+                    nameCar: galleryBuyerController.storePost[index].car!.name!,
+                    imageCar: galleryBuyerController
+                        .storePost[index].gallery!.first.image!,
+                    priceCar: galleryBuyerController.storePost[index].price!,
+                    conditionCar: galleryBuyerController
+                        .storePost[index].mechanicalStatus!.name!,
+                    imageSeller: adsDetailBuyerController.adsDetail.store!.avatar!,
+                    sellerName: adsDetailBuyerController.adsDetail.store!.name!,
+                    nameLocation: adsDetailBuyerController
+                        .adsDetail.store!.address!.governorate!.name!,
+                    isFavorite:
+                        galleryBuyerController.storePost[index].isFavorite!,
+                  ),
+                );
+              },
             ),
           ),
         ],

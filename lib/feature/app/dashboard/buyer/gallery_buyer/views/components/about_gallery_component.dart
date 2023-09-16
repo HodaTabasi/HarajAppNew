@@ -1,32 +1,46 @@
 part of gallery_buyer_view;
 
 class AboutGalleryComponent extends StatefulWidget {
-  const AboutGalleryComponent({super.key});
+  const AboutGalleryComponent({super.key, required this.id});
+
+  final int id;
 
   @override
   State<AboutGalleryComponent> createState() => _AboutGalleryComponentState();
 }
 
 class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
+  late GalleryBuyerController galleryBuyerController;
+  late AdsDetailBuyerController adsDetailBuyerController;
+
+  @override
+  void initState() {
+    super.initState();
+    galleryBuyerController =
+        Get.put(GalleryBuyerController(storeId: widget.id));
+    adsDetailBuyerController =
+        Get.put(AdsDetailBuyerController(productId: widget.id));
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBodyContainer(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const HeaderImage(),
+            HeaderImage(url: adsDetailBuyerController.adsDetail.store!.avatar!),
             SizedBox(height: 24.h),
             AppText(
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
-              text: "معرض النور لبيع وشراء السيارات",
+              text: adsDetailBuyerController.adsDetail.store!.name!,
               color: ColorResource.mainColor,
             ),
             SizedBox(height: 8.h),
             AppText(
               fontSize: 12.sp,
               fontWeight: FontWeight.w500,
-              text: "يعرض 100 سيارة للبيع",
+              text: adsDetailBuyerController.adsDetail.store!.email!,
               color: ColorResource.gray,
             ),
             Divider(
@@ -44,8 +58,7 @@ class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
             AppText(
               fontSize: 15.sp,
               fontWeight: FontWeight.w500,
-              text:
-                  """Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since""",
+              text: adsDetailBuyerController.adsDetail.store!.description!,
               color: ColorResource.mainFontColor,
             ),
             Divider(
@@ -55,7 +68,7 @@ class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
             ),
             InkWell(
               onTap: () {
-                Get.to(() => MapScreen());
+                Get.to(() => MapScreen(id: widget.id));
               },
               child: Row(
                 children: [
@@ -65,13 +78,19 @@ class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
                     height: 14.h,
                   ),
                   SizedBox(width: 10.w),
-                  AppText(
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w500,
-                    text: 'الشارقة ,العين ,شارع فلسطين',
-                    color: ColorResource.mainFontColor,
+                  Flexible(
+                    child: AppText(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      text:
+                          "${adsDetailBuyerController.adsDetail.store!.address!.governorate!.name!},${adsDetailBuyerController.adsDetail.store!.address!.city!.name!},${adsDetailBuyerController.adsDetail.store!.address!.street!}",
+                      color: ColorResource.mainFontColor,
+                      overflow: TextOverflow.ellipsis,
+                      maxLine: 2,
+                    ),
                   ),
-                  const Spacer(),
+                  // const Spacer(),
+                  SizedBox(width: 10.w),
                   AppImage(
                     width: 80.h,
                     height: 80.w,

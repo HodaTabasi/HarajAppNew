@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/home_buyer/use_case/ads_use_case.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
+import 'package:haraj/utils/models/meta/meta_model.dart';
 import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
 
 import '../../../../../../../../../utils/models/ads_model/ads_model.dart';

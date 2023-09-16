@@ -22,8 +22,16 @@ class ApiSettings {
   //***************************GALLERY LINKS************************************
   static const String gallery = '${_apiUrl}user/gallery';
   //***************************FEATURES LINKS***********************************
-  static const String governorates = '${_apiUrl}/governorates'; //المدن والمحافظات
-  static const String updateAddress = '${_apiUrl}/update-address'; //المدن والمحافظات
+  static const String governorates =
+      '${_apiUrl}/governorates'; //المدن والمحافظات
+  static const String updateAddress =
+      '${_apiUrl}/update-address'; //المدن والمحافظات
   // ***************************POST LINKS**************************************
   static const String post = '${_apiUrl}/posts';
+  // ***************************OFFERS LINKS************************************
+  static const String offers = '${_apiUrl}/offers';
+  // ***************************INSTRUCTION LINKS*******************************
+  static const String instruction = '${_apiUrl}/instructions';
+  // ***************************STORES LINKS************************************
+  static const String stores = '${_apiUrl}/stores';
 }

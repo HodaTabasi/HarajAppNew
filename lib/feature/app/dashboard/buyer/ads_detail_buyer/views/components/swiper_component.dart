@@ -1,13 +1,22 @@
 part of ads_detail_buyer_view;
 
 class SwiperComponent extends StatefulWidget {
-  SwiperComponent({Key? key}) : super(key: key);
+  SwiperComponent({Key? key, required this.id}) : super(key: key);
+  final int id;
 
   @override
   State<SwiperComponent> createState() => _SwiperComponentState();
 }
 
 class _SwiperComponentState extends State<SwiperComponent> {
+  late AdsDetailBuyerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.put(AdsDetailBuyerController(productId: widget.id));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -16,7 +25,7 @@ class _SwiperComponentState extends State<SwiperComponent> {
       child: Swiper(
         duration: 500,
         autoplay: true,
-        itemCount: 3,
+        itemCount: controller.adsDetail.gallery!.length,
         viewportFraction: 1,
         scale: 0.8,
         itemBuilder: (BuildContext context, int index) {
@@ -27,9 +36,9 @@ class _SwiperComponentState extends State<SwiperComponent> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.r),
               color: ColorResource.secondaryColor,
-              image: const DecorationImage(
-                image: NetworkImage(
-                    'https://www.pixel4k.com/wp-content/uploads/2019/01/bugatti-chiron-4k_1546362064.jpg.webp'),
+              image: DecorationImage(
+                image:
+                    NetworkImage(controller.adsDetail.gallery![index].image!),
                 fit: BoxFit.cover,
               ),
             ),
@@ -46,7 +55,13 @@ class _SwiperComponentState extends State<SwiperComponent> {
                       borderRadius: BorderRadius.circular(20.r),
                       color: ColorResource.white,
                     ),
-                    child: AppSvgPicture(assetName: IconsApp.fillScreen)),
+                    child: InkWell(
+                        onTap: () {
+                          Get.dialog(Image.network(
+                              controller.adsDetail.gallery![index].image!,
+                              fit: BoxFit.contain));
+                        },
+                        child: AppSvgPicture(assetName: IconsApp.fillScreen))),
               ],
             ),
           );

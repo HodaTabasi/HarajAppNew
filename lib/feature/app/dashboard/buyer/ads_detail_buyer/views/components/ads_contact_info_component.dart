@@ -1,7 +1,8 @@
 part of ads_detail_buyer_view;
 
 class AdsContactInfoComponent extends StatefulWidget {
-  const AdsContactInfoComponent({super.key});
+  const AdsContactInfoComponent({super.key, required this.id});
+  final int id;
 
   @override
   State<AdsContactInfoComponent> createState() =>
@@ -9,6 +10,14 @@ class AdsContactInfoComponent extends StatefulWidget {
 }
 
 class _AdsContactInfoComponentState extends State<AdsContactInfoComponent> {
+  late AdsDetailBuyerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.put(AdsDetailBuyerController(productId: widget.id));
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBodyContainer(
@@ -21,10 +30,14 @@ class _AdsContactInfoComponentState extends State<AdsContactInfoComponent> {
             color: ColorResource.mainFontColor,
             textAlign: TextAlign.start,
           ),
-          SizedBox(height: 18.h),
+          SizedBox(height: 16.h),
           MoreButton(
             title: context.localizations.chat,
-            onPressed: () {},
+            onPressed: () async {
+              if (controller.adsDetail.chat! == true) {
+                //here to open chat in next time
+              }
+            },
           ),
           SizedBox(height: 3.h),
           RowDividerWidget(
@@ -35,16 +48,28 @@ class _AdsContactInfoComponentState extends State<AdsContactInfoComponent> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SocialContainer(
-                nameIcon: IconsApp.twitter,
-                onPressed: () {},
+                nameIcon: IconsApp.facebook,
+                onPressed: () async {
+                  controller.launchURL(
+                      controller.adsDetail.facebook!, 'facebook');
+                },
               ),
               SocialContainer(
                 nameIcon: IconsApp.whatsapp,
-                onPressed: () {},
+                onPressed: () async {
+                  if (controller.adsDetail.whatsappConnection! == true) {
+                    controller.launchURL(
+                        "wa.me/${controller.adsDetail.whatsapp!}", 'https');
+                  }
+                },
               ),
               SocialContainer(
                 nameIcon: IconsApp.call,
-                onPressed: () {},
+                onPressed: () async {
+                  if (controller.adsDetail.call! == true) {
+                    controller.launchURL(controller.adsDetail.whatsapp!, 'tel');
+                  }
+                },
               ),
             ],
           ),

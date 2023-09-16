@@ -1,13 +1,22 @@
 part of ads_detail_buyer_view;
 
 class HeaderTitle extends StatefulWidget {
-  const HeaderTitle({Key? key}) : super(key: key);
+  const HeaderTitle({Key? key, required this.id}) : super(key: key);
+  final int id;
 
   @override
   State<HeaderTitle> createState() => _HeaderTitleState();
 }
 
 class _HeaderTitleState extends State<HeaderTitle> {
+  late AdsDetailBuyerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.put(AdsDetailBuyerController(productId: widget.id));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,13 +26,13 @@ class _HeaderTitleState extends State<HeaderTitle> {
           children: [
             AppText(
               color: ColorResource.mainFontColor,
-              text: 'بوغاتي شيرون',
+              text: controller.adsDetail.car!.name!,
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,
             ),
             AppText(
               color: ColorResource.mainColor,
-              text: '500000 درهم',
+              text: controller.adsDetail.price!,
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,
             ),
@@ -35,12 +44,14 @@ class _HeaderTitleState extends State<HeaderTitle> {
           children: [
             Expanded(
               child: OfferCard(
-                name: 'معرض النور لبيع وشراء السيارات',
-                subName: 'يعرض 100 سيارة للبيع الان',
-                image: ImagesApp.brandLogo,
-                posting: 'قبل 1 ساعة',
+                name: controller.adsDetail.store!.name!,
+                subName: controller.adsDetail.store!.description!,
+                image: controller.adsDetail.store!.avatar!,
+                posting: controller.adsDetail.createdAt!,
                 onTab: () {
-                  Get.to(() => GalleryBuyerScreen());
+                  Get.to(() => GalleryBuyerScreen(
+                        storeId: controller.adsDetail.store!.id!,
+                      ));
                 },
               ),
             ),

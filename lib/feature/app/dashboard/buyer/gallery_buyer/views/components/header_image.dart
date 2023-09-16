@@ -1,7 +1,8 @@
 part of gallery_buyer_view;
 
 class HeaderImage extends StatelessWidget {
-  const HeaderImage({Key? key}) : super(key: key);
+  HeaderImage({Key? key, required this.url}) : super(key: key);
+  String url;
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +11,7 @@ class HeaderImage extends StatelessWidget {
       child: CircleAvatar(
         radius: 50.r,
         backgroundColor: ColorResource.lightGray,
-        child: AppImage(
-          imageName: ImagesApp.person,
-        ),
+        backgroundImage: NetworkImage(url),
       ),
     );
   }

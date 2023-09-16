@@ -35,46 +35,46 @@ class OfferCard extends StatelessWidget {
             ),
           ),
           SizedBox(width: 5.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppText(
-                text: name,
-                color: ColorResource.mainColor,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-              ),
-              SizedBox(height: 10.h),
-              AppText(
-                text: subName,
-                color: ColorResource.gray,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ],
-          ),
-          const Spacer(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.access_time_rounded,
-                    color: ColorResource.gray,
-                    size: 18.w,
-                  ),
-                  AppText(
-                    text: posting,
-                    color: ColorResource.gray,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ],
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText(
+                  text: name,
+                  color: ColorResource.mainColor,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+                SizedBox(height: 10.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      child: AppText(
+                        text: subName,
+                        color: ColorResource.gray,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    SizedBox(width: 10.w),
+                    Icon(
+                      Icons.access_time_rounded,
+                      color: ColorResource.gray,
+                      size: 18.w,
+                    ),
+                    AppText(
+                      text: posting,
+                      color: ColorResource.gray,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

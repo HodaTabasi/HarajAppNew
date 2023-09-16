@@ -10,17 +10,19 @@ class ShowAds extends StatefulWidget {
 class _ShowAdsState extends State<ShowAds> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Get.to(() => AdsDetailBuyerScreen());
-      },
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        physics: const BouncingScrollPhysics(),
-        itemCount: 5,
-        itemBuilder: (BuildContext context, int index) {
-          return AppCarContainer(
+    return ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      physics: const BouncingScrollPhysics(),
+      itemCount: 5,
+      itemBuilder: (BuildContext context, int index) {
+        return InkWell(
+          onTap: () {
+            Get.to(() => AdsDetailBuyerScreen(
+                  productId: 1,
+                ));
+          },
+          child: AppCarContainer(
             nameCar: 'بوغاتي شيرون',
             imageCar:
                 "https://www.pixel4k.com/wp-content/uploads/2019/01/bugatti-chiron-4k_1546362064.jpg.webp",
@@ -77,9 +79,9 @@ class _ShowAdsState extends State<ShowAds> {
                 // Add more cases as needed
               }
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

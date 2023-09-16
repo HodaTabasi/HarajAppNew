@@ -32,7 +32,9 @@ class _SavedAdsComponentState extends State<SavedAdsComponent> {
             itemBuilder: (BuildContext context, int index) {
               return InkWell(
                 onTap: () {
-                  Get.to(() => AdsDetailBuyerScreen());
+                  Get.to(() => AdsDetailBuyerScreen(
+                        productId: 1,
+                      ));
                 },
                 child: const AppAdsCarContainer(
                   nameCar: 'بوغاتي شيرون',

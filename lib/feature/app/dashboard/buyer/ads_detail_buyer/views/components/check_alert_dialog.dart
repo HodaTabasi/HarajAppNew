@@ -1,6 +1,6 @@
 part of ads_detail_buyer_view;
 
-class AlertDialog extends StatelessWidget {
+class CheckAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
