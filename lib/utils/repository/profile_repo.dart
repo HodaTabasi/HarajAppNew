@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:haraj/utils/api/api_response.dart';
 import 'package:haraj/utils/api_controller/profile_api_controller.dart';
 
 import '../api/network_info.dart';
@@ -15,6 +16,20 @@ class ProfileRepo {
   Future<Either<Failure, UserModel>> getProfile(){
    return _getMessage(
               () => remoteDataSource.getProfile());
+
+  }
+
+  Future<Either<Failure, ApiResponse>> deleteImage({id}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.deleteImageFtomStore(id: id);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
 
   }
   Future<Either<Failure, UserModel>> _getMessage(Function loginOrCreate) async {

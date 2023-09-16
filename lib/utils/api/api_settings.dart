@@ -18,6 +18,7 @@ class ApiSettings {
   static const String getProfile = '${_apiUrl}/profile';
   static const String updatePersonalData = '${_apiUrl}/update-profile';
   static const String updateStoreData = '${_apiUrl}/update-store';
+  static const String deleteImagefromStore = '${_apiUrl}/media/{id}';
   //***************************GALLERY LINKS************************************
   static const String gallery = '${_apiUrl}user/gallery';
   //***************************FEATURES LINKS***********************************

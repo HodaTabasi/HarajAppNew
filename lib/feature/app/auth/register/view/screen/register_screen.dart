@@ -5,10 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/auth/register/controller/register_controller.dart';
-import 'package:haraj/feature/app/profile/buyer/complete_profile_buyer/controller/complete_profile_buyer_controller.dart';
-import 'package:haraj/feature/app/profile/buyer/complete_profile_buyer/view/screen/complete_profile_buyer_screen.dart';
-import 'package:haraj/feature/app/profile/seller/complete_profile_seller/controller/complete_profile_seller_controller.dart';
-import 'package:haraj/feature/app/profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
@@ -21,6 +17,10 @@ import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_textformfiled.dart';
 import 'package:haraj/widgets/row_divider_widget.dart';
 import 'package:haraj/widgets/social_container_widget.dart';
+
+import '../../../../profile/complete_profile/controller/complete_profile_buyer_controller.dart';
+import '../../../../profile/complete_profile/controller/complete_profile_seller_controller.dart';
+
 
 part '../components/back_button.dart';
 part '../components/bottom_sheet.dart';

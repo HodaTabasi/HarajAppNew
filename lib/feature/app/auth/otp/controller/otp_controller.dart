@@ -5,11 +5,8 @@ import '../../../../../utils/errors/error_const.dart';
 import '../../../../../utils/extensions/color_resource/color_resource.dart';
 import '../../../../../utils/prefs/shared_pref_controller.dart';
 import '../../../../../utils/repository/auth_repo.dart';
-import '../../../dashboard/buyer/dashboard_buyer/views/dashboard_screen.dart';
-import '../../../dashboard/seller/dashboard_seller/views/dashboard_screen.dart';
-import '../../../profile/buyer/complete_profile_buyer/view/screen/complete_profile_buyer_screen.dart';
-import '../../../profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
-import '../../register/use_case/verify_use_case.dart';
+import '../../../profile/complete_profile/profile_buyer/screen/complete_profile_buyer_screen.dart';
+import '../../../profile/complete_profile/profile_seller/screen/complete_profile_seller_screen.dart';
 import '../use_case/regester_use_case.dart';
 import '../use_case/resend_use_case.dart';
 

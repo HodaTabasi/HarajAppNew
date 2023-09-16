@@ -40,6 +40,19 @@ class CompletePersonalInfoRepo {
     }
   }
 
+  Future<Either<Failure, UserModel>> updateStoreImage({storeImages}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.updateStoreImage(images: storeImages);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
   Future<Either<Failure, UserModel>> completeAddressData({addressData}) async {
     if (await networkInfo.isConnected) {
       try {

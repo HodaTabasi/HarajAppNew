@@ -48,14 +48,16 @@ class AddAddressSellerController extends GetxController {
   int selectedRadio = 0;
   bool fromEditPage = false;
 
+
   Address get address => Address(
       lng: center?.longitude,
       lat: center?.latitude,
       street: nameStreetController.text,
       governorateId: emiraId,
-      buildingNo: buildNumberController.text,
-      postCode: postalCodeController.text,
-      cityId: cityId);
+    buildingNo: buildNumberController.text,
+    postCode: postalCodeController.text,
+    cityId: cityId
+  );
 
   int getValue(index) {
     return showEmirates.value ? emirates[index].id! : cities[index].id!;
@@ -121,6 +123,7 @@ class AddAddressSellerController extends GetxController {
     if (checkData()) {
       return await completeAddress();
     }
+
   }
 
   Future<void> getGovernorate() async {

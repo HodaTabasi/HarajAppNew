@@ -8,10 +8,10 @@ import '../../../../../../../../../../../../utils/extensions/color_resource/colo
 import '../../../../../../../../../../../../utils/extensions/icons_app/icons_app.dart';
 import '../../../../../../../../../../../../widgets/app_svg_picture.dart';
 import '../../../../../../../../../../../../widgets/app_text.dart';
+import '../../../../../../../../../../profile/complete_profile/controller/complete_profile_seller_controller.dart';
+import '../../../../../../../../../../profile/complete_profile/profile_seller/screen/complete_profile_seller_screen.dart';
 import '../../../../../../../../../../profile/seller/add_address_seller/controller/add_address_seller_controller.dart';
 import '../../../../../../../../../../profile/seller/add_address_seller/view/screen/add_address_seller_screen.dart';
-import '../../../../../../../../../../profile/seller/complete_profile_seller/controller/complete_profile_seller_controller.dart';
-import '../../../../../../../../../../profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
 import '../../../../../../../../../../profile/seller/complete_store_seller/controller/complete_store_seller_controller.dart';
 import '../../../../../../../../../../profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
 import '../../../../controllers/profile_seller_controller.dart';

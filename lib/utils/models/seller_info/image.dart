@@ -8,7 +8,10 @@ class MyImage {
   @JsonKey(name: "image")
   String? image;
 
-  MyImage(this.id, this.image);
+  bool? isSelected;
+  bool? fromFile;
+
+  MyImage(this.id, this.image,[this.fromFile = false,this.isSelected = false]);
 
   factory MyImage.fromJson(Map<String, dynamic> json) =>_$MyImageFromJson(json);
   //

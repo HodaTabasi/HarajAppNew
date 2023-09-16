@@ -1,26 +1,23 @@
-library complete_profile_seller_view;
+library complete_profile_buyer_view;
 
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/profile/seller/complete_profile_seller/controller/complete_profile_seller_controller.dart';
-import 'package:haraj/feature/app/profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/dashboard_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/get/general_getx_controller.dart';
-import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_elevated_button.dart';
 import 'package:haraj/widgets/app_image.dart';
 import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_textformfiled.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../../dashboard/buyer/dashboard_buyer/views/dashboard_screen.dart';
+import '../../controller/complete_profile_buyer_controller.dart';
 
 part '../components/close_button.dart';
 part '../components/header_image.dart';
@@ -29,10 +26,12 @@ part '../components/image_profile.dart';
 part '../components/input_field.dart';
 part '../components/save_button.dart';
 
-class CompleteProfileSellerScreen
-    extends GetView<CompleteProfileSellerController> {
-  CompleteProfileSellerController completeProfileSellerController =
-      Get.put(CompleteProfileSellerController());
+class CompleteProfileBuyerScreen
+    extends GetView<CompleteProfileBuyerController> {
+  CompleteProfileBuyerController completeProfileBuyerController =
+      Get.put(CompleteProfileBuyerController());
+  GeneralGetxController generalGetxController =
+      Get.put(GeneralGetxController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,11 +62,9 @@ class CompleteProfileSellerScreen
                                   child: SaveButton(
                                     title: context.localizations.save_changes,
                                     onPressed: () async {
-
-                                        await controller.performUpdateProfile();
-                                        // Get.to(() => CompleteStoreSellerScreen());
-
-
+                                      await controller.performRegister();
+                                      Get.offAll(
+                                          () => const DashboardBuyerScreen());
                                     },
                                   ),
                                 );

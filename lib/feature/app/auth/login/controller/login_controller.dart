@@ -10,7 +10,7 @@ import 'package:haraj/utils/repository/auth_repo.dart';
 
 import '../../../../../utils/errors/error_const.dart';
 import '../../../dashboard/buyer/dashboard_buyer/views/dashboard_screen.dart';
-import '../../../profile/seller/complete_profile_seller/view/screen/complete_profile_seller_screen.dart';
+import '../../../profile/complete_profile/profile_seller/screen/complete_profile_seller_screen.dart';
 import '../use_case/login_use_case.dart';
 
 class LoginController extends GetxController {

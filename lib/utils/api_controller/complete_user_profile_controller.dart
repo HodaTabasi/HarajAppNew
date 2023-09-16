@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 
 import '../errors/error_const.dart';
 import '../errors/exceptions.dart';
+import '../models/seller_info/image.dart';
 import '../models/seller_info/seller_user_model.dart';
 import '../models/seller_info/store_model.dart';
 
@@ -132,4 +133,38 @@ class CompleteUserProfileController with Helpers {
         throw ServerException();
       }
   }
+
+  updateStoreImage({required List<MyImage> images}) async {
+    var url = Uri.parse(ApiSettings.updateStoreData);
+    var response;
+    var decodedJson;
+
+
+      var request = http.MultipartRequest('POST', url);
+      for(int i = 0;i<images.length;i++){
+        http.MultipartFile imageFile =
+        await http.MultipartFile.fromPath('gallery[$i]', images[i].image??'');
+        request.files.add(imageFile);
+      }
+
+      request.headers[HttpHeaders.acceptHeader] = 'application/json';
+      request.headers[HttpHeaders.authorizationHeader] = SharedPrefController().token;
+      request.headers[HttpHeaders.acceptLanguageHeader] = SharedPrefController().language;
+
+      response = await request.send();
+      var body = await response.stream.transform(utf8.decoder).first;
+      decodedJson = jsonDecode(body);
+
+
+    print(decodedJson);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      // GetStorage().write('otp', decodedJson['otp_code']);
+      return UserModel.fromJson(decodedJson);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'] ;
+      throw ServerException();
+    }
+  }
+
 }

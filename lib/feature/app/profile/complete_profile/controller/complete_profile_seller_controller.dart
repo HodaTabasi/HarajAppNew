@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../../../utils/api_controller/complete_user_profile_controller.dart';
 import '../../../../../../utils/errors/error_const.dart';
 import '../../../../../../utils/repository/complete_user_repo.dart';
-import '../../complete_store_seller/view/screen/complete_store_seller_screen.dart';
+import '../../seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
 import '../use_case/complete_profile_use_case.dart';
 
 class CompleteProfileSellerController extends GetxController {
@@ -37,7 +37,13 @@ class CompleteProfileSellerController extends GetxController {
   }
 
   putDataToTextField({SellerUserModel? user}) {
+    nameController = TextEditingController();
+    phoneController = TextEditingController();
+    idController = TextEditingController();
+    nickNameController = TextEditingController();
+
     if (user != null) {
+
       nameController.text = user.name!;
       phoneController.text = user.mobile!;
       idController.text = user.ssn!;
@@ -45,10 +51,6 @@ class CompleteProfileSellerController extends GetxController {
       imageUrl = user.avatar;
       fromEditPage = true;
     } else {
-      nameController = TextEditingController();
-      phoneController = TextEditingController();
-      idController = TextEditingController();
-      nickNameController = TextEditingController();
       fromEditPage = false;
     }
   }
