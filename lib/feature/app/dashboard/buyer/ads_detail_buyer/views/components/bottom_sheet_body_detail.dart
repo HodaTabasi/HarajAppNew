@@ -1,6 +1,22 @@
 part of ads_detail_buyer_view;
 
-class BottomSheetBodyDetail extends StatelessWidget {
+class BottomSheetBodyDetail extends StatefulWidget {
+  const BottomSheetBodyDetail({super.key, required this.id});
+  final int id;
+
+  @override
+  State<BottomSheetBodyDetail> createState() => _BottomSheetBodyDetailState();
+}
+
+class _BottomSheetBodyDetailState extends State<BottomSheetBodyDetail> {
+  late AdsDetailBuyerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.put(AdsDetailBuyerController(productId: widget.id));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,58 +54,58 @@ class BottomSheetBodyDetail extends StatelessWidget {
         Expanded(
           child: SingleChildScrollView(
             child: Column(
-              children: const [
+              children: [
                 LineDetail(
-                  detail: 'المواصفات الاقليمية : ',
-                  result: 'مواصفات خليجية',
+                  detail: 'المواصفات الاقليمية :',
+                  result: controller.adsDetail.standard!.name!,
                 ),
                 LineDetail(
-                  detail: 'الضمان : ',
-                  result: 'لا',
+                  detail: 'الضمان :',
+                  result: controller.adsDetail.guarantee.toString(),
                 ),
                 LineDetail(
-                  detail: 'نشر في  : ',
-                  result: 'يونيو 12 . 2023',
+                  detail: 'نشر في  :',
+                  result: controller.adsDetail.createdAt!,
                 ),
                 LineDetail(
-                  detail: 'اللون الخارجي : ',
-                  result: 'ازرق',
+                  detail: 'اللون الخارجي :',
+                  result: controller.adsDetail.outColor!.name!,
                 ),
                 LineDetail(
-                  detail: 'عدد الابواب : ',
-                  result: '4 ابواب',
+                  detail: 'عدد الابواب :',
+                  result: controller.adsDetail.door!.number.toString(),
                 ),
                 LineDetail(
-                  detail: 'الحالة : ',
-                  result: 'ممتازة من الداخل والخارج',
+                  detail: 'الحالة :',
+                  result: controller.adsDetail.generalStatus!.name!,
                 ),
                 LineDetail(
-                  detail: 'اللون الداخلي : ',
-                  result: 'اسود',
+                  detail: 'اللون الداخلي :',
+                  result: controller.adsDetail.inColor!.name!,
                 ),
                 LineDetail(
-                  detail: 'عدد المقاعد : ',
-                  result: '5 مقاعد',
+                  detail: 'عدد المقاعد :',
+                  result: controller.adsDetail.seat!.number.toString(),
                 ),
                 LineDetail(
-                  detail: 'عدد الاسطوانات : ',
-                  result: '8 اسطوانات',
+                  detail: 'عدد الاسطوانات :',
+                  result: controller.adsDetail.cylinder!.number.toString(),
                 ),
                 LineDetail(
-                  detail: 'نوع الوقود : ',
-                  result: 'بنزين',
+                  detail: 'نوع الوقود :',
+                  result: controller.adsDetail.fuel!.name!,
                 ),
                 LineDetail(
-                  detail: 'ميزات تقنية : ',
-                  result: ' جر امامي',
+                  detail: 'ميزات تقنية :',
+                  result: controller.adsDetail.mechanicalStatus!.name!,
                 ),
                 LineDetail(
-                  detail: 'جهة القيادة : ',
-                  result: 'اليسار',
+                  detail: 'جهة القيادة :',
+                  result: controller.adsDetail.drivingSide!.name!,
                 ),
                 LineDetail(
-                  detail: 'اضافي : ',
-                  result: 'مراقب المناخ .......',
+                  detail: 'اضافي :',
+                  result: controller.adsDetail.details!,
                 ),
               ],
             ),

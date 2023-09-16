@@ -8,7 +8,6 @@ import 'package:haraj/feature/app/dashboard/buyer/ads_detail_buyer/controllers/a
 import 'package:haraj/feature/app/dashboard/buyer/gallery_buyer/views/screens/gallery_buyer_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
-import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/get/general_getx_controller.dart';
 import 'package:haraj/widgets/app_body_container.dart';
@@ -27,8 +26,8 @@ part '../components/ads_contact_info_component.dart';
 part '../components/ads_detail_component.dart';
 part '../components/ads_instructions_component.dart';
 part '../components/ads_offers_component.dart';
-part '../components/alert_dialog.dart';
 part '../components/bottom_sheet_body_detail.dart';
+part '../components/check_alert_dialog.dart';
 part '../components/header_title.dart';
 part '../components/input_field.dart';
 part '../components/line_detail.dart';
@@ -36,12 +35,27 @@ part '../components/more_button.dart';
 part '../components/offer_card.dart';
 part '../components/swiper_component.dart';
 
-class AdsDetailBuyerScreen extends GetView<AdsDetailBuyerController> {
-  int? idDetails;
-  late AdsDetailBuyerController adsDetailBuyerController;
+class AdsDetailBuyerScreen extends StatefulWidget {
+  final int productId;
 
-  AdsDetailBuyerScreen({this.idDetails}) {
-    adsDetailBuyerController = Get.put(AdsDetailBuyerController(idDetails!));
+  const AdsDetailBuyerScreen({
+    Key? key,
+    required this.productId,
+  }) : super(key: key);
+
+  @override
+  State<AdsDetailBuyerScreen> createState() => _AdsDetailBuyerScreenState();
+}
+
+class _AdsDetailBuyerScreenState extends State<AdsDetailBuyerScreen> {
+  late AdsDetailBuyerController
+      adsDetailBuyerController; // Remove the initialization here
+
+  @override
+  void initState() {
+    super.initState();
+    adsDetailBuyerController =
+        Get.put(AdsDetailBuyerController(productId: widget.productId));
   }
 
   @override
@@ -59,44 +73,50 @@ class AdsDetailBuyerScreen extends GetView<AdsDetailBuyerController> {
         actionIconColor: ColorResource.gray,
         actionOnTap: () {},
       ),
-      body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SwiperComponent(),
-              AppDivider(
-                height: 34.h,
-                color: ColorResource.gray,
-                thickness: 1,
-              ),
-              const HeaderTitle(),
-              AppDivider(
-                height: 34.h,
-                color: ColorResource.gray,
-                thickness: 1,
-              ),
-              TabBarComponent(
-                tabTitles: [
-                  context.localizations.details,
-                  context.localizations.contact,
-                  context.localizations.offer_submit,
-                  //TODO:Make Lang Here
-                  "ارشادات",
-                ],
-                tabViews: const [
-                  AdsDetailComponent(),
-                  AdsContactInfoComponent(),
-                  AdsOffersComponent(),
-                  AdsInstructionsComponent(),
-                  // Other tab views
-                ],
-                height: 250.h,
-              ),
-            ]),
-      ),
+      body: Obx(() {
+        return adsDetailBuyerController.loading.value
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SwiperComponent(id: widget.productId),
+                      AppDivider(
+                        height: 34.h,
+                        color: ColorResource.gray,
+                        thickness: 1,
+                      ),
+                      HeaderTitle(id: widget.productId),
+                      AppDivider(
+                        height: 34.h,
+                        color: ColorResource.gray,
+                        thickness: 1,
+                      ),
+                      TabBarComponent(
+                        tabTitles: [
+                          context.localizations.details,
+                          context.localizations.contact,
+                          context.localizations.offer_submit,
+                          //TODO:Make Lang Here
+                          "ارشادات",
+                        ],
+                        tabViews: [
+                          AdsDetailComponent(id: widget.productId),
+                          AdsContactInfoComponent(id: widget.productId),
+                          AdsOffersComponent(id: widget.productId),
+                          AdsInstructionsComponent(id: widget.productId),
+                          // Other tab views
+                        ],
+                        height: 250.h,
+                      ),
+                    ]),
+              );
+      }),
     );
   }
 }

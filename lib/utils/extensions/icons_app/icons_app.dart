@@ -99,4 +99,5 @@ class IconsApp {
   static const String logout = 'assets/icons/logout.svg';
   static const String tabBar = 'assets/icons/tab_bar.svg';
   static const String editIcon = 'assets/icons/edit_icon.svg';
+  static const String locationStore = 'assets/icons/location_store.svg';
 }

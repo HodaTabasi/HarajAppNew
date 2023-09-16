@@ -38,6 +38,8 @@ class LineDetail extends StatelessWidget {
                   color: ColorResource.mainFontColor,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
+                  overflow: TextOverflow.ellipsis,
+                  maxLine: 2,
                 ),
               ],
             ),

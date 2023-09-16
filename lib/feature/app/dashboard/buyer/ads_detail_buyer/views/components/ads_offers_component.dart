@@ -1,13 +1,22 @@
 part of ads_detail_buyer_view;
 
 class AdsOffersComponent extends StatefulWidget {
-  const AdsOffersComponent({super.key});
+  const AdsOffersComponent({super.key, required this.id});
+  final int id;
 
   @override
   State<AdsOffersComponent> createState() => _AdsOffersComponentState();
 }
 
 class _AdsOffersComponentState extends State<AdsOffersComponent> {
+  late AdsDetailBuyerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.put(AdsDetailBuyerController(productId: widget.id));
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBodyContainer(
@@ -21,12 +30,12 @@ class _AdsOffersComponentState extends State<AdsOffersComponent> {
             color: ColorResource.mainFontColor,
             textAlign: TextAlign.start,
           ),
-          SizedBox(height: 9.h),
+          SizedBox(height: 7.3.h),
           InputField(),
           MoreButton(
             title: context.localizations.offer_submit,
             onPressed: () {
-              Get.dialog(AlertDialog());
+              controller.performNewPrice();
             },
           ),
         ],

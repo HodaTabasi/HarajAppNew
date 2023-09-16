@@ -22,7 +22,9 @@ class _WaitingAdsComponentState extends State<WaitingAdsComponent> {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  Get.to(() => AdsDetailBuyerScreen());
+                  Get.to(() => AdsDetailBuyerScreen(
+                        productId: 1,
+                      ));
                 },
                 child: AppCarContainer(
                   nameCar: 'بوغاتي شيرون',

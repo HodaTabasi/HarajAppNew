@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:haraj/utils/api/api_settings.dart';
 import 'package:haraj/utils/extensions/helpers/helpers.dart';
 import 'package:haraj/utils/models/ads_model/ads_model.dart';
+import 'package:haraj/utils/models/instruction/instruction_model.dart';
+import 'package:haraj/utils/models/offer/offer_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../../errors/error_const.dart';
@@ -29,9 +31,8 @@ class AdsApiController with Helpers {
     http.Response response = await http.get(url, headers: headers);
     var decodedJson = json.decode(response.body);
 
-    debugPrint("mmm show 💯=> $decodedJson");
     if (response.statusCode == 200) {
-      return AdsModel.fromJson(decodedJson);
+      return Data.fromJson(decodedJson['data']);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();
@@ -109,6 +110,40 @@ class AdsApiController with Helpers {
     debugPrint("mmm post 💯=> $decodedJson");
     if (response.statusCode == 200) {
       return AdsModel.fromJson(decodedJson);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
+
+  offers({
+    postId,
+    amount,
+  }) async {
+    var map = {
+      "post_id": postId,
+      "amount": amount,
+    };
+    var url = Uri.parse(ApiSettings.offers);
+    http.Response response = await http.post(url, body: map, headers: headers);
+    var decodedJson = json.decode(response.body);
+
+    debugPrint("mmm offers 💯=> $decodedJson");
+    if (response.statusCode == 200) {
+      return OfferModel.fromJson(decodedJson['data']);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
+
+  instruction() async {
+    var url = Uri.parse(ApiSettings.instruction);
+    http.Response response = await http.get(url, headers: headers);
+    var decodedJson = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      return InstructionModel.fromJson(decodedJson);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();
