@@ -51,6 +51,7 @@ class CompleteProfileBuyerController extends GetxController {
       phoneController.text = user.mobile ?? '';
       imageUrl = user.avatar;
       fromEditPage = true;
+
     } else {
       fromEditPage = false;
     }
