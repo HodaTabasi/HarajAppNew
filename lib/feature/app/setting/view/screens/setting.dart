@@ -6,7 +6,7 @@ import 'package:haraj/widgets/app_elevated_button.dart';
 import 'package:haraj/widgets/app_switch_button.dart';
 import 'package:haraj/widgets/app_text.dart';
 
-import '../../../../../../../../../../utils/extensions/color_resource/color_resource.dart';
+import '../../../../../utils/extensions/color_resource/color_resource.dart';
 
 
 class SettingScreen extends StatefulWidget {

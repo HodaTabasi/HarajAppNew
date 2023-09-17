@@ -6,6 +6,7 @@ class ColorResource {
   static const Color mainColor = Color(0xFFAB1216);
   static const Color secondaryColor = Color(0xFFBBBEBF);
   static const Color mainFontColor = Color(0xFF0B1017);
+  static const Color secoundryFontColor = Color(0xFF3A3A3A);
   static const Color shadeRed = Color(0xFFFBF3F3);
   static const Color shadeGrey = Color(0xFFECECEC);
   static const Color shadeGrey1 = Color(0xFF858585);

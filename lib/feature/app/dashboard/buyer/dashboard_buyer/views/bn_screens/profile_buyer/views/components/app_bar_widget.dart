@@ -1,4 +1,4 @@
-part of public_profile_seller_view;
+part of public_profile_buyer_view;
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({

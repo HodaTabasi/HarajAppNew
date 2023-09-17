@@ -100,4 +100,10 @@ class IconsApp {
   static const String tabBar = 'assets/icons/tab_bar.svg';
   static const String editIcon = 'assets/icons/edit_icon.svg';
   static const String locationStore = 'assets/icons/location_store.svg';
+  static const String cFaceBook = 'assets/icons/facebook_c.svg';
+  static const String cTwitter = 'assets/icons/twitter_c.svg';
+  static const String cTelegram = 'assets/icons/telegram.svg';
+  static const String cInatagram = 'assets/icons/instagram_c.svg';
+  static const String cWhatsApp = 'assets/icons/whatsApp_c.svg';
+  static const String close = 'assets/icons/close.svg';
 }

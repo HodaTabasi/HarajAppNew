@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +11,7 @@ import 'package:haraj/feature/app/profile/seller/complete_store_seller/view/scre
 import 'package:haraj/feature/core/launch_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/routes/key_routes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 ///General Extension App
@@ -153,4 +156,19 @@ extension ContextExtension on BuildContext {
       };
 
 
+  getPackageNameFun(){
+  if (Platform.isAndroid || Platform.isIOS) {
+    final appId = Platform.isAndroid ? 'com.app.harage.hatage_app' : 'YOUR_IOS_APP_ID';
+    final url = Uri.parse(
+      Platform.isAndroid
+          ? "market://details?id=$appId"
+          : "https://apps.apple.com/app/id$appId",
+    );
+    return url;
+    // launchUrl(
+    //   url,
+    //   mode: LaunchMode.externalApplication,
+    // );
+  }
+}
 }

@@ -86,15 +86,11 @@ class _DashboardSellerScreenState extends State<DashboardSellerScreen> {
           changeTab(value);
         },
         currentIndex: _currentIndex,
-
         type: BottomNavigationBarType.fixed,
-
         showSelectedLabels: false,
         showUnselectedLabels: false,
-
         backgroundColor: ColorResource.white,
         elevation: 8,
-
         selectedItemColor: ColorResource.mainColor,
         selectedIconTheme: const IconThemeData(color: ColorResource.mainColor),
 
