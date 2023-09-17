@@ -3,7 +3,7 @@ library home_buyer_view;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/dashboard/buyer/ads_detail_buyer/views/screens/ads_detail_buyer_screen.dart';
+import 'package:haraj/feature/app/ads_detail/views/screens/ads_detail_screen.dart';
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/home_buyer/controllers/home_buyer_controller.dart';
 import 'package:haraj/feature/app/dashboard/buyer/filter_buyer/view/screens/filter_buyer_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';

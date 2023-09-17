@@ -1,13 +1,22 @@
-part of ads_detail_seller_view;
+part of ads_detail_buyer_view;
 
-class AdsOffersComponent extends StatefulWidget {
-  const AdsOffersComponent({super.key});
+class AdsAllOffersComponent extends StatefulWidget {
+  const AdsAllOffersComponent({super.key, required this.id});
+  final int id;
 
   @override
-  State<AdsOffersComponent> createState() => _AdsOffersComponentState();
+  State<AdsAllOffersComponent> createState() => _AdsAllOffersComponentState();
 }
 
-class _AdsOffersComponentState extends State<AdsOffersComponent> {
+class _AdsAllOffersComponentState extends State<AdsAllOffersComponent> {
+  late AdsDetailController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.put(AdsDetailController(productId: widget.id));
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBodyContainer(
@@ -98,7 +107,7 @@ class _AdsOffersComponentState extends State<AdsOffersComponent> {
               shrinkWrap: true,
               itemCount: 3,
               itemBuilder: (context, index) {
-                return OfferCard(
+                return AllOffersCard(
                   name: 'محمد محمد',
                   price: '400000 درهم',
                   image: ImagesApp.person,

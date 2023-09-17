@@ -1,7 +1,7 @@
-part of ads_detail_seller_view;
+part of ads_detail_buyer_view;
 
-class OfferCard extends StatelessWidget {
-  const OfferCard({
+class AllOffersCard extends StatelessWidget {
+  const AllOffersCard({
     super.key,
     required this.name,
     required this.price,

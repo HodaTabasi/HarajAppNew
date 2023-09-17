@@ -1,6 +1,6 @@
 part of ads_detail_buyer_view;
 
-class InputField extends GetView<AdsDetailBuyerController> {
+class InputField extends GetView<AdsDetailController> {
   @override
   Widget build(BuildContext context) {
     return AppTextFomField(

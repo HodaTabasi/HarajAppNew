@@ -1,4 +1,4 @@
-part of ads_detail_seller_view;
+part of ads_detail_buyer_view;
 
 class BottomSheetBodyOffers extends StatelessWidget {
   @override

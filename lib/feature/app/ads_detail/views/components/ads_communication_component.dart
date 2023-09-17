@@ -1,21 +1,21 @@
 part of ads_detail_buyer_view;
 
-class AdsContactInfoComponent extends StatefulWidget {
-  const AdsContactInfoComponent({super.key, required this.id});
+class AdsCommunicationComponent extends StatefulWidget {
+  const AdsCommunicationComponent({super.key, required this.id});
   final int id;
 
   @override
-  State<AdsContactInfoComponent> createState() =>
-      _AdsContactInfoComponentState();
+  State<AdsCommunicationComponent> createState() =>
+      _AdsCommunicationComponentState();
 }
 
-class _AdsContactInfoComponentState extends State<AdsContactInfoComponent> {
-  late AdsDetailBuyerController controller;
+class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
+  late AdsDetailController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = Get.put(AdsDetailBuyerController(productId: widget.id));
+    controller = Get.put(AdsDetailController(productId: widget.id));
   }
 
   @override

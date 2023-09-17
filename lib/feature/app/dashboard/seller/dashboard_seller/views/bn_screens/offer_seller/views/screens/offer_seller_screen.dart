@@ -3,7 +3,7 @@ library offer_seller_view;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/dashboard/seller/ads_detail_seller/views/screens/ads_detail_seller_screen.dart';
+import 'package:haraj/feature/app/ads_detail/views/screens/ads_detail_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/controllers/offer_seller_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';

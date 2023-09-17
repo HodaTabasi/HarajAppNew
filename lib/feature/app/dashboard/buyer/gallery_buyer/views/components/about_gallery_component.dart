@@ -11,15 +11,14 @@ class AboutGalleryComponent extends StatefulWidget {
 
 class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
   late GalleryBuyerController galleryBuyerController;
-  late AdsDetailBuyerController adsDetailBuyerController;
+  late AdsDetailController adsDetailController;
 
   @override
   void initState() {
     super.initState();
     galleryBuyerController =
         Get.put(GalleryBuyerController(storeId: widget.id));
-    adsDetailBuyerController =
-        Get.put(AdsDetailBuyerController(productId: widget.id));
+    adsDetailController = Get.put(AdsDetailController(productId: widget.id));
   }
 
   @override
@@ -28,19 +27,19 @@ class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HeaderImage(url: adsDetailBuyerController.adsDetail.store!.avatar!),
+            HeaderImage(url: adsDetailController.adsDetail.store!.avatar!),
             SizedBox(height: 24.h),
             AppText(
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
-              text: adsDetailBuyerController.adsDetail.store!.name!,
+              text: adsDetailController.adsDetail.store!.name!,
               color: ColorResource.mainColor,
             ),
             SizedBox(height: 8.h),
             AppText(
               fontSize: 12.sp,
               fontWeight: FontWeight.w500,
-              text: adsDetailBuyerController.adsDetail.store!.email!,
+              text: adsDetailController.adsDetail.store!.email!,
               color: ColorResource.gray,
             ),
             Divider(
@@ -58,7 +57,7 @@ class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
             AppText(
               fontSize: 15.sp,
               fontWeight: FontWeight.w500,
-              text: adsDetailBuyerController.adsDetail.store!.description!,
+              text: adsDetailController.adsDetail.store!.description!,
               color: ColorResource.mainFontColor,
             ),
             Divider(
@@ -83,7 +82,7 @@ class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w500,
                       text:
-                          "${adsDetailBuyerController.adsDetail.store!.address!.governorate!.name!},${adsDetailBuyerController.adsDetail.store!.address!.city!.name!},${adsDetailBuyerController.adsDetail.store!.address!.street!}",
+                          "${adsDetailController.adsDetail.store!.address!.governorate!.name!},${adsDetailController.adsDetail.store!.address!.city!.name!},${adsDetailController.adsDetail.store!.address!.street!}",
                       color: ColorResource.mainFontColor,
                       overflow: TextOverflow.ellipsis,
                       maxLine: 2,

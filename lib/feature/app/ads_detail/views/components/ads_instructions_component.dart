@@ -10,12 +10,12 @@ class AdsInstructionsComponent extends StatefulWidget {
 }
 
 class _AdsInstructionsComponentState extends State<AdsInstructionsComponent> {
-  late AdsDetailBuyerController controller;
+  late AdsDetailController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = Get.put(AdsDetailBuyerController(productId: widget.id));
+    controller = Get.put(AdsDetailController(productId: widget.id));
   }
 
   @override

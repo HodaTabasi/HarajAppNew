@@ -1,20 +1,21 @@
 part of ads_detail_buyer_view;
 
-class AdsOffersComponent extends StatefulWidget {
-  const AdsOffersComponent({super.key, required this.id});
+class AdsOfferSubmitComponent extends StatefulWidget {
+  const AdsOfferSubmitComponent({super.key, required this.id});
   final int id;
 
   @override
-  State<AdsOffersComponent> createState() => _AdsOffersComponentState();
+  State<AdsOfferSubmitComponent> createState() =>
+      _AdsOfferSubmitComponentState();
 }
 
-class _AdsOffersComponentState extends State<AdsOffersComponent> {
-  late AdsDetailBuyerController controller;
+class _AdsOfferSubmitComponentState extends State<AdsOfferSubmitComponent> {
+  late AdsDetailController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = Get.put(AdsDetailBuyerController(productId: widget.id));
+    controller = Get.put(AdsDetailController(productId: widget.id));
   }
 
   @override

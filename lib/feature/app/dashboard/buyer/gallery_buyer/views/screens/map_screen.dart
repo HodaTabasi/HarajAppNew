@@ -11,20 +11,19 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   late GalleryBuyerController galleryBuyerController;
-  late AdsDetailBuyerController adsDetailBuyerController;
+  late AdsDetailController adsDetailController;
 
   @override
   void initState() {
     super.initState();
     galleryBuyerController =
         Get.put(GalleryBuyerController(storeId: widget.id));
-    adsDetailBuyerController =
-        Get.put(AdsDetailBuyerController(productId: widget.id));
+    adsDetailController = Get.put(AdsDetailController(productId: widget.id));
     galleryBuyerController.setMarker(
-        adsDetailBuyerController.adsDetail.store!.id.toString(),
-        adsDetailBuyerController.adsDetail.store!.name!,
-        adsDetailBuyerController.adsDetail.store!.address!.lat!,
-        adsDetailBuyerController.adsDetail.store!.address!.lng!);
+        adsDetailController.adsDetail.store!.id.toString(),
+        adsDetailController.adsDetail.store!.name!,
+        adsDetailController.adsDetail.store!.address!.lat!,
+        adsDetailController.adsDetail.store!.address!.lng!);
   }
 
   @override
@@ -44,9 +43,9 @@ class _MapScreenState extends State<MapScreen> {
                         padding: EdgeInsets.all(1.w),
                         initialCameraPosition:
                             galleryBuyerController.initialCameraPosition(
-                                adsDetailBuyerController
+                                adsDetailController
                                     .adsDetail.store!.address!.lat!,
-                                adsDetailBuyerController
+                                adsDetailController
                                     .adsDetail.store!.address!.lng!),
                         onMapCreated: onMapCreated,
                         markers: galleryBuyerController.markers,
@@ -115,7 +114,7 @@ class _MapScreenState extends State<MapScreen> {
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w500,
                                   text:
-                                      "${adsDetailBuyerController.adsDetail.store!.address!.governorate!.name!},${adsDetailBuyerController.adsDetail.store!.address!.city!.name!},${adsDetailBuyerController.adsDetail.store!.address!.street!}",
+                                      "${adsDetailController.adsDetail.store!.address!.governorate!.name!},${adsDetailController.adsDetail.store!.address!.city!.name!},${adsDetailController.adsDetail.store!.address!.street!}",
                                   color: ColorResource.mainFontColor,
                                   textAlign: TextAlign.start,
                                 ),
@@ -145,7 +144,7 @@ class _MapScreenState extends State<MapScreen> {
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.w500,
                                     text:
-                                        "${adsDetailBuyerController.adsDetail.store!.address!.buildingNo!},${adsDetailBuyerController.adsDetail.store!.address!.postCode!}",
+                                        "${adsDetailController.adsDetail.store!.address!.buildingNo!},${adsDetailController.adsDetail.store!.address!.postCode!}",
                                     color: ColorResource.mainFontColor,
                                     maxLine: 1,
                                     textAlign: TextAlign.start,

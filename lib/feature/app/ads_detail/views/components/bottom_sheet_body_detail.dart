@@ -9,12 +9,12 @@ class BottomSheetBodyDetail extends StatefulWidget {
 }
 
 class _BottomSheetBodyDetailState extends State<BottomSheetBodyDetail> {
-  late AdsDetailBuyerController controller;
+  late AdsDetailController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = Get.put(AdsDetailBuyerController(productId: widget.id));
+    controller = Get.put(AdsDetailController(productId: widget.id));
   }
 
   @override

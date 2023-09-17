@@ -19,7 +19,7 @@ class _RejectedAdsComponentState extends State<RejectedAdsComponent> {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  Get.to(() => AdsDetailBuyerScreen(
+                  Get.to(() => AdsDetailScreen(
                         productId: 1,
                       ));
                 },
