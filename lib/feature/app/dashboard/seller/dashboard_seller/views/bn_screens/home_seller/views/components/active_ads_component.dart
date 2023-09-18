@@ -24,7 +24,7 @@ class _ActiveAdsComponentState extends State<ActiveAdsComponent> {
               return InkWell(
                 onTap: () {
                   Get.to(() => AdsDetailScreen(
-                        productId: 1,
+                        productId: 11,
                       ));
                 },
                 child: AppCarContainer(

@@ -4,27 +4,28 @@ import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
 
 class AppPopupMenuItem extends PopupMenuItem<int> {
-  final String iconAsset;
+  final String? iconAsset;
   final String title;
   final Color iconColor;
   final int value;
 
   AppPopupMenuItem({
-    required this.iconAsset,
     required this.title,
     required this.iconColor,
     required this.value,
+    this.iconAsset,
   }) : super(
           value: value,
           child: Row(
             children: [
-              AppSvgPicture(
-                assetName: iconAsset,
-                width: 14.w,
-                height: 14.h,
-                color: iconColor,
-              ),
-              SizedBox(width: 10.w),
+              if (iconAsset != null)
+                AppSvgPicture(
+                  assetName: iconAsset,
+                  width: 14.w,
+                  height: 14.h,
+                  color: iconColor,
+                ),
+              if (iconAsset != null) SizedBox(width: 10.w),
               Text(
                 title,
                 style: TextStyle(

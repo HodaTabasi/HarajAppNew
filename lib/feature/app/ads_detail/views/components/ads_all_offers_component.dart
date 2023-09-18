@@ -2,6 +2,7 @@ part of ads_detail_buyer_view;
 
 class AdsAllOffersComponent extends StatefulWidget {
   const AdsAllOffersComponent({super.key, required this.id});
+
   final int id;
 
   @override
@@ -29,69 +30,29 @@ class _AdsAllOffersComponentState extends State<AdsAllOffersComponent> {
               AppText(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w300,
-                text: "${context.localizations.offers_submitted} (${3})",
+                text:
+                    "${context.localizations.offers_submitted} (${controller.selectedMenuItem == 1 ? controller.allOffers.length : controller.newOffers.length})",
                 color: ColorResource.mainFontColor,
               ),
               AppPopupMenuButton(
                 menuItems: [
                   AppPopupMenuItem(
                     value: 1,
-                    iconAsset: '',
                     title: context.localizations.all_offers,
                     iconColor: ColorResource.mainColor,
                   ),
                   AppPopupMenuItem(
                     value: 2,
-                    iconAsset: '',
                     title: context.localizations.new_offers,
-                    iconColor: ColorResource.red,
-                  ),
-                  AppPopupMenuItem(
-                    value: 3,
-                    iconAsset: '',
-                    title: context.localizations.recent_offers,
                     iconColor: ColorResource.red,
                   ),
                 ],
                 onSelected: (value) {
                   // Handle selection for this usage
                   debugPrint('Selected value:💯 $value');
-                  switch (value) {
-                    case 1:
-                      Get.bottomSheet(
-                          AppBottomSheet(
-                            body: BottomSheetBodyOffers(),
-                            height: 280.h,
-                          ),
-                          enterBottomSheetDuration:
-                              const Duration(milliseconds: 500),
-                          exitBottomSheetDuration:
-                              const Duration(milliseconds: 400));
-                      break;
-                    case 2:
-                      // Get.bottomSheet(
-                      //     AppBottomSheet(
-                      //       body: BottomSheetBody(),
-                      //       height: 280.h,
-                      //     ),
-                      //     enterBottomSheetDuration:
-                      //         const Duration(milliseconds: 500),
-                      //     exitBottomSheetDuration:
-                      //         const Duration(milliseconds: 400));
-                      break;
-                    case 3:
-                      // Get.bottomSheet(
-                      //     AppBottomSheet(
-                      //       body: BottomSheetBody(),
-                      //       height: 280.h,
-                      //     ),
-                      //     enterBottomSheetDuration:
-                      //         const Duration(milliseconds: 500),
-                      //     exitBottomSheetDuration:
-                      //         const Duration(milliseconds: 400));
-                      break;
-                    // Add more cases as needed
-                  }
+                  setState(() {
+                    controller.selectedMenuItem = value;
+                  });
                 },
               ),
             ],
@@ -102,24 +63,62 @@ class _AdsAllOffersComponentState extends State<AdsAllOffersComponent> {
             thickness: 1.h,
           ),
           Expanded(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return AllOffersCard(
-                  name: 'محمد محمد',
-                  price: '400000 درهم',
-                  image: ImagesApp.person,
-                  posting: 'قبل 1 ساعة',
-                  crossOnTab: () {},
-                  checkOnTab: () {},
-                );
-              },
-            ),
+            child: buildListView(controller
+                .selectedMenuItem), // Use a function to build the ListView
           ),
         ],
       ),
     );
+  }
+
+  Widget buildListView(int selectedItem) {
+    switch (selectedItem) {
+      case 1:
+        // Return the ListView for "all_offers"
+        return ListView.builder(
+          controller: controller.scrollController,
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: controller.allOffers.length,
+          itemBuilder: (context, index) {
+            return AllOffersCard(
+              name: controller.allOffers[index].client!.name!,
+              price: controller.allOffers[index].amount.toString(),
+              image: controller.allOffers[index].client!.avatar ??
+                  ImagesApp.brandLogo,
+              posting: controller.allOffers[index].createdAt!,
+              status: controller.allOffers[index].status!,
+              crossOnTab: () {},
+              checkOnTab: () {
+                debugPrint(" checkOnTab 💯");
+                controller.acceptOffer();
+              },
+            );
+          },
+        );
+      case 2:
+        // Return the ListView for "new_offers"
+        return ListView.builder(
+          controller: controller.scrollController,
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: controller.newOffers.length,
+          itemBuilder: (context, index) {
+            return AllOffersCard(
+              name: controller.newOffers[index].client!.name!,
+              price: controller.newOffers[index].amount.toString(),
+              image: controller.newOffers[index].client!.avatar ??
+                  ImagesApp.brandLogo,
+              posting: controller.newOffers[index].createdAt!,
+              // status: controller.allOffers[index].status!,
+              status: 1,
+              crossOnTab: () {},
+              checkOnTab: () {},
+            );
+          },
+        );
+      default:
+        return const SizedBox(); // Default case, return an empty container
+    }
   }
 }

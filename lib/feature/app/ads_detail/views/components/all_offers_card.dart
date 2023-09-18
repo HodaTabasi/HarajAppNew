@@ -7,6 +7,7 @@ class AllOffersCard extends StatelessWidget {
     required this.price,
     required this.image,
     required this.posting,
+    required this.status,
     required this.crossOnTab,
     required this.checkOnTab,
   });
@@ -17,6 +18,7 @@ class AllOffersCard extends StatelessWidget {
   final String posting;
   final void Function() crossOnTab;
   final void Function() checkOnTab;
+  final int status;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class AllOffersCard extends StatelessWidget {
             child: CircleAvatar(
               radius: 40.r,
               backgroundColor: ColorResource.lightGray,
-              backgroundImage: AssetImage(image),
+              backgroundImage: NetworkImage(image),
             ),
           ),
           SizedBox(width: 10.w),
@@ -65,25 +67,48 @@ class AllOffersCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  InkWell(
-                    onTap: crossOnTab,
-                    child: AppSvgPicture(
-                      assetName: IconsApp.cross,
+              //status 1 pending ,status 2 rejected,status 3 accepted
+              if (status == 1)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: crossOnTab,
+                      child: AppSvgPicture(
+                        assetName: IconsApp.cross,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 20.w),
-                  InkWell(
-                    onTap: crossOnTab,
-                    child: AppSvgPicture(
-                      assetName: IconsApp.check,
+                    SizedBox(width: 20.w),
+                    InkWell(
+                      onTap: checkOnTab,
+                      child: AppSvgPicture(
+                        assetName: IconsApp.check,
+                      ),
                     ),
+                  ],
+                ),
+              if (status == 2 || status == 3)
+                Container(
+                  height: 25.h,
+                  width: 60.w,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: status == 2
+                        ? ColorResource.mainColor.withOpacity(0.10)
+                        : ColorResource.green.withOpacity(0.10),
+                    borderRadius: BorderRadius.circular(4.r),
                   ),
-                ],
-              ),
+                  child: AppText(
+                    //TODO: Make Lang Here
+                    text: status == 2 ? "مرفوضة" : "متاحة",
+                    color: status == 2
+                        ? ColorResource.mainColor
+                        : ColorResource.green,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
             ],
           ),
         ],

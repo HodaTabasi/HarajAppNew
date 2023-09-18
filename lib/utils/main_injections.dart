@@ -1,18 +1,19 @@
 import 'package:get/get.dart';
 import 'package:haraj/utils/api_controller/ads_api/ads_api_controller.dart';
 import 'package:haraj/utils/api_controller/auth_api_controller.dart';
+import 'package:haraj/utils/api_controller/offer_api_controller/offer_api_controller.dart';
 import 'package:haraj/utils/api_controller/profile_api_controller.dart';
 import 'package:haraj/utils/api_controller/store_api/store_api_controller.dart';
 import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
 import 'package:haraj/utils/repository/auth_repo.dart';
 import 'package:haraj/utils/repository/complete_user_repo.dart';
 import 'package:haraj/utils/repository/general_repo.dart';
+import 'package:haraj/utils/repository/offer_repo/offer_repo.dart';
 import 'package:haraj/utils/repository/profile_repo.dart';
 import 'package:haraj/utils/repository/store_repo/store_repo.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../feature/app/auth/otp/controller/otp_controller.dart';
-import '../feature/app/dashboard/seller/dashboard_seller/views/bn_screens/profile_seller/controllers/profile_seller_controller.dart';
 import '../feature/app/profile/complete_profile/controller/complete_profile_buyer_controller.dart';
 import '../feature/app/profile/complete_profile/controller/complete_profile_seller_controller.dart';
 import '../feature/app/profile/seller/add_address_seller/controller/add_address_seller_controller.dart';
@@ -51,5 +52,7 @@ class MainInjection implements Bindings {
     Get.put(StoreRepository(
         networkInfo: networkInfoImpl, remoteDataSource: StoreApiController()));
     Get.put(CompleteProfileBuyerController());
+    Get.put(OfferRepository(
+        networkInfo: networkInfoImpl, remoteDataSource: OfferApiController()));
   }
 }

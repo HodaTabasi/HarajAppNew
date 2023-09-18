@@ -83,7 +83,17 @@ class _AdsDetailScreenState extends State<AdsDetailScreen> {
         actionIconColor: SharedPrefController().type == 1
             ? ColorResource.mainColor
             : ColorResource.gray,
-        actionOnTap: () {},
+        actionOnTap: () {
+          SharedPrefController().type == 1
+              ? Get.bottomSheet(
+                  AppBottomSheet(
+                    body: BottomSheetBodyOffers(),
+                    height: 280.h,
+                  ),
+                  enterBottomSheetDuration: const Duration(milliseconds: 500),
+                  exitBottomSheetDuration: const Duration(milliseconds: 400))
+              : IconsApp.favoriteFill;
+        },
       ),
       body: Obx(() {
         return adsDetailController.loading.value
@@ -109,7 +119,7 @@ class _AdsDetailScreenState extends State<AdsDetailScreen> {
                         color: ColorResource.gray,
                         thickness: 1,
                       ),
-                      SharedPrefController().type == 2
+                      SharedPrefController().type == 1
                           ? TabBarComponent(
                               tabTitles: [
                                 context.localizations.details,
