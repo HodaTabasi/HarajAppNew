@@ -60,6 +60,20 @@ class OfferApiController with Helpers {
     }
   }
 
+  showPostRejectedOffers({page}) async {
+    var url = Uri.parse("${ApiSettings.offers}/rejected?page=$page");
+    http.Response response = await http.get(url, headers: headers);
+    var decodedJson = json.decode(response.body);
+
+    debugPrint("mmm showPostRejectedOffers 💯=> $decodedJson");
+    if (response.statusCode == 200) {
+      return MainOfferModel.fromJson(decodedJson);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
+
   acceptOffers({postId}) async {
     var url = Uri.parse("${ApiSettings.offers}/$postId/accept");
     http.Response response = await http.patch(url, headers: headers);

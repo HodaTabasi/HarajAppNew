@@ -53,6 +53,20 @@ class OfferRepository {
     }
   }
 
+  Future<Either<Failure, MainOfferModel>> showPostRejectedOffers({page}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response =
+            await remoteDataSource.showPostRejectedOffers(page: page);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
   Future<Either<Failure, OfferModel>> acceptOffers({postId}) async {
     if (await networkInfo.isConnected) {
       try {

@@ -33,13 +33,11 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
                       nameCar: controller.newOffers[index].post!.car!.name!,
                       imageCar: controller
                           .newOffers[index].post!.gallery!.first.image!,
-                      //
                       priceCar: "",
                       conditionCar: controller
                           .newOffers[index].post!.mechanicalStatus!.name!,
                       showCar: 'زائر',
-                      //
-                      postingTime: controller.newOffers[index].post!.createdAt!,
+                      postingTime: controller.newOffers[index].createdAt!,
                       showLocation: true,
                       iconLocation: IconsApp.location,
                       nameLocation: controller.newOffers[index].post!.store!
@@ -50,7 +48,6 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
                           ImagesApp.brandLogo,
                       showOfferedPrice: true,
                       offerPrice: controller.newOffers[index].amount.toString(),
-                      //
                       discountPrice: controller.newOffers[index].post!.price!,
                       showStatus: true,
                       menuItem: [
