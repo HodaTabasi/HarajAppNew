@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/show_post_accepted_offer_use_case.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/show_post_new_offer_use_case.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/show_post_rejected_offer_use_case.dart';
 import 'package:haraj/utils/errors/error_const.dart';
@@ -15,6 +16,7 @@ class OfferSellerController extends GetxController {
   var responseMessage = "";
   RxList<OfferModel> newOffers = <OfferModel>[].obs;
   RxList<OfferModel> rejectedOffers = <OfferModel>[].obs;
+  RxList<OfferModel> acceptedOffers = <OfferModel>[].obs;
   Meta meta = Meta();
   late ScrollController scrollController;
 
@@ -25,6 +27,7 @@ class OfferSellerController extends GetxController {
     scrollController.addListener(_listener);
     showPostNewOffer();
     showPostRejectedOffers();
+    showPostAcceptedOffers();
   }
 
   void _listener() {
@@ -33,6 +36,7 @@ class OfferSellerController extends GetxController {
       if (meta.currentPage! < meta.lastPage!) {
         showPostNewOffer(pageNumber: meta.currentPage);
         showPostRejectedOffers(pageNumber: meta.currentPage);
+        showPostAcceptedOffers(pageNumber: meta.currentPage);
       }
     }
   }
@@ -67,6 +71,23 @@ class OfferSellerController extends GetxController {
               );
             }, (response) async {
               rejectedOffers.addAll(response.data ?? []);
+              meta = response.meta!;
+            }));
+  }
+
+  Future<void> showPostAcceptedOffers({pageNumber = 1}) async {
+    return ShowPostAcceptedOfferUseCase(repository: Get.find<OfferRepository>())
+        .call(pageNumber)
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              acceptedOffers.addAll(response.data ?? []);
               meta = response.meta!;
             }));
   }
