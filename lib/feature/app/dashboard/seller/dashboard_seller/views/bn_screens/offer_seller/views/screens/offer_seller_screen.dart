@@ -7,6 +7,7 @@ import 'package:haraj/feature/app/ads_detail/views/screens/ads_detail_screen.dar
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/controllers/offer_seller_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
+import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/widgets/app_car_container.dart';
 import 'package:haraj/widgets/app_popup_menu_item.dart';

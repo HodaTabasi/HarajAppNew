@@ -167,19 +167,27 @@ class _AppCarContainerState extends State<AppCarContainer> {
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                            AppText(
-                              text: widget.offerPrice,
-                              color: ColorResource.mainFontColor,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
+                            Expanded(
+                              child: AppText(
+                                text: widget.offerPrice,
+                                color: ColorResource.mainFontColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                maxLine: 1,
+                                textAlign: TextAlign.start,
+                              ),
                             ),
-                            const Spacer(),
-                            AppText(
-                              text: widget.discountPrice,
-                              color: ColorResource.gray,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500,
-                              textDecoration: TextDecoration.lineThrough,
+                            SizedBox(width: 5.w),
+                            Expanded(
+                              child: AppText(
+                                text: widget.discountPrice,
+                                color: ColorResource.gray,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w500,
+                                textDecoration: TextDecoration.lineThrough,
+                                maxLine: 1,
+                                textAlign: TextAlign.end,
+                              ),
                             ),
                           ],
                         )
@@ -208,9 +216,10 @@ class _AppCarContainerState extends State<AppCarContainer> {
                                 fontWeight: FontWeight.w500,
                                 maxLine: 1,
                                 overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.start,
                               ),
                             ),
-                            SizedBox(width: 10.w),
+                            SizedBox(width: 5.w),
                             AppText(
                               //TODO: make lang here
                               text: widget.showCar,
