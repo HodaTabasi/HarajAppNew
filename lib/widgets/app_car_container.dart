@@ -31,6 +31,7 @@ class AppCarContainer extends StatefulWidget {
     this.showSeller = false,
     this.sellerName = 'Mahmoud',
     this.imageSeller = '',
+    this.isSold = false,
     // this.showMenuItem = false,
   });
 
@@ -52,6 +53,7 @@ class AppCarContainer extends StatefulWidget {
   final bool showSeller;
   final String sellerName;
   final String imageSeller;
+  final bool isSold;
   // final bool showMenuItem;
 
   @override
@@ -138,13 +140,18 @@ class _AppCarContainerState extends State<AppCarContainer> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      AppText(
-                        text: widget.nameCar,
-                        color: ColorResource.mainFontColor,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
+                      Expanded(
+                        child: AppText(
+                          text: widget.nameCar,
+                          color: ColorResource.mainFontColor,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          maxLine: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.start,
+                        ),
                       ),
-                      // widget.showMenuItem
+                      SizedBox(width: 10.w),
                       AppPopupMenuButton(
                           menuItems: widget.menuItem,
                           onSelected: widget.onSelected),
@@ -188,23 +195,27 @@ class _AppCarContainerState extends State<AppCarContainer> {
                           children: [
                             AppText(
                               //TODO: make lang here
-                              text: 'الحالة : ',
+                              text: 'الحالة :',
                               color: ColorResource.gray,
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                            AppText(
-                              text: widget.conditionCar,
-                              color: ColorResource.green,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
+                            Expanded(
+                              child: AppText(
+                                text: widget.conditionCar,
+                                color: ColorResource.green,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
+                                maxLine: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                            const Spacer(),
+                            SizedBox(width: 10.w),
                             AppText(
                               //TODO: make lang here
-                              text: '4K ${widget.showCar}',
+                              text: widget.showCar,
                               // text: '4K زائر',
-                              color: ColorResource.green,
+                              color: ColorResource.gray,
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                             ),
@@ -272,7 +283,7 @@ class _AppCarContainerState extends State<AppCarContainer> {
                               fontWeight: FontWeight.w500,
                             ),
                             const Spacer(),
-                            AppSwitchButton(),
+                            AppSwitchButton(isSold: widget.isSold),
                           ],
                         ),
                 ],

@@ -39,6 +39,14 @@ class HomeSellerScreen extends GetView<HomeSellerController> {
         heightBackground: 210.h,
         showLeading: false,
         showSearch: true,
+        searchController: controller.searchController,
+        clearOnPressed: () {
+          controller.search("");
+          controller.searchController.clear();
+        },
+        onChanged: (value) {
+          controller.search(value);
+        },
       ),
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
@@ -49,7 +57,6 @@ class HomeSellerScreen extends GetView<HomeSellerController> {
             children: [
               const TotalComponent(),
               SizedBox(height: 18.h),
-              // TabBarComponent(),
               TabBarComponent(
                 tabTitles: [
                   context.localizations.active_ad,

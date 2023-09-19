@@ -16,6 +16,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showActions;
   final Function()? actionOnTap;
   final TextEditingController? searchController;
+  final void Function(String)? onChanged;
+  final void Function()? clearOnPressed;
   final bool showSwiper;
   final double heightSwiper;
   final int itemCountSwiper;
@@ -38,6 +40,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showActions = false, // Set this to false to hide the Actions icon
     this.showSearch = false,
     this.searchController,
+    this.onChanged,
+    this.clearOnPressed,
     this.showSwiper = false,
     this.heightSwiper = 160,
     this.itemCountSwiper = 3,
@@ -177,12 +181,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             if (showSearch)
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                height: 48.h,
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: TextField(
                   controller: searchController,
-                  decoration: const InputDecoration(
-                    hintText: 'Search...',
-                    border: OutlineInputBorder(),
+                  onChanged: onChanged,
+                  decoration: InputDecoration(
+                    fillColor: ColorResource.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6.0.r),
+                      borderSide: BorderSide.none,
+                    ),
+                    //TODO:Make Lang here
+                    filled: true,
+                    labelText: "Search...",
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    labelStyle: TextStyle(
+                        color: ColorResource.borderGray1,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400),
+                    floatingLabelStyle: TextStyle(
+                        height: 7.h,
+                        color: ColorResource.borderGray1,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400),
+                    suffix: IconButton(
+                        onPressed: clearOnPressed,
+                        icon: const Icon(Icons.clear_rounded)),
                   ),
                 ),
               ),

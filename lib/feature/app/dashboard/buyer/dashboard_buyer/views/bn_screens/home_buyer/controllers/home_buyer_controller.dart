@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/home_buyer/use_case/ads_use_case.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/home_buyer/use_case/ads_buyer_use_case.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/models/meta/meta_model.dart';
@@ -47,7 +47,7 @@ class HomeBuyerController extends GetxController {
 
   Future<void> getIndexAds({pageNumber = 1}) async {
     loading.value = true;
-    return AdsUseCase(repository: Get.find<AdsRepository>())
+    return AdsBuyerUseCase(repository: Get.find<AdsRepository>())
         .call(pageNumber)
         .then((value) => value.fold((failure) {
               responseMessage = mapFailureToMessage(failure);
