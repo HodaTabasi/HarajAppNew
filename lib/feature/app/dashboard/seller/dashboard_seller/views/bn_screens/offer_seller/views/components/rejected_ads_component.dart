@@ -55,14 +55,7 @@ class _RejectedAdsComponentState extends State<RejectedAdsComponent> {
                       discountPrice:
                           controller.rejectedOffers[index].post!.price!,
                       showStatus: true,
-                      menuItem: [
-                        AppPopupMenuItem(
-                          value: 1,
-                          iconAsset: IconsApp.remove,
-                          title: context.localizations.delete,
-                          iconColor: ColorResource.red,
-                        ),
-                      ],
+                      menuItem: [],
                       onSelected: (value) {
                         // Handle selection for this usage
                         debugPrint('Selected value:💯 $value');

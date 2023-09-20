@@ -7,6 +7,7 @@ import 'package:haraj/utils/errors/exceptions.dart';
 import 'package:haraj/utils/extensions/helpers/helpers.dart';
 import 'package:haraj/utils/models/offer/main_offer_model.dart';
 import 'package:haraj/utils/models/offer/offer_model.dart';
+import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:http/http.dart' as http;
 
 class OfferApiController with Helpers {
@@ -79,6 +80,7 @@ class OfferApiController with Helpers {
     http.Response response = await http.get(url, headers: headers);
     var decodedJson = json.decode(response.body);
 
+    debugPrint("mmm acceptOffers 💯=> ${SharedPrefController().token}");
     debugPrint("mmm showPostAcceptedOffers 💯=> $decodedJson");
     if (response.statusCode == 200) {
       return MainOfferModel.fromJson(decodedJson);

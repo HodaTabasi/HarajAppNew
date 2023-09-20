@@ -69,17 +69,12 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
                         debugPrint('Selected value:💯 $value');
                         switch (value) {
                           case 1:
-                            // Get.bottomSheet(
-                            //     AppBottomSheet(
-                            //       body: BottomSheetBody(),
-                            //       height: 280.h,
-                            //     ),
-                            //     enterBottomSheetDuration:
-                            //         const Duration(milliseconds: 500),
-                            //     exitBottomSheetDuration:
-                            //         const Duration(milliseconds: 400));
+                            debugPrint('Selected value 1:💯 $value');
+                            controller.acceptOffer(
+                                postId: controller.newOffers[index].id!);
                             break;
                           case 2:
+                            debugPrint('Selected value 2:💯 $value');
                             break;
                           // Add more cases as needed
                         }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/accept_offer_use_case.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/show_post_accepted_offer_use_case.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/show_post_new_offer_use_case.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/show_post_rejected_offer_use_case.dart';
@@ -90,5 +91,41 @@ class OfferSellerController extends GetxController {
               acceptedOffers.addAll(response.data ?? []);
               meta = response.meta!;
             }));
+  }
+
+  Future<void> acceptOffer({postId}) async {
+    debugPrint("mmm stare acceptOffer 💯=> $postId");
+    return AcceptOfferUseCase(repository: Get.find<OfferRepository>())
+        .call(postId.toString())
+        .then((value) => value.fold(
+              (failure) {
+                responseMessage = mapFailureToMessage(failure);
+                Get.snackbar(
+                  'Requires',
+                  responseMessage,
+                  backgroundColor: ColorResource.red,
+                  snackPosition: SnackPosition.BOTTOM,
+                );
+              },
+              (response) async {
+                // acceptedOffers = response;
+                //FOR TESTING
+                debugPrint("mmm stare acceptOffer 💯=> $response");
+                debugPrint("mmm stare acceptOffer 💯=> $postId");
+                int index = newOffers
+                    .indexWhere((element) => element.postId! == postId);
+                debugPrint("mmm index acceptOffer 💯=> $response");
+                debugPrint("mmm index acceptOffer 💯=> $index");
+                if (index != -1) {
+                  debugPrint("mmm before remove acceptOffer 💯=> $index");
+                  newOffers.removeAt(index);
+                  debugPrint("mmm after after acceptOffer1 💯=> $index");
+                  update();
+                  debugPrint("mmm after after acceptOffer2 💯=> $index");
+                }
+                debugPrint("mmm out of index acceptOffer 💯=> $response");
+                debugPrint("mmm out of index acceptOffer 💯=> $index");
+              },
+            ));
   }
 }

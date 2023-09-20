@@ -21,7 +21,7 @@ class _AcceptedAdsComponentState extends State<AcceptedAdsComponent> {
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: 10,
+                itemCount: controller.acceptedOffers.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
@@ -62,31 +62,13 @@ class _AcceptedAdsComponentState extends State<AcceptedAdsComponent> {
                           title: context.localizations.contact,
                           iconColor: ColorResource.green,
                         ),
-                        AppPopupMenuItem(
-                          value: 2,
-                          iconAsset: IconsApp.remove,
-                          title: context.localizations.delete,
-                          iconColor: ColorResource.red,
-                        ),
                       ],
                       onSelected: (value) {
                         // Handle selection for this usage
                         debugPrint('Selected value:💯 $value');
                         switch (value) {
                           case 1:
-                            // Get.bottomSheet(
-                            //     AppBottomSheet(
-                            //       body: BottomSheetBody(),
-                            //       height: 280.h,
-                            //     ),
-                            //     enterBottomSheetDuration:
-                            //         const Duration(milliseconds: 500),
-                            //     exitBottomSheetDuration:
-                            //         const Duration(milliseconds: 400));
                             break;
-                          case 2:
-                            break;
-                          // Add more cases as needed
                         }
                       },
                     ),
