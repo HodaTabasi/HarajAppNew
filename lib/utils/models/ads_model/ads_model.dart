@@ -131,6 +131,10 @@ class Data {
   List<MyImage>? gallery;
   @JsonKey(name: "sold")
   bool? sold;
+  @JsonKey(name: "featured")
+  bool? featured;
+  @JsonKey(name: "status")
+  bool? status;
   @JsonKey(name: "created_at")
   String? createdAt;
   Data(
@@ -193,6 +197,11 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
 
   Map<String, dynamic> toJson() => _$DataToJson(this);
+
+  @override
+  String toString() {
+    return 'Data{store: $id}';
+  }
 }
 
 @JsonSerializable()

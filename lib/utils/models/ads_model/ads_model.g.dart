@@ -122,7 +122,9 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
           .toList(),
       sold: json['sold'] as bool?,
       createdAt: json['created_at'] as String?,
-    );
+    )
+      ..featured = json['featured'] as bool?
+      ..status = json['status'] as bool?;
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'id': instance.id,
@@ -179,6 +181,8 @@ Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'chat': instance.chat,
       'gallery': instance.gallery,
       'sold': instance.sold,
+      'featured': instance.featured,
+      'status': instance.status,
       'created_at': instance.createdAt,
     };
 

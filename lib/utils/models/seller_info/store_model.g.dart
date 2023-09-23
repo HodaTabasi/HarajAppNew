@@ -20,7 +20,10 @@ Store _$StoreFromJson(Map<String, dynamic> json) => Store(
       gallery: (json['gallery'] as List<dynamic>?)
           ?.map((e) => MyImage.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
+    )
+      ..commercialRegisterImage = json['commercial_register_image'] as String?
+      ..postsLeft = json['posts_left'] as int?
+      ..numberOfPosts = json['number_of_posts'] as int?;
 
 Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
       'id': instance.id,
@@ -28,8 +31,11 @@ Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
       'name': instance.name,
       'mobile': instance.mobile,
       'commercial_register': instance.commercialRegister,
+      'commercial_register_image': instance.commercialRegisterImage,
       'email': instance.email,
       'description': instance.description,
       'address': instance.address,
       'gallery': instance.gallery,
+      'posts_left': instance.postsLeft,
+      'number_of_posts': instance.numberOfPosts,
     };
