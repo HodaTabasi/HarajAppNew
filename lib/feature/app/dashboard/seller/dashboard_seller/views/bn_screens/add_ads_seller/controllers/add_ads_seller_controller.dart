@@ -48,28 +48,31 @@ class AddAdsSellerController extends GetxController {
   late TextEditingController carDetailsController;
 
   late CarProperties carProperties =CarProperties();
-  Map<String , GeneralModel?> selectedData =
+  Map<String , GeneralModel> selectedData =
   {
     "price":GeneralModel(),
-    "brands":GeneralModel(),
-    "cars":GeneralModel(),
-    "bodies":GeneralModel(),
-    "mechanical-statuses":GeneralModel(),
-    "standards":GeneralModel(),
-    "general-statuses":GeneralModel(),
-    "fuels":GeneralModel(),
-    "gears":GeneralModel(),
-    "driving-sides":GeneralModel(),
+    "brand_id":GeneralModel(),
+    "car_id":GeneralModel(),
+    "body_id":GeneralModel(),
+    "mechanical_status_id":GeneralModel(),
+    "standard_id":GeneralModel(),
+    "general_status_id":GeneralModel(),
+    "fuel_id":GeneralModel(),
+    "gear_id":GeneralModel(),
+    "driving_side_id":GeneralModel(),
     "seller_type":GeneralModel(),
-    "technical-advantages":GeneralModel(),
-    "seats":GeneralModel(),
-    "cylinders":GeneralModel(),
-    "doors":GeneralModel(),
-    "categories":GeneralModel(),
-    "engines":GeneralModel(),
+    "technical_advantage_id":GeneralModel(),
+    "seat_id":GeneralModel(),
+    "cylinder_id":GeneralModel(),
+    "door_id":GeneralModel(),
+    "category_id":GeneralModel(),
+    "engine_id":GeneralModel(),
     "distance":GeneralModel(),
-    "color_in":GeneralModel(),
-    "color_out":GeneralModel(),
+    "out_color":GeneralModel(),
+    "in_color":GeneralModel(),
+    "guarantee":GeneralModel(),
+    "finance":GeneralModel(),
+    "exportable":GeneralModel(),
   };
 
   var responseMessage = "";
@@ -127,52 +130,21 @@ class AddAdsSellerController extends GetxController {
     kilometerController.clear();
   }
 
-  // Future<void> addStoreAds() async {
-  //   return AddAdsSellerUseCase(repository: Get.find<AdsRepository>())
-  //       .call(
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "1",
-  //         "2023",
-  //         "1",
-  //         "1500",
-  //         "1",
-  //         "1",
-  //         "details",
-  //         "true",
-  //         "true",
-  //         "true",
-  //         "0592659279",
-  //         "facebook",
-  //         "true",
-  //         "true",
-  //         "true",
-  //         "true",
-  //       )
-  //       .then((value) => value.fold((failure) {
-  //             responseMessage = mapFailureToMessage(failure);
-  //             Get.snackbar(
-  //               'Requires',
-  //               responseMessage,
-  //               backgroundColor: ColorResource.red,
-  //               snackPosition: SnackPosition.BOTTOM,
-  //             );
-  //           }, (response) async {
-  //             print("mmm Add Ads Detail Buyer Controller 💯=>  ");
-  //           }));
-  // }
+  Future<void> addStoreAds() async {
+    return AddAdsSellerUseCase(repository: Get.find<AdsRepository>())
+        .call(imageGalaryList!,selectedData,carPriceController.text,title.value,kilometerController.text,carDetailsController.text)
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              print("mmm Add Ads Detail Buyer Controller 💯=>  ");
+            }));
+  }
 
   getCarProperties() async {
     return GetPropertiesUseCase(repository: Get.find<AdsRepository>())

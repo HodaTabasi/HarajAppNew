@@ -35,4 +35,5 @@ class ApiSettings {
   static const String instruction = '${_apiUrl}/instructions';
   // ***************************STORES LINKS************************************
   static const String stores = '${_apiUrl}/stores';
+  static const String addAds = '${_apiUrl}/posts';
 }

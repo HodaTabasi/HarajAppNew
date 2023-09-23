@@ -24,7 +24,7 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                     body: BottomSheetBody(
                       index: 10,
                       headerTitle: context.localizations.select_trade_mark,
-                      title: "brands",
+                      title: "brand_id",
                       list: addAdsSellerController.carProperties.brands ?? [],
                       logo: "",
                     ),
@@ -45,7 +45,7 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       index: 10,
                       //TODO: Make Lang Here
                       headerTitle: "حدد اسم السيارة",
-                      title: "cars",
+                      title: "car_id",
                       logo: "",
                       list: addAdsSellerController.carProperties.brands ?? [],
                     ),
@@ -66,7 +66,7 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد نوع جسم السيارة",
-                      title: "bodies",
+                      title: "body_id",
                       logo: "",
                       list: addAdsSellerController.carProperties.bodies ?? []
                     ),
@@ -89,7 +89,7 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       //TODO: Make Lang Here
                       headerTitle:
                           context.localizations.select_mechanical_condition,
-                      title: "mechanical-statuses",
+                      title: "mechanical_status_id",
                       logo: "",
                         list: addAdsSellerController.carProperties.mechanicalStatuses ?? []
                     ),
@@ -110,7 +110,7 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد المواصفات الاقليمية",
-                      title: "standards",
+                      title: "standard_id",
                       logo: "",
                         list: addAdsSellerController.carProperties.standards ?? []
                     ),
@@ -132,7 +132,7 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد حالة السيارة",
-                      title: "general-statuses",
+                      title: "general_status_id",
                       logo: "",
                       list: addAdsSellerController.carProperties.generalStatuses ??[]
                     ),
@@ -153,7 +153,7 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       index: 3,
                       headerTitle: context.localizations.select_fuel_type,
                       //TODO: Make Lang Here
-                      title: "fuels",
+                      title: "fuel_id",
                       logo: "",
                         list: addAdsSellerController.carProperties.fuels ??[]
                     ),

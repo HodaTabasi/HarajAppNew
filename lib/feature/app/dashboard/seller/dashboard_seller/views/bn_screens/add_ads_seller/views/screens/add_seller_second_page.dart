@@ -40,7 +40,7 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
               children: addAdsSellerController.carProperties.gears!.map((e){
                 return AppSelectableContainer(
                   isSelected: addAdsSellerController.selectedData['gears']!.id == e.id,
-                  onTap: () => selectRow('gears', e),
+                  onTap: () => selectRow('gear_id', e),
                   label: e.name!,
                 );
               } ).toList()
@@ -67,7 +67,7 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
                 children: addAdsSellerController.carProperties.drivingSides!.map((e){
                   return AppSelectableContainer(
                     isSelected: addAdsSellerController.selectedData['driving-sides']!.id == e.id,
-                    onTap: () => selectRow('driving-sides', e),
+                    onTap: () => selectRow('driving_side_id', e),
                     label: e.name!,
                   );
                 } ).toList()
@@ -123,7 +123,7 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
                 children: addAdsSellerController.carProperties.technicalAdvantages!.map((e){
                   return AppSelectableContainer(
                     isSelected: addAdsSellerController.selectedData['technical-advantages']!.id == e.id,
-                    onTap: () => selectRow('technical-advantages', e),
+                    onTap: () => selectRow('technical_advantage_id', e),
                     label: e.name!,
                   );
                 } ).toList()
@@ -145,7 +145,7 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد عدد المقاعد",
-                      title: "seats",
+                      title: "seat_id",
                       logo: "",
                         list: addAdsSellerController.carProperties.seats ?? []
                     ),
@@ -171,7 +171,7 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد عدد الاسطوانات",
-                      title: "cylinders",
+                      title: "cylinder_id",
                       logo: "",
                         list: addAdsSellerController.carProperties.cylinders ?? []
                     ),
@@ -197,7 +197,7 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد عدد الابواب",
-                      title: "doors",
+                      title: "door_id",
                       logo: "",
                         list: addAdsSellerController.carProperties.doors ??[]
                     ),

@@ -3,7 +3,6 @@ library add_contact_information_seller_view;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/dashboard/seller/add_contact_information_seller/controllers/add_contact_information_seller_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
@@ -16,6 +15,8 @@ import 'package:haraj/widgets/app_switch_button.dart';
 import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_appbar.dart';
 import 'package:haraj/widgets/custom_textformfiled.dart';
+
+import '../../controllers/add_contact_information_seller_controller.dart';
 
 part '../components/bottom_sheet_body.dart';
 part '../components/done_button.dart';

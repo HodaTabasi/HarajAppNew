@@ -38,7 +38,7 @@ class AddSellerThirdPage extends GetView<AddAdsSellerController> {
                     body: BottomSheetBody(
                       index: 10,
                       headerTitle: context.localizations.select_trade_mark,
-                      title: "categories",
+                      title: "category_id",
                       logo: ImagesApp.brandLogo,
                         list: addAdsSellerController.carProperties.categories ??[]
                     ),
@@ -71,7 +71,7 @@ class AddSellerThirdPage extends GetView<AddAdsSellerController> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد قوة المحرك",
-                      title: "engines",
+                      title: "engine_id",
                       logo: "",
                         list: addAdsSellerController.carProperties.engines ??[]
                     ),
@@ -92,7 +92,7 @@ class AddSellerThirdPage extends GetView<AddAdsSellerController> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد لون السيارة الخارجي",
-                      title: "color_in",
+                      title: "in_color",
                       logo: "",
                         list: addAdsSellerController.carProperties.colors ??[]
                     ),
@@ -113,7 +113,7 @@ class AddSellerThirdPage extends GetView<AddAdsSellerController> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد لون السيارة الداخلي",
-                      title: "color_out",
+                      title: "out_color",
                       logo: "",
                         list: addAdsSellerController.carProperties.colors ??[]
                     ),
