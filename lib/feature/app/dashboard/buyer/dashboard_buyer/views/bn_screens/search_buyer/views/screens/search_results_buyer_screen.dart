@@ -30,7 +30,7 @@ class _SearchResultBuyerScreenState extends State<SearchResultBuyerScreen> {
             Expanded(
               child: InkWell(
                 onTap: () {
-                  Get.to(() => AdsDetailBuyerScreen(
+                  Get.to(() => AdsDetailScreen(
                         productId: 1,
                       ));
                 },

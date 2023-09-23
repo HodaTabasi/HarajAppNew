@@ -18,7 +18,7 @@ class _ShowAdsState extends State<ShowAds> {
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
-            Get.to(() => AdsDetailBuyerScreen(
+            Get.to(() => AdsDetailScreen(
                   productId: 1,
                 ));
           },

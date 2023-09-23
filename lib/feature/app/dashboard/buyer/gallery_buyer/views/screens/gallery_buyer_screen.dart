@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:haraj/feature/app/dashboard/buyer/ads_detail_buyer/controllers/ads_detail_buyer_controller.dart';
-import 'package:haraj/feature/app/dashboard/buyer/ads_detail_buyer/views/screens/ads_detail_buyer_screen.dart';
+import 'package:haraj/feature/app/ads_detail/controllers/ads_detail_controller.dart';
+import 'package:haraj/feature/app/ads_detail/views/screens/ads_detail_screen.dart';
 import 'package:haraj/feature/app/dashboard/buyer/gallery_buyer/controllers/gallery_buyer_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
@@ -37,15 +37,15 @@ class GalleryBuyerScreen extends StatefulWidget {
 
 class _GalleryBuyerScreenState extends State<GalleryBuyerScreen> {
   late GalleryBuyerController galleryBuyerController;
-  late AdsDetailBuyerController adsDetailBuyerController;
+  late AdsDetailController adsDetailController;
 
   @override
   void initState() {
     super.initState();
     galleryBuyerController =
         Get.put(GalleryBuyerController(storeId: widget.storeId));
-    adsDetailBuyerController =
-        Get.put(AdsDetailBuyerController(productId: widget.storeId));
+    adsDetailController =
+        Get.put(AdsDetailController(productId: widget.storeId));
   }
 
   @override
@@ -60,7 +60,7 @@ class _GalleryBuyerScreenState extends State<GalleryBuyerScreen> {
         showActions: false,
       ),
       body: Obx(() {
-        return adsDetailBuyerController.loading.value
+        return adsDetailController.loading.value
             ? const Center(
                 child: CircularProgressIndicator(),
               )

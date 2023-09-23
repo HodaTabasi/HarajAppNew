@@ -6,8 +6,8 @@ import '../feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ad
 
 class AppSwitchButton extends StatefulWidget {
   String? mapKey;
-
-  AppSwitchButton({this.mapKey});
+  final bool? isSold;
+  AppSwitchButton({this.mapKey,this.isSold = false});
 
   @override
   _AppSwitchButtonState createState() => _AppSwitchButtonState();
@@ -34,7 +34,8 @@ class _AppSwitchButtonState extends State<AppSwitchButton> {
   @override
   Widget build(BuildContext context) {
     return Switch(
-      value: _isSwitchOn,
+      // value: _isSwitchOn,
+      value: widget.mapKey!= null?_isSwitchOn:widget.isSold!,
       onChanged: _toggleSwitch,
       activeColor: ColorResource.white, // Color when switch is on
       activeTrackColor:

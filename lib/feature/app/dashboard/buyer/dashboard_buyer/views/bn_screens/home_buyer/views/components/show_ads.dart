@@ -33,7 +33,7 @@ class _ShowAdsState extends State<ShowAds> {
             return InkWell(
               onTap: () {
                 Get.to(() =>
-                    AdsDetailBuyerScreen(productId: controller.ads[index].id!));
+                    AdsDetailScreen(productId: controller.ads[index].id!));
               },
               child: AppAdsCarContainer(
                 nameCar: controller.ads[index].car!.name!,

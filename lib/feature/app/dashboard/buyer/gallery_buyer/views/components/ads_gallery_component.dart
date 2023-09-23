@@ -10,15 +10,14 @@ class AdsGalleryComponent extends StatefulWidget {
 
 class _AdsGalleryComponentState extends State<AdsGalleryComponent> {
   late GalleryBuyerController galleryBuyerController;
-  late AdsDetailBuyerController adsDetailBuyerController;
+  late AdsDetailController adsDetailController;
 
   @override
   void initState() {
     super.initState();
     galleryBuyerController =
         Get.put(GalleryBuyerController(storeId: widget.id));
-    adsDetailBuyerController =
-        Get.put(AdsDetailBuyerController(productId: widget.id));
+    adsDetailController = Get.put(AdsDetailController(productId: widget.id));
   }
 
   @override
@@ -34,6 +33,7 @@ class _AdsGalleryComponentState extends State<AdsGalleryComponent> {
           ),
           Expanded(
             child: GridView.builder(
+              controller: galleryBuyerController.scrollController,
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
               padding: EdgeInsetsDirectional.symmetric(vertical: 16.h),
@@ -47,7 +47,7 @@ class _AdsGalleryComponentState extends State<AdsGalleryComponent> {
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: () {
-                    Get.to(() => AdsDetailBuyerScreen(
+                    Get.to(() => AdsDetailScreen(
                           productId:
                               galleryBuyerController.storePost[index].id!,
                         ));
@@ -59,9 +59,9 @@ class _AdsGalleryComponentState extends State<AdsGalleryComponent> {
                     priceCar: galleryBuyerController.storePost[index].price!,
                     conditionCar: galleryBuyerController
                         .storePost[index].mechanicalStatus!.name!,
-                    imageSeller: adsDetailBuyerController.adsDetail.store!.avatar!,
-                    sellerName: adsDetailBuyerController.adsDetail.store!.name!,
-                    nameLocation: adsDetailBuyerController
+                    imageSeller: adsDetailController.adsDetail.store!.avatar!,
+                    sellerName: adsDetailController.adsDetail.store!.name!,
+                    nameLocation: adsDetailController
                         .adsDetail.store!.address!.governorate!.name!,
                     isFavorite:
                         galleryBuyerController.storePost[index].isFavorite!,

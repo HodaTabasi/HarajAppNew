@@ -55,7 +55,7 @@ class _TabBarComponentState extends State<TabBarComponent>
                 ),
               ]),
           child: TabBar(
-            isScrollable: true,
+            isScrollable: false,
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
             controller: _tabController,
             onTap: (value) {

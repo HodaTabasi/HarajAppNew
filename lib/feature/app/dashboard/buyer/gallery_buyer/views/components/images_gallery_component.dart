@@ -9,13 +9,12 @@ class ImagesGalleryComponent extends StatefulWidget {
 }
 
 class _ImagesGalleryComponentState extends State<ImagesGalleryComponent> {
-  late AdsDetailBuyerController adsDetailBuyerController;
+  late AdsDetailController adsDetailController;
 
   @override
   void initState() {
     super.initState();
-    adsDetailBuyerController =
-        Get.put(AdsDetailBuyerController(productId: widget.id));
+    adsDetailController = Get.put(AdsDetailController(productId: widget.id));
   }
 
   @override
@@ -23,7 +22,7 @@ class _ImagesGalleryComponentState extends State<ImagesGalleryComponent> {
     return ListView.builder(
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
-      itemCount: adsDetailBuyerController.adsDetail.store!.gallery!.length,
+      itemCount: adsDetailController.adsDetail.store!.gallery!.length,
       padding: EdgeInsets.symmetric(vertical: 14.h),
       itemBuilder: (context, index) {
         return Container(
@@ -37,7 +36,7 @@ class _ImagesGalleryComponentState extends State<ImagesGalleryComponent> {
             border: Border.all(color: ColorResource.shadeGrey, width: 1.w),
           ),
           child: Image.network(
-            adsDetailBuyerController.adsDetail.store!.gallery![index].image!,
+            adsDetailController.adsDetail.store!.gallery![index].image!,
             fit: BoxFit.fill,
           ),
         );

@@ -3,7 +3,7 @@ library home_seller_view;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/dashboard/seller/ads_detail_seller/views/screens/ads_detail_seller_screen.dart';
+import 'package:haraj/feature/app/ads_detail/views/screens/ads_detail_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/home_seller/controllers/home_seller_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
@@ -39,6 +39,14 @@ class HomeSellerScreen extends GetView<HomeSellerController> {
         heightBackground: 210.h,
         showLeading: false,
         showSearch: true,
+        searchController: controller.searchController,
+        clearOnPressed: () {
+          controller.search("");
+          controller.searchController.clear();
+        },
+        onChanged: (value) {
+          controller.search(value);
+        },
       ),
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
@@ -49,7 +57,6 @@ class HomeSellerScreen extends GetView<HomeSellerController> {
             children: [
               const TotalComponent(),
               SizedBox(height: 18.h),
-              // TabBarComponent(),
               TabBarComponent(
                 tabTitles: [
                   context.localizations.active_ad,

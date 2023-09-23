@@ -127,52 +127,52 @@ class AddAdsSellerController extends GetxController {
     kilometerController.clear();
   }
 
-  Future<void> addStoreAds() async {
-    return AddAdsSellerUseCase(repository: Get.find<AdsRepository>())
-        .call(
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "1",
-          "2023",
-          "1",
-          "1500",
-          "1",
-          "1",
-          "details",
-          "true",
-          "true",
-          "true",
-          "0592659279",
-          "facebook",
-          "true",
-          "true",
-          "true",
-          "true",
-        )
-        .then((value) => value.fold((failure) {
-              responseMessage = mapFailureToMessage(failure);
-              Get.snackbar(
-                'Requires',
-                responseMessage,
-                backgroundColor: ColorResource.red,
-                snackPosition: SnackPosition.BOTTOM,
-              );
-            }, (response) async {
-              print("mmm Add Ads Detail Buyer Controller 💯=>  ");
-            }));
-  }
+  // Future<void> addStoreAds() async {
+  //   return AddAdsSellerUseCase(repository: Get.find<AdsRepository>())
+  //       .call(
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "1",
+  //         "2023",
+  //         "1",
+  //         "1500",
+  //         "1",
+  //         "1",
+  //         "details",
+  //         "true",
+  //         "true",
+  //         "true",
+  //         "0592659279",
+  //         "facebook",
+  //         "true",
+  //         "true",
+  //         "true",
+  //         "true",
+  //       )
+  //       .then((value) => value.fold((failure) {
+  //             responseMessage = mapFailureToMessage(failure);
+  //             Get.snackbar(
+  //               'Requires',
+  //               responseMessage,
+  //               backgroundColor: ColorResource.red,
+  //               snackPosition: SnackPosition.BOTTOM,
+  //             );
+  //           }, (response) async {
+  //             print("mmm Add Ads Detail Buyer Controller 💯=>  ");
+  //           }));
+  // }
 
   getCarProperties() async {
     return GetPropertiesUseCase(repository: Get.find<AdsRepository>())
