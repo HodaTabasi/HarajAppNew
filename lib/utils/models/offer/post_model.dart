@@ -115,6 +115,10 @@ class PostModel {
   List<MyImage>? gallery;
   @JsonKey(name: "sold")
   bool? sold;
+  @JsonKey(name: "featured")
+  bool? featured;
+  @JsonKey(name: "status")
+  bool? status;
   @JsonKey(name: "created_at")
   String? createdAt;
 
@@ -173,6 +177,8 @@ class PostModel {
       this.chat,
       this.gallery,
       this.sold,
+      this.featured,
+      this.status,
       this.createdAt});
 
   factory PostModel.fromJson(Map<String, dynamic> json) =>

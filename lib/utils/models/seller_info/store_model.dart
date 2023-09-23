@@ -38,10 +38,13 @@ class Store {
       this.name,
       this.mobile,
       this.commercialRegister,
+      this.commercialRegisterImage,
       this.email,
       this.description,
       this.address,
-      this.gallery});
+      this.gallery,
+      this.postsLeft,
+      this.numberOfPosts});
 
   factory Store.fromJson(Map<String, dynamic> json) => _$StoreFromJson(json);
 

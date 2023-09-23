@@ -121,10 +121,10 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
           ?.map((e) => MyImage.fromJson(e as Map<String, dynamic>))
           .toList(),
       sold: json['sold'] as bool?,
+      featured: json['featured'] as bool?,
+      status: json['status'] as bool?,
       createdAt: json['created_at'] as String?,
-    )
-      ..featured = json['featured'] as bool?
-      ..status = json['status'] as bool?;
+    );
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'id': instance.id,

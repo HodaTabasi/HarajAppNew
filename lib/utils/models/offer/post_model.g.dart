@@ -104,6 +104,8 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
           ?.map((e) => MyImage.fromJson(e as Map<String, dynamic>))
           .toList(),
       sold: json['sold'] as bool?,
+      featured: json['featured'] as bool?,
+      status: json['status'] as bool?,
       createdAt: json['created_at'] as String?,
     );
 
@@ -162,5 +164,7 @@ Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
       'chat': instance.chat,
       'gallery': instance.gallery?.map((e) => e.toJson()).toList(),
       'sold': instance.sold,
+      'featured': instance.featured,
+      'status': instance.status,
       'created_at': instance.createdAt,
     };

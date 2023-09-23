@@ -13,6 +13,7 @@ import 'package:haraj/utils/models/ads_model/ads_model.dart';
 import 'package:haraj/utils/models/general/general_model.dart';
 import 'package:haraj/utils/models/meta/meta_model.dart';
 import 'package:haraj/utils/models/offer/offer_model.dart';
+import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
 import 'package:haraj/utils/repository/offer_repo/offer_repo.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -104,8 +105,10 @@ class AdsDetailController extends GetxController {
             }, (response) async {
               adsDetail = response;
               getInstructionAds();
-              showPostOffer();
-              showPostNewOffer();
+              if (SharedPrefController().type == 1) {
+                showPostOffer();
+                showPostNewOffer();
+              }
               loading.value = false;
             }));
   }

@@ -192,6 +192,8 @@ class Data {
       this.chat,
       this.gallery,
       this.sold,
+      this.featured,
+      this.status,
       this.createdAt});
 
   factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
