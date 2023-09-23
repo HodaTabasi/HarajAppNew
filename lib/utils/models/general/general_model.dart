@@ -10,8 +10,10 @@ class GeneralModel {
   String? name;
   @JsonKey(name: "number")
   int? number;
+  @JsonKey(name: "cars")
+  List<GeneralModel>? cars;
 
-  GeneralModel({this.id, this.name, this.number});
+  GeneralModel({this.id, this.name, this.number,this.cars});
 
   factory GeneralModel.fromJson(Map<String, dynamic> json) =>
       _$GeneralModelFromJson(json);

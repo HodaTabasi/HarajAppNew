@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ads_seller/use_case/add_ads_seller_use_case.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ads_seller/use_case/get_properties_use_case.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+
+import '../../../../../../../../../utils/models/car_properties/car_properties.dart';
+import '../../../../../../../../../utils/models/general/general_model.dart';
+import '../../../../../../../../../utils/models/seller_info/image.dart';
 
 class AddAdsSellerController extends GetxController {
   static AddAdsSellerController get to => Get.find<AddAdsSellerController>();
@@ -15,12 +20,57 @@ class AddAdsSellerController extends GetxController {
   RxString title = "Production Year".obs;
   final ImagePicker picker = ImagePicker();
   List<XFile>? imageFileList = [];
+  RxList<MyImage>? imageGalaryList = <MyImage>[].obs;
+
+  void makeImageGallery() {
+    for(var file in imageFileList!){
+      imageGalaryList?.add(MyImage(1, file.path,true));
+    }
+    imageFileList?.clear();
+    update();
+  }
+
+  void updateSelected(int index, bool value) {
+    imageGalaryList![index].isSelected = value;
+    update();
+  }
+
+  deleteImageFromGallery(){
+    imageGalaryList?.removeWhere((element) => element.isSelected!);
+    update();
+  }
 
   late PageController pageController;
   int currentPage = 0;
 
   late TextEditingController carPriceController;
   late TextEditingController kilometerController;
+  late TextEditingController carDetailsController;
+
+  late CarProperties carProperties =CarProperties();
+  Map<String , GeneralModel?> selectedData =
+  {
+    "price":GeneralModel(),
+    "brands":GeneralModel(),
+    "cars":GeneralModel(),
+    "bodies":GeneralModel(),
+    "mechanical-statuses":GeneralModel(),
+    "standards":GeneralModel(),
+    "general-statuses":GeneralModel(),
+    "fuels":GeneralModel(),
+    "gears":GeneralModel(),
+    "driving-sides":GeneralModel(),
+    "seller_type":GeneralModel(),
+    "technical-advantages":GeneralModel(),
+    "seats":GeneralModel(),
+    "cylinders":GeneralModel(),
+    "doors":GeneralModel(),
+    "categories":GeneralModel(),
+    "engines":GeneralModel(),
+    "distance":GeneralModel(),
+    "color_in":GeneralModel(),
+    "color_out":GeneralModel(),
+  };
 
   var responseMessage = "";
 
@@ -46,6 +96,7 @@ class AddAdsSellerController extends GetxController {
 
       // Only add as many images as there are remaining slots.
       imageFileList!.addAll(selectedImages.take(remainingSlots));
+      makeImageGallery();
 
       debugPrint(
           'Selected image from gallery💯: ${imageFileList!.length.toString()}');
@@ -57,7 +108,9 @@ class AddAdsSellerController extends GetxController {
     pageController = PageController();
     carPriceController = TextEditingController();
     kilometerController = TextEditingController();
-    addStoreAds();
+    carDetailsController = TextEditingController();
+    getCarProperties();
+    // addStoreAds();
     super.onInit();
   }
 
@@ -119,5 +172,22 @@ class AddAdsSellerController extends GetxController {
             }, (response) async {
               print("mmm Add Ads Detail Buyer Controller 💯=>  ");
             }));
+  }
+
+  getCarProperties() async {
+    return GetPropertiesUseCase(repository: Get.find<AdsRepository>())
+        .call()
+        .then((value) => value.fold((failure) {
+      responseMessage = mapFailureToMessage(failure);
+      Get.snackbar(
+        'Requires',
+        responseMessage,
+        backgroundColor: ColorResource.red,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }, (response) async {
+          carProperties = response;
+          print("gfgh ${carProperties.brands}");
+    }));
   }
 }

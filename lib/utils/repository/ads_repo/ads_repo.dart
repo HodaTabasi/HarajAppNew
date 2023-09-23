@@ -7,6 +7,7 @@ import 'package:haraj/utils/models/offer/offer_model.dart';
 
 import '../../errors/exceptions.dart';
 import '../../errors/failures.dart';
+import '../../models/car_properties/car_properties.dart';
 
 class AdsRepository {
   final AdsApiController remoteDataSource;
@@ -133,6 +134,19 @@ class AdsRepository {
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.instruction();
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+  Future<Either<Failure, CarProperties>> getCarProperties() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.carProperties();
         return Right(response);
       } on ServerException {
         return Left(ServerFailure());

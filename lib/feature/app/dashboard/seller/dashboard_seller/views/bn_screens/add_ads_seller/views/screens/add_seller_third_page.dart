@@ -1,6 +1,9 @@
 part of add_ads_seller_view;
 
 class AddSellerThirdPage extends GetView<AddAdsSellerController> {
+  final AddAdsSellerController addAdsSellerController =
+  Get.find<AddAdsSellerController>();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -35,8 +38,9 @@ class AddSellerThirdPage extends GetView<AddAdsSellerController> {
                     body: BottomSheetBody(
                       index: 10,
                       headerTitle: context.localizations.select_trade_mark,
-                      title: "بي ام دبليو",
+                      title: "categories",
                       logo: ImagesApp.brandLogo,
+                        list: addAdsSellerController.carProperties.categories ??[]
                     ),
                     height: 500.h,
                   ),
@@ -67,8 +71,9 @@ class AddSellerThirdPage extends GetView<AddAdsSellerController> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد قوة المحرك",
-                      title: "600 حصان",
+                      title: "engines",
                       logo: "",
+                        list: addAdsSellerController.carProperties.engines ??[]
                     ),
                     height: 500.h,
                   ),
@@ -87,8 +92,9 @@ class AddSellerThirdPage extends GetView<AddAdsSellerController> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد لون السيارة الخارجي",
-                      title: "بنفتحي",
+                      title: "color_in",
                       logo: "",
+                        list: addAdsSellerController.carProperties.colors ??[]
                     ),
                     height: 500.h,
                   ),
@@ -107,8 +113,9 @@ class AddSellerThirdPage extends GetView<AddAdsSellerController> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد لون السيارة الداخلي",
-                      title: "ازرق",
+                      title: "color_out",
                       logo: "",
+                        list: addAdsSellerController.carProperties.colors ??[]
                     ),
                     height: 500.h,
                   ),
@@ -121,7 +128,7 @@ class AddSellerThirdPage extends GetView<AddAdsSellerController> {
             alignment: Alignment.bottomLeft,
             children: [
               CustomeTextFiled(
-                textEditingController: controller.carPriceController,
+                textEditingController: controller.carDetailsController,
                 //TODO: Make Lang Here
                 hintText: 'معلومات اضافية',
                 radius: 10.r,

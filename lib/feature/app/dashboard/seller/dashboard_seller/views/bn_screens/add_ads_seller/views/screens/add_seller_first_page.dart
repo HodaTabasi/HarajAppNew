@@ -8,6 +8,8 @@ class AddSellerFirstPage extends StatefulWidget {
 }
 
 class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
+  final AddAdsSellerController addAdsSellerController =
+  Get.find<AddAdsSellerController>();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -22,8 +24,9 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                     body: BottomSheetBody(
                       index: 10,
                       headerTitle: context.localizations.select_trade_mark,
-                      title: "بي ام دبليو",
-                      logo: ImagesApp.brandLogo,
+                      title: "brands",
+                      list: addAdsSellerController.carProperties.brands ?? [],
+                      logo: "",
                     ),
                     height: 500.h,
                   ),
@@ -42,8 +45,9 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       index: 10,
                       //TODO: Make Lang Here
                       headerTitle: "حدد اسم السيارة",
-                      title: "بي ام دبليواكس 6",
+                      title: "cars",
                       logo: "",
+                      list: addAdsSellerController.carProperties.brands ?? [],
                     ),
                     height: 500.h,
                   ),
@@ -62,8 +66,9 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد نوع جسم السيارة",
-                      title: "سيدان",
+                      title: "bodies",
                       logo: "",
+                      list: addAdsSellerController.carProperties.bodies ?? []
                     ),
                     height: 500.h,
                   ),
@@ -76,6 +81,7 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
             title: context.localizations.mechanical_condition,
             image: IconsApp.carMechanic,
             onPressed: () {
+              print(addAdsSellerController.carProperties.mechanicalStatuses);
               Get.bottomSheet(
                   AppBottomSheet(
                     body: BottomSheetBody(
@@ -83,8 +89,9 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       //TODO: Make Lang Here
                       headerTitle:
                           context.localizations.select_mechanical_condition,
-                      title: "ممتازة",
+                      title: "mechanical-statuses",
                       logo: "",
+                        list: addAdsSellerController.carProperties.mechanicalStatuses ?? []
                     ),
                     height: 500.h,
                   ),
@@ -103,8 +110,9 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد المواصفات الاقليمية",
-                      title: "مواصفات خليجية",
+                      title: "standards",
                       logo: "",
+                        list: addAdsSellerController.carProperties.standards ?? []
                     ),
                     height: 500.h,
                   ),
@@ -124,8 +132,9 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد حالة السيارة",
-                      title: "ممتازة من الداخل والخارج",
+                      title: "general-statuses",
                       logo: "",
+                      list: addAdsSellerController.carProperties.generalStatuses ??[]
                     ),
                     height: 500.h,
                   ),
@@ -144,8 +153,9 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       index: 3,
                       headerTitle: context.localizations.select_fuel_type,
                       //TODO: Make Lang Here
-                      title: "بنزين",
+                      title: "fuels",
                       logo: "",
+                        list: addAdsSellerController.carProperties.fuels ??[]
                     ),
                     height: 350.h,
                   ),

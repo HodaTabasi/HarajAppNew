@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
+import 'package:haraj/utils/models/general/general_model.dart';
+
+import '../feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ads_seller/controllers/add_ads_seller_controller.dart';
 
 class AppSwitchButton extends StatefulWidget {
+  String? mapKey;
+
+  AppSwitchButton({this.mapKey});
+
   @override
   _AppSwitchButtonState createState() => _AppSwitchButtonState();
 }
@@ -12,6 +19,15 @@ class _AppSwitchButtonState extends State<AppSwitchButton> {
   void _toggleSwitch(bool value) {
     setState(() {
       _isSwitchOn = value;
+      if(widget.mapKey != null){
+        GeneralModel m = GeneralModel();
+        if(_isSwitchOn){
+          m.id = 1;
+        }else {
+          m.id = 0;
+        }
+        AddAdsSellerController.to.selectedData[widget.mapKey!] = m;
+      }
     });
   }
 

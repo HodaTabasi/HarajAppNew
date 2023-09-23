@@ -28,6 +28,7 @@ class ApiSettings {
       '${_apiUrl}/update-address'; //المدن والمحافظات
   // ***************************POST LINKS**************************************
   static const String post = '${_apiUrl}/posts';
+  static const String getProperties = '${_apiUrl}/car-properties';
   // ***************************OFFERS LINKS************************************
   static const String offers = '${_apiUrl}/offers';
   // ***************************INSTRUCTION LINKS*******************************

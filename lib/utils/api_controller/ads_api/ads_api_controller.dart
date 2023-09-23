@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 
 import '../../errors/error_const.dart';
 import '../../errors/exceptions.dart';
+import '../../models/car_properties/car_properties.dart';
 
 class AdsApiController with Helpers {
   index({page}) async {
@@ -144,6 +145,18 @@ class AdsApiController with Helpers {
 
     if (response.statusCode == 200) {
       return InstructionModel.fromJson(decodedJson);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
+  carProperties() async {
+    var url = Uri.parse(ApiSettings.getProperties);
+    http.Response response = await http.get(url, headers: headers);
+    var decodedJson = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      return CarProperties.fromJson(decodedJson);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();

@@ -5,12 +5,14 @@ class BottomSheetBody extends StatefulWidget {
   final String headerTitle;
   final String title;
   final String logo;
+  final List<GeneralModel> list;
 
   const BottomSheetBody(
       {super.key,
       required this.index,
       required this.headerTitle,
       required this.title,
+      required this.list,
       required this.logo});
 
   @override
@@ -18,16 +20,19 @@ class BottomSheetBody extends StatefulWidget {
 }
 
 class _BottomSheetBodyState extends State<BottomSheetBody> {
-  int _selectedRadio = 0;
+  // int _selectedRadio = 0;
 
-  void _handleRadioValueChange(int? value) {
+
+  void _handleRadioValueChange(int? value,GeneralModel model) {
     setState(() {
-      _selectedRadio = value!;
+      // AddAdsSellerController.to.selectedData[widget.title]?.id = value!;
+      AddAdsSellerController.to.selectedData[widget.title] = model;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print(widget.list);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -62,19 +67,20 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
         ),
         Flexible(
           child: ListView.builder(
-            itemCount: widget.index,
+            itemCount: widget.list.length,
             // itemCount: 10,
             itemBuilder: (context, index) {
               return Column(
                 children: [
                   CarBrandSelection(
-                    value: index,
-                    groupValue: _selectedRadio,
-                    onChange: _handleRadioValueChange,
-                    title: widget.title,
+                    value: widget.list[index].id ?? 0,
+                    groupValue: AddAdsSellerController.to.selectedData[widget.title]?.id ?? 0,
+                    onChange: (val)=>_handleRadioValueChange(val,widget.list[index]),
+                    title: widget.list[index].name ??
+                        widget.list[index].number.toString(),
                     // title: "بي ام دبليو",
-                    logo: widget.logo,
-                    // logo: ImagesApp.brandLogo,
+                    // logo: widget.logo,
+                    logo: "",
                   ),
                   AppDivider(
                     height: 10.h,
