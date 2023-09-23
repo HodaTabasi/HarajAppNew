@@ -10,4 +10,5 @@ enum PrefKeys {
   isCompleteAddress,
   isCompleteStore,
   isCompleteProfile,
+  storeId,
 }
