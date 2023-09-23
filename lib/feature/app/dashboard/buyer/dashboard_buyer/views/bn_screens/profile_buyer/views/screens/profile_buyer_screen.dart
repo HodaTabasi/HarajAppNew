@@ -3,12 +3,13 @@ library public_profile_buyer_view;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/profile_buyer/controllers/profile_buyer_controller.dart';
+import 'package:haraj/feature/app/offer/views/screens/offer_screen.dart';
 import 'package:haraj/feature/app/profile/complete_profile/controller/complete_profile_buyer_controller.dart';
 import 'package:haraj/feature/app/profile/complete_profile/profile_buyer/screen/complete_profile_buyer_screen.dart';
 import 'package:haraj/feature/app/setting/view/screens/statice_page.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../../../../../../../utils/extensions/color_resource/color_resource.dart';
 import '../../../../../../../../../../utils/extensions/icons_app/icons_app.dart';
@@ -18,15 +19,16 @@ import '../../../../../../../../../../widgets/app_text.dart';
 import '../../../../../../../../auth/login/view/screen/login_screen.dart';
 import '../../../../../../../../setting/view/screens/contact_us.dart';
 import '../../../../../../../../setting/view/screens/setting.dart';
-import 'package:share_plus/share_plus.dart';
-part '../components/header_image.dart';
-part '../components/main_list_tile.dart';
+
 part '../components/app_bar_widget.dart';
+part '../components/header_image.dart';
 part '../components/header_user_info.dart';
+part '../components/main_list_tile.dart';
 part '../components/sliver_appbar_widget.dart';
 
-class ProfileBuyerScreen extends  GetView<ProfileBuyerController> {
-  ProfileBuyerController profileSellerController = Get.put(ProfileBuyerController());
+class ProfileBuyerScreen extends GetView<ProfileBuyerController> {
+  ProfileBuyerController profileSellerController =
+      Get.put(ProfileBuyerController());
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +47,14 @@ class ProfileBuyerScreen extends  GetView<ProfileBuyerController> {
               image: IconsApp.addressIcon,
               text: 'العروض المقدمة',
               onPress: () {
-                // Get.to(()=>const AddressInfoSellerScreen());
+                Get.to(() => OfferScreen());
               },
             ),
             MainListTile(
               image: IconsApp.aboutUs,
               text: 'من نحن',
               onPress: () {
-                Get.to(()=>StaticScreen());
+                Get.to(() => StaticScreen());
               },
             ),
             MainListTile(
@@ -60,10 +62,8 @@ class ProfileBuyerScreen extends  GetView<ProfileBuyerController> {
               text: 'تواصل معنا',
               onPress: () {
                 Get.bottomSheet(ContactUs(),
-                    enterBottomSheetDuration:
-                    const Duration(milliseconds: 500),
-                    exitBottomSheetDuration:
-                    const Duration(milliseconds: 400));
+                    enterBottomSheetDuration: const Duration(milliseconds: 500),
+                    exitBottomSheetDuration: const Duration(milliseconds: 400));
               },
             ),
             MainListTile(
@@ -81,21 +81,21 @@ class ProfileBuyerScreen extends  GetView<ProfileBuyerController> {
               image: IconsApp.policy,
               text: 'سياسات الخصوصية',
               onPress: () {
-                Get.to(()=>StaticScreen());
+                Get.to(() => StaticScreen());
               },
             ),
             MainListTile(
               image: IconsApp.condations,
               text: 'الشروط والاحكام',
               onPress: () {
-                Get.to(()=>StaticScreen());
+                Get.to(() => StaticScreen());
               },
             ),
             MainListTile(
               image: IconsApp.setting,
               text: 'الاعدادات',
               onPress: () {
-                Get.to(()=>SettingScreen());
+                Get.to(() => SettingScreen());
               },
             ),
             AppElevatedButtonWithImage(
@@ -122,4 +122,3 @@ class ProfileBuyerScreen extends  GetView<ProfileBuyerController> {
     );
   }
 }
-
