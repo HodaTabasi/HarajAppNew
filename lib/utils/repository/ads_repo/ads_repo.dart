@@ -6,6 +6,9 @@ import 'package:haraj/utils/models/instruction/instruction_model.dart';
 
 import '../../errors/exceptions.dart';
 import '../../errors/failures.dart';
+import '../../models/car_properties/car_properties.dart';
+import '../../models/general/general_model.dart';
+import '../../models/seller_info/image.dart';
 
 class AdsRepository {
   final AdsApiController remoteDataSource;
@@ -43,6 +46,54 @@ class AdsRepository {
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.instruction();
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+  Future<Either<Failure, CarProperties>> getCarProperties() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.carProperties();
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+  Future<Either<Failure, dynamic>> addAds({required List<MyImage> images,
+    required Map<String, GeneralModel> selectedData,
+    required price,
+    required year,
+    required kelometer,
+    required details}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.addAds(images: images,selectedData: selectedData,price: price,details: details,kelometer: kelometer,year: year);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+  Future<Either<Failure, dynamic>>addSocialContactAds({whatsapp, facebook,
+    whatsappConnection,
+    facebookConnection,
+    call,
+    chat}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.addSocialContactAds(whatsapp: whatsapp,whatsappConnection: whatsappConnection,call: call,chat: chat,facebook: facebook,facebookConnection: facebookConnection);
         return Right(response);
       } on ServerException {
         return Left(ServerFailure());

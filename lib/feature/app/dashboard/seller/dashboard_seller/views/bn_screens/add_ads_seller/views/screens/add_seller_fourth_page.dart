@@ -35,18 +35,23 @@ class AddSellerFourthPage extends GetView<AddAdsSellerController> {
                 Row(
                   children: [
                     Expanded(
-                      child: Container(
-                        width: double.infinity.w,
-                        height: 40.h,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: ColorResource.mainColor.withOpacity(0.05),
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(14.r),
+                      child: InkWell(
+                        onTap: (){
+                          controller.deleteImageFromGallery();
+                        },
+                        child: Container(
+                          width: double.infinity.w,
+                          height: 40.h,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: ColorResource.mainColor.withOpacity(0.05),
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(14.r),
+                            ),
                           ),
-                        ),
-                        child: AppSvgPicture(
-                          assetName: IconsApp.remove,
+                          child: AppSvgPicture(
+                            assetName: IconsApp.remove,
+                          ),
                         ),
                       ),
                     ),
@@ -98,7 +103,33 @@ class AddSellerFourthPage extends GetView<AddAdsSellerController> {
                 fontWeight: FontWeight.w500,
               ),
               const Spacer(),
-              AppSwitchButton(),
+              AppSwitchButton(mapKey: "guarantee",),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AppText(
+                text: " قابل للتصدير",
+                color: ColorResource.gray,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w500,
+              ),
+              const Spacer(),
+              AppSwitchButton(mapKey: "exportable",),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AppText(
+                text: " قابل للتمويل",
+                color: ColorResource.gray,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w500,
+              ),
+              const Spacer(),
+              AppSwitchButton(mapKey: "finance",),
             ],
           ),
           SizedBox(height: 12.h),

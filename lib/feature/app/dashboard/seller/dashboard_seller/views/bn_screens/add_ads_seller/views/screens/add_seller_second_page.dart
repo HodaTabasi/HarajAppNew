@@ -8,11 +8,13 @@ class AddSellerSecondPage extends StatefulWidget {
 }
 
 class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
-  List<int> selectedRowIndices = [-1, -1, -1, -1];
+  List<int> selectedRowIndices = [-1, -1, -1, -1]; //map
+  final AddAdsSellerController addAdsSellerController =
+  Get.find<AddAdsSellerController>();
 
-  void selectRow(int rowIndex, int index) {
+  void selectRow(String key, GeneralModel index) {
     setState(() {
-      selectedRowIndices[rowIndex] = index;
+      addAdsSellerController.selectedData[key] = index;
     });
   }
 
@@ -30,20 +32,19 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
             color: ColorResource.mainFontColor,
           ),
           SizedBox(height: 12.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppSelectableContainer(
-                isSelected: selectedRowIndices[0] == 0,
-                onTap: () => selectRow(0, 0),
-                label: context.localizations.automatic,
-              ),
-              AppSelectableContainer(
-                isSelected: selectedRowIndices[0] == 1,
-                onTap: () => selectRow(0, 1),
-                label: context.localizations.manual,
-              ),
-            ],
+          SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            child: Row( //list of General Model horizantel
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: addAdsSellerController.carProperties.gears!.map((e){
+                return AppSelectableContainer(
+                  isSelected: addAdsSellerController.selectedData['gears']!.id == e.id,
+                  onTap: () => selectRow('gear_id', e),
+                  label: e.name!,
+                );
+              } ).toList()
+            ),
           ),
           AppDivider(
             height: 24.h,
@@ -58,20 +59,19 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
             color: ColorResource.mainFontColor,
           ),
           SizedBox(height: 12.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppSelectableContainer(
-                isSelected: selectedRowIndices[1] == 0,
-                onTap: () => selectRow(1, 0),
-                label: context.localizations.right_side,
-              ),
-              AppSelectableContainer(
-                isSelected: selectedRowIndices[1] == 1,
-                onTap: () => selectRow(1, 1),
-                label: context.localizations.left_side,
-              ),
-            ],
+          SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            child: Row( //list of General Model horizantel
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: addAdsSellerController.carProperties.drivingSides!.map((e){
+                  return AppSelectableContainer(
+                    isSelected: addAdsSellerController.selectedData['driving-sides']!.id == e.id,
+                    onTap: () => selectRow('driving_side_id', e),
+                    label: e.name!,
+                  );
+                } ).toList()
+            ),
           ),
           AppDivider(
             height: 24.h,
@@ -90,13 +90,13 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppSelectableContainer(
-                isSelected: selectedRowIndices[2] == 0,
-                onTap: () => selectRow(2, 0),
+                isSelected: addAdsSellerController.selectedData['seller_type']!.id == 1,
+                onTap: () => selectRow('seller_type', GeneralModel(id: 1)),
                 label: context.localizations.agent,
               ),
               AppSelectableContainer(
-                isSelected: selectedRowIndices[2] == 1,
-                onTap: () => selectRow(2, 1),
+                isSelected: addAdsSellerController.selectedData['seller_type']!.id == 2 ,
+                onTap: () => selectRow("seller_type", GeneralModel(id: 2)),
                 label: context.localizations.car_owner,
               ),
             ],
@@ -115,32 +115,19 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
             color: ColorResource.mainFontColor,
           ),
           SizedBox(height: 12.h),
-          Row(
-            children: [
-              Expanded(
-                child: AppSelectableContainer(
-                  isSelected: selectedRowIndices[3] == 0,
-                  onTap: () => selectRow(3, 0),
-                  label: context.localizations.front_drag,
-                ),
-              ),
-              SizedBox(width: 16.w),
-              Expanded(
-                child: AppSelectableContainer(
-                  isSelected: selectedRowIndices[3] == 1,
-                  onTap: () => selectRow(3, 1),
-                  label: context.localizations.rear_drag,
-                ),
-              ),
-              SizedBox(width: 16.w),
-              Expanded(
-                child: AppSelectableContainer(
-                  isSelected: selectedRowIndices[3] == 2,
-                  onTap: () => selectRow(3, 2),
-                  label: context.localizations.four_wheel_drive,
-                ),
-              ),
-            ],
+          SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            child: Row( //list of General Model horizantel
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: addAdsSellerController.carProperties.technicalAdvantages!.map((e){
+                  return AppSelectableContainer(
+                    isSelected: addAdsSellerController.selectedData['technical-advantages']!.id == e.id,
+                    onTap: () => selectRow('technical_advantage_id', e),
+                    label: e.name!,
+                  );
+                } ).toList()
+            ),
           ),
           AppDivider(
             height: 24.h,
@@ -158,8 +145,9 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد عدد المقاعد",
-                      title: "8",
+                      title: "seat_id",
                       logo: "",
+                        list: addAdsSellerController.carProperties.seats ?? []
                     ),
                     height: 500.h,
                   ),
@@ -183,8 +171,9 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد عدد الاسطوانات",
-                      title: "5",
+                      title: "cylinder_id",
                       logo: "",
+                        list: addAdsSellerController.carProperties.cylinders ?? []
                     ),
                     height: 500.h,
                   ),
@@ -208,8 +197,9 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
                       index: 5,
                       //TODO: Make Lang Here
                       headerTitle: "حدد عدد الابواب",
-                      title: "4",
+                      title: "door_id",
                       logo: "",
+                        list: addAdsSellerController.carProperties.doors ??[]
                     ),
                     height: 500.h,
                   ),

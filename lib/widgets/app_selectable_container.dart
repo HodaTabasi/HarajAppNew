@@ -22,6 +22,7 @@ class AppSelectableContainer extends StatelessWidget {
         width: 147.w,
         height: 34.h,
         alignment: Alignment.center,
+        margin: EdgeInsets.symmetric(horizontal: 3.r),
         decoration: BoxDecoration(
             color: isSelected
                 ? ColorResource.mainColor.withOpacity(0.05)

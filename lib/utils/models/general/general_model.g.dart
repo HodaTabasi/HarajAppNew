@@ -10,6 +10,9 @@ GeneralModel _$GeneralModelFromJson(Map<String, dynamic> json) => GeneralModel(
       id: json['id'] as int?,
       name: json['name'] as String?,
       number: json['number'] as int?,
+      cars: (json['cars'] as List<dynamic>?)
+          ?.map((e) => GeneralModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$GeneralModelToJson(GeneralModel instance) =>
@@ -17,4 +20,5 @@ Map<String, dynamic> _$GeneralModelToJson(GeneralModel instance) =>
       'id': instance.id,
       'name': instance.name,
       'number': instance.number,
+      'cars': instance.cars?.map((e) => e.toJson()).toList(),
     };
