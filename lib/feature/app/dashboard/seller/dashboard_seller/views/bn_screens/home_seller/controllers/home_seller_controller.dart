@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/home_seller/use_case/destroy_post_use_case.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/home_seller/use_case/store_post_use_case.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
@@ -57,8 +58,7 @@ class HomeSellerController extends GetxController {
   Future<void> getStorePost({pageNumber = 1}) async {
     loading.value = true;
     return StorePostShowUseCase(repository: Get.find<StoreRepository>())
-        // .call(SharedPrefController().storeId, pageNumber)
-        .call(1, pageNumber)
+        .call(SharedPrefController().storeId, pageNumber)
         .then((value) => value.fold((failure) {
               responseMessage = mapFailureToMessage(failure);
               loading.value = false;
@@ -76,4 +76,51 @@ class HomeSellerController extends GetxController {
               loading.value = false;
             }));
   }
+
+  destroyPost({adsId}) {
+    return DestroyPostShowUseCase(repository: Get.find<StoreRepository>())
+        .call(adsId)
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              print("mmm0 😎=>$adsId");
+              print("mmm outside response 😎=>${response.message}");
+              if (response.success) {
+                print("mmm inside response 😎=>${response.message}");
+                int index = originalListAds
+                    .indexWhere((element) => element.id == adsId);
+                print("mmm inside indexWhere 😎=>${index}");
+                if (index != -1) {
+                  print("mmm inside index 😎=>${index}");
+                  print("mmm inside index 😎=>${originalListAds.length}");
+                  originalListAds.removeAt(index);
+                  print("mmm inside index 😎=>${originalListAds.length}");
+                  update();
+                  print("mmm inside index 😎=>${originalListAds.length}");
+                }
+              } else {
+                Get.snackbar(
+                  'Requires',
+                  responseMessage,
+                  backgroundColor: ColorResource.red,
+                  snackPosition: SnackPosition.BOTTOM,
+                );
+              }
+            }));
+  }
+
+  // Future<RxList<PostModel>> removeAds(int adsId) async {
+  //   int index = originalListAds.indexWhere((element) => element.id == adsId);
+  //   if (index != -1) {
+  //     originalListAds.removeAt(index);
+  //     update();
+  //   }
+  //   return originalListAds;
+  // }
 }

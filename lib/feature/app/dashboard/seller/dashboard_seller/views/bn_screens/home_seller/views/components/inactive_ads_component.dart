@@ -20,7 +20,7 @@ class _InActiveAdsComponentState extends State<InActiveAdsComponent> {
           children: [
             RowDividerWidget(
               text:
-                  '${controller.searchAdsList.where((p0) => (p0.status == false) || (p0.sold == true)).toList().length} ${context.localizations.ad}',
+                  '${controller.searchAdsList.where((p0) => (p0.status == false)).toList().length} ${context.localizations.ad}',
               lineColor: ColorResource.gray,
             ),
             Expanded(
@@ -29,8 +29,7 @@ class _InActiveAdsComponentState extends State<InActiveAdsComponent> {
                 shrinkWrap: true,
                 itemCount: controller.searchAdsList.length,
                 itemBuilder: (context, index) {
-                  if (controller.searchAdsList[index].status == false ||
-                      controller.searchAdsList[index].sold == true) {
+                  if (controller.searchAdsList[index].status == false) {
                     return InkWell(
                       onTap: () {
                         Get.to(() => AdsDetailScreen(
@@ -59,6 +58,8 @@ class _InActiveAdsComponentState extends State<InActiveAdsComponent> {
                         onSelected: (value) {
                           // Handle selection for this usage
                           debugPrint('Selected value:💯 $value');
+                          controller.destroyPost(
+                              adsId: controller.searchAdsList[index].id);
                         },
                       ),
                     );

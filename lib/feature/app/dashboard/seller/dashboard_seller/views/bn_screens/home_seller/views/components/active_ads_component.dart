@@ -20,7 +20,7 @@ class _ActiveAdsComponentState extends State<ActiveAdsComponent> {
           children: [
             RowDividerWidget(
               text:
-                  '${controller.searchAdsList.where((p0) => (p0.status == true) || (p0.sold == false)).toList().length} ${context.localizations.ad}',
+                  '${controller.searchAdsList.where((p0) => (p0.status == true)).toList().length} ${context.localizations.ad}',
               lineColor: ColorResource.gray,
             ),
             Expanded(
@@ -29,8 +29,7 @@ class _ActiveAdsComponentState extends State<ActiveAdsComponent> {
                 shrinkWrap: true,
                 itemCount: controller.searchAdsList.length,
                 itemBuilder: (context, index) {
-                  if (controller.searchAdsList[index].status == true ||
-                      controller.searchAdsList[index].sold == false) {
+                  if (controller.searchAdsList[index].status == true) {
                     return InkWell(
                       onTap: () {
                         Get.to(() => AdsDetailScreen(
@@ -70,6 +69,8 @@ class _ActiveAdsComponentState extends State<ActiveAdsComponent> {
                               Get.to(() => AddAdsSellerScreen());
                               break;
                             case 2:
+                              controller.destroyPost(
+                                  adsId: controller.searchAdsList[index].id);
                               break;
                             // Add more cases as needed
                           }
