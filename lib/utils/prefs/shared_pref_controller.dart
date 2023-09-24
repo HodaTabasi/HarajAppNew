@@ -31,7 +31,7 @@ class SharedPrefController {
     await _sharedPreferences.setString(
         PrefKeys.token.toString(), 'Bearer ${user.data?.token}');
     await _sharedPreferences.setInt(
-        PrefKeys.storeId.toString(), user.data?.store!.id ?? 0);
+        PrefKeys.storeId.toString(), user.data?.store?.id ?? 0);
   }
 
   //profileComplete

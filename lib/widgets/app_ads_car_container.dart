@@ -17,6 +17,7 @@ class AppAdsCarContainer extends StatefulWidget {
     this.sellerName = '',
     this.imageSeller = '',
     this.isFavorite = false,
+    this.FavoriteOnTap,
   });
 
   final String nameCar;
@@ -27,6 +28,7 @@ class AppAdsCarContainer extends StatefulWidget {
   final String sellerName;
   final String imageSeller;
   final bool isFavorite;
+  final void Function()? FavoriteOnTap;
 
   @override
   State<AppAdsCarContainer> createState() => _AppAdsCarContainerState();
@@ -70,15 +72,18 @@ class _AppAdsCarContainerState extends State<AppAdsCarContainer> {
                     padding: EdgeInsets.all(8.w),
                     child: Align(
                       alignment: Alignment.topRight,
-                      child: CircleAvatar(
-                        radius: 15.r,
-                        backgroundColor: ColorResource.lightGray,
-                        child: AppSvgPicture(
-                          assetName: widget.isFavorite
-                              ? IconsApp.favoriteFill
-                              : IconsApp.favoriteOutline,
-                          width: 12.w,
-                          height: 14.h,
+                      child: InkWell(
+                        onTap: widget.FavoriteOnTap,
+                        child: CircleAvatar(
+                          radius: 15.r,
+                          backgroundColor: ColorResource.lightGray,
+                          child: AppSvgPicture(
+                            assetName: widget.isFavorite
+                                ? IconsApp.favoriteFill
+                                : IconsApp.favoriteOutline,
+                            width: 12.w,
+                            height: 14.h,
+                          ),
                         ),
                       ),
                     ),

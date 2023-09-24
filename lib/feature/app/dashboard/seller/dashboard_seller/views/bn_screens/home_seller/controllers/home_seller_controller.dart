@@ -114,13 +114,4 @@ class HomeSellerController extends GetxController {
               }
             }));
   }
-
-  // Future<RxList<PostModel>> removeAds(int adsId) async {
-  //   int index = originalListAds.indexWhere((element) => element.id == adsId);
-  //   if (index != -1) {
-  //     originalListAds.removeAt(index);
-  //     update();
-  //   }
-  //   return originalListAds;
-  // }
 }

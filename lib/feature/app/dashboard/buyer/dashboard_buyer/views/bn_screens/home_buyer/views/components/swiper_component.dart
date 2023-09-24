@@ -22,7 +22,7 @@ class _SwiperComponentState extends State<SwiperComponent> {
           width: double.infinity.w,
           child: Swiper(
             duration: 500,
-            autoplay: false,
+            autoplay: true,
             // itemCount: controller.ads.where((p0) => p0.featured ?? false).toList().length,
             itemCount: controller.ads.length,
             viewportFraction: 0.8,
