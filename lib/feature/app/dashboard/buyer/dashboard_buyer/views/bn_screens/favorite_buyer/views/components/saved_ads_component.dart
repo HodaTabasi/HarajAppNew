@@ -56,7 +56,10 @@ class _SavedAdsComponentState extends State<SavedAdsComponent> {
                       nameLocation: /*controller.savedAds[index].store!.address!.governorate!.name!*/
                           "Dubai",
                       isFavorite: controller.savedAds[index].isFavorite!,
-                      FavoriteOnTap: () {},
+                      FavoriteOnTap: () {
+                        controller.postFavoriteAds(
+                            adsId: controller.savedAds[index].id);
+                      },
                     ),
                   );
                 },

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/favorite_buyer/use_case/favorite_post_use_case.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/favorite_buyer/use_case/get_favorite_ads_use_case.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/favorite_buyer/use_case/post_favorite_ads_use_case.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/models/meta/meta_model.dart';
@@ -40,7 +41,7 @@ class FavoriteBuyerController extends GetxController {
 
   Future<void> getFavoritePost({pageNumber = 1}) async {
     loading.value = true;
-    return FavoritePostShowUseCase(repository: Get.find<FavoriteRepository>())
+    return GetFavoriteAdsShowUseCase(repository: Get.find<FavoriteRepository>())
         .call(pageNumber)
         .then((value) => value.fold((failure) {
               responseMessage = mapFailureToMessage(failure);
@@ -55,6 +56,27 @@ class FavoriteBuyerController extends GetxController {
               savedAds.addAll(response.data ?? []);
               meta = response.meta!;
               loading.value = false;
+            }));
+  }
+
+  Future<void> postFavoriteAds({adsId}) async {
+    return PostFavoriteAdsShowUseCase(
+            repository: Get.find<FavoriteRepository>())
+        .call(adsId)
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              int index = savedAds.indexWhere((element) => element.id == adsId);
+              if (index != -1) {
+                savedAds.removeAt(index);
+                update();
+              }
             }));
   }
 }
