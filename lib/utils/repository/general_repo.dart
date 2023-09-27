@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:haraj/utils/api/api_response.dart';
 import 'package:haraj/utils/api_controller/general_api_controller.dart';
 import 'package:haraj/utils/models/governorates_model/governorates_response.dart';
 
@@ -26,7 +27,7 @@ class GeneralRepository {
     }
   }
 
-  Future<Either<Failure, dynamic>> sendFcmToken({token}) async {
+  Future<Either<Failure, ApiResponse>> sendFcmToken({token}) async {
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.sendFCMToken(token: token);

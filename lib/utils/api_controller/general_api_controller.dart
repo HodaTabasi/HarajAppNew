@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import '../api/api_response.dart';
 import '../api/api_settings.dart';
 import '../errors/error_const.dart';
 import '../errors/exceptions.dart';
@@ -35,7 +36,7 @@ class GeneralApiController with Helpers {
 
     print(decodedJson);
     if (response.statusCode == 200) {
-
+      ApiResponse.fromJson(decodedJson);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();
