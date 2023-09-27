@@ -34,7 +34,7 @@ mixin Helpers {
   Map<String, String> get headers {
     var headers = {
       'Accept': 'application/json',
-      'Accept-Language':SharedPrefController().language
+      'Accept-Language': SharedPrefController().language
     };
     if (SharedPrefController().loggedIn) {
       headers['Authorization'] = SharedPrefController().token;
@@ -48,10 +48,11 @@ mixin Helpers {
 
   Future<String?> getId() async {
     var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) { // import 'dart:io'
+    if (Platform.isIOS) {
+      // import 'dart:io'
       var iosDeviceInfo = await deviceInfo.iosInfo;
       return iosDeviceInfo.identifierForVendor; // unique ID on iOS
-    } else if(Platform.isAndroid) {
+    } else if (Platform.isAndroid) {
       var androidDeviceInfo = await deviceInfo.androidInfo;
       return androidDeviceInfo.id; // unique ID on Android
     }

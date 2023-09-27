@@ -1,5 +1,6 @@
 library home_buyer_view;
 
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,13 +8,13 @@ import 'package:haraj/feature/app/ads_detail/views/screens/ads_detail_screen.dar
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/home_buyer/controllers/home_buyer_controller.dart';
 import 'package:haraj/feature/app/dashboard/buyer/filter_buyer/view/screens/filter_buyer_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
-import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/widgets/app_ads_car_container.dart';
 import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_appbar.dart';
 
 part '../components/show_ads.dart';
+part '../components/swiper_component.dart';
 
 class HomeBuyerScreen extends GetView<HomeBuyerController> {
   final HomeBuyerController homeBuyerController =
@@ -30,10 +31,7 @@ class HomeBuyerScreen extends GetView<HomeBuyerController> {
         showActions: false,
         showSearch: false,
         showSwiper: true,
-        heightSwiper: 160.h,
-        itemCountSwiper: 3,
-        viewportFractionSwiper: 0.8,
-        imageSwiper: ImagesApp.imageSwiper,
+        appSwiper: const SwiperComponent(),
         showActionHomeBuyer: true,
         actionOnTapHomeBuyer: () {},
         showLeadingHomeBuyer: true,

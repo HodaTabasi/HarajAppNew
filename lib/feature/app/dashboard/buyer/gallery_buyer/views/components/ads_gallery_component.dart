@@ -45,28 +45,31 @@ class _AdsGalleryComponentState extends State<AdsGalleryComponent> {
                 childAspectRatio: 160.w / 281.h, // Width on Height
               ),
               itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  onTap: () {
-                    Get.to(() => AdsDetailScreen(
-                          productId:
-                              galleryBuyerController.storePost[index].id!,
-                        ));
-                  },
-                  child: AppAdsCarContainer(
-                    nameCar: galleryBuyerController.storePost[index].car!.name!,
-                    imageCar: galleryBuyerController
-                        .storePost[index].gallery!.first.image!,
-                    priceCar: galleryBuyerController.storePost[index].price!,
-                    conditionCar: galleryBuyerController
-                        .storePost[index].mechanicalStatus!.name!,
-                    imageSeller: adsDetailController.adsDetail.store!.avatar!,
-                    sellerName: adsDetailController.adsDetail.store!.name!,
-                    nameLocation: adsDetailController
-                        .adsDetail.store!.address!.governorate!.name!,
-                    isFavorite:
-                        galleryBuyerController.storePost[index].isFavorite!,
-                  ),
-                );
+                if (galleryBuyerController.storePost[index].status == true) {
+                  return InkWell(
+                    onTap: () {
+                      Get.to(() => AdsDetailScreen(
+                            productId:
+                                galleryBuyerController.storePost[index].id!,
+                          ));
+                    },
+                    child: AppAdsCarContainer(
+                      nameCar:
+                          galleryBuyerController.storePost[index].car!.name!,
+                      imageCar: galleryBuyerController
+                          .storePost[index].gallery!.first.image!,
+                      priceCar: galleryBuyerController.storePost[index].price!,
+                      conditionCar: galleryBuyerController
+                          .storePost[index].mechanicalStatus!.name!,
+                      imageSeller: adsDetailController.adsDetail.store!.avatar!,
+                      sellerName: adsDetailController.adsDetail.store!.name!,
+                      nameLocation: adsDetailController
+                          .adsDetail.store!.address!.governorate!.name!,
+                      isFavorite:
+                          galleryBuyerController.storePost[index].isFavorite!,
+                    ),
+                  );
+                }
               },
             ),
           ),

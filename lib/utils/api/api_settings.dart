@@ -36,6 +36,8 @@ class ApiSettings {
   // ***************************STORES LINKS************************************
   static const String stores = '${_apiUrl}/stores';
   static const String addAds = '${_apiUrl}/posts';
+  // ***************************FAVORITE LINKS**********************************
+  static const String addFavorite = '${_apiUrl}/post';
 // ***************************NOTIFICATION************************************
   static const String sendFCMToken = '${_apiUrl}/fcms';
 }

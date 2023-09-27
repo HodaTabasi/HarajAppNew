@@ -24,38 +24,43 @@ class SharedPrefController {
   Future<void> save({required UserModel user}) async {
     await _sharedPreferences.setBool(PrefKeys.login.toString(), true);
     await _sharedPreferences.setBool(PrefKeys.register.toString(), true);
-    await _sharedPreferences.setInt(PrefKeys.type.toString(), user.data?.type ?? 0);
-    await _sharedPreferences.setBool(PrefKeys.isVerify.toString(), user.data?.store!= null);
+    await _sharedPreferences.setInt(
+        PrefKeys.type.toString(), user.data?.type ?? 0);
+    await _sharedPreferences.setBool(
+        PrefKeys.isVerify.toString(), user.data?.store != null);
     await _sharedPreferences.setString(
         PrefKeys.token.toString(), 'Bearer ${user.data?.token}');
+    await _sharedPreferences.setInt(
+        PrefKeys.storeId.toString(), user.data?.store?.id ?? 0);
   }
 
-   //profileComplete
+  //profileComplete
   set isCompleteProfile(code) {
     _sharedPreferences.setBool(PrefKeys.isCompleteProfile.toString(), code);
   }
+
   bool get isCompleteProfile =>
-      _sharedPreferences.getBool(PrefKeys.isCompleteProfile.toString()) ?? false;
+      _sharedPreferences.getBool(PrefKeys.isCompleteProfile.toString()) ??
+      false;
 
   //address
   set isCompleteAddress(code) {
     _sharedPreferences.setBool(PrefKeys.isCompleteAddress.toString(), code);
   }
+
   bool get isCompleteAddress =>
-      _sharedPreferences.getBool(PrefKeys.isCompleteAddress.toString()) ?? false;
+      _sharedPreferences.getBool(PrefKeys.isCompleteAddress.toString()) ??
+      false;
 //store Completed
   set isCompleteStore(code) {
     _sharedPreferences.setBool(PrefKeys.isCompleteStore.toString(), code);
   }
+
   bool get isCompleteStore =>
       _sharedPreferences.getBool(PrefKeys.isCompleteStore.toString()) ?? false;
 
-
-
   ///get user type
-  int get type =>
-      _sharedPreferences.getInt(PrefKeys.type.toString()) ?? 0;
-
+  int get type => _sharedPreferences.getInt(PrefKeys.type.toString()) ?? 0;
 
 //verify set get
   String get vierifyCode =>
@@ -75,6 +80,9 @@ class SharedPrefController {
 
   String get token =>
       _sharedPreferences.getString(PrefKeys.token.toString()) ?? '';
+
+  int get storeId =>
+      _sharedPreferences.getInt(PrefKeys.storeId.toString()) ?? 0;
 
   //Function To Edit language
   Future<bool> changeLanguage({required String language}) async {

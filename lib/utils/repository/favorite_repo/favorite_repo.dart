@@ -1,22 +1,23 @@
 import 'package:dartz/dartz.dart';
-import 'package:haraj/utils/api/api_response.dart';
 import 'package:haraj/utils/api/network_info.dart';
-import 'package:haraj/utils/api_controller/store_api/store_api_controller.dart';
+import 'package:haraj/utils/api_controller/favorite_api/favorite_api_controller.dart';
+import 'package:haraj/utils/models/offer/post_model.dart';
 import 'package:haraj/utils/models/store_post/store_post_model.dart';
 
 import '../../errors/exceptions.dart';
 import '../../errors/failures.dart';
 
-class StoreRepository {
-  final StoreApiController remoteDataSource;
+class FavoriteRepository {
+  final FavoriteApiController remoteDataSource;
   final NetworkInfo networkInfo;
 
-  StoreRepository({required this.remoteDataSource, required this.networkInfo});
+  FavoriteRepository(
+      {required this.remoteDataSource, required this.networkInfo});
 
-  Future<Either<Failure, StorePostModel>> getStorePost({id, page}) async {
+  Future<Either<Failure, StorePostModel>> getFavoriteAds({page}) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await remoteDataSource.storePost(id: id, page: page);
+        final response = await remoteDataSource.getFavoriteAds(page: page);
         return Right(response);
       } on ServerException {
         return Left(ServerFailure());
@@ -26,10 +27,10 @@ class StoreRepository {
     }
   }
 
-  Future<Either<Failure, ApiResponse>> destroyPost({id}) async {
+  Future<Either<Failure, PostModel>> postFavoriteAds({id}) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await remoteDataSource.destroyPost(id: id);
+        final response = await remoteDataSource.postFavoriteAds(id: id);
         return Right(response);
       } on ServerException {
         return Left(ServerFailure());

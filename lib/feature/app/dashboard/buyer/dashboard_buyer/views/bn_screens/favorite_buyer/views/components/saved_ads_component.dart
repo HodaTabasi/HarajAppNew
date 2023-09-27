@@ -8,48 +8,70 @@ class SavedAdsComponent extends StatefulWidget {
 }
 
 class _SavedAdsComponentState extends State<SavedAdsComponent> {
+  final FavoriteBuyerController controller = Get.put(FavoriteBuyerController());
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: 10.h),
-        RowDividerWidget(
-          text: '010 ${context.localizations.ad}',
-          lineColor: ColorResource.gray,
-        ),
-        Expanded(
-          child: GridView.builder(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            padding: EdgeInsetsDirectional.symmetric(vertical: 10.h),
-            itemCount: 10,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 17.h, // Add spacing between grid items.
-              crossAxisSpacing: 15.w, // Add spacing between grid items.
-              childAspectRatio: 160.w / 281.h, // Width on Height
+    return Obx(() {
+      if (controller.loading.value) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (controller.savedAds.isNotEmpty) {
+        return Column(
+          children: [
+            SizedBox(height: 10.h),
+            RowDividerWidget(
+              text: '${controller.savedAds.length} ${context.localizations.ad}',
+              lineColor: ColorResource.gray,
             ),
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  Get.to(() => AdsDetailScreen(
-                        productId: 1,
-                      ));
-                },
-                child: const AppAdsCarContainer(
-                  nameCar: 'بوغاتي شيرون',
-                  imageCar: ImagesApp.imageSwiper,
-                  priceCar: '5000 درهم',
-                  conditionCar: 'ممتازة',
-                  imageSeller: ImagesApp.imageSwiper,
-                  sellerName: 'معرض النور لبيع السيارات',
-                  nameLocation: 'دبي',
+            Expanded(
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsetsDirectional.symmetric(vertical: 10.h),
+                itemCount: controller.savedAds.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 17.h, // Add spacing between grid items.
+                  crossAxisSpacing: 15.w, // Add spacing between grid items.
+                  childAspectRatio: 160.w / 281.h, // Width on Height
                 ),
-              );
-            },
-          ),
-        ),
-      ],
-    );
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      Get.to(() => AdsDetailScreen(
+                            productId: controller.savedAds[index].id!,
+                          ));
+                    },
+                    child: AppAdsCarContainer(
+                      nameCar: controller.savedAds[index].car!.name!,
+                      imageCar:
+                          controller.savedAds[index].gallery!.first.image!,
+                      priceCar: controller.savedAds[index].price!,
+                      conditionCar:
+                          controller.savedAds[index].mechanicalStatus!.name!,
+                      imageSeller: /*controller.savedAds[index].store!.avatar ??*/
+                          ImagesApp.brandLogo,
+                      sellerName: /*controller.savedAds[index].store!.name!*/
+                          "Store Name",
+                      nameLocation: /*controller.savedAds[index].store!.address!.governorate!.name!*/
+                          "Dubai",
+                      isFavorite: controller.savedAds[index].isFavorite!,
+                      FavoriteOnTap: () {
+                        controller.postFavoriteAds(
+                            adsId: controller.savedAds[index].id);
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      } else {
+        return Center(
+          child: Text('No data'),
+        );
+      }
+    });
   }
 }

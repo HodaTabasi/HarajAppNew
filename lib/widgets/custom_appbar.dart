@@ -5,7 +5,6 @@ import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/widgets/app_image.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
-import 'package:haraj/widgets/app_swiper.dart';
 import 'package:haraj/widgets/app_text.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -19,10 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final void Function(String)? onChanged;
   final void Function()? clearOnPressed;
   final bool showSwiper;
-  final double heightSwiper;
-  final int itemCountSwiper;
-  final double viewportFractionSwiper;
-  final String imageSwiper;
+  final Widget? appSwiper;
   final bool showActionHomeBuyer;
   final Function()? actionOnTapHomeBuyer;
   final bool showLeadingHomeBuyer;
@@ -43,10 +39,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onChanged,
     this.clearOnPressed,
     this.showSwiper = false,
-    this.heightSwiper = 160,
-    this.itemCountSwiper = 3,
-    this.viewportFractionSwiper = 0.8,
-    this.imageSwiper = '',
+    this.appSwiper,
     this.showActionHomeBuyer = false,
     this.actionOnTapHomeBuyer,
     this.showLeadingHomeBuyer = false,
@@ -211,13 +204,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
               ),
-            if (showSwiper)
-              AppSwiper(
-                height: heightSwiper,
-                itemCount: itemCountSwiper,
-                viewportFraction: viewportFractionSwiper,
-                imageSwiper: imageSwiper,
-              ),
+            if (showSwiper) appSwiper!,
           ],
         ),
       ],
