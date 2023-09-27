@@ -68,7 +68,7 @@ class AdsRepository {
     }
   }
 
-  Future<Either<Failure, dynamic>> addAds({required List<MyImage> images,
+  Future<Either<Failure, Data>> addAds({required List<MyImage> images,
     required Map<String, GeneralModel> selectedData,
     required price,
     required year,
@@ -86,14 +86,14 @@ class AdsRepository {
     }
   }
 
-  Future<Either<Failure, dynamic>>addSocialContactAds({whatsapp, facebook,
+  Future<Either<Failure, dynamic>>addSocialContactToAds({whatsapp, facebook,
     whatsappConnection,
     facebookConnection,
     call,
-    chat}) async {
+    chat,postId}) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await remoteDataSource.addSocialContactAds(whatsapp: whatsapp,whatsappConnection: whatsappConnection,call: call,chat: chat,facebook: facebook,facebookConnection: facebookConnection);
+        final response = await remoteDataSource.addSocialContactToAds(whatsapp: whatsapp,whatsappConnection: whatsappConnection,call: call,chat: chat,facebook: facebook,facebookConnection: facebookConnection,postId: postId);
         return Right(response);
       } on ServerException {
         return Left(ServerFailure());

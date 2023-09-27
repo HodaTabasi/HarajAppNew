@@ -76,7 +76,7 @@ class BottomSheetBodySuccess extends StatelessWidget {
               child: DoneButton(
                 title: context.localizations.noo,
                 onPressed: () {
-                  Get.back();
+                  Get.to(() => const DashboardSellerScreen());
                 },
               ),
             ),

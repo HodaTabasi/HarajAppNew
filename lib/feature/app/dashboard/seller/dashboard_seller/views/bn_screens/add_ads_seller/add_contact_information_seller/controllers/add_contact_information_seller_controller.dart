@@ -23,6 +23,7 @@ class AddContactInformationSellerController extends GetxController {
 
   bool facebook = false;
   bool whatsApp = false;
+  int? postIdAfterAdding;
 
 
 
@@ -45,9 +46,9 @@ class AddContactInformationSellerController extends GetxController {
     facebookController.clear();
   }
 
-  Future<void> addStoreAds() async {
+  Future<void> addStoreAds(postId) async {
     return AddAdsSocialContactUseCase(repository: Get.find<AdsRepository>())
-        .call(whatsApp?1:0,facebook?1:0,whatsappController.text,facebookController.text,mobile?1:0,chat?1:0)
+        .call(whatsApp?1:0,facebook?1:0,whatsappController.text,facebookController.text,mobile?1:0,chat?1:0,postIdAfterAdding ?? postId)
         .then((value) => value.fold((failure) {
       responseMessage = mapFailureToMessage(failure);
       Get.snackbar(

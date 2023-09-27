@@ -11,11 +11,12 @@ import 'package:intl/intl.dart';
 import '../../../../../../../../../utils/models/car_properties/car_properties.dart';
 import '../../../../../../../../../utils/models/general/general_model.dart';
 import '../../../../../../../../../utils/models/seller_info/image.dart';
+import '../add_contact_information_seller/controllers/add_contact_information_seller_controller.dart';
 
 class AddAdsSellerController extends GetxController {
   static AddAdsSellerController get to => Get.find<AddAdsSellerController>();
 
-  RxBool loading = true.obs;
+  RxBool loading = false.obs;
   Rx<DateTime> selectedDate = DateTime.now().obs;
   RxString title = "Production Year".obs;
   final ImagePicker picker = ImagePicker();
@@ -23,8 +24,8 @@ class AddAdsSellerController extends GetxController {
   RxList<MyImage>? imageGalaryList = <MyImage>[].obs;
 
   void makeImageGallery() {
-    for(var file in imageFileList!){
-      imageGalaryList?.add(MyImage(1, file.path,true));
+    for (var file in imageFileList!) {
+      imageGalaryList?.add(MyImage(1, file.path, true));
     }
     imageFileList?.clear();
     update();
@@ -35,7 +36,7 @@ class AddAdsSellerController extends GetxController {
     update();
   }
 
-  deleteImageFromGallery(){
+  deleteImageFromGallery() {
     imageGalaryList?.removeWhere((element) => element.isSelected!);
     update();
   }
@@ -47,33 +48,32 @@ class AddAdsSellerController extends GetxController {
   late TextEditingController kilometerController;
   late TextEditingController carDetailsController;
 
-  late CarProperties carProperties =CarProperties();
-  Map<String , GeneralModel> selectedData =
-  {
-    "price":GeneralModel(),
-    "brand_id":GeneralModel(),
-    "car_id":GeneralModel(),
-    "body_id":GeneralModel(),
-    "mechanical_status_id":GeneralModel(),
-    "standard_id":GeneralModel(),
-    "general_status_id":GeneralModel(),
-    "fuel_id":GeneralModel(),
-    "gear_id":GeneralModel(),
-    "driving_side_id":GeneralModel(),
-    "seller_type":GeneralModel(),
-    "technical_advantage_id":GeneralModel(),
-    "seat_id":GeneralModel(),
-    "cylinder_id":GeneralModel(),
-    "door_id":GeneralModel(),
-    "category_id":GeneralModel(),
-    "engine_id":GeneralModel(),
-    "distance":GeneralModel(),
-    "out_color":GeneralModel(),
-    "in_color":GeneralModel(),
-    "guarantee":GeneralModel(),
-    "finance":GeneralModel(),
-    "exportable":GeneralModel(),
-  };
+  late CarProperties carProperties = CarProperties();
+  RxMap<String, GeneralModel> selectedData = {
+    // "price":GeneralModel(),
+    "brand_id": GeneralModel(),
+    "car_id": GeneralModel(),
+    "body_id": GeneralModel(),
+    "mechanical_status_id": GeneralModel(),
+    "standard_id": GeneralModel(),
+    "general_status_id": GeneralModel(),
+    "fuel_id": GeneralModel(),
+    "gear_id": GeneralModel(),
+    "driving_side_id": GeneralModel(),
+    "seller_type_id": GeneralModel(),
+    "technical_advantage_id": GeneralModel(),
+    "seat_id": GeneralModel(),
+    "cylinder_id": GeneralModel(),
+    "door_id": GeneralModel(),
+    "category_id": GeneralModel(),
+    "engine_id": GeneralModel(),
+    // "distance":GeneralModel(),
+    "out_color": GeneralModel(),
+    "in_color": GeneralModel(),
+    "guarantee": GeneralModel(),
+    "finance": GeneralModel(),
+    "exportable": GeneralModel(),
+  }.obs;
 
   var responseMessage = "";
 
@@ -86,7 +86,8 @@ class AddAdsSellerController extends GetxController {
     );
     if (picked != null && picked != selectedDate.value) {
       selectedDate.value = picked;
-      title.value = DateFormat.yMMMd().format(picked);
+      // title.value = DateFormat.yMMMd().format(picked);
+      title.value = DateFormat.y().format(picked);
     }
   }
 
@@ -130,9 +131,32 @@ class AddAdsSellerController extends GetxController {
     kilometerController.clear();
   }
 
-  Future<void> addStoreAds() async {
+  Future<bool> addStoreAds() async {
+    loading.value = true;
     return AddAdsSellerUseCase(repository: Get.find<AdsRepository>())
-        .call(imageGalaryList!,selectedData,carPriceController.text,title.value,kilometerController.text,carDetailsController.text)
+        .call(imageGalaryList!, selectedData, carPriceController.text,
+            title.value, kilometerController.text, carDetailsController.text)
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+              loading.value = false;
+              return false;
+            }, (response) async {
+              AddContactInformationSellerController.to.postIdAfterAdding =
+                  response.id;
+              loading.value = false;
+              return true;
+            }));
+  }
+
+  getCarProperties() async {
+    return GetPropertiesUseCase(repository: Get.find<AdsRepository>())
+        .call()
         .then((value) => value.fold((failure) {
               responseMessage = mapFailureToMessage(failure);
               Get.snackbar(
@@ -142,24 +166,8 @@ class AddAdsSellerController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (response) async {
-              print("mmm Add Ads Detail Buyer Controller 💯=>  ");
+              carProperties = response;
+              print("gfgh ${carProperties.brands}");
             }));
-  }
-
-  getCarProperties() async {
-    return GetPropertiesUseCase(repository: Get.find<AdsRepository>())
-        .call()
-        .then((value) => value.fold((failure) {
-      responseMessage = mapFailureToMessage(failure);
-      Get.snackbar(
-        'Requires',
-        responseMessage,
-        backgroundColor: ColorResource.red,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }, (response) async {
-          carProperties = response;
-          print("gfgh ${carProperties.brands}");
-    }));
   }
 }

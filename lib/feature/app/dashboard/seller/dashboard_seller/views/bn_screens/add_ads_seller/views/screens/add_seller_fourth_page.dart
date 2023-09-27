@@ -133,19 +133,30 @@ class AddSellerFourthPage extends GetView<AddAdsSellerController> {
             ],
           ),
           SizedBox(height: 12.h),
-          DoneButton(
-            //TODO: Make Lang Here
-            title: 'اضافة',
-            onPressed: () {
-              Get.bottomSheet(
-                  AppBottomSheet(
-                    body: const BottomSheetBodySuccess(),
-                    height: 410.h,
-                  ),
-                  enterBottomSheetDuration: const Duration(milliseconds: 500),
-                  exitBottomSheetDuration: const Duration(milliseconds: 400));
-            },
-          ),
+          Obx(() {
+            return controller.loading.isTrue
+                ? const Center(child: CircularProgressIndicator())
+                : Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: DoneButton(
+                //TODO: Make Lang Here
+                title: 'اضافة',
+                onPressed: () async {
+                  bool isSucess = await addAdsSellerController.addStoreAds();
+                  if(isSucess){
+                    Get.bottomSheet(
+                        AppBottomSheet(
+                          body: const BottomSheetBodySuccess(),
+                          height: 410.h,
+                        ),
+                        enterBottomSheetDuration: const Duration(milliseconds: 400),
+                        exitBottomSheetDuration: const Duration(milliseconds: 400));
+                  }
+                },
+              ),
+            );
+          }),
+
         ],
       ),
     );

@@ -87,7 +87,8 @@ class _BottomSheetScState extends State<BottomSheet> {
             title: context.localizations.create,
             onPressed: () {
               if(addAddressSellerController.showEmirates.value){
-                addAddressSellerController.cities.value = addAddressSellerController.emirates[addAddressSellerController.selectedRadio].cities!;
+                print(addAddressSellerController.selectedRadio);
+               addAddressSellerController.cities.value = addAddressSellerController.emirates[addAddressSellerController.selectedRadio-1].cities!;
                 int index = addAddressSellerController.emirates.indexWhere((element) => element.id == addAddressSellerController.selectedRadio);
                 addAddressSellerController.emira.value = addAddressSellerController.emirates[index].name ?? '';
                 print(addAddressSellerController.emira.value);

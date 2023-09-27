@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
 
 import '../../../../../../../../../utils/errors/failures.dart';
+import 'package:haraj/utils/models/ads_model/ads_model.dart';
 import '../../../../../../../../../utils/models/general/general_model.dart';
 import '../../../../../../../../../utils/models/seller_info/image.dart';
 
@@ -10,7 +11,7 @@ class AddAdsSellerUseCase {
 
   AddAdsSellerUseCase({required this.repository});
 
-  Future<Either<Failure, dynamic>> call( List<MyImage> images,
+  Future<Either<Failure, Data>> call( List<MyImage> images,
        Map<String, GeneralModel> selectedData,
        price,
        year,

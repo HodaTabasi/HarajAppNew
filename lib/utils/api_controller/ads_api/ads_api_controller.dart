@@ -104,20 +104,20 @@ class AdsApiController with Helpers {
 
     print(decodedJson);
     print(response.statusCode);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       // GetStorage().write('otp', decodedJson['otp_code']);
-      // return UserModel.fromJson(decodedJson);
+      return Data.fromJson(decodedJson['data']);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();
     }
   }
 
-  addSocialContactAds({whatsapp, facebook,
+  addSocialContactToAds({whatsapp, facebook,
       whatsappConnection,
       facebookConnection,
       call,
-      chat}) async {
+      chat,postId}) async {
     var map = {
       'whatsapp': whatsapp,
       'facebook': facebook,
@@ -126,12 +126,12 @@ class AdsApiController with Helpers {
       'call': call,
       'chat': chat,
     };
-    var url = Uri.parse(ApiSettings.addAds);
+    var url = Uri.parse('${ApiSettings.addAds}/$postId');
     http.Response response = await http.post(url, headers: headers, body: map);
     var decodedJson = json.decode(response.body);
 
     if (response.statusCode == 200) {
-      return CarProperties.fromJson(decodedJson);
+      return Data.fromJson(decodedJson['data']);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();

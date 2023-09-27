@@ -36,6 +36,8 @@ class CarBrandSelection extends StatelessWidget {
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
           color: ColorResource.mainFontColor,
+          overflow: TextOverflow.ellipsis,
+          maxLine: 1,
         ),
         const Spacer(),
         Radio(

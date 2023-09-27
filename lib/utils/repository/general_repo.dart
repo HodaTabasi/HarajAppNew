@@ -25,4 +25,17 @@ class GeneralRepository {
       return Left(OfflineFailure());
     }
   }
+
+  Future<Either<Failure, dynamic>> sendFcmToken({token}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.sendFCMToken(token: token);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
 }

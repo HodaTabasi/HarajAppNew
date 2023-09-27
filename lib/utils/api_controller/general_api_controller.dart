@@ -23,4 +23,22 @@ class GeneralApiController with Helpers {
       throw ServerException();
     }
   }
+
+  sendFCMToken({required String token}) async {
+    var url = Uri.parse(ApiSettings.sendFCMToken);
+    var map = {
+      "token":token
+    };
+
+    http.Response response = await http.post(url, headers: headers,body: map);
+    var decodedJson = json.decode(response.body);
+
+    print(decodedJson);
+    if (response.statusCode == 200) {
+
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
 }

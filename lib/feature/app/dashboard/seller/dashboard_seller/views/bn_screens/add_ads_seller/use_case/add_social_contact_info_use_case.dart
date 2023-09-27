@@ -14,11 +14,12 @@ class AddAdsSocialContactUseCase {
       whatsappConnection,
       facebookConnection,
       call,
-      chat) async {
-    return await repository.addSocialContactAds(whatsapp:whatsapp, facebook:facebook,
+      chat,postId) async {
+    return await repository.addSocialContactToAds(whatsapp:whatsapp, facebook:facebook,
         whatsappConnection:whatsappConnection,
         facebookConnection:facebookConnection,
         call:call,
-        chat:chat);
+        chat:chat,
+        postId: postId);
   }
 }

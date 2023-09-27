@@ -24,6 +24,7 @@ import 'package:haraj/widgets/custom_textformfiled.dart';
 import 'package:haraj/widgets/time_line_content.dart';
 import 'package:haraj/widgets/time_line_indicator.dart';
 
+import '../../../../dashboard_screen.dart';
 import '../../../profile_seller/controllers/profile_seller_controller.dart';
 import '../../add_contact_information_seller/view/screens/add_contact_information_seller_screen.dart';
 
