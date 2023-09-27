@@ -58,5 +58,13 @@
             android:value="2" />
        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyCdEGRA529GazegcT8yR0GRmjHqOEgzZuQ"/>
+       <meta-data
+           android:name="com.google.firebase.messaging.default_notification_channel_id"
+           android:value="haraj_app_notification_channel" />
+       <!-- [START fcm_default_icon] -->
+       <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
+       <!--<meta-data
+           android:name="com.google.firebase.messaging.default_notification_icon"
+           android:resource="@drawable/ic_stat_ic_notification" /> -->
     </application>
 </manifest>
