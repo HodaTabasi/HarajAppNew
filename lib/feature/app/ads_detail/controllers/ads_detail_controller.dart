@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/accept_offer_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/ads_show_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/instruction_use_case.dart';
+import 'package:haraj/feature/app/ads_detail/use_case/post_favorite_ads_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/post_offer_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/show_post_new_offer_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/show_post_offer_use_case.dart';
@@ -13,8 +14,10 @@ import 'package:haraj/utils/models/ads_model/ads_model.dart';
 import 'package:haraj/utils/models/general/general_model.dart';
 import 'package:haraj/utils/models/meta/meta_model.dart';
 import 'package:haraj/utils/models/offer/offer_model.dart';
+import 'package:haraj/utils/models/offer/post_model.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
+import 'package:haraj/utils/repository/favorite_repo/favorite_repo.dart';
 import 'package:haraj/utils/repository/offer_repo/offer_repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -33,6 +36,7 @@ class AdsDetailController extends GetxController {
   RxList<OfferModel> newOffers = <OfferModel>[].obs;
   RxList<OfferModel> allOffers = <OfferModel>[].obs;
   RxList<GeneralModel> instructionModel = <GeneralModel>[].obs;
+  PostModel favorite = PostModel();
   Meta meta = Meta();
   late ScrollController scrollController;
 
@@ -212,5 +216,23 @@ class AdsDetailController extends GetxController {
                 debugPrint("mmm out of index acceptOffer 💯=> $index");
               },
             ));
+  }
+
+  Future<void> postFavoriteAds({adsId}) async {
+    return PostFavoriteAdsShowUseCase(
+            repository: Get.find<FavoriteRepository>())
+        .call(adsId)
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              favorite = response;
+              update();
+            }));
   }
 }

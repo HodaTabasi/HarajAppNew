@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showSearch;
   final bool showLeading;
   final bool showActions;
-  final Function()? actionOnTap;
+  final Widget? appActions;
   final TextEditingController? searchController;
   final void Function(String)? onChanged;
   final void Function()? clearOnPressed;
@@ -23,17 +23,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function()? actionOnTapHomeBuyer;
   final bool showLeadingHomeBuyer;
   final Function()? leadingOnTapHomeBuyer;
-  final String actionAssetName;
-  final Color? actionIconColor;
 
   const CustomAppBar({
     Key? key,
     required this.title,
     required this.heightBackground,
-    this.actionOnTap,
     this.showLeading =
         true, // Set this to true to show the leading icon by default
     this.showActions = false, // Set this to false to hide the Actions icon
+    this.appActions,
     this.showSearch = false,
     this.searchController,
     this.onChanged,
@@ -44,8 +42,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actionOnTapHomeBuyer,
     this.showLeadingHomeBuyer = false,
     this.leadingOnTapHomeBuyer,
-    this.actionAssetName = '',
-    this.actionIconColor,
   }) : super(key: key);
 
   // @override
@@ -139,15 +135,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                       ],
                     ),
-                    child: InkWell(
-                      onTap: actionOnTap,
-                      child: AppSvgPicture(
-                        assetName: actionAssetName,
-                        width: 16.w,
-                        height: 16.h,
-                        color: actionIconColor,
-                      ),
-                    ),
+                    child: appActions,
                   ),
                 if (showActionHomeBuyer) // Add this condition
                   Container(

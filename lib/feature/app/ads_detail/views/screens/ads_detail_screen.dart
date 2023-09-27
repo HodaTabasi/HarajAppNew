@@ -33,6 +33,7 @@ part '../components/ads_detail_component.dart';
 part '../components/ads_instructions_component.dart';
 part '../components/ads_offer_submit_component.dart';
 part '../components/all_offers_card.dart';
+part '../components/app_actions.dart';
 part '../components/bottom_sheet_body_detail.dart';
 part '../components/bottom_sheet_body_offers.dart';
 part '../components/check_alert_dialog.dart';
@@ -77,23 +78,7 @@ class _AdsDetailScreenState extends State<AdsDetailScreen> {
         showLeading: true,
         showSearch: false,
         showActions: true,
-        actionAssetName: SharedPrefController().type == 1
-            ? IconsApp.edit
-            : IconsApp.favoriteOutline,
-        actionIconColor: SharedPrefController().type == 1
-            ? ColorResource.mainColor
-            : ColorResource.gray,
-        actionOnTap: () {
-          SharedPrefController().type == 1
-              ? Get.bottomSheet(
-                  AppBottomSheet(
-                    body: BottomSheetBodyOffers(),
-                    height: 280.h,
-                  ),
-                  enterBottomSheetDuration: const Duration(milliseconds: 500),
-                  exitBottomSheetDuration: const Duration(milliseconds: 400))
-              : IconsApp.favoriteFill;
-        },
+        appActions: AppActions(id: widget.productId),
       ),
       body: Obx(() {
         return adsDetailController.loading.value
