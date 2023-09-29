@@ -8,7 +8,7 @@ class TotalViews extends StatefulWidget {
 }
 
 class _TotalViewsState extends State<TotalViews> {
-  double progressPercentage = 75.0; // Change this to the desired percentage
+  final HomeSellerController controller = Get.put(HomeSellerController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +34,19 @@ class _TotalViewsState extends State<TotalViews> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AppText(
-                //TODO:make lang here
-                text: '500K',
+                text: controller.searchAdsList
+                    .where((p0) =>
+                        p0.viewsCount != null && int.parse(p0.viewsCount!) > 0)
+                    .toList()
+                    .length
+                    .toString(),
                 color: ColorResource.mainColor,
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
               ),
               SizedBox(width: 5.w),
               AppText(
+                //TODO:Make Lang Here
                 text: 'مشاهدة',
                 color: ColorResource.gray,
                 fontSize: 16.sp,

@@ -102,7 +102,7 @@ class Data {
   @JsonKey(name: "engine")
   Seat? engine;
   @JsonKey(name: "distance")
-  String? distance;
+  int? distance;
   @JsonKey(name: "out_color")
   GovernorateModel? outColor;
   @JsonKey(name: "in_color")

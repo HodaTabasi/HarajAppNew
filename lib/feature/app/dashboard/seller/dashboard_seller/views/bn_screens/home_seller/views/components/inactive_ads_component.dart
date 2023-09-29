@@ -43,7 +43,9 @@ class _InActiveAdsComponentState extends State<InActiveAdsComponent> {
                         priceCar: controller.searchAdsList[index].price!,
                         conditionCar: controller
                             .searchAdsList[index].mechanicalStatus!.name!,
-                        showCar: '4K زائر',
+                        //TODO:Make Lang Here
+                        showCar:
+                            '${controller.searchAdsList[index].viewsCount}زائر',
                         showStatus: true,
                         postingTime: controller.searchAdsList[index].createdAt!,
                         isSold: controller.searchAdsList[index].sold!,
@@ -64,9 +66,7 @@ class _InActiveAdsComponentState extends State<InActiveAdsComponent> {
                       ),
                     );
                   } else {
-                    return Center(
-                      child: Text('No In Active Ads Here'),
-                    );
+                    return const SizedBox();
                   }
                 },
               ),

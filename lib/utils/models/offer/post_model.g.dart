@@ -83,7 +83,7 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
       engine: json['engine'] == null
           ? null
           : GeneralModel.fromJson(json['engine'] as Map<String, dynamic>),
-      distance: json['distance'] as String?,
+      distance: json['distance'] as int?,
       outColor: json['out_color'] == null
           ? null
           : GeneralModel.fromJson(json['out_color'] as Map<String, dynamic>),
@@ -106,6 +106,7 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
       sold: json['sold'] as bool?,
       featured: json['featured'] as bool?,
       status: json['status'] as bool?,
+      viewsCount: json['views_count'] as String?,
       createdAt: json['created_at'] as String?,
     );
 
@@ -166,5 +167,6 @@ Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
       'sold': instance.sold,
       'featured': instance.featured,
       'status': instance.status,
+      'views_count': instance.viewsCount,
       'created_at': instance.createdAt,
     };

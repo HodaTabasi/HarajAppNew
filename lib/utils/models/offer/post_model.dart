@@ -86,7 +86,7 @@ class PostModel {
   @JsonKey(name: "engine")
   GeneralModel? engine;
   @JsonKey(name: "distance")
-  String? distance;
+  int? distance;
   @JsonKey(name: "out_color")
   GeneralModel? outColor;
   @JsonKey(name: "in_color")
@@ -119,6 +119,8 @@ class PostModel {
   bool? featured;
   @JsonKey(name: "status")
   bool? status;
+  @JsonKey(name: "views_count")
+  String? viewsCount;
   @JsonKey(name: "created_at")
   String? createdAt;
 
@@ -179,6 +181,7 @@ class PostModel {
       this.sold,
       this.featured,
       this.status,
+      this.viewsCount,
       this.createdAt});
 
   factory PostModel.fromJson(Map<String, dynamic> json) =>

@@ -8,7 +8,7 @@ class TotalAds extends StatefulWidget {
 }
 
 class _TotalAdsState extends State<TotalAds> {
-  double progressPercentage = 75.0; // Change this to the desired percentage
+  final HomeSellerController controller = Get.put(HomeSellerController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _TotalAdsState extends State<TotalAds> {
                 height: 80.h,
                 width: 80.w,
                 child: CircularProgressIndicator(
-                  value: progressPercentage / 100,
+                  value: controller.searchAdsList.length / 100,
                   strokeWidth: 5.w,
                   backgroundColor: ColorResource.green.withOpacity(0.15),
                   valueColor:
@@ -48,8 +48,7 @@ class _TotalAdsState extends State<TotalAds> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AppText(
-                    //TODO:make lang here
-                    text: '24',
+                    text: controller.searchAdsList.length.toString(),
                     color: ColorResource.green,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,

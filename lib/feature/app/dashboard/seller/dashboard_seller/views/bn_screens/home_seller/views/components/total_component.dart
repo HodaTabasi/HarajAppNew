@@ -8,24 +8,30 @@ class TotalComponent extends StatefulWidget {
 }
 
 class _TotalComponentState extends State<TotalComponent> {
+  final HomeSellerController controller = Get.put(HomeSellerController());
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          children: const [
-            TotalAds(),
-          ],
-        ),
-        Column(
-          children: [
-            const TotalViews(),
-            SizedBox(height: 16.h),
-            const SubscriptionRenewal(),
-          ],
-        ),
-      ],
-    );
+    return Obx(() {
+      return controller.loading.value == true
+          ? const CircularProgressIndicator(color: ColorResource.transparent)
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: const [
+                    TotalAds(),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const TotalViews(),
+                    SizedBox(height: 16.h),
+                    const SubscriptionRenewal(),
+                  ],
+                ),
+              ],
+            );
+    });
   }
 }

@@ -99,7 +99,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       engine: json['engine'] == null
           ? null
           : Seat.fromJson(json['engine'] as Map<String, dynamic>),
-      distance: json['distance'] as String?,
+      distance: json['distance'] as int?,
       outColor: json['out_color'] == null
           ? null
           : GovernorateModel.fromJson(

@@ -34,7 +34,7 @@ class _AdsDetailComponentState extends State<AdsDetailComponent> {
             ),
             LineDetail(
               detail: 'كيلوميترات :',
-              result: controller.adsDetail.distance!,
+              result: controller.adsDetail.distance.toString(),
             ),
             LineDetail(
               detail: 'نوع الجسم :',

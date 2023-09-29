@@ -67,7 +67,7 @@ class HomeSellerScreen extends GetView<HomeSellerController> {
                   InActiveAdsComponent(),
                   // Other tab views
                 ],
-                height: 330.h,
+                height: 350.h,
               ),
             ]),
       ),
