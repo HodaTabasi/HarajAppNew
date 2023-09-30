@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:haraj/utils/api/api_response.dart';
 import 'package:haraj/utils/api/network_info.dart';
 import 'package:haraj/utils/api_controller/store_api/store_api_controller.dart';
+import 'package:haraj/utils/models/offer/post_model.dart';
 import 'package:haraj/utils/models/store_post/store_post_model.dart';
 
 import '../../errors/exceptions.dart';
@@ -30,6 +31,19 @@ class StoreRepository {
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.destroyPost(id: id);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+  Future<Either<Failure, PostModel>> soldPost({id}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.soldPost(id: id);
         return Right(response);
       } on ServerException {
         return Left(ServerFailure());

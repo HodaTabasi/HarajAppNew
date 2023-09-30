@@ -49,6 +49,11 @@ class _ActiveAdsComponentState extends State<ActiveAdsComponent> {
                         showStatus: true,
                         postingTime: controller.searchAdsList[index].createdAt!,
                         isSold: controller.searchAdsList[index].sold!,
+                        postId: controller.searchAdsList[index].id.toString(),
+                        onSold: (postId) {
+                          controller.soldPost(
+                              postId: controller.searchAdsList[index].id);
+                        },
                         menuItem: [
                           AppPopupMenuItem(
                             value: 1,

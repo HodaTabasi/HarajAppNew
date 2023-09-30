@@ -32,6 +32,8 @@ class AppCarContainer extends StatefulWidget {
     this.sellerName = 'Mahmoud',
     this.imageSeller = '',
     this.isSold = false,
+    this.postId,
+    this.onSold,
     // this.showMenuItem = false,
   });
 
@@ -54,6 +56,8 @@ class AppCarContainer extends StatefulWidget {
   final String sellerName;
   final String imageSeller;
   final bool isSold;
+  final String? postId;
+  final void Function(String postId)? onSold;
   // final bool showMenuItem;
 
   @override
@@ -292,7 +296,10 @@ class _AppCarContainerState extends State<AppCarContainer> {
                               fontWeight: FontWeight.w500,
                             ),
                             const Spacer(),
-                            AppSwitchButton(isSold: widget.isSold),
+                            AppSwitchButton(
+                                isSold: widget.isSold,
+                                postId: widget.postId,
+                                onSold: widget.onSold),
                           ],
                         ),
                 ],

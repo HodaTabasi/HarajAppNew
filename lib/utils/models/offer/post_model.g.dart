@@ -78,7 +78,7 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
       category: json['category'] == null
           ? null
           : GeneralModel.fromJson(json['category'] as Map<String, dynamic>),
-      year: json['year'] as String?,
+      year: json['year'] as int?,
       engineId: json['engine_id'] as int?,
       engine: json['engine'] == null
           ? null

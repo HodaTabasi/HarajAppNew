@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:haraj/utils/api/api_response.dart';
 import 'package:haraj/utils/api/api_settings.dart';
 import 'package:haraj/utils/extensions/helpers/helpers.dart';
+import 'package:haraj/utils/models/offer/post_model.dart';
 import 'package:haraj/utils/models/store_post/store_post_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,6 +36,21 @@ class StoreApiController with Helpers {
 
     if (response.statusCode == 200) {
       return ApiResponse.fromJson(decodedJson);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
+
+  soldPost({id}) async {
+    var url = Uri.parse('${ApiSettings.addFavorite}/$id/mark-sold');
+    http.Response response = await http.post(url, headers: headers);
+    var decodedJson = json.decode(response.body);
+
+    debugPrint("mmm soldPost 💯=> $decodedJson");
+
+    if (response.statusCode == 200) {
+      return PostModel.fromJson(decodedJson);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();

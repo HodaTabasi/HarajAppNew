@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/models/general/general_model.dart';
 
@@ -7,7 +8,9 @@ import '../feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ad
 class AppSwitchButton extends StatefulWidget {
   String? mapKey;
   final bool? isSold;
-  AppSwitchButton({this.mapKey,this.isSold = false});
+  String? postId;
+  final void Function(String postId)? onSold;
+  AppSwitchButton({this.mapKey, this.isSold = false, this.postId, this.onSold});
 
   @override
   _AppSwitchButtonState createState() => _AppSwitchButtonState();
@@ -16,17 +19,40 @@ class AppSwitchButton extends StatefulWidget {
 class _AppSwitchButtonState extends State<AppSwitchButton> {
   bool _isSwitchOn = false;
 
+  @override
+  void initState() {
+    super.initState();
+    // Set the initial switch state based on isSold
+    _isSwitchOn = widget.isSold == true;
+  }
+
   void _toggleSwitch(bool value) {
     setState(() {
-      _isSwitchOn = value;
-      if(widget.mapKey != null){
+      if (widget.mapKey != null) {
         GeneralModel m = GeneralModel();
-        if(_isSwitchOn){
+        if (value) {
           m.id = 1;
-        }else {
+        } else {
           m.id = 0;
         }
         AddAdsSellerController.to.selectedData[widget.mapKey!] = m;
+      }
+
+      // If isSold is true, always keep the switch on and show the message
+      if (widget.isSold == true) {
+        _isSwitchOn = true;
+        Get.snackbar(
+          'Unfortunately',
+          'The car is sold.',
+          backgroundColor: ColorResource.red,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        // Check if the switch is toggled from false to true
+        if (!_isSwitchOn && value && widget.onSold != null) {
+          widget.onSold!(widget.postId!);
+        }
+        _isSwitchOn = value;
       }
     });
   }
@@ -35,7 +61,9 @@ class _AppSwitchButtonState extends State<AppSwitchButton> {
   Widget build(BuildContext context) {
     return Switch(
       // value: _isSwitchOn,
-      value: widget.mapKey!= null?_isSwitchOn:widget.isSold!,
+      value: widget.mapKey != null || widget.postId != null
+          ? _isSwitchOn
+          : widget.isSold!,
       onChanged: _toggleSwitch,
       activeColor: ColorResource.white, // Color when switch is on
       activeTrackColor:

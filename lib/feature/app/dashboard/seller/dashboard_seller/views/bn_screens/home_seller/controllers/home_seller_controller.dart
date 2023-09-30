@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/home_seller/use_case/destroy_post_use_case.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/home_seller/use_case/sold_post_use_case.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/home_seller/use_case/store_post_use_case.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
@@ -17,6 +18,7 @@ class HomeSellerController extends GetxController {
   RxList<PostModel> searchAdsList = <PostModel>[].obs;
   RxList<PostModel> originalListAds = <PostModel>[].obs;
   Meta meta = Meta();
+  PostModel postModel = PostModel();
   late ScrollController scrollController;
   TextEditingController searchController = TextEditingController();
 
@@ -112,6 +114,28 @@ class HomeSellerController extends GetxController {
                   snackPosition: SnackPosition.BOTTOM,
                 );
               }
+            }));
+  }
+
+  Future<void> soldPost({postId}) async {
+    return SoldPostShowUseCase(repository: Get.find<StoreRepository>())
+        .call(postId)
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              postModel = response;
+              Get.snackbar(
+                'Congratulations',
+                "The car was sold successfully",
+                backgroundColor: ColorResource.greenWhatsup,
+                snackPosition: SnackPosition.BOTTOM,
+              );
             }));
   }
 }
