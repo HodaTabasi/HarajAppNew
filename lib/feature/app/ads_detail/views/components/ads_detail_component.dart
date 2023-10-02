@@ -30,7 +30,8 @@ class _AdsDetailComponentState extends State<AdsDetailComponent> {
             ),
             LineDetail(
               detail: 'السنة الانتاج :',
-              result: controller.adsDetail.year.toString(),
+              result: '${controller.adsDetail.year!}',
+             // result: controller.adsDetail.year.toString(),
             ),
             LineDetail(
               detail: 'كيلوميترات :',

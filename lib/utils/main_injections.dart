@@ -16,6 +16,7 @@ import 'package:haraj/utils/repository/store_repo/store_repo.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../feature/app/auth/otp/controller/otp_controller.dart';
+import '../feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ads_seller/add_contact_information_seller/controllers/add_contact_information_seller_controller.dart';
 import '../feature/app/profile/complete_profile/controller/complete_profile_buyer_controller.dart';
 import '../feature/app/profile/complete_profile/controller/complete_profile_seller_controller.dart';
 import '../feature/app/profile/seller/add_address_seller/controller/add_address_seller_controller.dart';
@@ -45,6 +46,7 @@ class MainInjection implements Bindings {
         networkInfo: networkInfoImpl));
 
     Get.put(OTPGetxController());
+    Get.put(AddContactInformationSellerController());
     //Get.put(ProfileSellerController());
     Get.put(CompleteProfileSellerController());
     Get.put(AddAddressSellerController());
