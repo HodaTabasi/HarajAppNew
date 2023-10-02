@@ -5,9 +5,11 @@ import 'package:haraj/feature/app/ads_detail/use_case/ads_show_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/instruction_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/post_favorite_ads_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/post_offer_use_case.dart';
+import 'package:haraj/feature/app/ads_detail/use_case/reject_offer_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/show_post_new_offer_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/show_post_offer_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/views/screens/ads_detail_screen.dart';
+import 'package:haraj/feature/app/offer/controllers/offer_controller.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/models/ads_model/ads_model.dart';
@@ -163,6 +165,7 @@ class AdsDetailController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (response) async {
+              allOffers.clear();
               allOffers.addAll(response.data ?? []);
               meta = response.meta!;
             }));
@@ -185,9 +188,9 @@ class AdsDetailController extends GetxController {
             }));
   }
 
-  Future<void> acceptOffer() async {
+  Future<void> acceptOffer({postId}) async {
     return AcceptOfferUseCase(repository: Get.find<OfferRepository>())
-        .call(productId.toString())
+        .call(postId.toString())
         .then((value) => value.fold(
               (failure) {
                 responseMessage = mapFailureToMessage(failure);
@@ -199,21 +202,62 @@ class AdsDetailController extends GetxController {
                 );
               },
               (response) async {
-                // offerModel = response;
-                debugPrint("mmm stare acceptOffer 💯=> $response");
-                int index = newOffers
-                    .indexWhere((element) => element.postId! == productId);
-                debugPrint("mmm index acceptOffer 💯=> $response");
-                debugPrint("mmm index acceptOffer 💯=> $index");
-                if (index != -1) {
-                  debugPrint("mmm before remove acceptOffer 💯=> $index");
-                  newOffers.removeAt(index);
-                  debugPrint("mmm after after acceptOffer1 💯=> $index");
-                  update();
-                  debugPrint("mmm after after acceptOffer2 💯=> $index");
+                if (response.success) {
+                  int index =
+                      newOffers.indexWhere((element) => element.id == postId);
+                  if (index != -1) {
+                    newOffers.removeAt(index);
+                    showPostOffer();
+                    OfferController.to.showPostNewOffer();
+                    OfferController.to.showPostAcceptedOffers();
+                    OfferController.to.showPostRejectedOffers();
+                    update();
+                  }
+                } else {
+                  Get.snackbar(
+                    'Requires',
+                    responseMessage,
+                    backgroundColor: ColorResource.red,
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
                 }
-                debugPrint("mmm out of index acceptOffer 💯=> $response");
-                debugPrint("mmm out of index acceptOffer 💯=> $index");
+              },
+            ));
+  }
+
+  Future<void> rejectOffer({postId}) async {
+    return RejectOfferUseCase(repository: Get.find<OfferRepository>())
+        .call(postId.toString())
+        .then((value) => value.fold(
+              (failure) {
+                responseMessage = mapFailureToMessage(failure);
+                Get.snackbar(
+                  'Requires',
+                  responseMessage,
+                  backgroundColor: ColorResource.red,
+                  snackPosition: SnackPosition.BOTTOM,
+                );
+              },
+              (response) async {
+                if (response.success) {
+                  int index =
+                      newOffers.indexWhere((element) => element.id == postId);
+                  if (index != -1) {
+                    newOffers.removeAt(index);
+                    showPostOffer();
+                    OfferController.to.showPostNewOffer();
+                    OfferController.to.showPostAcceptedOffers();
+                    OfferController.to.showPostRejectedOffers();
+                    update();
+                  }
+                } else {
+                  Get.snackbar(
+                    'Requires',
+                    responseMessage,
+                    backgroundColor: ColorResource.red,
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
               },
             ));
   }

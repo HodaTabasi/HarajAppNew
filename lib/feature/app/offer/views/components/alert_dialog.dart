@@ -1,6 +1,14 @@
 part of offer_view;
 
-class AlertDialog extends StatelessWidget {
+class RemoveAlertDialog extends StatefulWidget {
+  const RemoveAlertDialog({super.key, required this.removeOfferButton});
+  final void Function() removeOfferButton;
+
+  @override
+  State<RemoveAlertDialog> createState() => _RemoveAlertDialogState();
+}
+
+class _RemoveAlertDialogState extends State<RemoveAlertDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -10,7 +18,7 @@ class AlertDialog extends StatelessWidget {
       ),
       child: Container(
           width: double.infinity,
-          height: 190.h,
+          height: 200.h,
           margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
           child: Column(
             children: [
@@ -38,9 +46,7 @@ class AlertDialog extends StatelessWidget {
                   Expanded(
                     child: SendEditButton(
                       title: context.localizations.yess,
-                      onPressed: () {
-                        Get.back();
-                      },
+                      onPressed: widget.removeOfferButton,
                     ),
                   ),
                   SizedBox(width: 16.w),

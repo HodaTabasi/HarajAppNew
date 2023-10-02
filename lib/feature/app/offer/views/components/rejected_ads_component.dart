@@ -8,7 +8,7 @@ class RejectedAdsComponent extends StatefulWidget {
 }
 
 class _RejectedAdsComponentState extends State<RejectedAdsComponent> {
-  final OfferSellerController controller = Get.put(OfferSellerController());
+  final OfferController controller = Get.put(OfferController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,39 +35,127 @@ class _RejectedAdsComponentState extends State<RejectedAdsComponent> {
                       imageCar: controller
                           .rejectedOffers[index].post!.gallery!.first.image!,
                       priceCar: '',
-                      conditionCar: controller
-                          .rejectedOffers[index].post!.mechanicalStatus!.name!,
-                      showCar: 'زائر',
-                      postingTime: controller.rejectedOffers[index].createdAt!,
+                      showStatus:
+                          SharedPrefController().type == 1 ? false : true,
+                      //TODO: Make Lang Here
+                      conditionCar: "مرفوضة",
+                      showCar: '',
+                      postingTime: SharedPrefController().type == 1
+                          ? controller.rejectedOffers[index].createdAt!
+                          : "",
                       showLocation: true,
                       iconLocation: IconsApp.location,
                       nameLocation: controller.rejectedOffers[index].post!
                           .store!.address!.governorate!.name!,
                       showSeller: true,
-                      sellerName:
-                          controller.rejectedOffers[index].client!.name!,
-                      imageSeller:
-                          controller.rejectedOffers[index].client!.avatar ??
+                      sellerName: SharedPrefController().type == 1
+                          ? controller.rejectedOffers[index].client!.name!
+                          : controller.rejectedOffers[index].post!.store!.name!,
+                      imageSeller: SharedPrefController().type == 1
+                          ? controller.rejectedOffers[index].client!.avatar ??
+                              ImagesApp.brandLogo
+                          : controller
+                                  .rejectedOffers[index].post!.store!.avatar ??
                               ImagesApp.brandLogo,
                       showOfferedPrice: true,
                       offerPrice:
                           controller.rejectedOffers[index].amount.toString(),
                       discountPrice:
                           controller.rejectedOffers[index].post!.price!,
-                      showStatus: true,
-                      menuItem: [],
+                      menuItem: SharedPrefController().type == 1
+                          ? [
+                              // AppPopupMenuItem(
+                              //   value: 1,
+                              //   iconAsset: IconsApp.remove,
+                              //   title: context.localizations.delete,
+                              //   iconColor: ColorResource.mainColor,
+                              // ),
+                            ]
+                          : [
+                              AppPopupMenuItem(
+                                value: 1,
+                                iconAsset: IconsApp.resend,
+                                title: context.localizations.re_send,
+                                iconColor: ColorResource.mainColor,
+                              ),
+                              // AppPopupMenuItem(
+                              //   value: 2,
+                              //   iconAsset: IconsApp.remove,
+                              //   title: context.localizations.delete,
+                              //   iconColor: ColorResource.mainColor,
+                              // ),
+                            ],
                       onSelected: (value) {
                         // Handle selection for this usage
                         debugPrint('Selected value:💯 $value');
-                        // Get.bottomSheet(
-                        //     AppBottomSheet(
-                        //       body: BottomSheetBody(),
-                        //       height: 280.h,
-                        //     ),
-                        //     enterBottomSheetDuration:
-                        //         const Duration(milliseconds: 500),
-                        //     exitBottomSheetDuration:
-                        //         const Duration(milliseconds: 400));
+                        switch (value) {
+                          case 1:
+                            SharedPrefController().type == 1
+                                ? controller.acceptOffer(
+                                    postId:
+                                        controller.rejectedOffers[index].id!)
+                                : Get.bottomSheet(
+                                    AppBottomSheet(
+                                      body: BottomSheetBody(
+                                        headTitle:
+                                            context.localizations.edit_price,
+                                        buttonTitle:
+                                            context.localizations.re_send,
+                                        nameCar: controller
+                                            .rejectedOffers[index]
+                                            .post!
+                                            .car!
+                                            .name!,
+                                        imageCar: controller
+                                            .rejectedOffers[index]
+                                            .post!
+                                            .gallery!
+                                            .first
+                                            .image!,
+                                        //TODO: Make Lang Here
+                                        conditionCar: "مرفوضة",
+                                        sellerName: controller
+                                            .rejectedOffers[index]
+                                            .post!
+                                            .store!
+                                            .name!,
+                                        imageSeller: controller
+                                                .rejectedOffers[index]
+                                                .post!
+                                                .store!
+                                                .avatar ??
+                                            ImagesApp.brandLogo,
+                                        offerPrice: controller
+                                            .rejectedOffers[index].amount
+                                            .toString(),
+                                        discountPrice: controller
+                                            .rejectedOffers[index].post!.price!,
+                                        sendNewOfferButton: () {
+                                          controller.performNewPrice(
+                                              productId: controller
+                                                  .rejectedOffers[index]
+                                                  .postId!);
+                                          Get.back();
+                                        },
+                                      ),
+                                      height: 420.h,
+                                    ),
+                                    enterBottomSheetDuration:
+                                        const Duration(milliseconds: 500),
+                                    exitBottomSheetDuration:
+                                        const Duration(milliseconds: 400));
+                            break;
+                          case 2:
+                            Get.dialog(RemoveAlertDialog(
+                              removeOfferButton: () {
+                                controller.destroyOffer(
+                                    postId:
+                                        controller.rejectedOffers[index].id!);
+                              },
+                            ));
+                            break;
+                          // Add more cases as needed
+                        }
                       },
                     ),
                   );

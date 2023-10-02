@@ -30,23 +30,28 @@ class _ShowAdsState extends State<ShowAds> {
             childAspectRatio: 160.w / 281.h, // Width on Height
           ),
           itemBuilder: (BuildContext context, int index) {
-            return InkWell(
-              onTap: () {
-                Get.to(() =>
-                    AdsDetailScreen(productId: controller.ads[index].id!));
-              },
-              child: AppAdsCarContainer(
-                nameCar: controller.ads[index].car!.name!,
-                imageCar: controller.ads[index].gallery!.first.image!,
-                priceCar: controller.ads[index].price!,
-                conditionCar: controller.ads[index].mechanicalStatus!.name!,
-                imageSeller: controller.ads[index].store!.avatar!,
-                sellerName: controller.ads[index].sellerType!.name!,
-                nameLocation:
-                    controller.ads[index].store!.address!.governorate!.name!,
-                isFavorite: controller.ads[index].isFavorite!,
-              ),
-            );
+            if (controller.ads[index].status == true &&
+                controller.ads[index].sold == false) {
+              return InkWell(
+                onTap: () {
+                  Get.to(() =>
+                      AdsDetailScreen(productId: controller.ads[index].id!));
+                },
+                child: AppAdsCarContainer(
+                  nameCar: controller.ads[index].car!.name!,
+                  imageCar: controller.ads[index].gallery!.first.image!,
+                  priceCar: controller.ads[index].price!,
+                  conditionCar: controller.ads[index].mechanicalStatus!.name!,
+                  imageSeller: controller.ads[index].store!.avatar!,
+                  sellerName: controller.ads[index].sellerType!.name!,
+                  nameLocation:
+                      controller.ads[index].store!.address!.governorate!.name!,
+                  isFavorite: controller.ads[index].isFavorite!,
+                ),
+              );
+            } else {
+              return const SizedBox();
+            }
           },
         );
       } else {

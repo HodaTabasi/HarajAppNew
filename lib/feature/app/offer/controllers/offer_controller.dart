@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/accept_offer_use_case.dart';
-import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/show_post_accepted_offer_use_case.dart';
-import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/show_post_new_offer_use_case.dart';
-import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/use_case/show_post_rejected_offer_use_case.dart';
+import 'package:haraj/feature/app/offer/use_case/accept_offer_use_case.dart';
+import 'package:haraj/feature/app/offer/use_case/destroy_offer_use_case.dart';
+import 'package:haraj/feature/app/offer/use_case/post_offer_use_case.dart';
+import 'package:haraj/feature/app/offer/use_case/reject_offer_use_case.dart';
+import 'package:haraj/feature/app/offer/use_case/show_post_accepted_offer_use_case.dart';
+import 'package:haraj/feature/app/offer/use_case/show_post_new_offer_use_case.dart';
+import 'package:haraj/feature/app/offer/use_case/show_post_rejected_offer_use_case.dart';
+import 'package:haraj/feature/app/offer/views/screens/offer_screen.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/models/meta/meta_model.dart';
@@ -19,6 +23,7 @@ class OfferController extends GetxController {
   RxList<OfferModel> rejectedOffers = <OfferModel>[].obs;
   RxList<OfferModel> acceptedOffers = <OfferModel>[].obs;
   Meta meta = Meta();
+  OfferModel offerModel = OfferModel();
   late ScrollController scrollController;
   late TextEditingController newPriceController;
 
@@ -37,6 +42,10 @@ class OfferController extends GetxController {
   void dispose() {
     newPriceController.dispose();
     super.dispose();
+  }
+
+  void clear() {
+    newPriceController.clear();
   }
 
   void _listener() {
@@ -62,6 +71,7 @@ class OfferController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (response) async {
+              newOffers.clear();
               newOffers.addAll(response.data ?? []);
               meta = response.meta!;
             }));
@@ -79,6 +89,7 @@ class OfferController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (response) async {
+              rejectedOffers.clear();
               rejectedOffers.addAll(response.data ?? []);
               meta = response.meta!;
             }));
@@ -96,13 +107,13 @@ class OfferController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (response) async {
+              acceptedOffers.clear();
               acceptedOffers.addAll(response.data ?? []);
               meta = response.meta!;
             }));
   }
 
   Future<void> acceptOffer({postId}) async {
-    debugPrint("mmm stare acceptOffer 💯=> $postId");
     return AcceptOfferUseCase(repository: Get.find<OfferRepository>())
         .call(postId.toString())
         .then((value) => value.fold(
@@ -116,24 +127,128 @@ class OfferController extends GetxController {
                 );
               },
               (response) async {
-                // acceptedOffers = response;
-                //FOR TESTING
-                debugPrint("mmm stare acceptOffer 💯=> $response");
-                debugPrint("mmm stare acceptOffer 💯=> $postId");
-                int index = newOffers
-                    .indexWhere((element) => element.postId! == postId);
-                debugPrint("mmm index acceptOffer 💯=> $response");
-                debugPrint("mmm index acceptOffer 💯=> $index");
-                if (index != -1) {
-                  debugPrint("mmm before remove acceptOffer 💯=> $index");
-                  newOffers.removeAt(index);
-                  debugPrint("mmm after after acceptOffer1 💯=> $index");
-                  update();
-                  debugPrint("mmm after after acceptOffer2 💯=> $index");
+                if (response.success) {
+                  int index =
+                      newOffers.indexWhere((element) => element.id == postId);
+                  if (index != -1) {
+                    newOffers.removeAt(index);
+                    showPostAcceptedOffers();
+                    update();
+                  }
+                } else {
+                  Get.snackbar(
+                    'Requires',
+                    responseMessage,
+                    backgroundColor: ColorResource.red,
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
                 }
-                debugPrint("mmm out of index acceptOffer 💯=> $response");
-                debugPrint("mmm out of index acceptOffer 💯=> $index");
               },
             ));
+  }
+
+  Future<void> rejectOffer({postId}) async {
+    return RejectOfferUseCase(repository: Get.find<OfferRepository>())
+        .call(postId.toString())
+        .then((value) => value.fold(
+              (failure) {
+                responseMessage = mapFailureToMessage(failure);
+                Get.snackbar(
+                  'Requires',
+                  responseMessage,
+                  backgroundColor: ColorResource.red,
+                  snackPosition: SnackPosition.BOTTOM,
+                );
+              },
+              (response) async {
+                if (response.success) {
+                  int index =
+                      newOffers.indexWhere((element) => element.id == postId);
+                  if (index != -1) {
+                    newOffers.removeAt(index);
+                    showPostRejectedOffers();
+                    update();
+                  }
+                } else {
+                  Get.snackbar(
+                    'Requires',
+                    responseMessage,
+                    backgroundColor: ColorResource.red,
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
+              },
+            ));
+  }
+
+  Future<void> destroyOffer({postId}) async {
+    return DestroyOfferUseCase(repository: Get.find<OfferRepository>())
+        .call(postId.toString())
+        .then((value) => value.fold(
+              (failure) {
+                responseMessage = mapFailureToMessage(failure);
+                Get.snackbar(
+                  'Requires',
+                  responseMessage,
+                  backgroundColor: ColorResource.red,
+                  snackPosition: SnackPosition.BOTTOM,
+                );
+              },
+              (response) async {
+                if (response.success) {
+                  int index =
+                      newOffers.indexWhere((element) => element.id == postId);
+                  if (index != -1) {
+                    newOffers.removeAt(index);
+                    update();
+                  }
+                } else {
+                  Get.snackbar(
+                    'Requires',
+                    responseMessage,
+                    backgroundColor: ColorResource.red,
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
+              },
+            ));
+  }
+
+  Future<void> performNewPrice({productId}) async {
+    if (checkData()) {
+      await postOfferAds(productId: productId);
+    }
+  }
+
+  bool checkData() {
+    if (newPriceController.text.isNotEmpty) {
+      return true;
+    }
+    Get.snackbar(
+      'Requires',
+      'Enter Required',
+      backgroundColor: ColorResource.red,
+      snackPosition: SnackPosition.BOTTOM,
+    );
+    return false;
+  }
+
+  Future<void> postOfferAds({productId}) async {
+    return PostOfferUseCase(repository: Get.find<OfferRepository>())
+        .call(productId.toString(), newPriceController.text)
+        .then((value) => value.fold((failure) {
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              offerModel = response;
+              clear();
+              Get.dialog(CheckAlertDialog());
+              showPostNewOffer();
+            }));
   }
 }

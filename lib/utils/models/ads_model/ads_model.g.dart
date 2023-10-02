@@ -94,7 +94,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       category: json['category'] == null
           ? null
           : GovernorateModel.fromJson(json['category'] as Map<String, dynamic>),
-      year: json['year'] as String?,
+      year: json['year'] as int?,
       engineId: json['engine_id'] as int?,
       engine: json['engine'] == null
           ? null

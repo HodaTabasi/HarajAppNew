@@ -41,11 +41,11 @@ class _AdsAllOffersComponentState extends State<AdsAllOffersComponent> {
                     title: context.localizations.all_offers,
                     iconColor: ColorResource.mainColor,
                   ),
-                  AppPopupMenuItem(
-                    value: 2,
-                    title: context.localizations.new_offers,
-                    iconColor: ColorResource.red,
-                  ),
+                  // AppPopupMenuItem(
+                  //   value: 2,
+                  //   title: context.localizations.new_offers,
+                  //   iconColor: ColorResource.red,
+                  // ),
                 ],
                 onSelected: (value) {
                   // Handle selection for this usage
@@ -88,10 +88,18 @@ class _AdsAllOffersComponentState extends State<AdsAllOffersComponent> {
                   ImagesApp.brandLogo,
               posting: controller.allOffers[index].createdAt!,
               status: controller.allOffers[index].status!,
-              crossOnTab: () {},
+              crossOnTab: () {
+                debugPrint(" crossOnTab 💯");
+                controller.rejectOffer(postId: controller.allOffers[index].id!);
+              },
               checkOnTab: () {
                 debugPrint(" checkOnTab 💯");
-                controller.acceptOffer();
+                controller.acceptOffer(postId: controller.allOffers[index].id!);
+              },
+              openChat: () {
+                if (controller.allOffers[index].status! == 3) {
+                  Get.to(() => ChatScreen(comeFrom: ""));
+                }
               },
             );
           },
@@ -114,6 +122,7 @@ class _AdsAllOffersComponentState extends State<AdsAllOffersComponent> {
               status: 1,
               crossOnTab: () {},
               checkOnTab: () {},
+              openChat: () {},
             );
           },
         );

@@ -104,7 +104,7 @@ class _AppCarContainerState extends State<AppCarContainer> {
                   ),
                   widget.showLocation
                       ? Container(
-                          width: 62.w,
+                          width: 80.w,
                           height: 27.h,
                           margin: EdgeInsets.symmetric(
                               horizontal: 10.w, vertical: 10.h),
@@ -117,13 +117,18 @@ class _AppCarContainerState extends State<AppCarContainer> {
                             children: [
                               AppSvgPicture(
                                 assetName: widget.iconLocation,
+                                width: 10.w,
+                                height: 14.h,
                               ),
                               SizedBox(width: 5.w),
-                              AppText(
-                                text: widget.nameLocation,
-                                color: ColorResource.mainFontColor,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w300,
+                              Flexible(
+                                child: AppText(
+                                  text: widget.nameLocation,
+                                  color: ColorResource.mainFontColor,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w300,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ],
                           ),

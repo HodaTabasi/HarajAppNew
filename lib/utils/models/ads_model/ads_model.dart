@@ -96,7 +96,7 @@ class Data {
   @JsonKey(name: "category")
   GovernorateModel? category;
   @JsonKey(name: "year")
-  String? year;
+  int? year;
   @JsonKey(name: "engine_id")
   int? engineId;
   @JsonKey(name: "engine")

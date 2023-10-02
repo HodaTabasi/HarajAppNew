@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:haraj/utils/api/api_response.dart';
 import 'package:haraj/utils/api/api_settings.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/errors/exceptions.dart';
@@ -97,7 +98,7 @@ class OfferApiController with Helpers {
 
     debugPrint("mmm acceptOffers 💯=> $decodedJson");
     if (response.statusCode == 200) {
-      return OfferModel.fromJson(decodedJson);
+      return ApiResponse.fromJson(decodedJson);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();
@@ -111,7 +112,21 @@ class OfferApiController with Helpers {
 
     debugPrint("mmm rejectOffers 💯=> $decodedJson");
     if (response.statusCode == 200) {
-      return OfferModel.fromJson(decodedJson);
+      return ApiResponse.fromJson(decodedJson);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
+
+  destroyOffers({postId}) async {
+    var url = Uri.parse("${ApiSettings.offers}/$postId");
+    http.Response response = await http.delete(url, headers: headers);
+    var decodedJson = json.decode(response.body);
+
+    debugPrint("mmm destroyOffers 💯=> $decodedJson");
+    if (response.statusCode == 200) {
+      return ApiResponse.fromJson(decodedJson);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();

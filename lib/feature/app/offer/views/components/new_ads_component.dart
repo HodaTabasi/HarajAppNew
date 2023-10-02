@@ -15,15 +15,13 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
     return Obx(() {
       if (controller.loading.value) {
         return const Center(child: CircularProgressIndicator());
-      } else if (controller
-          .newOffers.isEmpty /*controller.newOffers.isNotEmpty*/) {
+      } else if (controller.newOffers.isNotEmpty) {
         return Column(
           children: [
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: 10,
-                // itemCount: controller.newOffers.length,
+                itemCount: controller.newOffers.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
@@ -32,15 +30,15 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
                           ));
                     },
                     child: AppCarContainer(
-                      nameCar: 'بوغاتي شيرون',
-                      imageCar:
-                          "https://www.pixel4k.com/wp-content/uploads/2019/01/bugatti-chiron-4k_1546362064.jpg.webp",
+                      nameCar: controller.newOffers[index].post!.car!.name!,
+                      imageCar: controller
+                          .newOffers[index].post!.gallery!.first.image!,
                       priceCar: '',
-                      conditionCar: SharedPrefController().type == 1
-                          ? controller
-                              .newOffers[index].post!.mechanicalStatus!.name!
-                          : "Watting",
-                      showCar: SharedPrefController().type == 1 ? "زائر" : "",
+                      showStatus:
+                          SharedPrefController().type == 1 ? false : true,
+                      //TODO: Make Lang Here
+                      conditionCar: "قيد الإنتظار",
+                      showCar: "",
                       postingTime: SharedPrefController().type == 1
                           ? controller.newOffers[index].createdAt!
                           : "",
@@ -60,8 +58,6 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
                       showOfferedPrice: true,
                       offerPrice: controller.newOffers[index].amount.toString(),
                       discountPrice: controller.newOffers[index].post!.price!,
-                      showStatus:
-                          SharedPrefController().type == 1 ? false : true,
                       menuItem: SharedPrefController().type == 1
                           ? [
                               AppPopupMenuItem(
@@ -106,8 +102,30 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
                                             context.localizations.edit_offer,
                                         buttonTitle:
                                             context.localizations.send_edit,
+                                        nameCar: controller
+                                            .newOffers[index].post!.car!.name!,
+                                        imageCar: controller.newOffers[index]
+                                            .post!.gallery!.first.image!,
+                                        //TODO: Make Lang Here
+                                        conditionCar: "قيد الإنتظار",
+                                        sellerName: controller.newOffers[index]
+                                            .post!.store!.name!,
+                                        imageSeller: controller.newOffers[index]
+                                                .post!.store!.avatar ??
+                                            ImagesApp.brandLogo,
+                                        offerPrice: controller
+                                            .newOffers[index].amount
+                                            .toString(),
+                                        discountPrice: controller
+                                            .newOffers[index].post!.price!,
+                                        sendNewOfferButton: () {
+                                          controller.performNewPrice(
+                                              productId: controller
+                                                  .newOffers[index].postId!);
+                                          Get.back();
+                                        },
                                       ),
-                                      height: 400.h,
+                                      height: 420.h,
                                     ),
                                     enterBottomSheetDuration:
                                         const Duration(milliseconds: 500),
@@ -116,8 +134,16 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
                             break;
                           case 2:
                             SharedPrefController().type == 1
-                                ? debugPrint('Selected value 2:💯 $value')
-                                : Get.dialog(AlertDialog());
+                                ? controller.rejectOffer(
+                                    postId: controller.newOffers[index].id!)
+                                : Get.dialog(RemoveAlertDialog(
+                                    removeOfferButton: () {
+                                      controller.destroyOffer(
+                                          postId:
+                                              controller.newOffers[index].id!);
+                                      Get.back();
+                                    },
+                                  ));
                             break;
                           // Add more cases as needed
                         }

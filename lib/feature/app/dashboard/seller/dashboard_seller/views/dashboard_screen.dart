@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haraj/feature/app/chat/view/screen/home_chat_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ads_seller/views/screens/add_seller_screen.dart';
 import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/home_seller/views/screens/home_seller_screen.dart';
-import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/bn_screens/offer_seller/views/screens/offer_seller_screen.dart';
+import 'package:haraj/feature/app/offer/views/screens/offer_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/get/general_getx_controller.dart';
@@ -26,7 +26,7 @@ class _DashboardSellerScreenState extends State<DashboardSellerScreen> {
     BnModel(widget: HomeSellerScreen()),
     BnModel(widget: HomeChatScreen()),
     BnModel(widget: AddAdsSellerScreen()),
-    BnModel(widget: OfferSellerScreen()),
+    BnModel(widget: OfferScreen()),
     BnModel(widget: ProfileSellerScreen()),
   ];
 

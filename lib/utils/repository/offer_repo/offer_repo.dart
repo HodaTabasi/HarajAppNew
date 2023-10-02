@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:haraj/utils/api/api_response.dart';
 import 'package:haraj/utils/api/network_info.dart';
 import 'package:haraj/utils/api_controller/offer_api_controller/offer_api_controller.dart';
 import 'package:haraj/utils/errors/exceptions.dart';
@@ -81,7 +82,7 @@ class OfferRepository {
     }
   }
 
-  Future<Either<Failure, OfferModel>> acceptOffers({postId}) async {
+  Future<Either<Failure, ApiResponse>> acceptOffers({postId}) async {
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.acceptOffers(postId: postId);
@@ -94,10 +95,23 @@ class OfferRepository {
     }
   }
 
-  Future<Either<Failure, OfferModel>> rejectOffers({postId}) async {
+  Future<Either<Failure, ApiResponse>> rejectOffers({postId}) async {
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.rejectOffers(postId: postId);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+  Future<Either<Failure, ApiResponse>> destroyOffers({postId}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.destroyOffers(postId: postId);
         return Right(response);
       } on ServerException {
         return Left(ServerFailure());
