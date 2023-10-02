@@ -132,6 +132,7 @@ class AddAdsSellerController extends GetxController {
   }
 
   Future<bool> addStoreAds() async {
+    print("dfsdfsd");
     loading.value = true;
     return AddAdsSellerUseCase(repository: Get.find<AdsRepository>())
         .call(imageGalaryList!, selectedData, carPriceController.text,
@@ -147,6 +148,7 @@ class AddAdsSellerController extends GetxController {
               loading.value = false;
               return false;
             }, (response) async {
+          print("dfsdfsd");
               AddContactInformationSellerController.to.postIdAfterAdding =
                   response.id;
               loading.value = false;

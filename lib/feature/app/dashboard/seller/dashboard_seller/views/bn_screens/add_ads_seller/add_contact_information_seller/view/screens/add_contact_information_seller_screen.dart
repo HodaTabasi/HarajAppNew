@@ -16,6 +16,8 @@ import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_appbar.dart';
 import 'package:haraj/widgets/custom_textformfiled.dart';
 
+import '../../../../../dashboard_screen.dart';
+import '../../../views/screens/add_seller_screen.dart';
 import '../../controllers/add_contact_information_seller_controller.dart';
 
 part '../components/bottom_sheet_body.dart';
@@ -70,7 +72,7 @@ class AddContactInformationSellerScreen
                     fontWeight: FontWeight.w500,
                   ),
                   const Spacer(),
-                  AppSwitchButton(),
+                  AppSwitchButton(mapKey: 'phone',),
                 ],
               ),
               SizedBox(height: 12.h),
@@ -84,22 +86,26 @@ class AddContactInformationSellerScreen
                     fontWeight: FontWeight.w500,
                   ),
                   const Spacer(),
-                  AppSwitchButton(),
+                  AppSwitchButton(mapKey: 'chat',),
                 ],
               ),
               const Spacer(),
               DoneButton(
                 title: context.localizations.publish_ad,
-                onPressed: () {
-                  Get.bottomSheet(
-                      AppBottomSheet(
-                        body: const BottomSheetBody(),
-                        height: 390.h,
-                      ),
-                      enterBottomSheetDuration:
-                          const Duration(milliseconds: 500),
-                      exitBottomSheetDuration:
-                          const Duration(milliseconds: 400));
+                onPressed: () async {
+                 bool done = await addContactInformationSellerController.addStoreAds();
+                 if(done){
+                   Get.bottomSheet(
+                       AppBottomSheet(
+                         body: const BottomSheetBody(),
+                         height: 390.h,
+                       ),
+                       enterBottomSheetDuration:
+                       const Duration(milliseconds: 500),
+                       exitBottomSheetDuration:
+                       const Duration(milliseconds: 400));
+                 }
+
                 },
               ),
             ],

@@ -118,17 +118,23 @@ class AdsApiController with Helpers {
       facebookConnection,
       call,
       chat,postId}) async {
+    print("object");
     var map = {
-      'whatsapp': whatsapp,
-      'facebook': facebook,
-      'whatsapp_connection': whatsappConnection,
-      'facebook_connection': facebookConnection,
-      'call': call,
-      'chat': chat,
+      'whatsapp': '$whatsapp',
+      'facebook': '$facebook',
+      'whatsapp_connection': '$whatsappConnection',
+      'facebook_connection': '$facebookConnection',
+      'call': '$call',
+      'chat': '$chat',
     };
     var url = Uri.parse('${ApiSettings.addAds}/$postId');
     http.Response response = await http.post(url, headers: headers, body: map);
+    print(response.body);
+    print(response.statusCode);
+    print(SharedPrefController().token);
     var decodedJson = json.decode(response.body);
+
+
 
     if (response.statusCode == 200) {
       return Data.fromJson(decodedJson['data']);

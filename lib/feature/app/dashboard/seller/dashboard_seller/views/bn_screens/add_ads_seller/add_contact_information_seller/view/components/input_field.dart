@@ -13,7 +13,7 @@ class InputField extends GetView<AddContactInformationSellerController> {
           title: context.localizations.contact_via_whats,
           radius: 6.r,
           prefixIcon: IconsApp.whatsapp,
-          suffixIcon: AppSwitchButton(),
+          suffixIcon: AppSwitchButton(mapKey: 'whatsapp',),
           errorTitle: '',
           type: 'whatsapp',
         ),
@@ -25,7 +25,7 @@ class InputField extends GetView<AddContactInformationSellerController> {
           title: context.localizations.contact_via_face,
           radius: 6.r,
           prefixIcon: IconsApp.facebookOld,
-          suffixIcon: AppSwitchButton(),
+          suffixIcon: AppSwitchButton(mapKey: 'facebook',),
           errorTitle: "",
           type: 'facebook',
         )

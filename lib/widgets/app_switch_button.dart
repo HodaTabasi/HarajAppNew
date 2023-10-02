@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/models/general/general_model.dart';
 
+import '../feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ads_seller/add_contact_information_seller/controllers/add_contact_information_seller_controller.dart';
 import '../feature/app/dashboard/seller/dashboard_seller/views/bn_screens/add_ads_seller/controllers/add_ads_seller_controller.dart';
 
 class AppSwitchButton extends StatefulWidget {
@@ -29,6 +30,20 @@ class _AppSwitchButtonState extends State<AppSwitchButton> {
   void _toggleSwitch(bool value) {
     setState(() {
       if (widget.mapKey != null) {
+        switch(widget.mapKey){
+          case 'facebook':
+            AddContactInformationSellerController.to.facebook = value;
+            break;
+          case 'whatsapp':
+            AddContactInformationSellerController.to.whatsApp = value;
+            break;
+          case 'phone':
+            AddContactInformationSellerController.to.mobile = value;
+            break;
+          case 'chat':
+            AddContactInformationSellerController.to.chat = value;
+            break;
+        }
         GeneralModel m = GeneralModel();
         if (value) {
           m.id = 1;
@@ -52,7 +67,8 @@ class _AppSwitchButtonState extends State<AppSwitchButton> {
         if (!_isSwitchOn && value && widget.onSold != null) {
           widget.onSold!(widget.postId!);
         }
-        _isSwitchOn = value;
+        print(!_isSwitchOn);
+        _isSwitchOn = !_isSwitchOn;
       }
     });
   }

@@ -46,10 +46,12 @@ class AddContactInformationSellerController extends GetxController {
     facebookController.clear();
   }
 
-  Future<void> addStoreAds(postId) async {
+  Future<bool> addStoreAds({postId}) async {
+    print("dfdsf");
     return AddAdsSocialContactUseCase(repository: Get.find<AdsRepository>())
         .call(whatsApp?1:0,facebook?1:0,whatsappController.text,facebookController.text,mobile?1:0,chat?1:0,postIdAfterAdding ?? postId)
         .then((value) => value.fold((failure) {
+      print("dfdsf");
       responseMessage = mapFailureToMessage(failure);
       Get.snackbar(
         'Requires',
@@ -57,8 +59,10 @@ class AddContactInformationSellerController extends GetxController {
         backgroundColor: ColorResource.red,
         snackPosition: SnackPosition.BOTTOM,
       );
+      return false;
     }, (response) async {
       print("mmm Add Ads Detail Buyer Controller 💯=>  ");
+      return true;
     }));
   }
 }

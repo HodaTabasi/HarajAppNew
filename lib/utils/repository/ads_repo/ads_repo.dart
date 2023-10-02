@@ -91,6 +91,7 @@ class AdsRepository {
     facebookConnection,
     call,
     chat,postId}) async {
+    print("Dfsdf");
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.addSocialContactToAds(whatsapp: whatsapp,whatsappConnection: whatsappConnection,call: call,chat: chat,facebook: facebook,facebookConnection: facebookConnection,postId: postId);

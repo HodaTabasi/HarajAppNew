@@ -56,7 +56,7 @@ class BottomSheetBody extends StatelessWidget {
               child: DoneButton(
                 title: context.localizations.yess,
                 onPressed: () {
-                  Get.to(() => AddContactInformationSellerScreen());
+                  Get.to(() => AddAdsSellerScreen());
                 },
               ),
             ),
@@ -66,7 +66,7 @@ class BottomSheetBody extends StatelessWidget {
                 //TODO:Make Lang Here
                 title: "لاحقا",
                 onPressed: () {
-                  Get.back();
+                  Get.to(()=>DashboardSellerScreen());
                 },
               ),
             ),
