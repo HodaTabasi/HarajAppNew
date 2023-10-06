@@ -1,21 +1,22 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:haraj/feature/app/setting/controller/setting_getx_controller.dart';
+import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
+import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_divider.dart';
 import 'package:haraj/widgets/app_elevated_button.dart';
 import 'package:haraj/widgets/app_switch_button.dart';
 import 'package:haraj/widgets/app_text.dart';
 
 import '../../../../../utils/extensions/color_resource/color_resource.dart';
+import '../../../../../utils/extensions/icons_app/icons_app.dart';
+import '../../../../../utils/get/general_getx_controller.dart';
+import '../../../../../widgets/custom_textformfiled.dart';
 
 
-class SettingScreen extends StatefulWidget {
-
-  @override
-  State<SettingScreen> createState() => _SettingScreenState();
-}
-
-class _SettingScreenState extends State<SettingScreen> {
+class SettingScreen extends GetView<SettingGetXController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +60,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               ),
                               const Spacer(),
                               AppText(
-                                text:'hoda.angel.1995@gmail.com',
+                                text:SharedPrefController().email,
                                 fontWeight: FontWeight.w300,
                                 fontSize: 14.sp,
                                 color: ColorResource.mainColor,
@@ -76,25 +77,46 @@ class _SettingScreenState extends State<SettingScreen> {
                             SizedBox(
                               height: 16.h,
                             ),
-                            AppText(
-                              text: 'سوف نرسل الى رقمك رسالة نصية تحتوي كود تحقيق عليك أدخالها حتى تتمكن من تغيير رقمك',
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w300,
+                            AppTextFomField(
+                              focusNode: FocusNode(),
+                              textController: controller.emailController,
+                              textInputType: TextInputType.emailAddress,
+                              title: context.localizations.email,
+                              radius: 6.r,
+                              prefixIcon: IconsApp.email,
+                              // validator: GeneralGetxController.to.emailValidation,
+                              errorTitle: GeneralGetxController.to.emailErrorText.value,
+                              type: 'email',
                             ),
+                            // AppText(
+                            //   text: 'سوف نرسل الى رقمك رسالة نصية تحتوي كود تحقيق عليك أدخالها حتى تتمكن من تغيير رقمك',
+                            //   fontSize: 14.sp,
+                            //   fontWeight: FontWeight.w300,
+                            // ),
                             SizedBox(
                               height: 24.h,
                             ),
-                            AppElevatedButton(
-                              backgroundColor: ColorResource.red,
-                              onPressed: (){},
-                              title: 'ارسال',
-                              heightButton: 50.h,
-                              widthButton: MediaQuery.of(context).size.width-30,
-                              titleColor: Colors.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                              radius: 8,
-                            ),
+                            Obx(() {
+                              return controller.loading.isTrue
+                                  ? const Center(child: CircularProgressIndicator())
+                                  : Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                                child: AppElevatedButton(
+                                  backgroundColor: ColorResource.red,
+                                  onPressed: (){
+                                    controller.updateEmail();
+                                  },
+                                  title: 'ارسال',
+                                  heightButton: 50.h,
+                                  widthButton: MediaQuery.of(context).size.width-30,
+                                  titleColor: Colors.white,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                  radius: 8,
+                                ),
+                              );
+                            }),
+
                             SizedBox(
                               height: 24.h,
                             ),
@@ -241,6 +263,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ),
                 ),
+
                 ExpandableNotifier(
                   child: ScrollOnExpand(
                     scrollOnExpand: true,
@@ -288,6 +311,115 @@ class _SettingScreenState extends State<SettingScreen> {
                               fontWeight: FontWeight.w300,
                               fontSize: 12.sp,
                             ),
+                            AppTextFomField(
+                              focusNode: FocusNode(),
+                              textController: controller.passwordController,
+                              textInputType: TextInputType.visiblePassword,
+                              title: context.localizations.password,
+                              radius: 6.r,
+                              prefixIcon: IconsApp.password,
+                              secure:
+                              controller.isVisibility.value, // Toggle the secure property
+                              suffixIcon: IconButton(
+                                color: ColorResource.red,
+                                onPressed: () {
+                                  controller
+                                      .toggleVisibility(); // Call the toggleVisibility method
+                                  debugPrint('${controller.isVisibility.value}');
+                                },
+                                icon: Icon(
+                                  controller.isVisibility
+                                      .value // Use .value to get the RxBool value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: controller.isVisibility
+                                      .value // Use .value to get the RxBool value
+                                      ? ColorResource.gray
+                                      : ColorResource.black,
+                                ),
+                              ),
+                              // validator: GeneralGetxController.to.passwordValidation,
+                              errorTitle: GeneralGetxController.to.passwordErrorText.value,
+                              type: 'password',
+                            ),
+                            AppText(
+                              text: 'كلمة المرور الجديدة',
+                              fontWeight: FontWeight.w300,
+                              fontSize: 12.sp,
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            AppTextFomField(
+                              focusNode: FocusNode(),
+                              textController: controller.newPasswordController,
+                              textInputType: TextInputType.visiblePassword,
+                              title: context.localizations.password,
+                              radius: 6.r,
+                              prefixIcon: IconsApp.password,
+                              secure:
+                              controller.isVisibility.value, // Toggle the secure property
+                              suffixIcon: IconButton(
+                                color: ColorResource.red,
+                                onPressed: () {
+                                  controller
+                                      .toggleVisibility(); // Call the toggleVisibility method
+                                  debugPrint('${controller.isVisibility.value}');
+                                },
+                                icon: Icon(
+                                  controller.isVisibility
+                                      .value // Use .value to get the RxBool value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: controller.isVisibility
+                                      .value // Use .value to get the RxBool value
+                                      ? ColorResource.gray
+                                      : ColorResource.black,
+                                ),
+                              ),
+                              // validator: GeneralGetxController.to.passwordValidation,
+                              errorTitle: GeneralGetxController.to.confiormPasswordErrorText.value,
+                              type: 'password',
+                            ),
+                            AppText(
+                              text: 'تاكيد كلمة المرور',
+                              fontWeight: FontWeight.w300,
+                              fontSize: 12.sp,
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            AppTextFomField(
+                              focusNode: FocusNode(),
+                              textController: controller.rePasswordController,
+                              textInputType: TextInputType.visiblePassword,
+                              title: context.localizations.password,
+                              radius: 6.r,
+                              prefixIcon: IconsApp.password,
+                              secure:
+                              controller.isVisibility.value, // Toggle the secure property
+                              suffixIcon: IconButton(
+                                color: ColorResource.red,
+                                onPressed: () {
+                                  controller
+                                      .toggleVisibility(); // Call the toggleVisibility method
+                                  debugPrint('${controller.isVisibility.value}');
+                                },
+                                icon: Icon(
+                                  controller.isVisibility
+                                      .value // Use .value to get the RxBool value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: controller.isVisibility
+                                      .value // Use .value to get the RxBool value
+                                      ? ColorResource.gray
+                                      : ColorResource.black,
+                                ),
+                              ),
+                              // validator: GeneralGetxController.to.passwordValidation,
+                              errorTitle: GeneralGetxController.to.confiormPasswordErrorText.value,
+                              type: 'conformPassword',
+                            ),
                             SizedBox(
                               height: 24.h,
                             ),
@@ -300,7 +432,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     onPressed: () {
                                     },
                                     child: AppText(
-                                      text: 'نسيت لكمة المرور',
+                                      text: 'نسيت كلمة المرور',
                                       color: ColorResource.mainColor,
                                     )),
                               ],

@@ -22,6 +22,9 @@ import '../../profile_part_seller/info_view/view/screens/personal_info_seller.da
 import '../../profile_part_seller/store_image/seller_gallary_page.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../../../../../../setting/view/component/bottom_sheet_delete_account.dart';
+import '../../../../../../../../setting/view/component/bottom_sheet_logout_account.dart';
+
 part '../components/header_image.dart';
 part '../components/main_list_tile.dart';
 part '../components/app_bar_widget.dart';
@@ -128,14 +131,33 @@ class ProfileSellerScreen extends  GetView<ProfileSellerController> {
               fontSize: 14.sp,
               radius: 10.r,
               fontWeight: FontWeight.normal,
-              onPressed: () {},
+              onPressed: () {
+                Get.bottomSheet( BottomSheetBodyLogout(),
+                    backgroundColor: ColorResource.white,
+                    ignoreSafeArea: true,
+                    enterBottomSheetDuration:
+                    const Duration(milliseconds: 500),
+                    exitBottomSheetDuration:
+                    const Duration(milliseconds: 400));
+
+              },
               titleColor: ColorResource.white,
               heightButton: 50.h,
               widthButton: MediaQuery.of(context).size.width / 50.w,
               assetName: IconsApp.logout,
             ),
             TextButtonApp(
-              onPressed: () {},
+              onPressed: () {
+                Get.bottomSheet( BottomSheetBodyDelete(),
+                    backgroundColor: ColorResource.white,
+                    ignoreSafeArea: true,
+                    enterBottomSheetDuration:
+                    const Duration(milliseconds: 500),
+                    exitBottomSheetDuration:
+                    const Duration(milliseconds: 400));
+                //
+
+              },
               title: 'حذف الحساب',
               color: ColorResource.mainColor,
               alignment: Alignment.center,

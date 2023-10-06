@@ -31,7 +31,7 @@ class InputField extends GetView<LoginController> {
                     radius: 6.r,
                     prefixIcon: IconsApp.password,
                     secure:
-                        controller.isVisibility.value, // Toggle the secure property
+                        !controller.isVisibility.value, // Toggle the secure property
                     suffixIcon: IconButton(
                       color: ColorResource.red,
                       onPressed: () {

@@ -9,10 +9,10 @@ class ApiSettings {
   static const String verify = '${_apiUrl}/verify/{id}';
   static const String reSendVerify = '${_apiUrl}/resend-code';
   static const String socialLogin = '${_apiUrl}/social-login';
-  static const String logout = '${_apiUrl}user/logout';
+  static const String logout = '${_apiUrl}/logout';
   static const String changeEmail = '${_apiUrl}user/change-email';
   static const String changePassword = '${_apiUrl}user/change-password';
-  static const String deleteAccount = '${_apiUrl}user/delete';
+  static const String deleteAccount = '${_apiUrl}/account';
   //***************************PROFILE LINKS************************************
   // static const String profile = '${_apiUrl}user/profile?user_id=';
   static const String getProfile = '${_apiUrl}/profile';

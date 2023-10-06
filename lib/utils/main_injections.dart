@@ -12,6 +12,7 @@ import 'package:haraj/utils/repository/favorite_repo/favorite_repo.dart';
 import 'package:haraj/utils/repository/general_repo.dart';
 import 'package:haraj/utils/repository/offer_repo/offer_repo.dart';
 import 'package:haraj/utils/repository/profile_repo.dart';
+import 'package:haraj/utils/repository/setting_repo.dart';
 import 'package:haraj/utils/repository/store_repo/store_repo.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -25,6 +26,7 @@ import '../feature/app/setting/controller/setting_getx_controller.dart';
 import 'api/network_info.dart';
 import 'api_controller/complete_user_profile_controller.dart';
 import 'api_controller/general_api_controller.dart';
+import 'api_controller/setting_api_controller.dart';
 
 class MainInjection implements Bindings {
   @override
@@ -47,21 +49,36 @@ class MainInjection implements Bindings {
         networkInfo: networkInfoImpl));
 
     Get.put(OTPGetxController());
+
+    Get.put(SettingGetXController());
+
     Get.put(AddContactInformationSellerController());
     //Get.put(ProfileSellerController());
     Get.put(CompleteProfileSellerController());
+
     Get.put(AddAddressSellerController());
+
     Get.put(SettingGetXController());
+
     Get.put(CompleteStoreSellerController());
+
     Get.put(AdsRepository(
         networkInfo: networkInfoImpl, remoteDataSource: AdsApiController()));
+
     Get.put(StoreRepository(
         networkInfo: networkInfoImpl, remoteDataSource: StoreApiController()));
+
     Get.put(CompleteProfileBuyerController());
+
     Get.put(OfferRepository(
         networkInfo: networkInfoImpl, remoteDataSource: OfferApiController()));
+
     Get.put(FavoriteRepository(
         networkInfo: networkInfoImpl,
         remoteDataSource: FavoriteApiController()));
+
+    Get.put(SettingRepo(
+        networkInfo: networkInfoImpl,
+        remoteDataSource: SettingApiController()));
   }
 }

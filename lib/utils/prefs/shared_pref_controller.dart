@@ -32,10 +32,15 @@ class SharedPrefController {
         PrefKeys.token.toString(), 'Bearer ${user.data?.token}');
     await _sharedPreferences.setInt(
         PrefKeys.storeId.toString(), user.data?.store?.id ?? 0);
+    await _sharedPreferences.setString(
+        PrefKeys.email.toString(), user.data?.email ?? '');
   }
 
   ///get user type
   int get type => _sharedPreferences.getInt(PrefKeys.type.toString()) ?? 0;
+  /// get email
+  String get email => _sharedPreferences.getString(PrefKeys.email.toString()) ??"";
+  set email(token) => _sharedPreferences.getString(PrefKeys.email.toString());
 
   //fcm token
   String get fcmToken => _sharedPreferences.getString(PrefKeys.fcmToken.toString()) ?? "";

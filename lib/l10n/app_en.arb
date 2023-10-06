@@ -253,7 +253,7 @@
     "valid_phone": "must contain 10 diget",
     "valid_email": "invalid email",
     "valid_password": "must contain 8 diget",
-    "valid_name": "must contain 4 char at least"
-
-
+    "valid_name": "must contain 4 char at least",
+    "logout_account": "Are you sure you want to log out?",
+    "delete_account_msg": "It is unfortunate to see you leaving our application permanently, and we hope that\n   Retract your decision as quickly as possible, knowing that it is the end\nYour account will be deleted 28 days after you leave\nThe status suspension lasts only before the end of the term\nNote the entry and the order will be canceled automatically. Thank you"
 }
