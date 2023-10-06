@@ -171,4 +171,36 @@ extension ContextExtension on BuildContext {
     // );
   }
 }
+
+  Future<void> launchTUrl(url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  Future<void> launchFaceBookUrl(url) async {
+    String fbProtocolUrl;
+    if (Platform.isIOS) {
+      fbProtocolUrl = 'fb://profile/100092446166287';
+    } else {
+      fbProtocolUrl = 'fb://profile/100092446166287';
+      // fbProtocolUrl = 'fb://page/100092446166287';
+    }
+//https://www.facebook.com/profile.php?id=100092446166287
+    String fallbackUrl = "https://www.facebook.com/profile.php";
+
+    try {
+      Uri fbBundleUri = Uri.parse(fbProtocolUrl);
+      var canLaunchNatively = await canLaunchUrl(fbBundleUri);
+
+      if (canLaunchNatively) {
+        launchUrl(fbBundleUri);
+      } else {
+        await launchUrl(Uri.parse(fbProtocolUrl),
+            mode: LaunchMode.externalApplication);
+      }
+    } catch (e, st) {
+      // Handle this as you prefer
+    }
+  }
 }

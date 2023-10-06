@@ -134,8 +134,6 @@ class CompleteProfileSellerController extends GetxController {
                 ProfileSellerController.to.userModel = user;
                 Get.back();
               } else {
-                SharedPrefController().isCompleteStore = false;
-                SharedPrefController().isCompleteProfile = true;
                 Get.to(() => CompleteStoreSellerScreen());
               }
             }));

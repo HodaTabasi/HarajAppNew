@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
+import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 
 //typedef BackgroundMessageHandler = Future<void> Function(RemoteMessage message);
 Future<void> firebaseMessagingBackgroundHandler(
@@ -104,6 +105,7 @@ mixin FbNotifications {
 
   static Future<void> getToken() async {
     await FirebaseMessaging.instance.getToken().then((value) {
+      SharedPrefController().fcmToken = value;
       debugPrint("Token device📲=>  $value ");
     });
   }

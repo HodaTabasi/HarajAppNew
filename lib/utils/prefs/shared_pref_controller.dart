@@ -34,33 +34,12 @@ class SharedPrefController {
         PrefKeys.storeId.toString(), user.data?.store?.id ?? 0);
   }
 
-  //profileComplete
-  set isCompleteProfile(code) {
-    _sharedPreferences.setBool(PrefKeys.isCompleteProfile.toString(), code);
-  }
-
-  bool get isCompleteProfile =>
-      _sharedPreferences.getBool(PrefKeys.isCompleteProfile.toString()) ??
-      false;
-
-  //address
-  set isCompleteAddress(code) {
-    _sharedPreferences.setBool(PrefKeys.isCompleteAddress.toString(), code);
-  }
-
-  bool get isCompleteAddress =>
-      _sharedPreferences.getBool(PrefKeys.isCompleteAddress.toString()) ??
-      false;
-//store Completed
-  set isCompleteStore(code) {
-    _sharedPreferences.setBool(PrefKeys.isCompleteStore.toString(), code);
-  }
-
-  bool get isCompleteStore =>
-      _sharedPreferences.getBool(PrefKeys.isCompleteStore.toString()) ?? false;
-
   ///get user type
   int get type => _sharedPreferences.getInt(PrefKeys.type.toString()) ?? 0;
+
+  //fcm token
+  String get fcmToken => _sharedPreferences.getString(PrefKeys.fcmToken.toString()) ?? "";
+  set fcmToken(token) => _sharedPreferences.getString(PrefKeys.fcmToken.toString());
 
 //verify set get
   String get vierifyCode =>

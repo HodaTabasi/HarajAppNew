@@ -8,6 +8,7 @@ import '../errors/error_const.dart';
 import '../errors/exceptions.dart';
 import '../extensions/helpers/helpers.dart';
 import '../models/governorates_model/governorates_response.dart';
+import '../models/setting/setting.dart';
 
 class GeneralApiController with Helpers {
   getGovernorates() async {
@@ -37,6 +38,20 @@ class GeneralApiController with Helpers {
     print(decodedJson);
     if (response.statusCode == 200) {
       ApiResponse.fromJson(decodedJson);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
+
+  getSettings() async {
+    var url = Uri.parse(ApiSettings.setting);
+    http.Response response = await http.get(url, headers: headers);
+    var decodedJson = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      // GetStorage().write('otp', decodedJson['otp_code']);
+      return SettingModel.fromJson(decodedJson['data']);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();

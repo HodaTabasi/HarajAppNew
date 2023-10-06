@@ -35,7 +35,7 @@ class HomeSellerScreen extends GetView<HomeSellerController> {
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
         //TODO:make lang here
-        title: 'المحفوظات',
+        title: 'الرئيسية',
         heightBackground: 210.h,
         showLeading: false,
         showSearch: true,

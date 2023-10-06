@@ -8,6 +8,7 @@ import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/get/general_getx_controller.dart';
 import 'package:haraj/utils/models/bn_model/bn_model.dart';
+import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
 
 import 'bn_screens/profile_seller/view/screen/profile_seller_screen.dart';
@@ -79,7 +80,7 @@ class _DashboardSellerScreenState extends State<DashboardSellerScreen> {
 
   @override
   void initState() {
-    GeneralGetxController.to.sendFcmToken("token");
+    GeneralGetxController.to.sendFcmToken(SharedPrefController().fcmToken);
     super.initState();
   }
 

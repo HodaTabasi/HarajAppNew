@@ -248,7 +248,6 @@ class AddAddressSellerController extends GetxController {
                 Get.back();
                 return false;
               } else {
-                SharedPrefController().isCompleteAddress = true;
                 return true;
               }
 

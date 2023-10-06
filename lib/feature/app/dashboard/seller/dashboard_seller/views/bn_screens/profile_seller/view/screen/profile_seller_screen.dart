@@ -69,7 +69,14 @@ class ProfileSellerScreen extends  GetView<ProfileSellerController> {
               image: IconsApp.aboutUs,
               text: 'من نحن',
               onPress: () {
-                Get.to(()=>StaticScreen());
+                Get.to(()=>StaticScreen('about_us'));
+              },
+            ),
+            MainListTile(
+              image: IconsApp.aboutUs,
+              text: 'حول التطبيق',
+              onPress: () {
+                Get.to(()=>StaticScreen('about_app'));
               },
             ),
             MainListTile(
@@ -98,14 +105,14 @@ class ProfileSellerScreen extends  GetView<ProfileSellerController> {
               image: IconsApp.policy,
               text: 'سياسات الخصوصية',
               onPress: () {
-                Get.to(()=>StaticScreen());
+                Get.to(()=>StaticScreen('privacy'));
               },
             ),
             MainListTile(
               image: IconsApp.condations,
               text: 'الشروط والاحكام',
               onPress: () {
-                Get.to(()=>StaticScreen());
+                Get.to(()=>StaticScreen('usage_conditions'));
               },
             ),
             MainListTile(

@@ -26,7 +26,7 @@ class _HeaderTitleState extends State<HeaderTitle> {
           children: [
             AppText(
               color: ColorResource.mainFontColor,
-              text: controller.adsDetail.car!.name!,
+              text: controller.adsDetail.car?.name ?? '',
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,
             ),

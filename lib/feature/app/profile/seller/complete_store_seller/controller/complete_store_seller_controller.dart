@@ -139,8 +139,6 @@ class CompleteStoreSellerController extends GetxController {
           if(fromEditPage){
             Get.back();
           }else {
-            SharedPrefController().isCompleteStore = true;
-            SharedPrefController().isCompleteAddress = false;
             Get.to(() => AddAddressSellerScreen());
           }
 

@@ -21,6 +21,7 @@ import '../feature/app/profile/complete_profile/controller/complete_profile_buye
 import '../feature/app/profile/complete_profile/controller/complete_profile_seller_controller.dart';
 import '../feature/app/profile/seller/add_address_seller/controller/add_address_seller_controller.dart';
 import '../feature/app/profile/seller/complete_store_seller/controller/complete_store_seller_controller.dart';
+import '../feature/app/setting/controller/setting_getx_controller.dart';
 import 'api/network_info.dart';
 import 'api_controller/complete_user_profile_controller.dart';
 import 'api_controller/general_api_controller.dart';
@@ -50,6 +51,7 @@ class MainInjection implements Bindings {
     //Get.put(ProfileSellerController());
     Get.put(CompleteProfileSellerController());
     Get.put(AddAddressSellerController());
+    Get.put(SettingGetXController());
     Get.put(CompleteStoreSellerController());
     Get.put(AdsRepository(
         networkInfo: networkInfoImpl, remoteDataSource: AdsApiController()));

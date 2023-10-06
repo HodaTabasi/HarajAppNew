@@ -19,7 +19,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FbNotifications.initNotifications();
-  // await FbNotifications.getToken();
+  await FbNotifications.getToken();
 
   runApp(MyApp());
 }

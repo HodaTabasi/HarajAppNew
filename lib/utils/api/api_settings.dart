@@ -40,4 +40,6 @@ class ApiSettings {
   static const String addFavorite = '${_apiUrl}/post';
 // ***************************NOTIFICATION************************************
   static const String sendFCMToken = '${_apiUrl}/fcms';
+  // ***************************SETTING************************************
+  static const String setting = '${_apiUrl}/settings';
 }

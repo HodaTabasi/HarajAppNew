@@ -301,10 +301,13 @@ class _AppCarContainerState extends State<AppCarContainer> {
                               fontWeight: FontWeight.w500,
                             ),
                             const Spacer(),
-                            AppSwitchButton(
-                                isSold: widget.isSold,
-                                postId: widget.postId,
-                                onSold: widget.onSold),
+                            SizedBox(
+                              height: 40.h,
+                              child: AppSwitchButton(
+                                  isSold: widget.isSold,
+                                  postId: widget.postId,
+                                  onSold: widget.onSold),
+                            ),
                           ],
                         ),
                 ],

@@ -11,4 +11,5 @@ enum PrefKeys {
   isCompleteStore,
   isCompleteProfile,
   storeId,
+  fcmToken
 }

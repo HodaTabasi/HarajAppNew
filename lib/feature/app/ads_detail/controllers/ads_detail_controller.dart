@@ -167,7 +167,7 @@ class AdsDetailController extends GetxController {
             }, (response) async {
               allOffers.clear();
               allOffers.addAll(response.data ?? []);
-              meta = response.meta!;
+              meta = response.meta ?? Meta(currentPage: 1,lastPage: 1);
             }));
   }
 

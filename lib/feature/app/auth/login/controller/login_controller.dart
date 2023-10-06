@@ -85,11 +85,11 @@ class LoginController extends GetxController {
             }, (user) async {
               SharedPrefController().save(user: user);
               if (user.data?.type == 1) {
-                if (!SharedPrefController().isCompleteProfile) {
+                if (user.data?.name == null) {
                   Get.offAll(() => CompleteProfileSellerScreen());
-                } else if (!SharedPrefController().isCompleteStore) {
+                } else if (user.data?.store?.name == null) {
                   Get.offAll(() => CompleteStoreSellerScreen());
-                } else if (!SharedPrefController().isCompleteAddress) {
+                } else if (user.data?.store?.address?.city == null) {
                   Get.offAll(() => AddAddressSellerScreen());
                 } else {
                   Get.offAll(() => const DashboardSellerScreen());
