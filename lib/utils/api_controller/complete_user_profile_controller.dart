@@ -82,12 +82,17 @@ class CompleteUserProfileController with Helpers {
         decodedJson = jsonDecode(response.body);
     }else {
       var request = http.MultipartRequest('POST', url);
-      http.MultipartFile imageFile =
-      await http.MultipartFile.fromPath('avatar', path);
-      http.MultipartFile imageFile1 =
-      await http.MultipartFile.fromPath('commercial_register_image', imageFileCommPath);
-      request.files.add(imageFile);
-      request.files.add(imageFile1);
+      if(path != null){
+        http.MultipartFile imageFile =
+        await http.MultipartFile.fromPath('avatar', path);
+        request.files.add(imageFile);
+      }else if(imageFileCommPath != null){
+        http.MultipartFile imageFile1 =
+        await http.MultipartFile.fromPath('commercial_register_image', imageFileCommPath);
+
+        request.files.add(imageFile1);
+      }
+
       request.headers[HttpHeaders.acceptHeader] = 'application/json';
       request.headers[HttpHeaders.authorizationHeader] = SharedPrefController().token;
       request.headers[HttpHeaders.acceptLanguageHeader] = SharedPrefController().language;
