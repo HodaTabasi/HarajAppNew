@@ -12,7 +12,7 @@ class CompleteStoreUseCase {
 
   CompleteStoreUseCase({required this.repository});
 
-  Future<Either<Failure, UserModel>> call(Store store,String? imagePath) async {
-    return await repository.completeStoreData(storeData: store,imageFile: imagePath);
+  Future<Either<Failure, UserModel>> call(Store store,String? imagePath,String? imagePath1) async {
+    return await repository.completeStoreData(storeData: store,imageFile: imagePath,imageFileComm: imagePath1);
   }
 }

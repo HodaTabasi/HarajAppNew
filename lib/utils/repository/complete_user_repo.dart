@@ -27,10 +27,10 @@ class CompletePersonalInfoRepo {
     }
   }
 
-  Future<Either<Failure, UserModel>> completeStoreData({storeData,imageFile}) async {
+  Future<Either<Failure, UserModel>> completeStoreData({storeData,imageFile,imageFileComm}) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await remoteDataSource.updateStoreInfo(store: storeData,path:imageFile);
+        final response = await remoteDataSource.updateStoreInfo(store: storeData,path:imageFile,imageFileCommPath:imageFileComm);
         return Right(response);
       } on ServerException {
         return Left(ServerFailure());

@@ -25,10 +25,12 @@ part '../components/header_title.dart';
 part '../components/image_profile.dart';
 part '../components/input_field.dart';
 part '../components/save_button.dart';
+part '../components/image_commercial_register.dart';
 
 class CompleteStoreSellerScreen extends GetView<CompleteStoreSellerController> {
   CompleteStoreSellerController completeStoreSellerController =
       Get.put(CompleteStoreSellerController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +51,7 @@ class CompleteStoreSellerScreen extends GetView<CompleteStoreSellerController> {
                         const ImageProfile(),
                         SizedBox(height: 30.h),
                         InputField(),
+                        const ImageCommercialRegister(),
                         SizedBox(height: 15.h),
                         Obx(() {
                           return controller.loading.isTrue

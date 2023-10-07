@@ -65,12 +65,12 @@ class CompleteUserProfileController with Helpers {
     }
   }
 
-  updateStoreInfo({required Store store,path}) async {
+  updateStoreInfo({required Store store,path,imageFileCommPath}) async {
     var url = Uri.parse(ApiSettings.updateStoreData);
     var response;
     var decodedJson;
 
-    if(path == null){
+    if(path == null && imageFileCommPath == null){
       var map = {
       'name': store.name ??"",
       'email': store.email!,
@@ -84,7 +84,10 @@ class CompleteUserProfileController with Helpers {
       var request = http.MultipartRequest('POST', url);
       http.MultipartFile imageFile =
       await http.MultipartFile.fromPath('avatar', path);
+      http.MultipartFile imageFile1 =
+      await http.MultipartFile.fromPath('commercial_register_image', imageFileCommPath);
       request.files.add(imageFile);
+      request.files.add(imageFile1);
       request.headers[HttpHeaders.acceptHeader] = 'application/json';
       request.headers[HttpHeaders.authorizationHeader] = SharedPrefController().token;
       request.headers[HttpHeaders.acceptLanguageHeader] = SharedPrefController().language;

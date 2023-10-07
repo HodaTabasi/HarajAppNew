@@ -20,7 +20,9 @@ class CompleteStoreSellerController extends GetxController {
   RxBool loading = false.obs;
   RxBool isVisibility = false.obs;
   XFile? file;
+  XFile? fileComm;
   String? imageUrl;
+  String? imageUrlComm;
   bool fromEditPage = false;
 
   Store get store => Store(
@@ -50,6 +52,7 @@ class CompleteStoreSellerController extends GetxController {
         briefController.text = user.store!.description ??'';
         fromEditPage = true;
         imageUrl = user.store!.avatar;
+        imageUrlComm = user.store!.commercialRegisterImage;
     }else {
       nameController = TextEditingController();
       phoneController = TextEditingController();
@@ -126,7 +129,7 @@ class CompleteStoreSellerController extends GetxController {
   Future<void> completeProfile() async {
     return CompleteStoreUseCase(
             repository: Get.find<CompletePersonalInfoRepo>())
-        .call(store, file?.path)
+        .call(store, file?.path,fileComm?.path)
         .then((value) => value.fold((failure) {
               responseMessage = mapFailureToMessage(failure);
               Get.snackbar(
