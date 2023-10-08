@@ -17,7 +17,8 @@ class ProfileApiController with Helpers{
     http.Response response = await http.get(url, headers: headers);
     var decodedJson = json.decode(response.body);
 
-    print(decodedJson);
+    print("mmm profile Headers 💯=> $headers");
+    print("mmm profile  💯=> $decodedJson");
     if (response.statusCode == 200) {
       return UserModel.fromJson(decodedJson);
     } else {

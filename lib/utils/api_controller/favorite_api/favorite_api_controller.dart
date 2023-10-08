@@ -17,6 +17,7 @@ class FavoriteApiController with Helpers {
     var decodedJson = json.decode(response.body);
 
     debugPrint("mmm favoritePost 💯=> $decodedJson");
+    debugPrint("mmm favoritePost Headers 💯=> $headers");
 
     if (response.statusCode == 200) {
       return StorePostModel.fromJson(decodedJson);

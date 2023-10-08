@@ -176,9 +176,9 @@ class _AppAdsCarContainerState extends State<AppAdsCarContainer> {
                         alignment: Alignment.center,
                         color: Colors.white,
                         height: 30.h,
-                        width: 30.w,
+                        width: 35.w,
                         child: CircleAvatar(
-                          radius: 20.r,
+                          radius: 15.r,
                           backgroundColor: ColorResource.lightGray,
                           backgroundImage: NetworkImage(widget.imageSeller),
                         ),

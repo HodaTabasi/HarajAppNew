@@ -20,6 +20,10 @@ class AdsApiController with Helpers {
     http.Response response = await http.get(url, headers: headers);
     var decodedJson = json.decode(response.body);
 
+    print("mmm ads Headers 💯=> $headers");
+    print("mmm ads  💯=> $decodedJson");
+    print("mmm ads  💯=> ${response.statusCode}");
+
     if (response.statusCode == 200) {
       return AdsModel.fromJson(decodedJson);
     } else {

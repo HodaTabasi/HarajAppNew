@@ -27,7 +27,7 @@ class _ShowAdsState extends State<ShowAds> {
             crossAxisCount: 2,
             mainAxisSpacing: 17.h, // Add spacing between grid items.
             crossAxisSpacing: 15.w, // Add spacing between grid items.
-            childAspectRatio: 160.w / 281.h, // Width on Height
+            childAspectRatio: 160.w / 291.h, // Width on Height
           ),
           itemBuilder: (BuildContext context, int index) {
             if (controller.ads[index].status == true &&
