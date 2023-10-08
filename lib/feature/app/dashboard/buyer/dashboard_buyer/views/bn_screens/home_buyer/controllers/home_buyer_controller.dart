@@ -7,12 +7,13 @@ import 'package:haraj/utils/models/meta/meta_model.dart';
 import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
 
 import '../../../../../../../../../utils/models/ads_model/ads_model.dart';
+import '../../../../../../../ads_detail/use_case/toggle_favorite_use_case.dart';
 
 class HomeBuyerController extends GetxController {
   static HomeBuyerController get to => Get.find<HomeBuyerController>();
 
   RxBool loading = false.obs;
-  RxBool isFavorite = false.obs;
+  RxBool isFavoriteLoading = false.obs;
   var responseMessage = "";
   RxList<Data> ads = <Data>[].obs;
   Meta meta = Meta();
@@ -63,5 +64,28 @@ class HomeBuyerController extends GetxController {
               meta = response.meta!;
               loading.value = false;
             }));
+  }
+
+  Future<void> toggleFavorite({postId,index}) async {
+    // isFavoriteLoading.value = true;
+    return ToggleFavoriteUseCase(repository: Get.find<AdsRepository>())
+        .call(postId.toString())
+        .then((value) => value.fold(
+          (failure) {
+        responseMessage = mapFailureToMessage(failure);
+        Get.snackbar(
+          'Requires',
+          responseMessage,
+          backgroundColor: ColorResource.red,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        // isFavoriteLoading.value = false;
+      },
+          (response) async {
+            ads[index].isFavorite = !(ads[index].isFavorite!);
+            ads.refresh();
+        // isFavoriteLoading.value = false;
+      },
+    ));
   }
 }

@@ -47,6 +47,8 @@ class _ShowAdsState extends State<ShowAds> {
                   nameLocation:
                       controller.ads[index].store!.address!.governorate!.name!,
                   isFavorite: controller.ads[index].isFavorite!,
+                  id: controller.ads[index].id!,
+                  index: index,
                 ),
               );
             } else {

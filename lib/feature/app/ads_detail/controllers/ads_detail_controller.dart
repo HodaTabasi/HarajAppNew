@@ -9,6 +9,7 @@ import 'package:haraj/feature/app/ads_detail/use_case/reject_offer_use_case.dart
 import 'package:haraj/feature/app/ads_detail/use_case/show_post_new_offer_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/show_post_offer_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/views/screens/ads_detail_screen.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/home_buyer/controllers/home_buyer_controller.dart';
 import 'package:haraj/feature/app/offer/controllers/offer_controller.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
@@ -299,14 +300,10 @@ class AdsDetailController extends GetxController {
       },
           (response) async {
             adsDetail.value.isFavorite = !(adsDetail.value.isFavorite!);
-
+            int index = HomeBuyerController.to.ads.indexWhere((element) => element.id == adsDetail.value.id);
+            HomeBuyerController.to.ads[index].isFavorite = adsDetail.value.isFavorite;
+            HomeBuyerController.to.ads.refresh();
             isFavoriteLoading.value = false;
-          // Get.snackbar(
-          //   'Requires',
-          //   responseMessage,
-          //   backgroundColor: ColorResource.red,
-          //   snackPosition: SnackPosition.BOTTOM,
-          // );
       },
     ));
   }
