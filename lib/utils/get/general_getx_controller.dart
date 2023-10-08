@@ -17,6 +17,8 @@ class GeneralGetxController extends GetxController {
   GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   GlobalKey<FormState> newUserKey = GlobalKey<FormState>();
   GlobalKey<FormState> sellerProfileKey = GlobalKey<FormState>();
+  GlobalKey<FormState> sellerAddressKey = GlobalKey<FormState>();
+  GlobalKey<FormState> sellerStoreKey = GlobalKey<FormState>();
   // GlobalKey<FormState> profileKey = GlobalKey<FormState>();
 
   static GeneralGetxController get to =>
