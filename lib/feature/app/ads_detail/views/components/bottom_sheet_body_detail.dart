@@ -57,55 +57,55 @@ class _BottomSheetBodyDetailState extends State<BottomSheetBodyDetail> {
               children: [
                 LineDetail(
                   detail: 'المواصفات الاقليمية :',
-                  result: controller.adsDetail.standard!.name!,
+                  result: controller.adsDetail.value.standard!.name!,
                 ),
                 LineDetail(
                   detail: 'الضمان :',
-                  result: controller.adsDetail.guarantee.toString(),
+                  result: controller.adsDetail.value.guarantee.toString(),
                 ),
                 LineDetail(
                   detail: 'نشر في  :',
-                  result: controller.adsDetail.createdAt!,
+                  result: controller.adsDetail.value.createdAt!,
                 ),
                 LineDetail(
                   detail: 'اللون الخارجي :',
-                  result: controller.adsDetail.outColor!.name!,
+                  result: controller.adsDetail.value.outColor!.name!,
                 ),
                 LineDetail(
                   detail: 'عدد الابواب :',
-                  result: controller.adsDetail.door!.number.toString(),
+                  result: controller.adsDetail.value.door!.number.toString(),
                 ),
                 LineDetail(
                   detail: 'الحالة :',
-                  result: controller.adsDetail.generalStatus!.name!,
+                  result: controller.adsDetail.value.generalStatus!.name!,
                 ),
                 LineDetail(
                   detail: 'اللون الداخلي :',
-                  result: controller.adsDetail.inColor!.name!,
+                  result: controller.adsDetail.value.inColor!.name!,
                 ),
                 LineDetail(
                   detail: 'عدد المقاعد :',
-                  result: controller.adsDetail.seat!.number.toString(),
+                  result: controller.adsDetail.value.seat!.number.toString(),
                 ),
                 LineDetail(
                   detail: 'عدد الاسطوانات :',
-                  result: controller.adsDetail.cylinder!.number.toString(),
+                  result: controller.adsDetail.value.cylinder!.number.toString(),
                 ),
                 LineDetail(
                   detail: 'نوع الوقود :',
-                  result: controller.adsDetail.fuel!.name!,
+                  result: controller.adsDetail.value.fuel!.name!,
                 ),
                 LineDetail(
                   detail: 'ميزات تقنية :',
-                  result: controller.adsDetail.mechanicalStatus!.name!,
+                  result: controller.adsDetail.value.mechanicalStatus!.name!,
                 ),
                 LineDetail(
                   detail: 'جهة القيادة :',
-                  result: controller.adsDetail.drivingSide!.name!,
+                  result: controller.adsDetail.value.drivingSide!.name!,
                 ),
                 LineDetail(
                   detail: 'اضافي :',
-                  result: controller.adsDetail.details!,
+                  result: controller.adsDetail.value.details!,
                 ),
               ],
             ),

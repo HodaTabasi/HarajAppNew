@@ -8,6 +8,7 @@ import 'package:haraj/utils/models/general/general_model.dart';
 import 'package:haraj/utils/models/instruction/instruction_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../../api/api_response.dart';
 import '../../errors/error_const.dart';
 import '../../errors/exceptions.dart';
 import '../../models/car_properties/car_properties.dart';
@@ -139,11 +140,23 @@ class AdsApiController with Helpers {
     var decodedJson = json.decode(response.body);
 
 
-
     if (response.statusCode == 200) {
       return Data.fromJson(decodedJson['data']);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
+
+  toggleFavorite({postId}) async {
+    var url = Uri.parse('${ApiSettings.toggleFavorite}/$postId/toggle-favorite');
+    http.Response response = await http.post(url, headers: headers);
+    var decodedJson = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      return ApiResponse.fromJson(decodedJson);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['reason'];
       throw ServerException();
     }
   }

@@ -70,75 +70,76 @@ class _AdsDetailScreenState extends State<AdsDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: CustomAppBar(
-        //TODO:make lang here
-        title: 'تفاصيل الاعلان',
-        heightBackground: 100.h,
-        showLeading: true,
-        showSearch: false,
-        showActions: true,
-        appActions: AppActions(id: widget.productId),
-      ),
-      body: Obx(() {
-        return adsDetailController.loading.value
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SwiperComponent(id: widget.productId),
-                      AppDivider(
-                        height: 34.h,
-                        color: ColorResource.gray,
-                        thickness: 1,
-                      ),
-                      HeaderTitle(id: widget.productId),
-                      AppDivider(
-                        height: 34.h,
-                        color: ColorResource.gray,
-                        thickness: 1,
-                      ),
-                      SharedPrefController().type == 1
-                          ? TabBarComponent(
-                              tabTitles: [
-                                context.localizations.details,
-                                context.localizations.contact_info,
-                                context.localizations.all_offers,
-                              ],
-                              tabViews: [
-                                AdsDetailComponent(id: widget.productId),
-                                AdsContactInfoComponent(id: widget.productId),
-                                AdsAllOffersComponent(id: widget.productId),
-                              ],
-                              height: 250.h,
-                            )
-                          : TabBarComponent(
-                              tabTitles: [
-                                context.localizations.details,
-                                context.localizations.contact,
-                                context.localizations.offer_submit,
-                                //TODO:Make Lang Here
-                                "ارشادات",
-                              ],
-                              tabViews: [
-                                AdsDetailComponent(id: widget.productId),
-                                AdsCommunicationComponent(id: widget.productId),
-                                AdsOfferSubmitComponent(id: widget.productId),
-                                AdsInstructionsComponent(id: widget.productId),
-                                // Other tab views
-                              ],
-                              height: 250.h,
-                            ),
-                    ]),
-              );
-      }),
+    return Obx(() {
+        return Scaffold(
+          resizeToAvoidBottomInset: true,
+          appBar: CustomAppBar(
+            //TODO:make lang here
+            title: 'تفاصيل الاعلان',
+            heightBackground: 100.h,
+            showLeading: true,
+            showSearch: false,
+            showActions: true,
+            appActions: AppActions(id: widget.productId),
+          ),
+          body:  adsDetailController.loading.value
+              ? const Center(
+            child: CircularProgressIndicator(),
+          )
+              : SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SwiperComponent(id: widget.productId),
+                  AppDivider(
+                    height: 34.h,
+                    color: ColorResource.gray,
+                    thickness: 1,
+                  ),
+                  HeaderTitle(id: widget.productId),
+                  AppDivider(
+                    height: 34.h,
+                    color: ColorResource.gray,
+                    thickness: 1,
+                  ),
+                  SharedPrefController().type == 1
+                      ? TabBarComponent(
+                    tabTitles: [
+                      context.localizations.details,
+                      context.localizations.contact_info,
+                      context.localizations.all_offers,
+                    ],
+                    tabViews: [
+                      AdsDetailComponent(id: widget.productId),
+                      AdsContactInfoComponent(id: widget.productId),
+                      AdsAllOffersComponent(id: widget.productId),
+                    ],
+                    height: 250.h,
+                  )
+                      : TabBarComponent(
+                    tabTitles: [
+                      context.localizations.details,
+                      context.localizations.contact,
+                      context.localizations.offer_submit,
+                      //TODO:Make Lang Here
+                      "ارشادات",
+                    ],
+                    tabViews: [
+                      AdsDetailComponent(id: widget.productId),
+                      AdsCommunicationComponent(id: widget.productId),
+                      AdsOfferSubmitComponent(id: widget.productId),
+                      AdsInstructionsComponent(id: widget.productId),
+                      // Other tab views
+                    ],
+                    height: 250.h,
+                  ),
+                ]),
+          ),
+        );
+      }
     );
   }
 }

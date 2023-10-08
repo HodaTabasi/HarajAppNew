@@ -42,4 +42,6 @@ class ApiSettings {
   static const String sendFCMToken = '${_apiUrl}/fcms';
   // ***************************SETTING************************************
   static const String setting = '${_apiUrl}/settings';
+  // ***************************SETTING************************************
+  static const String toggleFavorite = '${_apiUrl}/post';
 }

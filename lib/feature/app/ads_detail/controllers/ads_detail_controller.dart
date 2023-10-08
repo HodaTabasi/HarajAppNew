@@ -23,6 +23,8 @@ import 'package:haraj/utils/repository/favorite_repo/favorite_repo.dart';
 import 'package:haraj/utils/repository/offer_repo/offer_repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../use_case/toggle_favorite_use_case.dart';
+
 class AdsDetailController extends GetxController {
   final int productId; // Add this line to store the productId
 
@@ -31,9 +33,9 @@ class AdsDetailController extends GetxController {
   static AdsDetailController get to => Get.find<AdsDetailController>();
 
   RxBool loading = false.obs;
-  RxBool isFavorite = false.obs;
+  RxBool isFavoriteLoading = false.obs;
   var responseMessage = "";
-  Data adsDetail = Data();
+  Rx<Data> adsDetail = Data().obs;
   OfferModel offerModel = OfferModel();
   RxList<OfferModel> newOffers = <OfferModel>[].obs;
   RxList<OfferModel> allOffers = <OfferModel>[].obs;
@@ -109,7 +111,7 @@ class AdsDetailController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (response) async {
-              adsDetail = response;
+              adsDetail.value = response;
               getInstructionAds();
               if (SharedPrefController().type == 1) {
                 showPostOffer();
@@ -278,5 +280,34 @@ class AdsDetailController extends GetxController {
               favorite = response;
               update();
             }));
+  }
+
+  Future<void> toggleFavorite({postId}) async {
+    isFavoriteLoading.value = true;
+    return ToggleFavoriteUseCase(repository: Get.find<AdsRepository>())
+        .call(postId.toString())
+        .then((value) => value.fold(
+          (failure) {
+        responseMessage = mapFailureToMessage(failure);
+        Get.snackbar(
+          'Requires',
+          responseMessage,
+          backgroundColor: ColorResource.red,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        isFavoriteLoading.value = false;
+      },
+          (response) async {
+            adsDetail.value.isFavorite = !(adsDetail.value.isFavorite!);
+
+            isFavoriteLoading.value = false;
+          // Get.snackbar(
+          //   'Requires',
+          //   responseMessage,
+          //   backgroundColor: ColorResource.red,
+          //   snackPosition: SnackPosition.BOTTOM,
+          // );
+      },
+    ));
   }
 }

@@ -26,13 +26,13 @@ class _HeaderTitleState extends State<HeaderTitle> {
           children: [
             AppText(
               color: ColorResource.mainFontColor,
-              text: controller.adsDetail.car?.name ?? '',
+              text: controller.adsDetail.value.car?.name ?? '',
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,
             ),
             AppText(
               color: ColorResource.mainColor,
-              text: controller.adsDetail.price!,
+              text: controller.adsDetail.value.price!,
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,
             ),
@@ -58,7 +58,7 @@ class _HeaderTitleState extends State<HeaderTitle> {
                   ),
                   AppText(
                     color: ColorResource.gray,
-                    text: controller.adsDetail.createdAt!,
+                    text: controller.adsDetail.value.createdAt!,
                     fontWeight: FontWeight.w500,
                     fontSize: 16.sp,
                   ),
@@ -69,13 +69,13 @@ class _HeaderTitleState extends State<HeaderTitle> {
                 children: [
                   Expanded(
                     child: OfferCard(
-                      name: controller.adsDetail.store!.name!,
-                      subName: controller.adsDetail.store!.description!,
-                      image: controller.adsDetail.store!.avatar!,
-                      posting: controller.adsDetail.createdAt!,
+                      name: controller.adsDetail.value.store!.name!,
+                      subName: controller.adsDetail.value.store!.description!,
+                      image: controller.adsDetail.value.store!.avatar!,
+                      posting: controller.adsDetail.value.createdAt!,
                       onTab: () {
                         Get.to(() => GalleryBuyerScreen(
-                              storeId: controller.adsDetail.store!.id!,
+                              storeId: controller.adsDetail.value.store!.id!,
                             ));
                       },
                     ),

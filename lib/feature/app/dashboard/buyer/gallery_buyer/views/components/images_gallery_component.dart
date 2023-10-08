@@ -22,7 +22,7 @@ class _ImagesGalleryComponentState extends State<ImagesGalleryComponent> {
     return ListView.builder(
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
-      itemCount: adsDetailController.adsDetail.store!.gallery!.length,
+      itemCount: adsDetailController.adsDetail.value.store!.gallery!.length,
       padding: EdgeInsets.symmetric(vertical: 14.h),
       itemBuilder: (context, index) {
         return Container(
@@ -36,7 +36,7 @@ class _ImagesGalleryComponentState extends State<ImagesGalleryComponent> {
             border: Border.all(color: ColorResource.shadeGrey, width: 1.w),
           ),
           child: Image.network(
-            adsDetailController.adsDetail.store!.gallery![index].image!,
+            adsDetailController.adsDetail.value.store!.gallery![index].image!,
             fit: BoxFit.fill,
           ),
         );

@@ -61,10 +61,10 @@ class _AdsGalleryComponentState extends State<AdsGalleryComponent> {
                       priceCar: galleryBuyerController.storePost[index].price!,
                       conditionCar: galleryBuyerController
                           .storePost[index].mechanicalStatus!.name!,
-                      imageSeller: adsDetailController.adsDetail.store!.avatar!,
-                      sellerName: adsDetailController.adsDetail.store!.name!,
+                      imageSeller: adsDetailController.adsDetail.value.store!.avatar!,
+                      sellerName: adsDetailController.adsDetail.value.store!.name!,
                       nameLocation: adsDetailController
-                          .adsDetail.store!.address!.governorate!.name!,
+                          .adsDetail.value.store!.address!.governorate!.name!,
                       isFavorite:
                           galleryBuyerController.storePost[index].isFavorite!,
                     ),

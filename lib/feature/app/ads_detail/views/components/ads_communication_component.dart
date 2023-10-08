@@ -34,7 +34,7 @@ class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
           MoreButton(
             title: context.localizations.chat,
             onPressed: () async {
-              if (controller.adsDetail.chat! == true) {
+              if (controller.adsDetail.value.chat! == true) {
                 //here to open chat in next time
               }
             },
@@ -51,23 +51,23 @@ class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
                 nameIcon: IconsApp.facebook,
                 onPressed: () async {
                   controller.launchURL(
-                      controller.adsDetail.facebook!, 'facebook');
+                      controller.adsDetail.value.facebook!, 'facebook');
                 },
               ),
               SocialContainer(
                 nameIcon: IconsApp.whatsapp,
                 onPressed: () async {
-                  if (controller.adsDetail.whatsappConnection! == true) {
+                  if (controller.adsDetail.value.whatsappConnection! == true) {
                     controller.launchURL(
-                        "wa.me/${controller.adsDetail.whatsapp!}", 'https');
+                        "wa.me/${controller.adsDetail.value.whatsapp!}", 'https');
                   }
                 },
               ),
               SocialContainer(
                 nameIcon: IconsApp.call,
                 onPressed: () async {
-                  if (controller.adsDetail.call! == true) {
-                    controller.launchURL(controller.adsDetail.whatsapp!, 'tel');
+                  if (controller.adsDetail.value.call! == true) {
+                    controller.launchURL(controller.adsDetail.value.whatsapp!, 'tel');
                   }
                 },
               ),

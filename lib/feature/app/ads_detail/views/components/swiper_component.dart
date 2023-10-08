@@ -25,7 +25,7 @@ class _SwiperComponentState extends State<SwiperComponent> {
       child: Swiper(
         duration: 500,
         autoplay: true,
-        itemCount: controller.adsDetail.gallery!.length,
+        itemCount: controller.adsDetail.value.gallery!.length,
         viewportFraction: 1,
         scale: 0.8,
         itemBuilder: (BuildContext context, int index) {
@@ -38,7 +38,7 @@ class _SwiperComponentState extends State<SwiperComponent> {
               color: ColorResource.secondaryColor,
               image: DecorationImage(
                 image:
-                    NetworkImage(controller.adsDetail.gallery![index].image!),
+                    NetworkImage(controller.adsDetail.value.gallery![index].image!),
                 fit: BoxFit.cover,
               ),
             ),
@@ -58,7 +58,7 @@ class _SwiperComponentState extends State<SwiperComponent> {
                     child: InkWell(
                         onTap: () {
                           Get.dialog(Image.network(
-                              controller.adsDetail.gallery![index].image!,
+                              controller.adsDetail.value.gallery![index].image!,
                               fit: BoxFit.contain));
                         },
                         child: AppSvgPicture(assetName: IconsApp.fillScreen))),

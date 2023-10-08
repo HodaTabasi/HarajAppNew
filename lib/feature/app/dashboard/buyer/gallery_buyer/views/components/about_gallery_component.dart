@@ -27,19 +27,19 @@ class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HeaderImage(url: adsDetailController.adsDetail.store!.avatar!),
+            HeaderImage(url: adsDetailController.adsDetail.value.store!.avatar!),
             SizedBox(height: 24.h),
             AppText(
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
-              text: adsDetailController.adsDetail.store!.name!,
+              text: adsDetailController.adsDetail.value.store!.name!,
               color: ColorResource.mainColor,
             ),
             SizedBox(height: 8.h),
             AppText(
               fontSize: 12.sp,
               fontWeight: FontWeight.w500,
-              text: adsDetailController.adsDetail.store!.email!,
+              text: adsDetailController.adsDetail.value.store!.email!,
               color: ColorResource.gray,
             ),
             Divider(
@@ -57,7 +57,7 @@ class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
             AppText(
               fontSize: 15.sp,
               fontWeight: FontWeight.w500,
-              text: adsDetailController.adsDetail.store!.description!,
+              text: adsDetailController.adsDetail.value.store!.description!,
               color: ColorResource.mainFontColor,
             ),
             Divider(
@@ -82,7 +82,7 @@ class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w500,
                       text:
-                          "${adsDetailController.adsDetail.store!.address!.governorate!.name!},${adsDetailController.adsDetail.store!.address!.city!.name!},${adsDetailController.adsDetail.store!.address!.street!}",
+                          "${adsDetailController.adsDetail.value.store!.address!.governorate!.name!},${adsDetailController.adsDetail.value.store!.address!.city!.name!},${adsDetailController.adsDetail.value.store!.address!.street!}",
                       color: ColorResource.mainFontColor,
                       overflow: TextOverflow.ellipsis,
                       maxLine: 2,

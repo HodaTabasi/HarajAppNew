@@ -26,36 +26,36 @@ class _AdsDetailComponentState extends State<AdsDetailComponent> {
             //TODO: Make Lang Here
             LineDetail(
               detail: 'الفئة :',
-              result: controller.adsDetail.category!.name!,
+              result: controller.adsDetail.value.category!.name!,
             ),
             LineDetail(
               detail: 'السنة الانتاج :',
-              result: '${controller.adsDetail.year!}',
-             // result: controller.adsDetail.year.toString(),
+              result: '${controller.adsDetail.value.year!}',
+             // result: controller.adsDetail.value.year.toString(),
             ),
             LineDetail(
               detail: 'كيلوميترات :',
-              result: controller.adsDetail.distance.toString(),
+              result: controller.adsDetail.value.distance.toString(),
             ),
             LineDetail(
               detail: 'نوع الجسم :',
-              result: controller.adsDetail.body!.name!,
+              result: controller.adsDetail.value.body!.name!,
             ),
             LineDetail(
               detail: 'الحالة الميكانيكية :',
-              result: controller.adsDetail.mechanicalStatus!.name!,
+              result: controller.adsDetail.value.mechanicalStatus!.name!,
             ),
             LineDetail(
               detail: 'نوع البائع :',
-              result: controller.adsDetail.sellerType!.name!,
+              result: controller.adsDetail.value.sellerType!.name!,
             ),
             LineDetail(
               detail: 'نوع الناقل :',
-              result: controller.adsDetail.gear!.name!,
+              result: controller.adsDetail.value.gear!.name!,
             ),
             LineDetail(
               detail: 'قوة المحرك :',
-              result: controller.adsDetail.engine!.number.toString(),
+              result: controller.adsDetail.value.engine!.number.toString(),
             ),
             MoreButton(
               title: context.localizations.more,

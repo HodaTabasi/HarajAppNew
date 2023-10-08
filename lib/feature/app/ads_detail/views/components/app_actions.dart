@@ -2,6 +2,7 @@ part of ads_detail_buyer_view;
 
 class AppActions extends StatefulWidget {
   const AppActions({super.key, required this.id});
+
   final int id;
 
   @override
@@ -13,6 +14,8 @@ class _AppActionsState extends State<AppActions> {
 
   @override
   void initState() {
+    //TODO dddds
+    print("Fgdfgd");
     super.initState();
     controller = Get.put(AdsDetailController(productId: widget.id));
   }
@@ -29,36 +32,41 @@ class _AppActionsState extends State<AppActions> {
               onTap: () {
                 print("i am here");
                 print(
-                    "${controller.adsDetail.isFavorite} || ${controller.favorite.isFavorite}");
+                    "${controller.adsDetail.value.isFavorite} || ${controller.favorite.isFavorite}");
                 // controller.postFavoriteAds(adsId: widget.id);
-                SharedPrefController().type == 1
-                    ? Get.bottomSheet(
-                        AppBottomSheet(
-                          body: BottomSheetBodyOffers(),
-                          height: 280.h,
-                        ),
-                        enterBottomSheetDuration:
-                            const Duration(milliseconds: 500),
-                        exitBottomSheetDuration:
-                            const Duration(milliseconds: 400))
-                    : controller.adsDetail.isFavorite == true
-                        ? IconsApp.favoriteFill
-                        : IconsApp.favoriteOutline;
+                if (SharedPrefController().type == 1) {
+                  Get.bottomSheet(
+                      AppBottomSheet(
+                        body: BottomSheetBodyOffers(),
+                        height: 280.h,
+                      ),
+                      enterBottomSheetDuration:
+                          const Duration(milliseconds: 500),
+                      exitBottomSheetDuration:
+                          const Duration(milliseconds: 400));
+                } else {
+                  controller.toggleFavorite(
+                      postId: controller.adsDetail.value.id);
+                }
               },
-              child: AppSvgPicture(
-                assetName: SharedPrefController().type == 1
-                    ? IconsApp.edit
-                    : controller.adsDetail.isFavorite == true
-                        ? IconsApp.favoriteFill
-                        : IconsApp.favoriteOutline,
-                width: 16.w,
-                height: 16.h,
-                color: SharedPrefController().type == 1
-                    ? ColorResource.mainColor
-                    : controller.adsDetail.isFavorite == true
-                        ? ColorResource.mainColor
-                        : ColorResource.gray,
-              ),
+              child: controller.isFavoriteLoading.isTrue
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : AppSvgPicture(
+                      assetName: SharedPrefController().type == 1
+                          ? IconsApp.edit
+                          : controller.adsDetail.value.isFavorite == true
+                              ? IconsApp.favoriteFill
+                              : IconsApp.favoriteOutline,
+                      width: 16.w,
+                      height: 16.h,
+                      color: SharedPrefController().type == 1
+                          ? ColorResource.mainColor
+                          : controller.adsDetail.value.isFavorite == true
+                              ? ColorResource.mainColor
+                              : ColorResource.gray,
+                    ),
             );
     });
   }
