@@ -61,10 +61,10 @@ class SharedPrefController {
 
   bool get register =>
       _sharedPreferences.getBool(PrefKeys.register.toString()) ?? false;
-
+////////////////token//////////////////
   String get token =>
       _sharedPreferences.getString(PrefKeys.token.toString()) ?? '';
-
+////////////////store id//////////////////
   int get storeId =>
       _sharedPreferences.getInt(PrefKeys.storeId.toString()) ?? 0;
 

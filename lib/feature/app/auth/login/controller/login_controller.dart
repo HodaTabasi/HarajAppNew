@@ -83,7 +83,7 @@ class LoginController extends GetxController {
                 snackPosition: SnackPosition.BOTTOM,
               );
             }, (user) async {
-              SharedPrefController().save(user: user);
+              await SharedPrefController().save(user: user);
               if (user.data?.type == 1) {
                 if (user.data?.name == null) {
                   Get.offAll(() => CompleteProfileSellerScreen());
