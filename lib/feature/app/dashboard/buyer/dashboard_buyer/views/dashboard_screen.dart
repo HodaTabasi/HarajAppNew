@@ -11,6 +11,7 @@ import 'package:haraj/utils/models/bn_model/bn_model.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
 
 import '../../../../../../utils/get/general_getx_controller.dart';
+import '../../../../../../utils/prefs/shared_pref_controller.dart';
 
 class DashboardBuyerScreen extends StatefulWidget {
   const DashboardBuyerScreen({super.key});
@@ -79,7 +80,7 @@ class _DashboardBuyerScreenState extends State<DashboardBuyerScreen> {
 
   @override
   void initState() {
-    GeneralGetxController.to.sendFcmToken("token");
+    GeneralGetxController.to.sendFcmToken(SharedPrefController().fcmToken);
     super.initState();
   }
   @override

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/routes/key_routes.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
+
+import '../../utils/get/general_getx_controller.dart';
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({Key? key}) : super(key: key);
@@ -19,11 +22,13 @@ class _LaunchScreenState extends State<LaunchScreen> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
+        GeneralGetxController generalGetxController =
+        Get.put(GeneralGetxController());
         String route = SharedPrefController().loggedIn
-            ? KeyRoutes.mainBuyerScreen
+            ? SharedPrefController().type == 1? KeyRoutes.mainSellerScreen : KeyRoutes.mainBuyerScreen
             : KeyRoutes.loginScreen;
-        // Navigator.pushReplacementNamed(context, route);
-        Navigator.pushReplacementNamed(context, KeyRoutes.loginScreen);
+        Navigator.pushReplacementNamed(context, route);
+        // Navigator.pushReplacementNamed(context, KeyRoutes.loginScreen);
       },
     );
   }

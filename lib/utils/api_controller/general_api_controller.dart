@@ -37,7 +37,7 @@ class GeneralApiController with Helpers {
 
     print(decodedJson);
     if (response.statusCode == 200) {
-      ApiResponse.fromJson(decodedJson);
+      return ApiResponse.fromJson(decodedJson);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();

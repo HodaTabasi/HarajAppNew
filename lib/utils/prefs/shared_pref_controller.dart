@@ -44,7 +44,7 @@ class SharedPrefController {
 
   //fcm token
   String get fcmToken => _sharedPreferences.getString(PrefKeys.fcmToken.toString()) ?? "";
-  set fcmToken(token) => _sharedPreferences.getString(PrefKeys.fcmToken.toString());
+  set fcmToken(token) => _sharedPreferences.setString(PrefKeys.fcmToken.toString(), token);
 
 //verify set get
   String get vierifyCode =>

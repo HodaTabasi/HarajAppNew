@@ -66,7 +66,7 @@ class ProfileSellerController extends GetxController {
       );
     }, (user) async {
       userModel = user;
-      imageGalaryList?.addAll(user.data!.store!.gallery ?? []);
+      imageGalaryList?.addAll(user.data?.store?.gallery ?? []);
      // EasyLoading.dismiss();
     }));
   }

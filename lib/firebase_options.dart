@@ -50,7 +50,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDgW0BipvOihOaMS88ZMW8BZAn5neX5FyI',
+    apiKey: 'AIzaSyA2YO_xecvNYwWmZU6X-w6rbCpDyo_MmVI',
     appId: '1:212432731339:android:84e9f564ae711d47242f4e',
     messagingSenderId: '212432731339',
     projectId: 'haraj-8b11e',
@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '212432731339',
     projectId: 'haraj-8b11e',
     storageBucket: 'haraj-8b11e.appspot.com',
-    iosClientId: '212432731339-uk89mgjog0gfbvcpm71f4beid8qhgvsl.apps.googleusercontent.com',
+    iosClientId:
+        '212432731339-uk89mgjog0gfbvcpm71f4beid8qhgvsl.apps.googleusercontent.com',
     iosBundleId: 'com.app.harage.hatageApp',
   );
 }

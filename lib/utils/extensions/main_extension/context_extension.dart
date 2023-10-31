@@ -6,12 +6,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/auth/login/view/screen/login_screen.dart';
 import 'package:haraj/feature/app/auth/register/view/screen/register_screen.dart';
+import 'package:haraj/feature/app/dashboard/seller/dashboard_seller/views/dashboard_screen.dart';
 import 'package:haraj/feature/app/profile/seller/add_address_seller/view/screen/add_address_seller_screen.dart';
 import 'package:haraj/feature/app/profile/seller/complete_store_seller/view/screen/complete_store_seller_screen.dart';
 import 'package:haraj/feature/core/launch_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/routes/key_routes.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../feature/app/dashboard/buyer/dashboard_buyer/views/dashboard_screen.dart';
 
 
 ///General Extension App
@@ -108,7 +111,7 @@ extension ContextExtension on BuildContext {
         // //***************************BUYER SCREENS******************************
         // KeyRoutes.mainBuyerScreen: (context) => const BuyerMainScreen(),
         // //TODO:He wants to check this screen if buyer or seller
-        // KeyRoutes.homeBuyerScreen: (context) => const SellerHomeScreen(),
+        KeyRoutes.mainBuyerScreen: (context) => const DashboardBuyerScreen(),
         // KeyRoutes.profileBuyerScreen: (context) => const ProfileSellerScreen(),
         // //
         // KeyRoutes.searchBuyerScreen: (context) => const BuyerSearchScreen(),
@@ -126,7 +129,7 @@ extension ContextExtension on BuildContext {
         //       password: '',
         //     ),
         // //***************************SELLER SCREENS*****************************
-        // KeyRoutes.mainSellerScreen: (context) => const SellerMainScreen(),
+        KeyRoutes.mainSellerScreen: (context) => const DashboardSellerScreen(),
         // KeyRoutes.addADSSellerScreen: (context) => const AddAdSSellerScreen(),
         // KeyRoutes.contactInfoSellerScreen: (context) =>
         //     const ContactInfoSellerScreen(),
