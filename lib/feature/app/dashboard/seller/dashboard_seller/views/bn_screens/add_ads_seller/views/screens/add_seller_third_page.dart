@@ -64,8 +64,7 @@ class AddSellerThirdPage extends GetView<AddAdsSellerController> {
             SizedBox(height: 24.h),
             AddComponent(
               title: addAdsSellerController.selectedData['engine_id']?.name ??
-                  addAdsSellerController.selectedData['engine_id']?.number
-                      .toString() ??
+                  addAdsSellerController.selectedData['engine_id']?.number?.toString() ??
                   context.localizations.engine_power,
               image: IconsApp.enginePower,
               onPressed: () {

@@ -1,6 +1,6 @@
 class ApiSettings {
   //***************************MAIN LINK****************************************
-  static const String _baseUrl = "http://haraj-online.com/";
+  static const String _baseUrl = "https://haraj-online.com/";
   //***************************API LINK*****************************************
   static const String _apiUrl = "${_baseUrl}api";
   //***************************AUTH LINKS***************************************

@@ -11,7 +11,7 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
       price: json['price'] as String?,
       sellerId: json['seller_id'] as int?,
       isFavorite: json['is_favorite'] as bool?,
-      storeId: json['store_id'] as int?,
+      storeId: int.tryParse('${json['store_id']}'),
       store: json['store'] == null
           ? null
           : Store.fromJson(json['store'] as Map<String, dynamic>),

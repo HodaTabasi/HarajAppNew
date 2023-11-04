@@ -109,16 +109,16 @@ class SettingGetXController extends GetxController{
         .then((value) => value.fold((failure) {
       responseMessage = mapFailureToMessage(failure);
       Get.snackbar(
-        'Requires',
-        responseMessage,
+        'Session expired',
+        'Please login again',
         backgroundColor: ColorResource.red,
         snackPosition: SnackPosition.BOTTOM,
       );
+      SharedPrefController().clear().then((value) =>  Get.offAll(() =>LoginScreen()));
       loading.value = false;
     }, (response) async {
       loading.value = false;
-
-      Get.offAll(()=>LoginScreen());
+      SharedPrefController().clear().then((value) =>  Get.offAll(() =>LoginScreen()));
     }));
   }
 

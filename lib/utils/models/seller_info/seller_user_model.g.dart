@@ -12,7 +12,7 @@ SellerUserModel _$SellerUserModelFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       email: json['email'] as String?,
       avatar: json['avatar'] as String?,
-      type: json['type'] as int?,
+      type: int.tryParse('${json['type'] ?? 2}'),
       ssn: json['ssn'] as String?,
       mobile: json['mobile'] as String?,
       nickName: json['nick_name'] as String?,

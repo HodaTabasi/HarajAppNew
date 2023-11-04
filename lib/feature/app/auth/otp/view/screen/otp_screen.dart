@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/auth/otp/view/widget/otp_form.dart';
 import 'package:haraj/feature/app/auth/register/view/screen/register_screen.dart';
+import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_elevated_button.dart';
 
 import '../../../../../../utils/extensions/color_resource/color_resource.dart';
@@ -92,7 +93,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 children: [
                   TermsAndConditions(
                     title:'لقد أرسلنا إليك رسالة نصية قصيرة تحتوي على رمز التحقق إلى بريدك الاكتروني ' ,
-                    onTitle: 'Mona _Fadl1233@gmail.com',
+                    onTitle: OTPGetxController.to.emailText,
                     onPressed: () {},
                     textAlign: TextAlign.start,
                   ),

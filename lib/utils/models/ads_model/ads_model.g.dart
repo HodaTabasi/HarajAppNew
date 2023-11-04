@@ -23,9 +23,9 @@ Map<String, dynamic> _$AdsModelToJson(AdsModel instance) => <String, dynamic>{
 Data _$DataFromJson(Map<String, dynamic> json) => Data(
       id: json['id'] as int?,
       price: json['price'] as String?,
-      sellerId: json['seller_id'] as int?,
+      sellerId: int.tryParse('${json['seller_id']}'),
       isFavorite: json['is_favorite'] as bool?,
-      storeId: json['store_id'] as int?,
+      storeId: int.tryParse('${json['store_id']}'),
       store: json['store'] == null
           ? null
           : Store.fromJson(json['store'] as Map<String, dynamic>),

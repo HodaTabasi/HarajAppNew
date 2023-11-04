@@ -22,10 +22,14 @@ class _LaunchScreenState extends State<LaunchScreen> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
+        print('HII ${SharedPrefController().token}');
         GeneralGetxController generalGetxController =
-        Get.put(GeneralGetxController());
-        String route = SharedPrefController().loggedIn
-            ? SharedPrefController().type == 1? KeyRoutes.mainSellerScreen : KeyRoutes.mainBuyerScreen
+            Get.put(GeneralGetxController());
+        String route = SharedPrefController().loggedIn &&
+                SharedPrefController().token != ''
+            ? SharedPrefController().type == 1
+                ? KeyRoutes.mainSellerScreen
+                : KeyRoutes.mainBuyerScreen
             : KeyRoutes.loginScreen;
         Navigator.pushReplacementNamed(context, route);
         // Navigator.pushReplacementNamed(context, KeyRoutes.loginScreen);

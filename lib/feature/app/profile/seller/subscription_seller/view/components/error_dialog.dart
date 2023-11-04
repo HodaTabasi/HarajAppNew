@@ -44,7 +44,7 @@ class ErrorDialog extends StatelessWidget {
                         //   (route) => false,
                         // );
                         // Get.back();
-                        Get.to(() => DashboardSellerScreen());
+                        Get.off(() => DashboardSellerScreen());
                       }),
                 ],
               )),

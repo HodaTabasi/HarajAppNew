@@ -25,19 +25,23 @@ class _AdsContactInfoComponentState extends State<AdsContactInfoComponent> {
       body: Column(
         children: [
           //TODO: Make Lang Here
+          if(controller.adsDetail.value.whatsapp != null)
           LineDetail(
             detail: 'رقم التواصل :',
             result: controller.adsDetail.value.whatsapp!,
           ),
-          LineDetail(
+          if(controller.adsDetail.value.whatsapp != null)
+            LineDetail(
             detail: 'رقم الواتساب :',
             result: controller.adsDetail.value.whatsapp!,
           ),
-          LineDetail(
+          if(controller.adsDetail.value.facebook != null)
+            LineDetail(
             detail: 'حساب الفيسبوك :',
             result: controller.adsDetail.value.facebook!,
           ),
-          LineDetail(
+          if(controller.adsDetail.value.chat != null)
+            LineDetail(
             detail: 'الدردشة الداخلية :',
             result: controller.adsDetail.value.chat! == true ? 'متاحه' : 'غير متاحه',
           ),

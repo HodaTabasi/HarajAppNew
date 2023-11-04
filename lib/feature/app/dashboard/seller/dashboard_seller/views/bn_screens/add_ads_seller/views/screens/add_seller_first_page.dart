@@ -35,7 +35,9 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                       exitBottomSheetDuration: const Duration(milliseconds: 400));
                 },
               ),
-              SizedBox(height: 24.h),
+              if(AddAdsSellerController.to.selectedData['brand_id']?.id != null)
+                SizedBox(height: 24.h),
+              if( AddAdsSellerController.to.selectedData['brand_id']?.id != null)
               AddComponent(
                 title: addAdsSellerController.selectedData["car_id"]!.name ?? context.localizations.car_name,
                 image: IconsApp.carName,
@@ -48,7 +50,7 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                           headerTitle: "حدد اسم السيارة",
                           title: "car_id",
                           logo: "",
-                          list: addAdsSellerController.carProperties.brands ?? [],
+                          list: addAdsSellerController.carProperties.brands?.firstWhere((element) => element.id == AddAdsSellerController.to.selectedData['brand_id']?.id).cars ?? [],
                         ),
                         height: 500.h,
                       ),

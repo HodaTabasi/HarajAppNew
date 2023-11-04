@@ -38,7 +38,7 @@ class _ShowAdsState extends State<ShowAds> {
                       AdsDetailScreen(productId: controller.ads[index].id!));
                 },
                 child: AppAdsCarContainer(
-                  nameCar: controller.ads[index].car!.name!,
+                  nameCar: controller.ads[index].car?.name?? "",
                   imageCar: controller.ads[index].gallery!.first.image!,
                   priceCar: controller.ads[index].price!,
                   conditionCar: controller.ads[index].mechanicalStatus!.name!,

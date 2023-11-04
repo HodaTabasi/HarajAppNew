@@ -21,8 +21,8 @@ Store _$StoreFromJson(Map<String, dynamic> json) => Store(
       gallery: (json['gallery'] as List<dynamic>?)
           ?.map((e) => MyImage.fromJson(e as Map<String, dynamic>))
           .toList(),
-      postsLeft: json['posts_left'] as int?,
-      numberOfPosts: json['number_of_posts'] as int?,
+      postsLeft: int.tryParse('${json['posts_left']}'),
+      numberOfPosts: int.tryParse('${json['number_of_posts'] ?? 0}'),
     );
 
 Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{

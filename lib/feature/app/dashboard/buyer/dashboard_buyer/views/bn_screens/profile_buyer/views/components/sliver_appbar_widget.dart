@@ -15,6 +15,7 @@ class SliverAppBarWidget extends GetView<ProfileBuyerController> {
           expandedHeight: 334.0.h,
           toolbarHeight: 100.h,
           pinned: true,
+          elevation: 0,
           backgroundColor: Colors.transparent,
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,

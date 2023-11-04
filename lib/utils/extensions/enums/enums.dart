@@ -12,5 +12,6 @@ enum PrefKeys {
   isCompleteProfile,
   storeId,
   fcmToken,
-  email
+  email,
+  user
 }

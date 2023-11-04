@@ -153,8 +153,7 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
             // seats_number
             AddComponent(
               title: addAdsSellerController.selectedData['seat_id']?.name ??
-                  addAdsSellerController.selectedData['seat_id']?.number
-                      .toString() ??
+                  addAdsSellerController.selectedData['seat_id']?.number?.toString() ??
                   context.localizations.seats_number,
               image: IconsApp.regionalSpecifications,
               onPressed: () {
@@ -182,8 +181,7 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
             // cylinders_number
             AddComponent(
               title:  addAdsSellerController.selectedData['cylinder_id']?.name ??
-                  addAdsSellerController.selectedData['cylinder_id']?.number
-                      .toString() ??context.localizations.cylinders_number,
+                  addAdsSellerController.selectedData['cylinder_id']?.number?.toString() ??context.localizations.cylinders_number,
               image: IconsApp.regionalSpecifications,
               onPressed: () {
                 Get.bottomSheet(
@@ -211,8 +209,7 @@ class _AddSellerSecondPageState extends State<AddSellerSecondPage> {
             // doors_number
             AddComponent(
               title: addAdsSellerController.selectedData['door_id']?.name ??
-                  addAdsSellerController.selectedData['door_id']?.number
-                      .toString() ?? context.localizations.doors_number,
+                  addAdsSellerController.selectedData['door_id']?.number?.toString() ?? context.localizations.doors_number,
               image: IconsApp.regionalSpecifications,
               onPressed: () {
                 Get.bottomSheet(

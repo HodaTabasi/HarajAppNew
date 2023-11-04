@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:haraj/utils/extensions/enums/enums.dart';
 import 'package:haraj/utils/models/user/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,17 +36,27 @@ class SharedPrefController {
         PrefKeys.storeId.toString(), user.data?.store?.id ?? 0);
     await _sharedPreferences.setString(
         PrefKeys.email.toString(), user.data?.email ?? '');
+    await _sharedPreferences.setString(
+        PrefKeys.user.toString(), json.encode(user.toJson()) ?? '');
   }
 
   ///get user type
   int get type => _sharedPreferences.getInt(PrefKeys.type.toString()) ?? 0;
+  UserModel get user {
+    return UserModel.fromJson(json
+        .decode(_sharedPreferences.getString(PrefKeys.user.toString()) ?? ""));
+  }
+
   /// get email
-  String get email => _sharedPreferences.getString(PrefKeys.email.toString()) ??"";
+  String get email =>
+      _sharedPreferences.getString(PrefKeys.email.toString()) ?? "";
   set email(token) => _sharedPreferences.getString(PrefKeys.email.toString());
 
   //fcm token
-  String get fcmToken => _sharedPreferences.getString(PrefKeys.fcmToken.toString()) ?? "";
-  set fcmToken(token) => _sharedPreferences.setString(PrefKeys.fcmToken.toString(), token);
+  String get fcmToken =>
+      _sharedPreferences.getString(PrefKeys.fcmToken.toString()) ?? "";
+  set fcmToken(token) =>
+      _sharedPreferences.setString(PrefKeys.fcmToken.toString(), token);
 
 //verify set get
   String get vierifyCode =>
@@ -79,6 +91,11 @@ class SharedPrefController {
       _sharedPreferences.getString(PrefKeys.language.toString()) ?? 'ar';
 
   Future<bool> clear() async {
-    return await _sharedPreferences.clear();
+    for (var key in _sharedPreferences.getKeys()) {
+      if (key != PrefKeys.fcmToken.toString() && key == PrefKeys.language.toString()) {
+        _sharedPreferences.remove(key);
+      }
+    }
+    return true;
   }
 }
