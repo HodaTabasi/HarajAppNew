@@ -33,7 +33,7 @@ class _SavedAdsComponentState extends State<SavedAdsComponent> {
                   crossAxisCount: 2,
                   mainAxisSpacing: 17.h, // Add spacing between grid items.
                   crossAxisSpacing: 15.w, // Add spacing between grid items.
-                  childAspectRatio: 160.w / 281.h, // Width on Height
+                  childAspectRatio: 160.w / 290.h, // Width on Height
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
@@ -43,7 +43,7 @@ class _SavedAdsComponentState extends State<SavedAdsComponent> {
                           ));
                     },
                     child: AppAdsCarContainer(
-                      nameCar: controller.savedAds[index].car!.name!,
+                      nameCar: controller.savedAds[index].car?.name ?? '',
                       imageCar:
                           controller.savedAds[index].gallery!.first.image!,
                       priceCar: controller.savedAds[index].price!,

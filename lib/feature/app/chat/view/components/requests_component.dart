@@ -30,7 +30,7 @@ class _RequestsComponentState extends State<RequestsComponent> {
                     onTap: () {
                       // Handle item tap here
                       Get.to(() =>
-                          ChatScreen(comeFrom: context.localizations.requests));
+                          ChatScreen(comeFrom: context.localizations.requests, chatId: 0,));
                     },
                     child: const AppChatCard(
                       image: ImagesApp.brandLogo,

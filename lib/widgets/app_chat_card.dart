@@ -50,8 +50,8 @@ class _AppChatCardState extends State<AppChatCard> {
               alignment: Alignment.bottomLeft,
               children: [
                 Container(
-                  height: 50.h,
-                  width: 50.w,
+                  height: 50.r,
+                  width: 50.r,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25.r),
@@ -118,7 +118,7 @@ class _AppChatCardState extends State<AppChatCard> {
                 ),
                 SizedBox(width: 10.w),
                 widget.isMessage == true
-                    ? Container(
+                    ? !widget.isNewMessage ? const SizedBox():Container(
                         height: 19.h,
                         width: 18.w,
                         alignment: Alignment.center,

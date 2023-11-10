@@ -28,7 +28,7 @@ class _AppChatCarContainerState extends State<AppChatCarContainer> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity.w,
-      height: 102.h,
+      // height: 102.h,
       margin: EdgeInsets.symmetric(vertical: 10.h),
       decoration: BoxDecoration(
         color: ColorResource.white,

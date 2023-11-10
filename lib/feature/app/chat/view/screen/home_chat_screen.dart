@@ -1,14 +1,19 @@
 library home_chat_view;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/chat/controller/chat_controller.dart';
+import 'package:haraj/feature/app/chat/controller/chat_details_controller.dart';
+import 'package:haraj/utils/api_controller/auth_api_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/models/chat/message.dart';
+import 'package:haraj/utils/models/offer/client_model.dart';
+import 'package:haraj/utils/models/offer/post_model.dart';
 import 'package:haraj/widgets/app_body_container.dart';
 import 'package:haraj/widgets/app_chat_car_container.dart';
 import 'package:haraj/widgets/app_chat_card.dart';
@@ -19,6 +24,8 @@ import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_appbar.dart';
 import 'package:haraj/widgets/custom_textformfiled.dart';
 import 'package:haraj/widgets/row_divider_widget.dart';
+
+import '../../../../../utils/prefs/shared_pref_controller.dart';
 
 part '../components/background_dismissible.dart';
 part '../components/chat_component.dart';
@@ -52,7 +59,8 @@ class HomeChatScreen extends GetView<HomeChatController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InputField(),
-            controller.seller == 'seller'
+            // controller.seller == 'seller'
+            SharedPrefController().type == 1
                 ? TabBarComponent(
                     tabTitles: [
                       context.localizations.chat,

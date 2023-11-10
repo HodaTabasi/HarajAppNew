@@ -1,7 +1,9 @@
 part of home_chat_view;
 
 class WelcomeMessage extends StatelessWidget {
-  const WelcomeMessage({super.key});
+  final num? postId;
+  final String createdDate;
+  const WelcomeMessage({super.key, required this.postId, required this.createdDate});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,8 @@ class WelcomeMessage extends StatelessWidget {
         SizedBox(height: 12.h),
         AppText(
           color: ColorResource.gray,
-          text: context.localizations.start_chat,
+          // text: context.localizations.start_chat,
+          text: 'مرحبا بك، هنا بداية المحادثة الخاصة بالاعلان رقم $postId، والذي نشر $createdDate',
           fontWeight: FontWeight.w500,
           fontSize: 14.sp,
           textAlign: TextAlign.center,

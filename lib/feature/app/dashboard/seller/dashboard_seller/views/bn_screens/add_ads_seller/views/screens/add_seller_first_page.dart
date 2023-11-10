@@ -50,7 +50,8 @@ class _AddSellerFirstPageState extends State<AddSellerFirstPage> {
                           headerTitle: "حدد اسم السيارة",
                           title: "car_id",
                           logo: "",
-                          list: addAdsSellerController.carProperties.brands?.firstWhere((element) => element.id == AddAdsSellerController.to.selectedData['brand_id']?.id).cars ?? [],
+                          list: addAdsSellerController.carProperties.brands?.firstWhere((element) =>
+                          element.id == AddAdsSellerController.to.selectedData['brand_id']?.id).cars ?? [],
                         ),
                         height: 500.h,
                       ),

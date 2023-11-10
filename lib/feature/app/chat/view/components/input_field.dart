@@ -10,7 +10,7 @@ class InputField extends GetView<HomeChatController> {
       title: context.localizations.chat_search,
       radius: 6.r,
       prefixIcon: IconsApp.searchOutline,
-      errorTitle: 'search Error Text',
+      errorTitle: '',
       type: 'search',
     );
   }

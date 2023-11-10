@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/auth/login/view/screen/login_screen.dart';
+import 'package:haraj/feature/app/chat/controller/chat_controller.dart';
+import 'package:haraj/feature/app/chat/controller/chat_details_controller.dart';
 import 'package:haraj/feature/app/setting/use_case/delete_account_use_case.dart';
 import 'package:haraj/feature/app/setting/use_case/logout_use_case.dart';
 import 'package:haraj/feature/app/setting/use_case/update_email_use_case.dart';
@@ -115,10 +117,14 @@ class SettingGetXController extends GetxController{
         snackPosition: SnackPosition.BOTTOM,
       );
       SharedPrefController().clear().then((value) =>  Get.offAll(() =>LoginScreen()));
+      Get.delete<ChatDetailsController>(force: true);
+      Get.delete<HomeChatController>(force: true);
       loading.value = false;
     }, (response) async {
-      loading.value = false;
       SharedPrefController().clear().then((value) =>  Get.offAll(() =>LoginScreen()));
+      Get.delete<ChatDetailsController>(force: true);
+      Get.delete<HomeChatController>(force: true);
+      loading.value = false;
     }));
   }
 

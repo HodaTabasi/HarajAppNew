@@ -131,7 +131,7 @@
   "chat_message": "You can see all the messages he sends in order to communicate with you regarding the advertisement, but you cannot reply after accepting the correspondence request",
   "yes": "Accept",
   "no": "Reject",
-  "start_chat": "Hello, here is the beginning of the conversation regarding advertisement No. E5656, which was published on 2/5/2023.",
+  "start_chat": "Hello, here is the beginning of the conversation regarding advertisement No. {postId}, which was published {createdAt}",
   "contact_us": "Contact with Us",
   "technical_support_contact": "You can communicate with technical support and submit complaints and suggestions through our social media accounts",
   "answer_question": "Your inquiries are answered via social media platforms during official working hours, with a response rate of less than an hour",
@@ -255,5 +255,6 @@
     "valid_password": "must contain 8 diget",
     "valid_name": "must contain 4 char at least",
     "logout_account": "Are you sure you want to log out?",
-    "delete_account_msg": "It is unfortunate to see you leaving our application permanently, and we hope that\n   Retract your decision as quickly as possible, knowing that it is the end\nYour account will be deleted 28 days after you leave\nThe status suspension lasts only before the end of the term\nNote the entry and the order will be canceled automatically. Thank you"
+    "delete_account_msg": "It is unfortunate to see you leaving our application permanently, and we hope that\n   Retract your decision as quickly as possible, knowing that it is the end\nYour account will be deleted 28 days after you leave\nThe status suspension lasts only before the end of the term\nNote the entry and the order will be canceled automatically. Thank you",
+    "chat2": "chat",
 }

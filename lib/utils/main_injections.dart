@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 import 'package:haraj/utils/api_controller/ads_api/ads_api_controller.dart';
 import 'package:haraj/utils/api_controller/auth_api_controller.dart';
+import 'package:haraj/utils/api_controller/chat_api/chats_api_controller.dart';
 import 'package:haraj/utils/api_controller/favorite_api/favorite_api_controller.dart';
 import 'package:haraj/utils/api_controller/offer_api_controller/offer_api_controller.dart';
 import 'package:haraj/utils/api_controller/profile_api_controller.dart';
 import 'package:haraj/utils/api_controller/store_api/store_api_controller.dart';
 import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
 import 'package:haraj/utils/repository/auth_repo.dart';
+import 'package:haraj/utils/repository/chat_repo/chat_repo.dart';
 import 'package:haraj/utils/repository/complete_user_repo.dart';
 import 'package:haraj/utils/repository/favorite_repo/favorite_repo.dart';
 import 'package:haraj/utils/repository/general_repo.dart';
@@ -64,6 +66,8 @@ class MainInjection implements Bindings {
 
     Get.put(AdsRepository(
         networkInfo: networkInfoImpl, remoteDataSource: AdsApiController()));
+    Get.put(ChatsRepository(
+        networkInfo: networkInfoImpl, remoteDataSource: ChatsApiController()));
 
     Get.put(StoreRepository(
         networkInfo: networkInfoImpl, remoteDataSource: StoreApiController()));

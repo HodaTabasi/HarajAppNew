@@ -67,7 +67,7 @@ class AppTextFomField extends GetView<GeneralGetxController> {
             borderRadius: BorderRadius.circular(8.r),
             border: errorTitle!.isNotEmpty
                 ? Border.all(color: ColorResource.red, width: 0.5.r)
-                : Border.all(color: ColorResource.lightGray, width: 0.5.r),
+                : Border.all(color: ColorResource.borderGray),
           ),
           child: IntrinsicHeight(
             child: Row(

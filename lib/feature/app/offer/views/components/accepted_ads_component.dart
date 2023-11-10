@@ -84,7 +84,7 @@ class _AcceptedAdsComponentState extends State<AcceptedAdsComponent> {
                         debugPrint('Selected value:💯 $value');
                         switch (value) {
                           case 1:
-                            Get.to(() => ChatScreen(comeFrom: ""));
+                            Get.to(() => ChatScreen(comeFrom: "", chatId: 0,));
                             // SharedPrefController().type == 1
                             //     ? controller.acceptOffer(
                             //         postId:

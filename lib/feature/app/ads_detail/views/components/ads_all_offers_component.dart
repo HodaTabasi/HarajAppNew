@@ -98,7 +98,7 @@ class _AdsAllOffersComponentState extends State<AdsAllOffersComponent> {
               },
               openChat: () {
                 if (controller.allOffers[index].status! == 3) {
-                  Get.to(() => ChatScreen(comeFrom: ""));
+                  Get.to(() => ChatScreen(comeFrom: "", chatId: 0,));
                 }
               },
             );
