@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/auth/login/view/screen/login_screen.dart';
@@ -16,7 +17,7 @@ import '../../../../utils/repository/setting_repo.dart';
 import '../use_case/get_setting_use_case.dart';
 import '../use_case/update_password_use_case.dart';
 
-class SettingGetXController extends GetxController{
+class SettingGetXController extends GetxController {
   var responseMessage = "";
   SettingModel? settingModel;
   late TextEditingController emailController;
@@ -26,7 +27,6 @@ class SettingGetXController extends GetxController{
   RxBool loading = false.obs;
 
   RxBool isVisibility = false.obs;
-
 
   static SettingGetXController get to => Get.find<SettingGetXController>();
 
@@ -45,106 +45,113 @@ class SettingGetXController extends GetxController{
     update();
   }
 
-  getSetting(){
+  getSetting() {
     return GetSettingUseCase(repository: Get.find<GeneralRepository>())
         .call()
         .then((value) => value.fold((failure) {
-      responseMessage = mapFailureToMessage(failure);
-      Get.snackbar(
-        'Requires',
-        responseMessage,
-        backgroundColor: ColorResource.red,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }, (response) async {
-          settingModel = response;
-    }));
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }, (response) async {
+              settingModel = response;
+            }));
   }
 
-  updateEmail(){
+  updateEmail() {
     loading.value = true;
     return UpdateEmailUseCase(repository: Get.find<SettingRepo>())
         .call(emailController.text)
         .then((value) => value.fold((failure) {
-      responseMessage = mapFailureToMessage(failure);
-      Get.snackbar(
-        'Requires',
-        responseMessage,
-        backgroundColor: ColorResource.red,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      loading.value = false;
-    }, (response) async {
-      loading.value = false;
-    SharedPrefController().email = response.data?.email;
-    }));
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+              loading.value = false;
+            }, (response) async {
+              loading.value = false;
+              SharedPrefController().email = response.data?.email;
+            }));
   }
 
-  updatePassword(){
+  updatePassword() {
     loading.value = true;
     return UpdatePasswordUseCase(repository: Get.find<SettingRepo>())
-        .call(newPasswordController.text,passwordController.text,rePasswordController.text)
+        .call(newPasswordController.text, passwordController.text,
+            rePasswordController.text)
         .then((value) => value.fold((failure) {
-      responseMessage = mapFailureToMessage(failure);
-      Get.snackbar(
-        'Requires',
-        responseMessage,
-        backgroundColor: ColorResource.red,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      loading.value = false;
-    }, (response) async {
-      loading.value = false;
-      Get.snackbar(
-        'Good',
-        'done successfully',
-        backgroundColor: ColorResource.red,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }));
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+              loading.value = false;
+            }, (response) async {
+              loading.value = false;
+              Get.snackbar(
+                'Good',
+                'done successfully',
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }));
   }
 
-  logout(){
+  logout() {
     loading.value = true;
     return LogoutAccountUseCase(repository: Get.find<SettingRepo>())
         .call()
         .then((value) => value.fold((failure) {
-      responseMessage = mapFailureToMessage(failure);
-      Get.snackbar(
-        'Session expired',
-        'Please login again',
-        backgroundColor: ColorResource.red,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      SharedPrefController().clear().then((value) =>  Get.offAll(() =>LoginScreen()));
-      Get.delete<ChatDetailsController>(force: true);
-      Get.delete<HomeChatController>(force: true);
-      loading.value = false;
-    }, (response) async {
-      SharedPrefController().clear().then((value) =>  Get.offAll(() =>LoginScreen()));
-      Get.delete<ChatDetailsController>(force: true);
-      Get.delete<HomeChatController>(force: true);
-      loading.value = false;
-    }));
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Session expired',
+                'Please login again',
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+              FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers');
+              SharedPrefController()
+                  .clear()
+                  .then((value) => Get.offAll(() => LoginScreen()));
+              Get.delete<ChatDetailsController>(force: true);
+              Get.delete<HomeChatController>(force: true);
+              loading.value = false;
+            }, (response) async {
+              FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers');
+              SharedPrefController()
+                  .clear()
+                  .then((value) => Get.offAll(() => LoginScreen()));
+              Get.delete<ChatDetailsController>(force: true);
+              Get.delete<HomeChatController>(force: true);
+              loading.value = false;
+            }));
   }
 
-  deleteAccount(){
+  deleteAccount() {
     loading.value = true;
     return DeleteAccountUseCase(repository: Get.find<SettingRepo>())
         .call()
         .then((value) => value.fold((failure) {
-      responseMessage = mapFailureToMessage(failure);
-      Get.snackbar(
-        'Requires',
-        responseMessage,
-        backgroundColor: ColorResource.red,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      loading.value = false;
-    }, (response) async {
-      loading.value = false;
+              responseMessage = mapFailureToMessage(failure);
+              Get.snackbar(
+                'Requires',
+                responseMessage,
+                backgroundColor: ColorResource.red,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+              loading.value = false;
+            }, (response) async {
+              loading.value = false;
 
-      Get.offAll(()=>LoginScreen());
-    }));
+              Get.offAll(() => LoginScreen());
+            }));
   }
 }

@@ -11,6 +11,7 @@ import 'package:haraj/utils/models/bn_model/bn_model.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
 
+import '../../../../../../utils/extensions/helpers/fb_notifications.dart';
 import 'bn_screens/profile_seller/view/screen/profile_seller_screen.dart';
 
 class DashboardSellerScreen extends StatefulWidget {
@@ -81,6 +82,7 @@ class _DashboardSellerScreenState extends State<DashboardSellerScreen> {
   @override
   void initState() {
     GeneralGetxController.to.sendFcmToken(SharedPrefController().fcmToken);
+    FbNotifications.initializeForegroundNotificationForAndroid();
     super.initState();
   }
 

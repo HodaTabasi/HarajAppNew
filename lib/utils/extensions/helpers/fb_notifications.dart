@@ -38,9 +38,26 @@ mixin FbNotifications {
         playSound: true,
       );
     }
-
-    //Flutter Local Notifications Plugin (FOREGROUND) - ANDROID CHANNEL
     localNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+    const initializationSettingsAndroid = AndroidInitializationSettings(
+        // '@mipmap/launcher_icon',
+        "@mipmap/ic_launcher");
+
+    const initializationSettingsIOS = DarwinInitializationSettings(
+      requestAlertPermission: false,
+      requestBadgePermission: false,
+      requestSoundPermission: false,
+    );
+
+    const initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+    await localNotificationsPlugin.initialize(initializationSettings,
+        onDidReceiveBackgroundNotificationResponse: (details) {},
+        onDidReceiveNotificationResponse: (details) {});
+    //Flutter Local Notifications Plugin (FOREGROUND) - ANDROID CHANNEL
     await localNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
@@ -80,9 +97,15 @@ mixin FbNotifications {
   }
 
   //ANDROID
-  void initializeForegroundNotificationForAndroid() {
+  static void initializeForegroundNotificationForAndroid() {
+    if (SharedPrefController().type == 2) {
+      FirebaseMessaging.instance.subscribeToTopic('all_buyers');
+      print('subscribed to all_buyers');
+    }
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       debugPrint('Message Received: ${message.data}');
+      debugPrint('Notification title: ${message.notification?.title}');
+      debugPrint('Notification body: ${message.notification?.body}');
       RemoteNotification? notification = message.notification;
       AndroidNotification? androidNotification = notification?.android;
       if (notification != null && androidNotification != null) {
@@ -95,7 +118,7 @@ mixin FbNotifications {
               channel.id,
               channel.name,
               channelDescription: channel.description,
-              icon: 'ic_stat_ic_notification',
+              // icon: 'ic_stat_ic_notification',
             ),
           ),
         );
