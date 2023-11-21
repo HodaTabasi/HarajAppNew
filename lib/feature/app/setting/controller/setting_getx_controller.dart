@@ -117,7 +117,8 @@ class SettingGetXController extends GetxController {
                 backgroundColor: ColorResource.red,
                 snackPosition: SnackPosition.BOTTOM,
               );
-              FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers');
+              FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers_en');
+              FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers_ar');
               SharedPrefController()
                   .clear()
                   .then((value) => Get.offAll(() => LoginScreen()));
@@ -125,7 +126,8 @@ class SettingGetXController extends GetxController {
               Get.delete<HomeChatController>(force: true);
               loading.value = false;
             }, (response) async {
-              FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers');
+              FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers_en');
+              FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers_ar');
               SharedPrefController()
                   .clear()
                   .then((value) => Get.offAll(() => LoginScreen()));

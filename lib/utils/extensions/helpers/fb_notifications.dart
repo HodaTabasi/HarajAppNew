@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
@@ -54,9 +55,7 @@ mixin FbNotifications {
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
     );
-    await localNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveBackgroundNotificationResponse: (details) {},
-        onDidReceiveNotificationResponse: (details) {});
+    await localNotificationsPlugin.initialize(initializationSettings);
     //Flutter Local Notifications Plugin (FOREGROUND) - ANDROID CHANNEL
     await localNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -97,10 +96,12 @@ mixin FbNotifications {
   }
 
   //ANDROID
-  static void initializeForegroundNotificationForAndroid() {
+  static void initializeForegroundNotificationForAndroid(BuildContext context) {
     if (SharedPrefController().type == 2) {
-      FirebaseMessaging.instance.subscribeToTopic('all_buyers');
-      print('subscribed to all_buyers');
+      FirebaseMessaging.instance.subscribeToTopic(
+          Localizations.localeOf(context).languageCode == 'en'
+              ? 'all_buyers_en'
+              : 'all_buyers_ar');
     }
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       debugPrint('Message Received: ${message.data}');

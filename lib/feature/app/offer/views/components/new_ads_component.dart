@@ -30,7 +30,7 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
                           ));
                     },
                     child: AppCarContainer(
-                      nameCar: controller.newOffers[index].post!.car!.name!,
+                      nameCar: controller.newOffers[index].post!.car?.name ?? '',
                       imageCar: controller
                           .newOffers[index].post!.gallery!.first.image!,
                       priceCar: '',

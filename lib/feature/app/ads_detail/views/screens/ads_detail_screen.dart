@@ -12,6 +12,7 @@ import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/get/general_getx_controller.dart';
+import 'package:haraj/utils/models/offer/client_model.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_body_container.dart';
 import 'package:haraj/widgets/app_bottom_sheet.dart';
@@ -117,7 +118,7 @@ class _AdsDetailScreenState extends State<AdsDetailScreen> {
                       AdsContactInfoComponent(id: widget.productId),
                       AdsAllOffersComponent(id: widget.productId),
                     ],
-                    height: 250.h,
+                    height: 260.h,
                   )
                       : TabBarComponent(
                     tabTitles: [
@@ -134,7 +135,7 @@ class _AdsDetailScreenState extends State<AdsDetailScreen> {
                       AdsInstructionsComponent(id: widget.productId),
                       // Other tab views
                     ],
-                    height: 250.h,
+                    height: 260.h,
                   ),
                 ]),
           ),

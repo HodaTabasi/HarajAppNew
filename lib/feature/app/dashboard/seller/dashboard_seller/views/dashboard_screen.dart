@@ -82,7 +82,9 @@ class _DashboardSellerScreenState extends State<DashboardSellerScreen> {
   @override
   void initState() {
     GeneralGetxController.to.sendFcmToken(SharedPrefController().fcmToken);
-    FbNotifications.initializeForegroundNotificationForAndroid();
+    Future.delayed(Duration.zero, () {
+      FbNotifications.initializeForegroundNotificationForAndroid(context);
+    });
     super.initState();
   }
 

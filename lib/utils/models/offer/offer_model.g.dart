@@ -9,9 +9,9 @@ part of 'offer_model.dart';
 OfferModel _$OfferModelFromJson(Map<String, dynamic> json) => OfferModel(
       id: json['id'] as int?,
       status: json['status'] as int?,
-      amount: json['amount'] as int?,
-      clientId: json['client_id'] as int?,
-      postId: json['post_id'] as int?,
+      amount: int.tryParse('${json['amount']}'),
+      clientId: int.tryParse('${json['client_id']}'),
+      postId: int.tryParse('${json['post_id']}'),
       client: json['client'] == null
           ? null
           : ClientModel.fromJson(json['client'] as Map<String, dynamic>),

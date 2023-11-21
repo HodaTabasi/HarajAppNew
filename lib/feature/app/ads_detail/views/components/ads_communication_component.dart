@@ -23,6 +23,7 @@ class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
     return AppBodyContainer(
       body: Column(
         children: [
+          if (controller.adsDetail.value.chat! == true)
           AppText(
             text: context.localizations.communicate,
             fontSize: 16.sp,
@@ -30,13 +31,22 @@ class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
             color: ColorResource.mainFontColor,
             textAlign: TextAlign.start,
           ),
+          if (controller.adsDetail.value.chat! == true)
           SizedBox(height: 16.h),
+          if (controller.adsDetail.value.chat! == true)
           MoreButton(
             title: context.localizations.chat,
             onPressed: () async {
-              if (controller.adsDetail.value.chat! == true) {
-                //here to open chat in next time
-              }
+              // if (controller.adsDetail.value.chat! == true) {
+              //   //here to open chat
+              //   ChatScreen(comeFrom: context.localizations.communicate,
+              //     otherUser: ClientModel(
+              //       id: controller.adsDetail.value.sellerId,
+              //     ),
+              //     post: controller.chatConversations[index].post,
+              //
+              //   ));
+              // }
             },
           ),
           SizedBox(height: 3.h),

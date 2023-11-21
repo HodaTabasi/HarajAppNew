@@ -9,7 +9,7 @@ part of 'post_model.dart';
 PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
       id: json['id'] as int?,
       price: json['price'] as String?,
-      sellerId: json['seller_id'] as int?,
+      sellerId: int.tryParse('${json['seller_id']}'),
       isFavorite: json['is_favorite'] as bool?,
       storeId: int.tryParse('${json['store_id']}'),
       store: json['store'] == null

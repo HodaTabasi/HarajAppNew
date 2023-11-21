@@ -10,9 +10,9 @@ class CheckAlertDialog extends StatelessWidget {
       ),
       child: Container(
           width: double.infinity,
-          height: 162.h,
           margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               AppSvgPicture(
                 assetName: IconsApp.bigCheck,
