@@ -13,22 +13,46 @@ class _MapScreenState extends State<MapScreen> {
   var camera;
   bool isLoading = false;
 
-  final Completer<GoogleMapController> _controllerGoogleMap = Completer();
+  GoogleMapController? mapController;
 
-  final ValueNotifier<CameraPosition> currentCameraPosition = ValueNotifier(
-  const CameraPosition(target: LatLng(15.508457, 32.522854), zoom: 18));
+   CameraPosition currentCameraPosition = const CameraPosition(target: LatLng(15.508457, 32.522854), zoom: 18);
 
   LatLng? center;
 
 
   onCameraMove(CameraPosition position) {
-    print("On Camera Move method $position");
+    addAddressSellerController.center = position.target;
+    addAddressSellerController.markers.clear();
+    addAddressSellerController.markers.add(Marker(
+      markerId: MarkerId(position.target.toString()),
+      position: position.target,
+      infoWindow: const InfoWindow(
+        //popup info
+        title: 'My Custom Title ',
+        snippet: 'My Custom Subtitle',
+      ),
+      icon: BitmapDescriptor.defaultMarker,
+    ));
+    currentCameraPosition = position;
+    setState(() {
 
-    currentCameraPosition.value = position;
+    });
   }
 
   onCameraIdle() {
+    _getAddressFromLatLng();
     print("On Camera Idle method");
+  }
+  @override
+  void initState() {
+    print('asdasd');
+    print(addAddressSellerController.center);
+    print('asdasd');
+    if(addAddressSellerController.center != null){
+      print(addAddressSellerController.center);
+      currentCameraPosition = CameraPosition(target: addAddressSellerController.center!);
+    }
+    super.initState();
   }
 
   @override
@@ -45,7 +69,7 @@ class _MapScreenState extends State<MapScreen> {
                 //     addAddressSellerController.initialCameraPosition(),
                 onMapCreated: onMapCreated,
                 markers: addAddressSellerController.markers,
-                myLocationButtonEnabled: false,
+                myLocationButtonEnabled: true,
                 compassEnabled: false,
                 minMaxZoomPreference: const MinMaxZoomPreference(8, 19),
                 zoomControlsEnabled: false,
@@ -57,26 +81,14 @@ class _MapScreenState extends State<MapScreen> {
                 myLocationEnabled: true,
                 onCameraMove: onCameraMove,
                 onCameraIdle: onCameraIdle,
-                initialCameraPosition: currentCameraPosition.value,
 
+                initialCameraPosition: currentCameraPosition,
                 gestureRecognizers: Set()
                   ..add(Factory<PanGestureRecognizer>(
                           () => PanGestureRecognizer())),
                 onTap: (argument) {
-                 addAddressSellerController.center = argument;
-                  addAddressSellerController.markers.clear();
-                  addAddressSellerController.markers.add(Marker(
-                    markerId: MarkerId(argument.toString()),
-                    position: argument,
-                    infoWindow: const InfoWindow(
-                      //popup info
-                      title: 'My Custom Title ',
-                      snippet: 'My Custom Subtitle',
-                    ),
-                    icon: BitmapDescriptor.defaultMarker,
-                  ));
-                  _getAddressFromLatLng();
-                  setState(() {});
+                 mapController?.animateCamera(CameraUpdate.newLatLngZoom(
+                     argument, 18));
                 },
               ),
 
@@ -119,9 +131,15 @@ class _MapScreenState extends State<MapScreen> {
 
   void onMapCreated(GoogleMapController controller) {
     setState(() {
+      mapController = controller;
       addAddressSellerController.mapController = controller;
     });
+    if(addAddressSellerController.center != null) {
+      mapController?.animateCamera(CameraUpdate.newLatLngZoom(
+        addAddressSellerController.center!, 18));
+    }
   }
+
 
   Future<void> _getAddressFromLatLng() async {
     // Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -134,7 +152,7 @@ class _MapScreenState extends State<MapScreen> {
         '${place.street}, ${place.subLocality}';
       });
     }).catchError((e) {
-      debugPrint(e);
+      debugPrint(e.toString());
     });
   }
 

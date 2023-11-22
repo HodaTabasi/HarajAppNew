@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:haraj/utils/api_controller/auth_api_controller.dart';
 import 'package:haraj/utils/repository/general_repo.dart';
 
+import '../../feature/app/setting/controller/setting_getx_controller.dart';
 import '../errors/error_const.dart';
 import '../extensions/color_resource/color_resource.dart';
 
@@ -101,22 +103,29 @@ class GeneralGetxController extends GetxController {
   }
 
 sendFcmToken(token) async {
-
-    Get.find<GeneralRepository>().sendFcmToken(token: token)
-        .then((value) =>value.fold(
-            (failure) {
-              var responseMessage = mapFailureToMessage(failure);
-              Get.snackbar(
-                'Requires',
-                responseMessage,
-                backgroundColor: ColorResource.red,
-                snackPosition: SnackPosition.BOTTOM,
-              );
-            },
-            (response) {
+    String? message;
+    await Get.find<GeneralRepository>().sendFcmToken(token: token)
+        .then((value) {
+      value.fold(
+              (failure) {
+            // var responseMessage = mapFailureToMessage(failure);
+            // Get.snackbar(
+            //   'Requires',
+            //   responseMessage,
+            //   backgroundColor: ColorResource.red,
+            //   snackPosition: SnackPosition.BOTTOM,
+            // );
+          },
+              (response) {
+            if(response.message == 'bad auth') {
+              message = response.message;
+            } else {
               print("send successfully");
-            })
+            }
+          });
+    }
     );
+    return message;
 }
 
 }

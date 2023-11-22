@@ -11,6 +11,7 @@ import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/get/general_getx_controller.dart';
+import 'package:haraj/utils/models/seller_info/image.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_bottom_sheet.dart';
 import 'package:haraj/widgets/app_car_container.dart';

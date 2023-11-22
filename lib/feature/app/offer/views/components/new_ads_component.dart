@@ -31,8 +31,8 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
                     },
                     child: AppCarContainer(
                       nameCar: controller.newOffers[index].post!.car?.name ?? '',
-                      imageCar: controller
-                          .newOffers[index].post!.gallery!.first.image!,
+                      gallery: controller
+                          .newOffers[index].post!.gallery,
                       priceCar: '',
                       showStatus:
                           SharedPrefController().type == 1 ? false : true,
@@ -104,8 +104,8 @@ class _NewAdsComponentState extends State<NewAdsComponent> {
                                             context.localizations.send_edit,
                                         nameCar: controller
                                             .newOffers[index].post!.car!.name!,
-                                        imageCar: controller.newOffers[index]
-                                            .post!.gallery!.first.image!,
+                                        gallery: controller.newOffers[index]
+                                            .post!.gallery,
                                         //TODO: Make Lang Here
                                         conditionCar: "قيد الإنتظار",
                                         sellerName: controller.newOffers[index]

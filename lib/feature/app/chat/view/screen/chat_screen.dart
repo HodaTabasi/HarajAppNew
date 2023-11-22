@@ -86,7 +86,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   AppChatCarContainer(
                                       imageCar: widget.post!.gallery == null ||
                                               widget.post!.gallery!.isEmpty
-                                          ? ''
+                                          ? null
                                           : widget.post!.gallery!.first.image ??
                                               '',
                                       nameCar:

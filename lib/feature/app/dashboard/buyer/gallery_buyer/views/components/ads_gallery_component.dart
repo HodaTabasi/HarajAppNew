@@ -56,8 +56,8 @@ class _AdsGalleryComponentState extends State<AdsGalleryComponent> {
                     child: AppAdsCarContainer(
                       nameCar:
                           galleryBuyerController.storePost[index].car!.name!,
-                      imageCar: galleryBuyerController
-                          .storePost[index].gallery!.first.image!,
+                      gallery: galleryBuyerController
+                          .storePost[index].gallery,
                       priceCar: galleryBuyerController.storePost[index].price!,
                       conditionCar: galleryBuyerController
                           .storePost[index].mechanicalStatus!.name!,

@@ -73,7 +73,8 @@ class AdsApiController with Helpers {
     }
   }
 
-  addAds({required List<MyImage> images,
+  addAds(
+      {required List<MyImage> images,
       required Map<String, GeneralModel> selectedData,
       required price,
       required year,
@@ -95,7 +96,12 @@ class AdsApiController with Helpers {
         SharedPrefController().language;
 
     selectedData.forEach((key, value) {
-      request.fields[key] = value.id.toString();
+      if ((key == 'guarantee' || key == 'finance' || key == 'exportable') &&
+          value.id == null) {
+        request.fields[key] = '0';
+      } else {
+        request.fields[key] = value.id.toString();
+      }
     });
 
     request.fields['distance'] = kelometer.toString();
@@ -118,11 +124,14 @@ class AdsApiController with Helpers {
     }
   }
 
-  addSocialContactToAds({whatsapp, facebook,
+  addSocialContactToAds(
+      {whatsapp,
+      facebook,
       whatsappConnection,
       facebookConnection,
       call,
-      chat,postId}) async {
+      chat,
+      postId}) async {
     print("object");
     var map = {
       'whatsapp': '$whatsapp',
@@ -139,7 +148,6 @@ class AdsApiController with Helpers {
     print(SharedPrefController().token);
     var decodedJson = json.decode(response.body);
 
-
     if (response.statusCode == 200) {
       return Data.fromJson(decodedJson['data']);
     } else {
@@ -149,7 +157,8 @@ class AdsApiController with Helpers {
   }
 
   toggleFavorite({postId}) async {
-    var url = Uri.parse('${ApiSettings.toggleFavorite}/$postId/toggle-favorite');
+    var url =
+        Uri.parse('${ApiSettings.toggleFavorite}/$postId/toggle-favorite');
     http.Response response = await http.post(url, headers: headers);
     var decodedJson = json.decode(response.body);
 

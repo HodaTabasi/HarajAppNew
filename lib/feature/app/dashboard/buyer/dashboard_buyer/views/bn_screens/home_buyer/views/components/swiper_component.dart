@@ -29,7 +29,19 @@ class _SwiperComponentState extends State<SwiperComponent> {
             scale: 0.9,
             itemBuilder: (BuildContext context, int index) {
               if (controller.ads[index].featured == true) {
-                return Container(
+                return (controller.ads[index].gallery?.isEmpty??true)
+                    ? Container(
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                    margin:
+                    EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                    width: double.infinity,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: AppSvgPicture(assetName: IconsApp.logoSeller))
+                    :Container(
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
                   margin:

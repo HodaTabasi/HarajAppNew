@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/extensions/routes/custom_shap.dart';
+import 'package:haraj/utils/models/seller_info/image.dart';
 import 'package:haraj/widgets/app_divider.dart';
 import 'package:haraj/widgets/app_popup_menu_button.dart';
 import 'package:haraj/widgets/app_popup_menu_item.dart';
@@ -10,11 +11,13 @@ import 'package:haraj/widgets/app_svg_picture.dart';
 import 'package:haraj/widgets/app_switch_button.dart';
 import 'package:haraj/widgets/app_text.dart';
 
+import '../utils/extensions/icons_app/icons_app.dart';
+
 class AppCarContainer extends StatefulWidget {
   const AppCarContainer({
     super.key,
     required this.nameCar,
-    required this.imageCar,
+    required this.gallery,
     required this.priceCar,
     required this.conditionCar,
     required this.showCar,
@@ -38,7 +41,7 @@ class AppCarContainer extends StatefulWidget {
   });
 
   final String nameCar;
-  final String imageCar;
+  final List<MyImage>? gallery;
   final String priceCar;
   final String conditionCar;
   final String showCar;
@@ -96,10 +99,12 @@ class _AppCarContainerState extends State<AppCarContainer> {
                     height: 151.h,
                     child: ClipPath(
                       clipper: RPSCustomPainter(),
-                      child: Image.network(
-                        widget.imageCar,
-                        fit: BoxFit.fill,
-                      ),
+                      child: (widget.gallery?.isEmpty??true)
+                          ? AppSvgPicture(assetName: IconsApp.logoSeller)
+                          : Image.network(
+                        widget.gallery!.first.image!,
+                              fit: BoxFit.fill,
+                            ),
                     ),
                   ),
                   widget.showLocation

@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/widgets/app_text.dart';
 
+import '../utils/extensions/icons_app/icons_app.dart';
+import 'app_svg_picture.dart';
+
 class AppChatCarContainer extends StatefulWidget {
   const AppChatCarContainer({
     super.key,
@@ -14,7 +17,7 @@ class AppChatCarContainer extends StatefulWidget {
   });
 
   final String nameCar;
-  final String imageCar;
+  final String? imageCar;
   final String priceCar;
   final String conditionCar;
   final String postingTime;
@@ -39,6 +42,16 @@ class _AppChatCarContainerState extends State<AppChatCarContainer> {
         children: [
           Column(
             children: [
+              (widget.imageCar == null || widget.imageCar == '')
+                  ? Container(
+                  decoration: BoxDecoration(
+                    color: ColorResource.white,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(15.r),
+                        bottomRight: Radius.circular(15.r)),
+                  ),
+                  child: AppSvgPicture(assetName: IconsApp.logoSeller))
+                  :
               Container(
                 width: 100.w,
                 height: 100.h,
@@ -49,7 +62,7 @@ class _AppChatCarContainerState extends State<AppChatCarContainer> {
                       topRight: Radius.circular(15.r),
                       bottomRight: Radius.circular(15.r)),
                   image: DecorationImage(
-                    image: NetworkImage(widget.imageCar),
+                    image: NetworkImage(widget.imageCar!),
                     fit: BoxFit.fill,
                   ),
                 ),

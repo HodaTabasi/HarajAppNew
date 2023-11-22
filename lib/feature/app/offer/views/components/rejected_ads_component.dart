@@ -32,8 +32,8 @@ class _RejectedAdsComponentState extends State<RejectedAdsComponent> {
                     child: AppCarContainer(
                       nameCar:
                           controller.rejectedOffers[index].post!.car!.name!,
-                      imageCar: controller
-                          .rejectedOffers[index].post!.gallery!.first.image!,
+                      gallery: controller
+                          .rejectedOffers[index].post!.gallery,
                       priceCar: '',
                       showStatus:
                           SharedPrefController().type == 1 ? false : true,
@@ -106,12 +106,10 @@ class _RejectedAdsComponentState extends State<RejectedAdsComponent> {
                                             .post!
                                             .car!
                                             .name!,
-                                        imageCar: controller
+                                        gallery: controller
                                             .rejectedOffers[index]
                                             .post!
-                                            .gallery!
-                                            .first
-                                            .image!,
+                                            .gallery,
                                         //TODO: Make Lang Here
                                         conditionCar: "مرفوضة",
                                         sellerName: controller

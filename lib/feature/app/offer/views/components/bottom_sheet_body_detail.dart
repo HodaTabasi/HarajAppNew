@@ -5,7 +5,7 @@ class BottomSheetBody extends StatefulWidget {
   final String buttonTitle;
 
   final String nameCar;
-  final String imageCar;
+  final List<MyImage>? gallery;
   final String conditionCar;
   final String sellerName;
   final String imageSeller;
@@ -18,7 +18,7 @@ class BottomSheetBody extends StatefulWidget {
       required this.headTitle,
       required this.buttonTitle,
       required this.nameCar,
-      required this.imageCar,
+      required this.gallery,
       required this.conditionCar,
       required this.sellerName,
       required this.imageSeller,
@@ -68,7 +68,7 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
           child: SingleChildScrollView(
             child: AppCarContainer(
               nameCar: widget.nameCar,
-              imageCar: widget.imageCar,
+              gallery: widget.gallery,
               priceCar: '',
               conditionCar: widget.conditionCar,
               showCar: '',

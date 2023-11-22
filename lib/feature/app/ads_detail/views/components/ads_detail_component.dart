@@ -24,35 +24,43 @@ class _AdsDetailComponentState extends State<AdsDetailComponent> {
         child: Column(
           children: [
             //TODO: Make Lang Here
+            if(controller.adsDetail.value.category!.name != null)
             LineDetail(
               detail: 'الفئة :',
               result: controller.adsDetail.value.category!.name!,
             ),
+            if(controller.adsDetail.value.year != null)
             LineDetail(
               detail: 'السنة الانتاج :',
               result: '${controller.adsDetail.value.year!}',
-             // result: controller.adsDetail.value.year.toString(),
+              // result: controller.adsDetail.value.year.toString(),
             ),
+            if(controller.adsDetail.value.distance != null)
             LineDetail(
               detail: 'كيلوميترات :',
               result: controller.adsDetail.value.distance.toString(),
             ),
+            if(controller.adsDetail.value.body!.name != null)
             LineDetail(
               detail: 'نوع الجسم :',
               result: controller.adsDetail.value.body!.name!,
             ),
+            if( controller.adsDetail.value.mechanicalStatus!.name != null)
             LineDetail(
               detail: 'الحالة الميكانيكية :',
               result: controller.adsDetail.value.mechanicalStatus!.name!,
             ),
+            if(controller.adsDetail.value.sellerType!.name != null)
             LineDetail(
               detail: 'نوع البائع :',
               result: controller.adsDetail.value.sellerType!.name!,
             ),
+            if(controller.adsDetail.value.gear!.name != null)
             LineDetail(
               detail: 'نوع الناقل :',
               result: controller.adsDetail.value.gear!.name!,
             ),
+            if(controller.adsDetail.value.engine!.number != null)
             LineDetail(
               detail: 'قوة المحرك :',
               result: controller.adsDetail.value.engine!.number.toString(),

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/home_buyer/controllers/home_buyer_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
+import 'package:haraj/utils/models/seller_info/image.dart';
 import 'package:haraj/widgets/app_divider.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
 import 'package:haraj/widgets/app_text.dart';
@@ -12,7 +13,7 @@ class AppAdsCarContainer extends StatefulWidget {
   const AppAdsCarContainer({
     super.key,
     required this.nameCar,
-    required this.imageCar,
+    required this.gallery,
     required this.priceCar,
     required this.conditionCar,
     this.nameLocation = '',
@@ -25,7 +26,7 @@ class AppAdsCarContainer extends StatefulWidget {
   });
 
   final String nameCar;
-  final String imageCar;
+  final List<MyImage>? gallery;
   final String priceCar;
   final String conditionCar;
   final String nameLocation;
@@ -65,11 +66,16 @@ class _AppAdsCarContainerState extends State<AppAdsCarContainer> {
             Stack(
               alignment: Alignment.bottomRight,
               children: [
-                Image.network(
-                  widget.imageCar,
-                  fit: BoxFit.cover,
+                SizedBox(
                   height: 130.h,
                   width: double.infinity,
+                  child: (widget.gallery?.isEmpty??true)
+                      ? AppSvgPicture(assetName: IconsApp.logoSeller)
+                      :
+                  Image.network(
+                    widget.gallery!.first.image!,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

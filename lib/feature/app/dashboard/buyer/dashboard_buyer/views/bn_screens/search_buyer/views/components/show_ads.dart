@@ -24,8 +24,8 @@ class _ShowAdsState extends State<ShowAds> {
           },
           child: AppCarContainer(
             nameCar: 'بوغاتي شيرون',
-            imageCar:
-                "https://www.pixel4k.com/wp-content/uploads/2019/01/bugatti-chiron-4k_1546362064.jpg.webp",
+            gallery:
+                [MyImage(1, "https://www.pixel4k.com/wp-content/uploads/2019/01/bugatti-chiron-4k_1546362064.jpg.webp")],
             priceCar: '5000 درهم',
             conditionCar: 'ممتازة',
             showCar: 'زائر',

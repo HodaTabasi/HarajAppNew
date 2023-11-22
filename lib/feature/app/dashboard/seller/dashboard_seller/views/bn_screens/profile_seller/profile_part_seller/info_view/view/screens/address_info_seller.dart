@@ -45,11 +45,11 @@ class _AddressInfoSellerScreenState extends State<AddressInfoSellerScreen> {
             text: '${profileSellerController.userModel?.data!.store?.address?.city?.name}',
             icon: IconsApp.mobile,
           ),
-          InfoItemWidget(
-            title: 'الموقع',
-            text: 'sdefh142',
-            icon: IconsApp.vendorAccount,
-          ),
+          // InfoItemWidget(
+          //   title: 'الموقع',
+          //   text: 'sdefh142',
+          //   icon: IconsApp.vendorAccount,
+          // ),
           InfoItemWidget(
             title: 'اسم الشارع',
             text: '${profileSellerController.userModel?.data!.store?.address?.street}',

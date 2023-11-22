@@ -92,7 +92,7 @@ class SharedPrefController {
 
   Future<bool> clear() async {
     for (var key in _sharedPreferences.getKeys()) {
-      if (key != PrefKeys.fcmToken.toString() && key == PrefKeys.language.toString()) {
+      if (key != PrefKeys.fcmToken.toString() && key != PrefKeys.language.toString()) {
         _sharedPreferences.remove(key);
       }
     }

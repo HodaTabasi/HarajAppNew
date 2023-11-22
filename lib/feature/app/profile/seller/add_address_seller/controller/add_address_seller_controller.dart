@@ -13,6 +13,7 @@ import '../../../../../../utils/models/governorates_model/governorate_model.dart
 import '../../../../../../utils/prefs/shared_pref_controller.dart';
 import '../../../../../../utils/repository/complete_user_repo.dart';
 import '../../../../../../utils/repository/general_repo.dart';
+import '../../../../dashboard/seller/dashboard_seller/views/bn_screens/profile_seller/controllers/profile_seller_controller.dart';
 import '../use_case/complete_store_use_case.dart';
 import '../use_case/get_governortates_use_case.dart';
 
@@ -87,8 +88,9 @@ class AddAddressSellerController extends GetxController {
       city.value = user.store!.address!.city!.name;
       emira.value = user.store!.address!.governorate!.name;
       fromEditPage = true;
-      center = LatLng(user.store!.address!.lng!, user.store!.address!.lng!);
+      center = LatLng(user.store!.address!.lat!, user.store!.address!.lng!);
     } else {
+      print('c123');
       nameStreetController = TextEditingController();
       buildNumberController = TextEditingController();
       postalCodeController = TextEditingController();
@@ -243,6 +245,8 @@ class AddAddressSellerController extends GetxController {
               loading.value = false;
               return false;
             }, (user) async {
+      ProfileSellerController.to.userModel?.data?.store?.address?.lat = center?.latitude;
+      ProfileSellerController.to.userModel?.data?.store?.address?.lng = center?.longitude;
               loading.value = false;
               if (fromEditPage) {
                 Get.back();

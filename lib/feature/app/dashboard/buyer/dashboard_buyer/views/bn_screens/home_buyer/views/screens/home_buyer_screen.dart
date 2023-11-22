@@ -13,6 +13,9 @@ import 'package:haraj/widgets/app_ads_car_container.dart';
 import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_appbar.dart';
 
+import '../../../../../../../../../../utils/extensions/icons_app/icons_app.dart';
+import '../../../../../../../../../../widgets/app_svg_picture.dart';
+
 part '../components/show_ads.dart';
 part '../components/swiper_component.dart';
 

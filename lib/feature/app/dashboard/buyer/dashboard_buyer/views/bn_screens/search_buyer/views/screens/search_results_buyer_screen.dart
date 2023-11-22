@@ -51,9 +51,9 @@ class _SearchResultBuyerScreenState extends State<SearchResultBuyerScreen> {
                         childAspectRatio: 160.w / 281.h, // Width on Height
                       ),
                       itemBuilder: (BuildContext context, int index) {
-                        return const AppAdsCarContainer(
+                        return  AppAdsCarContainer(
                           nameCar: 'بوغاتي شيرون',
-                          imageCar: ImagesApp.imageSwiper,
+                          gallery: [MyImage(1, ImagesApp.imageSwiper)],
                           priceCar: '5000 درهم',
                           conditionCar: 'ممتازة',
                           imageSeller: ImagesApp.imageSwiper,

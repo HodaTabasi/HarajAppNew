@@ -38,7 +38,10 @@ class GeneralApiController with Helpers {
     print(decodedJson);
     if (response.statusCode == 200) {
       return ApiResponse.fromJson(decodedJson);
-    } else {
+    } else if (response.statusCode == 401) {
+      return ApiResponse('bad auth', false);
+    }
+    else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();
     }

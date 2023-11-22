@@ -32,8 +32,8 @@ class _AcceptedAdsComponentState extends State<AcceptedAdsComponent> {
                     child: AppCarContainer(
                       nameCar:
                           controller.acceptedOffers[index].post!.car!.name!,
-                      imageCar: controller
-                          .acceptedOffers[index].post!.gallery!.first.image!,
+                      gallery: controller
+                          .acceptedOffers[index].post!.gallery,
                       priceCar: '',
                       showStatus:
                           SharedPrefController().type == 1 ? false : true,

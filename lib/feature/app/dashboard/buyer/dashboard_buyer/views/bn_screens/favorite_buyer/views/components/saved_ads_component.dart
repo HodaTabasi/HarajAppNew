@@ -44,8 +44,8 @@ class _SavedAdsComponentState extends State<SavedAdsComponent> {
                     },
                     child: AppAdsCarContainer(
                       nameCar: controller.savedAds[index].car?.name ?? '',
-                      imageCar:
-                          controller.savedAds[index].gallery!.first.image!,
+                      gallery:
+                          controller.savedAds[index].gallery,
                       priceCar: controller.savedAds[index].price!,
                       conditionCar:
                           controller.savedAds[index].mechanicalStatus!.name!,

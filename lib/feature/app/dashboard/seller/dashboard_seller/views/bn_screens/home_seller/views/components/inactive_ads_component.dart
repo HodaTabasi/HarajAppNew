@@ -37,9 +37,10 @@ class _InActiveAdsComponentState extends State<InActiveAdsComponent> {
                             ));
                       },
                       child: AppCarContainer(
-                        nameCar: controller.searchAdsList[index].car?.name ?? '',
-                        imageCar: controller
-                            .searchAdsList[index].gallery!.first.image!,
+                        nameCar:
+                            controller.searchAdsList[index].car?.name ?? '',
+                        gallery:
+                            controller.searchAdsList[index].gallery,
                         priceCar: controller.searchAdsList[index].price!,
                         conditionCar: controller
                             .searchAdsList[index].mechanicalStatus!.name!,

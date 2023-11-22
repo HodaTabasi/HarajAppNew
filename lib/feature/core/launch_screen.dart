@@ -7,6 +7,7 @@ import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
 
 import '../../utils/get/general_getx_controller.dart';
+import '../app/setting/controller/setting_getx_controller.dart';
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({Key? key}) : super(key: key);
@@ -21,10 +22,22 @@ class _LaunchScreenState extends State<LaunchScreen> {
     super.initState();
     Future.delayed(
       const Duration(seconds: 2),
-      () {
-        print('HII ${SharedPrefController().token}');
+      () async {
         GeneralGetxController generalGetxController =
             Get.put(GeneralGetxController());
+        SettingGetXController settingGetXController =
+            Get.put(SettingGetXController());
+
+        if(SharedPrefController().loggedIn &&
+            SharedPrefController().token != ''
+            ) {
+          final xx = await generalGetxController.sendFcmToken(SharedPrefController().fcmToken);
+          if(xx == 'bad auth') {
+            settingGetXController.logout();
+            return;
+          }
+        }
+        print('HII ${SharedPrefController().token}');
         String route = SharedPrefController().loggedIn &&
                 SharedPrefController().token != ''
             ? SharedPrefController().type == 1

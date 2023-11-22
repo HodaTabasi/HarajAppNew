@@ -110,29 +110,30 @@ class SettingGetXController extends GetxController {
     return LogoutAccountUseCase(repository: Get.find<SettingRepo>())
         .call()
         .then((value) => value.fold((failure) {
-              responseMessage = mapFailureToMessage(failure);
-              Get.snackbar(
-                'Session expired',
-                'Please login again',
-                backgroundColor: ColorResource.red,
-                snackPosition: SnackPosition.BOTTOM,
-              );
+              // responseMessage = mapFailureToMessage(failure);
+              // Get.snackbar(
+              //   'Session expired',
+              //   'Please login again',
+              //   backgroundColor: ColorResource.red,
+              //   snackPosition: SnackPosition.BOTTOM,
+              // );
               FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers_en');
               FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers_ar');
+              Get.delete<ChatDetailsController>(force: true);
+              Get.delete<HomeChatController>(force: true);
               SharedPrefController()
                   .clear()
                   .then((value) => Get.offAll(() => LoginScreen()));
-              Get.delete<ChatDetailsController>(force: true);
-              Get.delete<HomeChatController>(force: true);
               loading.value = false;
-            }, (response) async {
+    }, (response) async {
               FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers_en');
               FirebaseMessaging.instance.unsubscribeFromTopic('all_buyers_ar');
+              Get.delete<ChatDetailsController>(force: true);
+              Get.delete<HomeChatController>(force: true);
               SharedPrefController()
                   .clear()
                   .then((value) => Get.offAll(() => LoginScreen()));
-              Get.delete<ChatDetailsController>(force: true);
-              Get.delete<HomeChatController>(force: true);
+
               loading.value = false;
             }));
   }
