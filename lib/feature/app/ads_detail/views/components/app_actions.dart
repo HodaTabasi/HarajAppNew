@@ -38,7 +38,6 @@ class _AppActionsState extends State<AppActions> {
                   Get.bottomSheet(
                       AppBottomSheet(
                         body: BottomSheetBodyOffers(),
-                        height: 280.h,
                       ),
                       enterBottomSheetDuration:
                           const Duration(milliseconds: 500),

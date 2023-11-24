@@ -5,6 +5,7 @@ class BottomSheetBodyOffers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           alignment: Alignment.topLeft,
@@ -24,31 +25,31 @@ class BottomSheetBodyOffers extends StatelessWidget {
           ),
         ),
         SizedBox(height: 16.h),
-        AppText(
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w300,
-          text: context.localizations.select_data_modify,
-          color: ColorResource.mainFontColor,
-        ),
-        AppDivider(
-          color: ColorResource.secondaryColor,
-          height: 25.h,
-          thickness: 1.h,
-        ),
+        // AppText(
+        //   fontSize: 16.sp,
+        //   fontWeight: FontWeight.w300,
+        //   text: context.localizations.select_data_modify,
+        //   color: ColorResource.mainFontColor,
+        // ),
+        // AppDivider(
+        //   color: ColorResource.secondaryColor,
+        //   height: 25.h,
+        //   thickness: 1.h,
+        // ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppText(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              text: context.localizations.add_car_images,
-              color: ColorResource.mainFontColor,
-            ),
-            AppDivider(
-              color: ColorResource.secondaryColor,
-              height: 25.h,
-              thickness: 1.h,
-            ),
+            // AppText(
+            //   fontSize: 16.sp,
+            //   fontWeight: FontWeight.w500,
+            //   text: context.localizations.add_car_images,
+            //   color: ColorResource.mainFontColor,
+            // ),
+            // AppDivider(
+            //   color: ColorResource.secondaryColor,
+            //   height: 25.h,
+            //   thickness: 1.h,
+            // ),
             AppText(
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
@@ -60,17 +61,23 @@ class BottomSheetBodyOffers extends StatelessWidget {
               height: 25.h,
               thickness: 1.h,
             ),
-            AppText(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              text: context.localizations.edit_car_info,
-              color: ColorResource.mainFontColor,
+            InkWell(
+              onTap: () {
+                // Get.to(() => AddAdsSellerScreen());
+              },
+              child: AppText(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w500,
+                text: context.localizations.edit_car_info,
+                color: ColorResource.mainFontColor,
+              ),
             ),
-            AppDivider(
-              color: ColorResource.secondaryColor,
-              height: 25.h,
-              thickness: 1.h,
-            ),
+            // AppDivider(
+            //   color: ColorResource.secondaryColor,
+            //   height: 25.h,
+            //   thickness: 1.h,
+            // ),
+            const SizedBox(height: 16),
           ],
         ),
       ],

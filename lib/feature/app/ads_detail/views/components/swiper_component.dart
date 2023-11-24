@@ -72,10 +72,35 @@ class _SwiperComponentState extends State<SwiperComponent> {
                           ),
                           child: InkWell(
                               onTap: () {
-                                Get.dialog(Image.network(
-                                    controller
-                                        .adsDetail.value.gallery![index].image!,
-                                    fit: BoxFit.contain));
+                                Get.dialog(
+                                    Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Image.network(
+                                            controller.adsDetail.value
+                                                .gallery![index].image!,
+                                            fit: BoxFit.contain),
+                                        Positioned.directional(
+                                            start: 10,
+                                            top: 10,
+                                            textDirection:
+                                                Localizations.localeOf(context)
+                                                            .languageCode ==
+                                                        'ar'
+                                                    ? TextDirection.rtl
+                                                    : TextDirection.ltr,
+                                            child: IconButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                icon: const Icon(
+                                                  Icons.close,
+                                                  color: Colors.white,
+                                                ))),
+                                      ],
+                                    ),
+                                    barrierColor: Colors.black,
+                                    barrierDismissible: true);
                               },
                               child: AppSvgPicture(
                                   assetName: IconsApp.fillScreen))),

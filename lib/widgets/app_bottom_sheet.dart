@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 
 class AppBottomSheet extends StatefulWidget {
-  final double height;
+  final double? height;
   final Widget body;
 
-  const AppBottomSheet({Key? key, required this.height, required this.body})
+  const AppBottomSheet({Key? key, this.height, required this.body})
       : super(key: key);
 
   @override
