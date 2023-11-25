@@ -45,7 +45,7 @@ class _ShowAdsState extends State<ShowAds> {
                   imageSeller: controller.ads[index].store!.avatar!,
                   sellerName: controller.ads[index].sellerType!.name!,
                   nameLocation:
-                      controller.ads[index].store!.address!.governorate!.name!,
+                      controller.ads[index].store!.address!.governorate?.name ?? "",
                   isFavorite: controller.ads[index].isFavorite!,
                   id: controller.ads[index].id!,
                   index: index,
