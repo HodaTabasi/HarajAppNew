@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +12,14 @@ import 'package:haraj/utils/get/localizations/language_getx_controller.dart';
 import 'package:haraj/utils/main_injections.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/utils/translation_file.dart';
+
+@pragma('vm:entry-point')
+Future<void> firebaseMessagingBackgroundHandler(
+    RemoteMessage remoteMessage) async {
+  //BACKGROUND Notifications - iOS & Android
+  // await Firebase.initializeApp();
+  debugPrint('Message: ${remoteMessage.messageId}');
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

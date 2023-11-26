@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:haraj/feature/app/chat/use_case/home_chat_use_case.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
-import 'package:haraj/utils/models/chat/Message.dart';
+import 'package:haraj/utils/models/chat/message.dart';
 import 'package:haraj/utils/models/chat/chat_conversation.dart';
 import 'package:haraj/utils/repository/chat_repo/chat_repo.dart';
 

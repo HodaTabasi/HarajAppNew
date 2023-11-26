@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 import '../../errors/error_const.dart';
 import '../../errors/exceptions.dart';
-import '../../models/chat/Message.dart';
+import '../../models/chat/message.dart';
 
 class ChatsApiController with Helpers {
   index({page}) async {

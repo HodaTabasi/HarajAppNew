@@ -1,4 +1,4 @@
-import 'package:haraj/utils/models/chat/Message.dart';
+import 'package:haraj/utils/models/chat/message.dart';
 import 'package:haraj/utils/models/meta/meta_model.dart';
 
 class MessagesModel {

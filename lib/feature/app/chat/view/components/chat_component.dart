@@ -62,6 +62,7 @@ class _ChatComponentState extends State<ChatComponent> {
                             image:controller.chatConversations[index].client?.avatar ?? '',
                             title: controller.chatConversations[index].client?.name ?? '',
                             subTitle: controller.chatConversations[index].lastMessageContent ?? '',
+                            postId: controller.chatConversations[index].post?.id,
                             time: controller.chatConversations[index].lastMessageCreatedAt ?? '',
                             numberOfMessages: "",
                             isOnLine: false,
