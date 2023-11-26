@@ -6,7 +6,7 @@ import 'package:haraj/feature/app/chat/use_case/send_message_use_case.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/models/ads_model/ads_model.dart';
-import 'package:haraj/utils/models/chat/Message.dart';
+import 'package:haraj/utils/models/chat/message.dart';
 import 'package:haraj/utils/models/meta/meta_model.dart';
 import 'package:haraj/utils/models/offer/client_model.dart';
 import '../../../../utils/repository/chat_repo/chat_repo.dart';
@@ -18,6 +18,7 @@ class ChatDetailsController extends GetxController {
   ChatDetailsController({required this.chatId}); // Add this constructor
 
   static ChatDetailsController get to => Get.find<ChatDetailsController>();
+  static bool get isPut => Get.isRegistered<ChatDetailsController>();
 
   RxBool loading = false.obs;
   RxBool isFavoriteLoading = false.obs;

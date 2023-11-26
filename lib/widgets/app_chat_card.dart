@@ -6,6 +6,7 @@ import 'package:haraj/widgets/app_text.dart';
 
 class AppChatCard extends StatefulWidget {
   final String image;
+  final num? postId;
   final String title;
   final String subTitle;
   final String time;
@@ -23,7 +24,7 @@ class AppChatCard extends StatefulWidget {
     required this.numberOfMessages,
     required this.isOnLine,
     required this.isMessage,
-    required this.isNewMessage,
+    required this.isNewMessage, this.postId,
   });
 
   @override
@@ -38,105 +39,120 @@ class _AppChatCardState extends State<AppChatCard> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 74.h,
+          // height: 74.h,
           width: double.infinity,
           alignment: Alignment.topCenter,
-          child: ListTile(
-            horizontalTitleGap: 10.w,
-            contentPadding: EdgeInsets.zero,
-            minLeadingWidth: 0.w,
-            minVerticalPadding: 0.h,
-            leading: Stack(
-              alignment: Alignment.bottomLeft,
-              children: [
-                Container(
-                  height: 50.r,
-                  width: 50.r,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25.r),
-                    // border: Border.all(color: ColorResource.red, width: 1.w),
-                    image: DecorationImage(
-                      image: NetworkImage(widget.image),
-                      fit: BoxFit.cover,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if(widget.postId != null)
+              AppText(
+                color: ColorResource.mainFontColor,
+                text: 'رقم الإعلان ${widget.postId}',
+                fontWeight: FontWeight.w500,
+                fontSize: 10.sp,
+                textAlign: TextAlign.start,
+                maxLine: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              ListTile(
+                horizontalTitleGap: 10.w,
+                contentPadding: EdgeInsets.zero,
+                minLeadingWidth: 0.w,
+                minVerticalPadding: 0.h,
+                leading: Stack(
+                  alignment: Alignment.bottomLeft,
+                  children: [
+                    Container(
+                      height: 50.r,
+                      width: 50.r,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.r),
+                        // border: Border.all(color: ColorResource.red, width: 1.w),
+                        image: DecorationImage(
+                          image: NetworkImage(widget.image),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                  ),
+                    widget.isOnLine == true
+                        ? CircleAvatar(
+                            backgroundColor: ColorResource.white,
+                            radius: 8.r,
+                            child: CircleAvatar(
+                              backgroundColor: ColorResource.green,
+                              radius: 7.r,
+                            ),
+                          )
+                        : const SizedBox(),
+                  ],
                 ),
-                widget.isOnLine == true
-                    ? CircleAvatar(
-                        backgroundColor: ColorResource.white,
-                        radius: 8.r,
-                        child: CircleAvatar(
-                          backgroundColor: ColorResource.green,
-                          radius: 7.r,
-                        ),
-                      )
-                    : const SizedBox(),
-              ],
-            ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: AppText(
-                    color: ColorResource.mainFontColor,
-                    text: widget.title,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15.sp,
-                    textAlign: TextAlign.start,
-                    maxLine: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: AppText(
+                        color: ColorResource.mainFontColor,
+                        text: widget.title,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15.sp,
+                        textAlign: TextAlign.start,
+                        maxLine: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    SizedBox(width: 10.w),
+                    AppText(
+                      color: widget.isNewMessage == true
+                          ? ColorResource.mainColor
+                          : ColorResource.gray,
+                      text: widget.time,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 10.sp,
+                      textAlign: TextAlign.start,
+                    ),
+                  ],
                 ),
-                SizedBox(width: 10.w),
-                AppText(
-                  color: widget.isNewMessage == true
-                      ? ColorResource.mainColor
-                      : ColorResource.gray,
-                  text: widget.time,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 10.sp,
-                  textAlign: TextAlign.start,
+                subtitle: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: AppText(
+                        color: ColorResource.gray,
+                        text: widget.subTitle,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15.sp,
+                        textAlign: TextAlign.start,
+                        maxLine: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    SizedBox(width: 10.w),
+                    widget.isMessage == true
+                        ? !widget.isNewMessage ? const SizedBox():Container(
+                            height: 19.h,
+                            width: 18.w,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25.r),
+                              color: ColorResource.mainColor,
+                            ),
+                            child: AppText(
+                              color: ColorResource.white,
+                              text: widget.numberOfMessages,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12.sp,
+                              textAlign: TextAlign.start,
+                            ),
+                          )
+                        : const SizedBox(),
+                  ],
                 ),
-              ],
-            ),
-            subtitle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: AppText(
-                    color: ColorResource.gray,
-                    text: widget.subTitle,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15.sp,
-                    textAlign: TextAlign.start,
-                    maxLine: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                SizedBox(width: 10.w),
-                widget.isMessage == true
-                    ? !widget.isNewMessage ? const SizedBox():Container(
-                        height: 19.h,
-                        width: 18.w,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25.r),
-                          color: ColorResource.mainColor,
-                        ),
-                        child: AppText(
-                          color: ColorResource.white,
-                          text: widget.numberOfMessages,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.sp,
-                          textAlign: TextAlign.start,
-                        ),
-                      )
-                    : const SizedBox(),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         AppDivider(
@@ -144,6 +160,7 @@ class _AppChatCardState extends State<AppChatCard> {
           color: ColorResource.lightGray,
           thickness: 1,
         ),
+        const SizedBox(height: 10)
       ],
     );
   }

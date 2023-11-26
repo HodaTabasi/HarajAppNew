@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:haraj/utils/api/network_info.dart';
 import 'package:haraj/utils/api_controller/chat_api/chats_api_controller.dart';
-import 'package:haraj/utils/models/chat/Message.dart';
+import 'package:haraj/utils/models/chat/message.dart';
 import 'package:haraj/utils/models/chat/chats_model.dart';
 
 import '../../errors/exceptions.dart';

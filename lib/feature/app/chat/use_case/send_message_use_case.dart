@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:haraj/utils/errors/failures.dart';
-import 'package:haraj/utils/models/chat/Message.dart';
+import 'package:haraj/utils/models/chat/message.dart';
 import 'package:haraj/utils/repository/chat_repo/chat_repo.dart';
 
 class SendMessageUseCase {
