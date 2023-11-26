@@ -58,7 +58,8 @@ class HomeChatScreen extends GetView<HomeChatController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InputField(),
+            //TODO search later
+            // InputField(),
             // controller.seller == 'seller'
             SharedPrefController().type == 1
                 ? TabBarComponent(
