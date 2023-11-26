@@ -13,6 +13,7 @@ import 'package:haraj/widgets/app_svg_picture.dart';
 import '../../../../../../utils/extensions/helpers/fb_notifications.dart';
 import '../../../../../../utils/get/general_getx_controller.dart';
 import '../../../../../../utils/prefs/shared_pref_controller.dart';
+import '../../../../profile/seller/add_address_seller/controller/add_address_seller_controller.dart';
 
 class DashboardBuyerScreen extends StatefulWidget {
   const DashboardBuyerScreen({super.key});
@@ -81,6 +82,7 @@ class _DashboardBuyerScreenState extends State<DashboardBuyerScreen> {
 
   @override
   void initState() {
+    AddAddressSellerController.to.getGovernorate();
     GeneralGetxController.to.sendFcmToken(SharedPrefController().fcmToken);
     Future.delayed(Duration.zero, () {
       FbNotifications.initializeForegroundNotificationForAndroid(context);

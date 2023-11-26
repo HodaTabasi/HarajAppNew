@@ -60,6 +60,7 @@ class AddAddressSellerController extends GetxController {
     cityId: cityId
   );
 
+
   int getValue(index) {
     return showEmirates.value ? emirates[index].id! : cities[index].id!;
   }

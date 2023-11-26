@@ -5,6 +5,7 @@ import 'package:haraj/utils/api_controller/chat_api/chats_api_controller.dart';
 import 'package:haraj/utils/api_controller/favorite_api/favorite_api_controller.dart';
 import 'package:haraj/utils/api_controller/offer_api_controller/offer_api_controller.dart';
 import 'package:haraj/utils/api_controller/profile_api_controller.dart';
+import 'package:haraj/utils/api_controller/search_api/search_api_controller.dart';
 import 'package:haraj/utils/api_controller/store_api/store_api_controller.dart';
 import 'package:haraj/utils/repository/ads_repo/ads_repo.dart';
 import 'package:haraj/utils/repository/auth_repo.dart';
@@ -14,6 +15,7 @@ import 'package:haraj/utils/repository/favorite_repo/favorite_repo.dart';
 import 'package:haraj/utils/repository/general_repo.dart';
 import 'package:haraj/utils/repository/offer_repo/offer_repo.dart';
 import 'package:haraj/utils/repository/profile_repo.dart';
+import 'package:haraj/utils/repository/search_repo/search_repo.dart';
 import 'package:haraj/utils/repository/setting_repo.dart';
 import 'package:haraj/utils/repository/store_repo/store_repo.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -66,6 +68,10 @@ class MainInjection implements Bindings {
 
     Get.put(AdsRepository(
         networkInfo: networkInfoImpl, remoteDataSource: AdsApiController()));
+
+    Get.put(SearchRepository(
+        networkInfo: networkInfoImpl, remoteDataSource: SearchApiController()));
+
     Get.put(ChatsRepository(
         networkInfo: networkInfoImpl, remoteDataSource: ChatsApiController()));
 

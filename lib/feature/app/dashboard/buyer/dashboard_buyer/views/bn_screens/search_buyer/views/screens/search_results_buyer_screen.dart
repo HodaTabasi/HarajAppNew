@@ -9,6 +9,9 @@ class SearchResultBuyerScreen extends StatefulWidget {
 }
 
 class _SearchResultBuyerScreenState extends State<SearchResultBuyerScreen> {
+  final SearchBuyerController searchController =
+  Get.find<SearchBuyerController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +19,7 @@ class _SearchResultBuyerScreenState extends State<SearchResultBuyerScreen> {
         title: context.localizations.research_results,
         heightBackground: 180.h,
         showLeading: true,
-        showSearch: true,
+        showSearch: false,
         showActions: false,
       ),
       body: Padding(
@@ -24,16 +27,10 @@ class _SearchResultBuyerScreenState extends State<SearchResultBuyerScreen> {
         child: Column(
           children: [
             RowDividerWidget(
-              text: '010 ${context.localizations.ad}',
+              text: '${searchController.ads.length} ${context.localizations.ad}',
               lineColor: ColorResource.gray,
             ),
             Expanded(
-              child: InkWell(
-                onTap: () {
-                  Get.to(() => AdsDetailScreen(
-                        productId: 1,
-                      ));
-                },
                 child: Stack(
                   alignment: Alignment.bottomCenter,
                   children: [
@@ -41,7 +38,7 @@ class _SearchResultBuyerScreenState extends State<SearchResultBuyerScreen> {
                       shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),
                       padding: EdgeInsetsDirectional.symmetric(vertical: 16.h),
-                      itemCount: 10,
+                      itemCount: searchController.ads.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing:
@@ -51,15 +48,21 @@ class _SearchResultBuyerScreenState extends State<SearchResultBuyerScreen> {
                         childAspectRatio: 160.w / 281.h, // Width on Height
                       ),
                       itemBuilder: (BuildContext context, int index) {
-                        return  AppAdsCarContainer(
-                          nameCar: 'بوغاتي شيرون',
-                          gallery: [MyImage(1, ImagesApp.imageSwiper)],
-                          priceCar: '5000 درهم',
-                          conditionCar: 'ممتازة',
-                          imageSeller: ImagesApp.imageSwiper,
-                          sellerName: 'معرض النور لبيع السيارات',
-                          nameLocation: 'دبي',
-                        );
+                        return  InkWell(
+                          onTap: () {
+                            Get.to(() =>  AdsDetailScreen(
+                              productId: searchController.ads[index].id!,
+                            ));},
+                         child:AppAdsCarContainer(
+                          nameCar: searchController.ads[index].car?.name??"no name",
+                          gallery: searchController.ads[index].gallery,
+                          priceCar: searchController.ads[index].price??"no price",
+                          conditionCar: searchController.ads[index].mechanicalStatus?.name??"no status",
+                          imageSeller: searchController.ads[index].store!.gallery![0].image??"",
+                          sellerName: searchController.ads[index].store?.name??"no name ",
+                          nameLocation: searchController.ads[index].address?.city?.name??"",
+                         ));
+
                       },
                     ),
                     DoneButton(
@@ -69,7 +72,7 @@ class _SearchResultBuyerScreenState extends State<SearchResultBuyerScreen> {
                     ),
                   ],
                 ),
-              ),
+
             ),
           ],
         ),

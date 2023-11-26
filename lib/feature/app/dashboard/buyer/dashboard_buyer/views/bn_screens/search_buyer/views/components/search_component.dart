@@ -8,6 +8,13 @@ class SearchBuyerComponent extends StatefulWidget {
 }
 
 class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
+  final SearchBuyerController searchController =
+  Get.find<SearchBuyerController>();
+
+  final AddAddressSellerController addAddressSellerController =
+  Get.find<AddAddressSellerController>();
+
+
   @override
   Widget build(BuildContext context) {
     return AppBodyContainer(
@@ -23,7 +30,7 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
           ),
           SizedBox(height: 15.h),
           AppContainerOpenBottomSheet(
-            title: context.localizations.car_model,
+            title: searchController.selectedData["brand_id"]!.name ??context.localizations.car_model,
             image: IconsApp.carName,
             onPressed: () {
               Get.bottomSheet(
@@ -33,7 +40,30 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
                       headerTitle: context.localizations.select_car_model,
                       title: "بي ام دبليواكس 6",
                       logo: ImagesApp.brandLogo,
-                      showCheckbox: true,
+                      //showCheckbox: true,
+                        list: searchController.carProperties.brands ?? [],
+                      isForBrand: true,
+                    ),
+                    height: 500.h,
+                  ),
+                  enterBottomSheetDuration: const Duration(milliseconds: 500),
+                  exitBottomSheetDuration: const Duration(milliseconds: 400));
+            },
+          ),
+          SizedBox(height: 24.h),
+          AppContainerOpenBottomSheet(
+            title: context.localizations.emirate,
+            image: IconsApp.city,
+            onPressed: () {
+              Get.bottomSheet(
+                  AppBottomSheet(
+                    body: BottomSheetBodyGovernorates(
+                      index: 5,
+                      headerTitle: context.localizations.select_governorate,
+                      title: "ابو ظبي",
+                      logo: "",
+                      list: addAddressSellerController.emirates ?? [],
+                      //showCheckbox: false,
                     ),
                     height: 500.h,
                   ),
@@ -48,12 +78,13 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
             onPressed: () {
               Get.bottomSheet(
                   AppBottomSheet(
-                    body: BottomSheetBody(
+                    body: BottomSheetBodyCities(
                       index: 5,
                       headerTitle: context.localizations.select_city,
                       title: "ابو ظبي",
                       logo: "",
-                      showCheckbox: false,
+                      list: searchController.selectedCities,
+                      //showCheckbox: false,
                     ),
                     height: 500.h,
                   ),
@@ -74,7 +105,9 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
                       //TODO: Make Lang Here
                       title: "بنزين",
                       logo: "",
-                      showCheckbox: true,
+                      list: searchController.carProperties.fuels ?? [],
+                      isForBrand: false,
+                      //showCheckbox: true,
                     ),
                     height: 350.h,
                   ),
@@ -83,12 +116,13 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
             },
           ),
           SizedBox(height: 24.h),
+          Obx(() => searchController.loading.value?const Center(child: CircularProgressIndicator()):
           DoneButton(
             title: context.localizations.search,
-            onPressed: () {
-              Get.to(() => const SearchResultBuyerScreen());
+            onPressed: ()  {
+              searchController.getIndexAds().then((value) => Get.to(() => const SearchResultBuyerScreen()));
             },
-          ),
+          ),)
         ],
       ),
     );

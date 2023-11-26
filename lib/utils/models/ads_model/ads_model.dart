@@ -4,6 +4,8 @@ import 'package:haraj/utils/models/seller_info/image.dart';
 import 'package:haraj/utils/models/seller_info/store_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../seller_info/address_model.dart';
+
 part 'ads_model.g.dart';
 
 @JsonSerializable(explicitToJson: true, createToJson: true, createFactory: true)
@@ -137,6 +139,8 @@ class Data {
   bool? status;
   @JsonKey(name: "created_at")
   String? createdAt;
+  @JsonKey(name: "address")
+  Address? address;
   Data(
       {this.id,
       this.price,

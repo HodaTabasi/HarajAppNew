@@ -1,40 +1,33 @@
-part of search_buyer_view;
+part of '../screens/search_buyer_screen.dart';
 
-class BottomSheetBody extends StatefulWidget {
+class BottomSheetBodyGovernorates extends StatefulWidget {
   final int index;
   final String headerTitle;
   final String title;
   final String logo;
-  final List<GeneralModel> list;
-  final bool isForBrand;
+  final List<GovernorateModel> list;
 
-  const BottomSheetBody(
+  const BottomSheetBodyGovernorates(
       {super.key,
         required this.index,
         required this.headerTitle,
         required this.title,
         required this.list,
-        required this.logo,
-        required this.isForBrand
-      });
+        required this.logo});
 
   @override
-  State<BottomSheetBody> createState() => _BottomSheetBodyState();
+  State<BottomSheetBodyGovernorates> createState() => _BottomSheetBodyGovernorates();
 }
 
-class _BottomSheetBodyState extends State<BottomSheetBody> {
+class _BottomSheetBodyGovernorates extends State<BottomSheetBodyGovernorates> {
   // int _selectedRadio = 0;
 
 
-  void _handleRadioValueChange(int? value,GeneralModel model) {
+  void _handleRadioValueChange(int? value,GovernorateModel model) {
     setState(() {
       // AddAdsSellerController.to.selectedData[widget.title]?.id = value!;
-      if(widget.isForBrand) {
-        SearchBuyerController.to.brandId.value = value!;
-      } else {
-        SearchBuyerController.to.fuelId.value = value!;
-      }
-      SearchBuyerController.to.selectedData[widget.title] = model;
+      SearchBuyerController.to.cityId.value = 0;
+      SearchBuyerController.to.governorateId.value = value!;
     });
   }
 
@@ -82,10 +75,10 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
                 children: [
                   CarBrandSelection(
                     value: widget.list[index].id ?? 0,
-                    groupValue: SearchBuyerController.to.selectedData[widget.title]?.id ?? 0,
+                    groupValue: SearchBuyerController.to.governorateId.value ?? 0,
                     onChange: (val)=>_handleRadioValueChange(val,widget.list[index]),
                     title: widget.list[index].name ??
-                        widget.list[index].number.toString(),
+                        widget.list[index].id.toString(),
                     // title: "بي ام دبليو",
                     // logo: widget.logo,
                     logo: "",

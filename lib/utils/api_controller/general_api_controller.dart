@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
 
 import '../api/api_response.dart';
@@ -11,6 +13,8 @@ import '../models/governorates_model/governorates_response.dart';
 import '../models/setting/setting.dart';
 
 class GeneralApiController with Helpers {
+  static GeneralApiController get to => Get.find<GeneralApiController>();
+
   getGovernorates() async {
     var url = Uri.parse(ApiSettings.governorates);
     http.Response response = await http.get(url, headers: headers);
