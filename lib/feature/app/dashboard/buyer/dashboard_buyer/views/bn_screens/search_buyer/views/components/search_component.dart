@@ -18,7 +18,7 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
   @override
   Widget build(BuildContext context) {
     return AppBodyContainer(
-      body: Column(
+      body: Obx(()=> Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
@@ -30,7 +30,9 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
           ),
           SizedBox(height: 15.h),
           AppContainerOpenBottomSheet(
-            title: searchController.selectedData["brand_id"]!.name ??context.localizations.car_model,
+            title: searchController.brandId.value == 0 ?context.localizations.car_model :
+            searchController.carProperties.brands!.firstWhere((element) =>
+            element.id ==searchController.brandId.value).name ?? "",
             image: IconsApp.carName,
             onPressed: () {
               Get.bottomSheet(
@@ -41,7 +43,7 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
                       title: "بي ام دبليواكس 6",
                       logo: ImagesApp.brandLogo,
                       //showCheckbox: true,
-                        list: searchController.carProperties.brands ?? [],
+                      list: searchController.carProperties.brands ?? [],
                       isForBrand: true,
                     ),
                     height: 500.h,
@@ -52,7 +54,9 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
           ),
           SizedBox(height: 24.h),
           AppContainerOpenBottomSheet(
-            title: context.localizations.emirate,
+            title: searchController.governorateId.value == 0 ?context.localizations.emirate :
+            addAddressSellerController.emirates.firstWhere((element) =>
+            element.id ==searchController.governorateId.value).name ?? "",
             image: IconsApp.city,
             onPressed: () {
               Get.bottomSheet(
@@ -72,29 +76,38 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
             },
           ),
           SizedBox(height: 24.h),
-          AppContainerOpenBottomSheet(
-            title: context.localizations.city,
-            image: IconsApp.city,
-            onPressed: () {
-              Get.bottomSheet(
-                  AppBottomSheet(
-                    body: BottomSheetBodyCities(
-                      index: 5,
-                      headerTitle: context.localizations.select_city,
-                      title: "ابو ظبي",
-                      logo: "",
-                      list: searchController.selectedCities,
-                      //showCheckbox: false,
-                    ),
-                    height: 500.h,
-                  ),
-                  enterBottomSheetDuration: const Duration(milliseconds: 500),
-                  exitBottomSheetDuration: const Duration(milliseconds: 400));
-            },
+          if(searchController.selectedCities.isNotEmpty)
+          Column(
+            children: [
+              AppContainerOpenBottomSheet(
+                title: searchController.cityId.value == 0 ?context.localizations.city :
+                searchController.selectedCities.firstWhere((element) =>
+                element.id ==searchController.cityId.value).name ?? "",
+                image: IconsApp.city,
+                onPressed: () {
+                  Get.bottomSheet(
+                      AppBottomSheet(
+                        body: BottomSheetBodyCities(
+                          index: 5,
+                          headerTitle: context.localizations.select_city,
+                          title: "ابو ظبي",
+                          logo: "",
+                          list: searchController.selectedCities,
+                          //showCheckbox: false,
+                        ),
+                        height: 500.h,
+                      ),
+                      enterBottomSheetDuration: const Duration(milliseconds: 500),
+                      exitBottomSheetDuration: const Duration(milliseconds: 400));
+                },
+              ),
+              SizedBox(height: 24.h),
+            ],
           ),
-          SizedBox(height: 24.h),
           AppContainerOpenBottomSheet(
-            title: context.localizations.fuel_type,
+            title: searchController.fuelId.value == 0 ?context.localizations.fuel_type :
+            searchController.carProperties.fuels!.firstWhere((element) =>
+            element.id ==searchController.fuelId.value).name ?? "",
             image: IconsApp.fuelType,
             onPressed: () {
               Get.bottomSheet(
@@ -124,7 +137,7 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
             },
           ),)
         ],
-      ),
+      )),
     );
   }
 }

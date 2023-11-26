@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/favorite_buyer/controllers/favorite_buyer_controller.dart';
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/home_buyer/use_case/ads_buyer_use_case.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/search_buyer/controllers/search_buyer_controller.dart';
 import 'package:haraj/utils/errors/error_const.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/models/meta/meta_model.dart';
@@ -66,7 +68,7 @@ class HomeBuyerController extends GetxController {
             }));
   }
 
-  Future<void> toggleFavorite({postId,index}) async {
+  Future<void> toggleFavorite({postId}) async {
     // isFavoriteLoading.value = true;
     return ToggleFavoriteUseCase(repository: Get.find<AdsRepository>())
         .call(postId.toString())
@@ -82,8 +84,26 @@ class HomeBuyerController extends GetxController {
         // isFavoriteLoading.value = false;
       },
           (response) async {
-            ads[index].isFavorite = !(ads[index].isFavorite!);
-            ads.refresh();
+              final index = ads.indexWhere((element) => element.id == postId);
+              if(index != -1) {
+                ads[index].isFavorite = !(ads[index].isFavorite!);
+                ads.refresh();
+              }
+              if(SearchBuyerController.isPut) {
+                final index = SearchBuyerController.to.ads.indexWhere((element) => element.id == postId);
+                if(index != -1) {
+                  SearchBuyerController.to.ads[index].isFavorite = !(SearchBuyerController.to.ads[index].isFavorite!);
+                  SearchBuyerController.to.ads.refresh();
+                }
+            }
+              if(FavoriteBuyerController.isPut) {
+                final index = FavoriteBuyerController.to.savedAds.indexWhere((element) => element.id == postId);
+                if(index != -1) {
+                  FavoriteBuyerController.to.savedAds.removeAt(index);
+                  FavoriteBuyerController.to.savedAds.refresh();
+                }
+            }
+
         // isFavoriteLoading.value = false;
       },
     ));

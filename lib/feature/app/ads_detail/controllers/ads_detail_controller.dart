@@ -24,6 +24,8 @@ import 'package:haraj/utils/repository/favorite_repo/favorite_repo.dart';
 import 'package:haraj/utils/repository/offer_repo/offer_repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../dashboard/buyer/dashboard_buyer/views/bn_screens/favorite_buyer/controllers/favorite_buyer_controller.dart';
+import '../../dashboard/buyer/dashboard_buyer/views/bn_screens/search_buyer/controllers/search_buyer_controller.dart';
 import '../use_case/toggle_favorite_use_case.dart';
 
 class AdsDetailController extends GetxController {
@@ -303,6 +305,20 @@ class AdsDetailController extends GetxController {
             int index = HomeBuyerController.to.ads.indexWhere((element) => element.id == adsDetail.value.id);
             HomeBuyerController.to.ads[index].isFavorite = adsDetail.value.isFavorite;
             HomeBuyerController.to.ads.refresh();
+            if(SearchBuyerController.isPut) {
+              final index = SearchBuyerController.to.ads.indexWhere((element) => element.id == postId);
+              if(index != -1) {
+                SearchBuyerController.to.ads[index].isFavorite = !(SearchBuyerController.to.ads[index].isFavorite!);
+                SearchBuyerController.to.ads.refresh();
+              }
+            }
+            if(FavoriteBuyerController.isPut) {
+              final index = FavoriteBuyerController.to.savedAds.indexWhere((element) => element.id == postId);
+              if(index != -1) {
+                FavoriteBuyerController.to.savedAds.removeAt(index);
+                FavoriteBuyerController.to.savedAds.refresh();
+              }
+            }
             isFavoriteLoading.value = false;
       },
     ));

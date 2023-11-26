@@ -10,6 +10,8 @@ import 'package:haraj/utils/repository/favorite_repo/favorite_repo.dart';
 
 class FavoriteBuyerController extends GetxController {
   static FavoriteBuyerController get to => Get.find<FavoriteBuyerController>();
+  static bool get isPut => Get.isRegistered<FavoriteBuyerController>();
+
 
   RxBool loading = false.obs;
   var responseMessage = "";

@@ -47,6 +47,7 @@ class _SavedAdsComponentState extends State<SavedAdsComponent> {
                       gallery:
                           controller.savedAds[index].gallery,
                       priceCar: controller.savedAds[index].price!,
+                      id: controller.savedAds[index].id!,
                       conditionCar:
                           controller.savedAds[index].mechanicalStatus!.name!,
                       imageSeller: /*controller.savedAds[index].store!.avatar ??*/

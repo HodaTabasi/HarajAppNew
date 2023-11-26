@@ -64,9 +64,12 @@ class _AdsGalleryComponentState extends State<AdsGalleryComponent> {
                       imageSeller: adsDetailController.adsDetail.value.store!.avatar!,
                       sellerName: adsDetailController.adsDetail.value.store!.name!,
                       nameLocation: adsDetailController
-                          .adsDetail.value.store!.address!.governorate!.name!,
+                          .adsDetail.value.store!.address!.governorate?.name??'',
                       isFavorite:
                           galleryBuyerController.storePost[index].isFavorite!,
+                      id:
+                          galleryBuyerController.storePost[index].id!,
+
                     ),
                   );
                 }

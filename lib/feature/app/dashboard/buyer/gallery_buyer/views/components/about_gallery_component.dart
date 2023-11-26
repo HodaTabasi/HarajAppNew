@@ -82,7 +82,7 @@ class _AboutGalleryComponentState extends State<AboutGalleryComponent> {
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w500,
                       text:
-                          "${adsDetailController.adsDetail.value.store!.address!.governorate!.name!},${adsDetailController.adsDetail.value.store!.address!.city!.name!},${adsDetailController.adsDetail.value.store!.address!.street!}",
+                          "${adsDetailController.adsDetail.value.store?.address?.governorate?.name??''},${adsDetailController.adsDetail.value.store!.address!.city?.name??''},${adsDetailController.adsDetail.value.store!.address?.street??''}",
                       color: ColorResource.mainFontColor,
                       overflow: TextOverflow.ellipsis,
                       maxLine: 2,

@@ -17,6 +17,7 @@ import '../../../../../../seller/dashboard_seller/views/bn_screens/add_ads_selle
 
 class SearchBuyerController extends GetxController {
   static SearchBuyerController get to => Get.find<SearchBuyerController>();
+  static bool get isPut => Get.isRegistered<SearchBuyerController>();
 
   RxBool loading = false.obs;
   RxBool isFavorite = false.obs;
@@ -48,6 +49,9 @@ class SearchBuyerController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }, (response) async {
+          if(pageNumber == 1) {
+            ads.clear();
+          }
       ads.addAll(response.data ?? []);
       meta = response.meta!;
       loading.value = false;

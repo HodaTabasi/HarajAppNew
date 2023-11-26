@@ -73,15 +73,18 @@ class SearchBuyerScreen extends GetView<SearchBuyerController> {
               color: ColorResource.gray,
               thickness: 1,
             ),
-            SizedBox(height: 5.h),
-            AppText(
-              text: context.localizations.ads_you_may_like,
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w400,
-              color: ColorResource.mainFontColor,
-              textAlign: TextAlign.start,
-            ),
-            const Expanded(child: ShowAds()),
+            //TODO LATER
+
+            // SizedBox(height: 5.h),
+            // AppText(
+            //   text: context.localizations.ads_you_may_like,
+            //   fontSize: 16.sp,
+            //   fontWeight: FontWeight.w400,
+            //   color: ColorResource.mainFontColor,
+            //   textAlign: TextAlign.start,
+            // ),
+            //TODO LATER
+            // const Expanded(child: ShowAds()),
           ],
         ),
       ),
