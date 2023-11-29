@@ -46,6 +46,7 @@ part '../components/line_detail.dart';
 part '../components/more_button.dart';
 part '../components/offer_card.dart';
 part '../components/swiper_component.dart';
+part '../components/swiper_component_full_screen.dart';
 
 class AdsDetailScreen extends StatefulWidget {
   final int productId;
@@ -95,7 +96,7 @@ class _AdsDetailScreenState extends State<AdsDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SwiperComponent(id: widget.productId),
+                      SwiperComponentFullScreen(id: widget.productId),
                       AppDivider(
                         height: 34.h,
                         color: ColorResource.gray,

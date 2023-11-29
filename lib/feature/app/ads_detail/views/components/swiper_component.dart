@@ -20,7 +20,7 @@ class _SwiperComponentState extends State<SwiperComponent> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 220.h,
+      height: double.infinity.h,
       width: double.infinity.w,
       child: controller.adsDetail.value.gallery!.isEmpty
           ? Column(
@@ -38,74 +38,46 @@ class _SwiperComponentState extends State<SwiperComponent> {
             )
           : Swiper(
               duration: 500,
-              autoplay: true,
+              autoplay: false,
               itemCount: controller.adsDetail.value.gallery!.length,
               viewportFraction: 1,
               scale: 0.8,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
+                  alignment:Localizations.localeOf(context)
+                      .languageCode == 'ar'
+                      ? Alignment.topRight
+                      : Alignment.topLeft,
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
                   width: double.infinity,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.r),
-                    color: ColorResource.secondaryColor,
+                    color: ColorResource.black,
                     image: DecorationImage(
                       image: NetworkImage(
                           controller.adsDetail.value.gallery![index].image!),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: 28.w,
-                          height: 28.h,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 5.w, vertical: 5.h),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.r),
-                            color: ColorResource.white,
-                          ),
-                          child: InkWell(
-                              onTap: () {
-                                Get.dialog(
-                                    Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        Image.network(
-                                            controller.adsDetail.value
-                                                .gallery![index].image!,
-                                            fit: BoxFit.contain),
-                                        Positioned.directional(
-                                            start: 10,
-                                            top: 10,
-                                            textDirection:
-                                                Localizations.localeOf(context)
-                                                            .languageCode ==
-                                                        'ar'
-                                                    ? TextDirection.rtl
-                                                    : TextDirection.ltr,
-                                            child: IconButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                icon: const Icon(
-                                                  Icons.close,
-                                                  color: Colors.white,
-                                                ))),
-                                      ],
-                                    ),
-                                    barrierColor: Colors.black,
-                                    barrierDismissible: true);
-                              },
-                              child: AppSvgPicture(
-                                  assetName: IconsApp.fillScreen))),
-                    ],
-                  ),
+                  child: Positioned.directional(
+                      start: 10,
+                      top: 10,
+                      textDirection:
+                      Localizations.localeOf(context)
+                          .languageCode ==
+                          'ar'
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      child: IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                          ))),
                 );
               },
             ),
