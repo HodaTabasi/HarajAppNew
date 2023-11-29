@@ -75,7 +75,7 @@ class _AdsAllOffersComponentState extends State<AdsAllOffersComponent> {
     switch (selectedItem) {
       case 1:
         // Return the ListView for "all_offers"
-        return ListView.builder(
+        return Obx(()=>ListView.builder(
           controller: controller.scrollController,
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
@@ -103,7 +103,7 @@ class _AdsAllOffersComponentState extends State<AdsAllOffersComponent> {
               },
             );
           },
-        );
+        ));
       case 2:
         // Return the ListView for "new_offers"
         return ListView.builder(

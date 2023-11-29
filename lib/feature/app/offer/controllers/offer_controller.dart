@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/ads_detail/controllers/ads_detail_controller.dart';
 import 'package:haraj/feature/app/offer/use_case/accept_offer_use_case.dart';
 import 'package:haraj/feature/app/offer/use_case/destroy_offer_use_case.dart';
 import 'package:haraj/feature/app/offer/use_case/post_offer_use_case.dart';
@@ -74,6 +76,7 @@ class OfferController extends GetxController {
               newOffers.clear();
               newOffers.addAll(response.data ?? []);
               meta = response.meta!;
+              newOffers.refresh();
             }));
   }
 
@@ -92,6 +95,7 @@ class OfferController extends GetxController {
               rejectedOffers.clear();
               rejectedOffers.addAll(response.data ?? []);
               meta = response.meta!;
+              rejectedOffers.refresh();
             }));
   }
 
@@ -110,6 +114,7 @@ class OfferController extends GetxController {
               acceptedOffers.clear();
               acceptedOffers.addAll(response.data ?? []);
               meta = response.meta!;
+              acceptedOffers.refresh();
             }));
   }
 

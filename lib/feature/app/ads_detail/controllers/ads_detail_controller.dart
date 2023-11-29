@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/accept_offer_use_case.dart';
 import 'package:haraj/feature/app/ads_detail/use_case/ads_show_use_case.dart';
@@ -173,6 +174,7 @@ class AdsDetailController extends GetxController {
               allOffers.clear();
               allOffers.addAll(response.data ?? []);
               meta = response.meta ?? Meta(currentPage: 1,lastPage: 1);
+              allOffers.refresh();
             }));
   }
 
@@ -194,10 +196,12 @@ class AdsDetailController extends GetxController {
   }
 
   Future<void> acceptOffer({postId}) async {
+    EasyLoading.show();
     return AcceptOfferUseCase(repository: Get.find<OfferRepository>())
         .call(postId.toString())
         .then((value) => value.fold(
               (failure) {
+                EasyLoading.dismiss();
                 responseMessage = mapFailureToMessage(failure);
                 Get.snackbar(
                   'Requires',
@@ -212,11 +216,12 @@ class AdsDetailController extends GetxController {
                       newOffers.indexWhere((element) => element.id == postId);
                   if (index != -1) {
                     newOffers.removeAt(index);
-                    showPostOffer();
-                    OfferController.to.showPostNewOffer();
-                    OfferController.to.showPostAcceptedOffers();
-                    OfferController.to.showPostRejectedOffers();
+                    await showPostOffer();
+                    // await OfferController.to.showPostNewOffer();
+                    // await OfferController.to.showPostAcceptedOffers();
+                    // await OfferController.to.showPostRejectedOffers();
                     update();
+                    EasyLoading.dismiss();
                   }
                 } else {
                   Get.snackbar(
@@ -231,10 +236,12 @@ class AdsDetailController extends GetxController {
   }
 
   Future<void> rejectOffer({postId}) async {
+    EasyLoading.show();
     return RejectOfferUseCase(repository: Get.find<OfferRepository>())
         .call(postId.toString())
         .then((value) => value.fold(
               (failure) {
+                EasyLoading.dismiss();
                 responseMessage = mapFailureToMessage(failure);
                 Get.snackbar(
                   'Requires',
@@ -249,11 +256,12 @@ class AdsDetailController extends GetxController {
                       newOffers.indexWhere((element) => element.id == postId);
                   if (index != -1) {
                     newOffers.removeAt(index);
-                    showPostOffer();
-                    OfferController.to.showPostNewOffer();
-                    OfferController.to.showPostAcceptedOffers();
-                    OfferController.to.showPostRejectedOffers();
+                    await showPostOffer();
+                    // OfferController.to.showPostNewOffer();
+                    // OfferController.to.showPostAcceptedOffers();
+                    // OfferController.to.showPostRejectedOffers();
                     update();
+                    EasyLoading.dismiss();
                   }
                 } else {
                   Get.snackbar(
