@@ -1,8 +1,10 @@
 import 'package:expandable/expandable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/setting/controller/setting_getx_controller.dart';
+import 'package:haraj/feature/core/launch_screen.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_divider.dart';
@@ -13,13 +15,16 @@ import 'package:haraj/widgets/app_text.dart';
 import '../../../../../utils/extensions/color_resource/color_resource.dart';
 import '../../../../../utils/extensions/icons_app/icons_app.dart';
 import '../../../../../utils/get/general_getx_controller.dart';
+import '../../../../../utils/get/localizations/language_getx_controller.dart';
 import '../../../../../widgets/custom_textformfiled.dart';
 
 
 class SettingScreen extends GetView<SettingGetXController> {
+  late Rx<Locale> locale;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(() => Scaffold(
       // backgroundColor: ,
       appBar: AppBar(),
       body: ListView(
@@ -162,7 +167,7 @@ class SettingScreen extends GetView<SettingGetXController> {
                               ),
                               const Spacer(),
                               AppText(
-                                text: 'عربي',
+                                text: Get.locale?.toLanguageTag() == "ar"?"العربية":"English",
                                 fontWeight: FontWeight.w300,
                                 fontSize: 14.sp,
                                 color: ColorResource.mainColor,
@@ -187,18 +192,26 @@ class SettingScreen extends GetView<SettingGetXController> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                    color: ColorResource.mainColor,
+                                    color: Get.locale?.toLanguageTag() == "ar"?ColorResource.mainColor:Colors.white,
                                     borderRadius:
                                     BorderRadius.circular(
                                         12.r),
+                                    border: Border.all(
+                                        color: ColorResource.containerColor),
                                   ),
+
                                   padding: EdgeInsets.symmetric(
                                     horizontal: 16.w,
                                     vertical: 12.h,
                                   ),
-                                  child: const AppText(
-                                    text: 'العربية',
-                                    color: Colors.white,
+                                  child:  InkWell(
+                                    onTap: (){
+                                      locale =  const Locale("ar").obs;
+                                      Get.updateLocale(locale.value);                                      },
+                                    child:  AppText(
+                                      text: 'العربية',
+                                      color: Get.locale?.toLanguageTag() == "ar"?Colors.white:ColorResource.borderGray,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
@@ -206,7 +219,7 @@ class SettingScreen extends GetView<SettingGetXController> {
                                 ),
                                 Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: Get.locale?.toLanguageTag() == "en"?ColorResource.mainColor:Colors.white,
                                     borderRadius:
                                     BorderRadius.circular(
                                         12.r),
@@ -217,27 +230,19 @@ class SettingScreen extends GetView<SettingGetXController> {
                                     horizontal: 16.w,
                                     vertical: 12.h,
                                   ),
-                                  child: const AppText(
-                                    text: 'English',
-                                    color: ColorResource.borderGray,
+                                  child: InkWell(
+                                    onTap: (){
+                                     locale =  const Locale("en").obs;
+                                      Get.updateLocale(locale.value);
+                                      },
+                                    child:  AppText(
+                                      text: 'English',
+                                      color: Get.locale?.toLanguageTag() == "en"?Colors.white:ColorResource.borderGray,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 24.h,
-                            ),
-                        AppElevatedButton(
-                          backgroundColor: ColorResource.red,
-                          onPressed: (){},
-                          title: 'تغيير',
-                          heightButton: 50.h,
-                          widthButton: MediaQuery.of(context).size.width-30,
-                          titleColor: Colors.white,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          radius: 8,
-                        ),
                             SizedBox(
                               height: 24.h,
                             ),
@@ -546,6 +551,6 @@ class SettingScreen extends GetView<SettingGetXController> {
           )
         ],
       ),
-    );
+    ));
   }
 }
