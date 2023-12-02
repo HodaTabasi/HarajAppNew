@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/setting/controller/setting_getx_controller.dart';
-import 'package:haraj/feature/core/launch_screen.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_divider.dart';
@@ -15,7 +14,6 @@ import 'package:haraj/widgets/app_text.dart';
 import '../../../../../utils/extensions/color_resource/color_resource.dart';
 import '../../../../../utils/extensions/icons_app/icons_app.dart';
 import '../../../../../utils/get/general_getx_controller.dart';
-import '../../../../../utils/get/localizations/language_getx_controller.dart';
 import '../../../../../widgets/custom_textformfiled.dart';
 
 
