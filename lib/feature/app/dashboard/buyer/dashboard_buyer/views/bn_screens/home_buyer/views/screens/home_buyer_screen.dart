@@ -1,6 +1,7 @@
 library home_buyer_view;
 
 import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,9 @@ import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_appbar.dart';
 
 import '../../../../../../../../../../utils/extensions/icons_app/icons_app.dart';
+import '../../../../../../../../../../utils/models/ads_model/ads_model.dart';
 import '../../../../../../../../../../widgets/app_svg_picture.dart';
+import '../../../../../../../../../core/launch_screen.dart';
 
 part '../components/show_ads.dart';
 part '../components/swiper_component.dart';
