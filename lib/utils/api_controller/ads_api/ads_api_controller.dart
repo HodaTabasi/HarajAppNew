@@ -108,6 +108,10 @@ class AdsApiController with Helpers {
     request.fields['year'] = year.toString();
     request.fields['details'] = details.toString();
     request.fields['price'] = price.toString();
+    request.fields['whatsapp_connection'] = "0";
+    request.fields['facebook_connection'] = "0";
+    request.fields['call'] = "0";
+    request.fields['chat'] = "0";
 
     var response = await request.send();
     var body = await response.stream.transform(utf8.decoder).first;
