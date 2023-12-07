@@ -14,7 +14,7 @@ class _TotalViewsState extends State<TotalViews> {
   Widget build(BuildContext context) {
     return Container(
       width: 160.w,
-      height: 73.h,
+      height: 90.h,
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(vertical: 12.h),
       decoration: BoxDecoration(

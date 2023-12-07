@@ -233,6 +233,7 @@
   "total_ads": "Total Ads",
   "total_views": "Total Views",
   "subscription_renewal": "Subscription Renewal",
+  "payment_lbl": "Payment",
   "visitor": "Visitor",
   "active_ad": "Active Ads",
   "inactive_ad": "InActive Ads",
@@ -259,9 +260,16 @@
     "delete_account_msg": "It is unfortunate to see you leaving our application permanently, and we hope that\n   Retract your decision as quickly as possible, knowing that it is the end\nYour account will be deleted 28 days after you leave\nThe status suspension lasts only before the end of the term\nNote the entry and the order will be canceled automatically. Thank you",
     "chat2": "chat",
     "requires": "Required fields ",
-      "price": "Price",
-        "currency": "AED"
-
+    "price": "Price",
+    "currency": "AED",
+    "expand_ads_limits": "Expand Ads Limit",
+      "expand_ads_limits_price": "Every 50 ads by 200 AED",
+      "six_months_price": "Subscribe for 6 months for 1000 AED",
+      "one_year_price": "Subscribe for one year for 2000 AED",
+      "contact_sales": "To subscribe please contact with sales team throw:",
+      "contact_sales_for_expand": "To increase ads please contact with sales team throw:",
+        "call_sales": "Contact us throw calling (+962985757755)",
+        "whatsapp_sales": "Contact us throw Whatsapp"
 
 
 }

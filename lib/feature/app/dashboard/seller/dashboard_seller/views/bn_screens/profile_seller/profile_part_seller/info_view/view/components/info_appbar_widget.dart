@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 
 import '../../../../../../../../../../../../utils/extensions/color_resource/color_resource.dart';
 import '../../../../../../../../../../../../utils/extensions/icons_app/icons_app.dart';
@@ -67,7 +68,7 @@ class InfoAppBarWidget extends StatelessWidget {
 
                     },
                     child: Opacity(
-                      opacity: text == 'صور المعرض' ?0:1,
+                      opacity: (text == 'صور المعرض' || text == context.localizations.payment_lbl ) ?0:1,
                       child: AppSvgPicture(
                         assetName: IconsApp.editIcon,
                         width: 30.r,

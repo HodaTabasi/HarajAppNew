@@ -18,8 +18,8 @@ class _TotalComponentState extends State<TotalComponent> {
           : Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: const [
+                const Column(
+                  children: [
                     TotalAds(),
                   ],
                 ),
@@ -27,7 +27,7 @@ class _TotalComponentState extends State<TotalComponent> {
                   children: [
                     const TotalViews(),
                     SizedBox(height: 16.h),
-                    const SubscriptionRenewal(),
+                    const PaymentComponent(),
                   ],
                 ),
               ],

@@ -14,7 +14,7 @@ class _TotalAdsState extends State<TotalAds> {
   Widget build(BuildContext context) {
     return Container(
       width: 160.w,
-      height: 138.h,
+      height: 170.h,
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(vertical: 12.h),
       decoration: BoxDecoration(
