@@ -135,7 +135,14 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
             onPressed: ()  {
               searchController.getIndexAds().then((value) => Get.to(() => const SearchResultBuyerScreen()));
             },
-          ),)
+          ),),
+          SizedBox(height: 15.h),
+          DoneButton(
+            title: context.localizations.clear_filter_lbl,
+            onPressed: ()  {
+             searchController.clearFilters();
+            },
+          )
         ],
       )),
     );

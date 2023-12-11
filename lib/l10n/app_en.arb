@@ -269,7 +269,10 @@
       "contact_sales": "To subscribe please contact with sales team throw:",
       "contact_sales_for_expand": "To increase ads please contact with sales team throw:",
         "call_sales": "Contact us throw calling (+962985757755)",
-        "whatsapp_sales": "Contact us throw Whatsapp"
+        "whatsapp_sales": "Contact us throw Whatsapp",
+          "no_results_lbl": "No results found",
+          "edit_filter_lbl": "Edit filter values",
+          "clear_filter_lbl": "Clear filters"
 
 
 }

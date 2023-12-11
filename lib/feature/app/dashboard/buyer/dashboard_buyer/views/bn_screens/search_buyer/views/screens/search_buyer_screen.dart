@@ -21,6 +21,7 @@ import 'package:haraj/widgets/app_divider.dart';
 import 'package:haraj/widgets/app_elevated_button.dart';
 import 'package:haraj/widgets/app_popup_menu_item.dart';
 import 'package:haraj/widgets/app_selection_bottom_sheet.dart';
+import 'package:haraj/widgets/app_svg_picture.dart';
 import 'package:haraj/widgets/app_text.dart';
 import 'package:haraj/widgets/custom_appbar.dart';
 import 'package:haraj/widgets/row_divider_widget.dart';
@@ -37,6 +38,7 @@ part '../components/done_button.dart';
 part '../components/search_component.dart';
 part '../components/show_ads.dart';
 part '../screens/search_results_buyer_screen.dart';
+part '../components/no_result_component.dart';
 
 class SearchBuyerScreen extends GetView<SearchBuyerController> {
   final SearchBuyerController searchBuyerController =

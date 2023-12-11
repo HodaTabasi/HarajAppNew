@@ -34,59 +34,7 @@ class _SwiperComponentState extends State<SwiperComponent> {
             scale: 0.9,
             itemBuilder: (BuildContext context, int index) {
               if (controller.ads[index].featured == true) {
-                return (controller.ads[index].gallery?.isEmpty??true)
-                    ? InkWell(
-                  onTap: (){
-                    Get.to( AdsDetailScreen(productId: controller.ads[index].id!));
-                  },
-                      child: Container(
-                      decoration: BoxDecoration(
-                        color: ColorResource.fillgrey,
-                        borderRadius: BorderRadius.circular(12.r),
-                        border: Border.all(
-                            color: ColorResource.lightGreyDivider1),
-                      ),
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 5.w, vertical: 15.h),
-                      margin:
-                      EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
-                      width: double.infinity,
-                      clipBehavior: Clip.antiAlias,
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                        SizedBox(
-                        height: 90.h,
-                        width: 90.w,
-                        child: AppSvgPicture(assetName: IconsApp.logoSeller)),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              AppText(
-                                fontWeight: FontWeight.bold,
-                                color: ColorResource.mainFontColor,
-                                  text:"${controller.ads[index].brand}"??""),
-                              AppText(
-                                  color: ColorResource.mainFontColor,
-                                  text: "${controller.ads[index].address?.governorate?.name??"no govern"} - "
-                                      "${controller.ads[index].address?.city?.name??"no city"}"),
-                              AppText(
-                                color: ColorResource.mainFontColor,
-                                  text:controller.ads[index].outColor?.name??"no color"
-                              ),
-                              AppText(
-                                  color: ColorResource.mainColor,
-                                  text:controller.ads[index].price??"no color"
-                              )
-                            ],
-                          ),
-                        )])),
-                    )
-                    :InkWell(
+             return InkWell(
                   onTap: (){
                     Get.to( AdsDetailScreen(productId: controller.ads[index].id!));
                   },
@@ -112,7 +60,9 @@ class _SwiperComponentState extends State<SwiperComponent> {
                             child: SizedBox(
                                 height: 70.h,
                                 width: 70.w,
-                                child: CircleAvatar(
+                                child:(controller.ads[index].gallery?.isEmpty??true)?
+                                  AppSvgPicture(assetName: IconsApp.logoSeller):
+                                  CircleAvatar(
                                   radius: 20.r,
                                   backgroundColor: ColorResource.lightGray,
                                   backgroundImage:
@@ -129,9 +79,14 @@ class _SwiperComponentState extends State<SwiperComponent> {
                                     fontWeight: FontWeight.bold,
                                     color: ColorResource.mainFontColor,
                                     text:"${controller.ads[index].brand}"??""),
-                                AppText(
-                                    color: ColorResource.mainFontColor,
-                                    text: controller.ads[index].generalStatus?.name??"no status"),
+                                Container(
+                                  constraints: const BoxConstraints(maxWidth: 200),
+                                  child: AppText(
+                                      color: ColorResource.mainFontColor,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLine: 1,
+                                      text: controller.ads[index].generalStatus?.name??"no status"),
+                                ),
                                 AppText(
                                     color: ColorResource.mainFontColor,
                                     text:controller.ads[index].outColor?.name??"no color"

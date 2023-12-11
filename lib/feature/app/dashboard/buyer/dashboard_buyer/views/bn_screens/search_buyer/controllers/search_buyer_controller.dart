@@ -21,6 +21,7 @@ class SearchBuyerController extends GetxController {
 
   RxBool loading = false.obs;
   RxBool isFavorite = false.obs;
+  RxBool isNoResults = false.obs;
   RxBool isFavoriteLoading = false.obs;
   RxInt fuelId = 0.obs, cityId = 0.obs, governorateId = 0.obs, brandId = 0.obs;
   RxString keyword = "".obs;
@@ -52,7 +53,13 @@ class SearchBuyerController extends GetxController {
           if(pageNumber == 1) {
             ads.clear();
           }
-      ads.addAll(response.data ?? []);
+          if(pageNumber == 1 && (response.data == null || response.data?.isEmpty == true)){
+            isNoResults = true.obs;
+          }else{
+            ads.addAll(response.data ?? []);
+            isNoResults = false.obs;
+
+          }
       meta = response.meta!;
       loading.value = false;
     }));
@@ -129,5 +136,13 @@ class SearchBuyerController extends GetxController {
         getIndexAds(pageNumber: (meta.currentPage??0)+1);
       }
     }
+  }
+
+  void clearFilters(){
+     fuelId.value = 0;
+     cityId.value = 0;
+     governorateId.value = 0;
+     brandId.value = 0;
+
   }
 }

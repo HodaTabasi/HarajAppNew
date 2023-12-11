@@ -106,4 +106,5 @@ class IconsApp {
   static const String cInatagram = 'assets/icons/instagram_c.svg';
   static const String cWhatsApp = 'assets/icons/whatsApp_c.svg';
   static const String close = 'assets/icons/close.svg';
+  static const String noResults = 'assets/icons/ic_no_results.svg';
 }

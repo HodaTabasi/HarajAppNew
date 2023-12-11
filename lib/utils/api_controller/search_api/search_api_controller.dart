@@ -17,7 +17,7 @@ class SearchApiController with Helpers {
   static SearchBuyerController get to => Get.find<SearchBuyerController>();
 
   index({fuelId,cityId,governorateId,brandId,keyword, page}) async {
-    var url = Uri.parse('${ApiSettings.post}?page=$page&fuel_id=$fuelId&city_id=$cityId&governorate_id=$governorateId&brand_id=$brandId&keyword=$keyword');
+    var url = Uri.parse('${ApiSettings.post}?page=$page&fuel_id=$fuelId&city_id=$cityId&governorate_id=$governorateId&brand_id=$brandId&keywords=$keyword');
     http.Response response = await http.get(url, headers: headers);
     var decodedJson = json.decode(response.body);
 
