@@ -13,7 +13,7 @@ class _SavedSearchComponentState extends State<SavedSearchComponent> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (controller.loading.value) {
+      if (controller.loading.value && controller.searchResults.isEmpty) {
         return const Center(child: CircularProgressIndicator());
       } else if (controller.searchResults.isNotEmpty) {
         return  Column(
@@ -27,6 +27,7 @@ class _SavedSearchComponentState extends State<SavedSearchComponent> {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
+                controller: controller.scrollController,
                 padding: EdgeInsets.only(top: 15.h),
                 itemCount: controller.searchResults.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -47,6 +48,11 @@ class _SavedSearchComponentState extends State<SavedSearchComponent> {
                 },
               ),
             ),
+            if (controller.loading.value && controller.searchResults.isNotEmpty)
+              const Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Center(child: CircularProgressIndicator()),
+              ),
           ],
         );
       }

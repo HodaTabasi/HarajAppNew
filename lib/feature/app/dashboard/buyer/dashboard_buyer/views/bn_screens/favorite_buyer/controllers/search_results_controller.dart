@@ -27,7 +27,7 @@ class SearchResultsController extends GetxController {
     super.onInit();
     scrollController = ScrollController();
     scrollController.addListener(_listener);
-    getSearchResults();
+    // getSearchResults();
   }
 
   @override
@@ -39,14 +39,15 @@ class SearchResultsController extends GetxController {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       if (meta.currentPage! < meta.lastPage!) {
-        getSearchResults(pageNumber: meta.currentPage);
+        getSearchResults(pageNumber: (meta.currentPage ?? 0) + 1);
       }
     }
   }
 
-
   Future<void> getSearchResults({pageNumber = 1}) async {
-    searchResults.clear();
+    if (pageNumber == 1) {
+      searchResults.clear();
+    }
     loading.value = true;
     return GetSearchResultsShowUseCase(repository: Get.find<FavoriteRepository>())
         .call(pageNumber)
