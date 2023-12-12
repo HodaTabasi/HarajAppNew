@@ -8,36 +8,53 @@ class SavedSearchComponent extends StatefulWidget {
 }
 
 class _SavedSearchComponentState extends State<SavedSearchComponent> {
+  final SearchResultsController controller = Get.put(SearchResultsController());
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: 10.h),
-        RowDividerWidget(
-          text: '010 ${context.localizations.ad}',
-          lineColor: ColorResource.gray,
-        ),
-        Expanded(
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            padding: EdgeInsets.only(top: 15.h),
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  // Get.to(() => AdsDetailBuyerScreen());
+    return Obx(() {
+      if (controller.loading.value) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (controller.searchResults.isNotEmpty) {
+        return  Column(
+          children: [
+            SizedBox(height: 10.h),
+            RowDividerWidget(
+              text: '${controller.searchResults.length} ${context.localizations.result}',
+              lineColor: ColorResource.gray,
+            ),
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.only(top: 15.h),
+                itemCount: controller.searchResults.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      if(SearchBuyerController.isPut){
+                        SearchBuyerController.to.showNoResultBtn.value = false ;
+                        SearchBuyerController.to.keyword.value = controller.searchResults[index].content??"";
+                        SearchBuyerController.to.getIndexAds().then((value) => Get.to(() => const SearchResultBuyerScreen()));
+                      }
+                      },
+                    child: AppSearchResultContainer(
+                      title: controller.searchResults[index].content??"",
+                      subTitle: "",
+                      onTap: () {},
+                    ),
+                  );
                 },
-                child: AppFavoriteContainer(
-                  title: "توسان أكسنت 2022",
-                  subTitle: "50",
-                  onTap: () {},
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    );
+              ),
+            ),
+          ],
+        );
+      }
+      else {
+        return const Center(
+          child: Text('No data'),
+        );
+      }
+    });
   }
 }

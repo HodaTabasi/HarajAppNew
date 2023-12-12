@@ -5,11 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/ads_detail/views/screens/ads_detail_screen.dart';
 import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/favorite_buyer/controllers/favorite_buyer_controller.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/favorite_buyer/controllers/search_results_controller.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/search_buyer/controllers/search_buyer_controller.dart';
+import 'package:haraj/feature/app/dashboard/buyer/dashboard_buyer/views/bn_screens/search_buyer/views/screens/search_buyer_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/widgets/app_ads_car_container.dart';
 import 'package:haraj/widgets/app_favorite_container.dart';
+import 'package:haraj/widgets/app_search_result_container.dart';
 import 'package:haraj/widgets/app_tab_bar.dart';
 import 'package:haraj/widgets/custom_appbar.dart';
 import 'package:haraj/widgets/row_divider_widget.dart';
@@ -20,9 +24,14 @@ part '../components/saved_searches_component.dart';
 class FavoriteBuyerScreen extends GetView<FavoriteBuyerController> {
   final FavoriteBuyerController favoriteBuyerController =
       Get.put(FavoriteBuyerController());
+  final SearchResultsController searchResultsController =
+      Get.put(SearchResultsController());
 
   @override
   Widget build(BuildContext context) {
+
+    favoriteBuyerController.getFavoritePost(pageNumber: 1);
+    searchResultsController.getSearchResults(pageNumber: 1);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(

@@ -8,6 +8,8 @@ import 'package:haraj/utils/models/meta/meta_model.dart';
 import 'package:haraj/utils/models/offer/post_model.dart';
 import 'package:haraj/utils/repository/favorite_repo/favorite_repo.dart';
 
+
+
 class FavoriteBuyerController extends GetxController {
   static FavoriteBuyerController get to => Get.find<FavoriteBuyerController>();
   static bool get isPut => Get.isRegistered<FavoriteBuyerController>();
@@ -42,6 +44,7 @@ class FavoriteBuyerController extends GetxController {
   }
 
   Future<void> getFavoritePost({pageNumber = 1}) async {
+    savedAds.clear();
     loading.value = true;
     return GetFavoriteAdsShowUseCase(repository: Get.find<FavoriteRepository>())
         .call(pageNumber)
@@ -60,6 +63,7 @@ class FavoriteBuyerController extends GetxController {
               loading.value = false;
             }));
   }
+
 
   Future<void> postFavoriteAds({adsId}) async {
     return PostFavoriteAdsShowUseCase(

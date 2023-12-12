@@ -22,7 +22,9 @@ class SearchBuyerController extends GetxController {
   RxBool loading = false.obs;
   RxBool isFavorite = false.obs;
   RxBool isNoResults = false.obs;
+  RxBool showNoResultBtn = true.obs;
   RxBool isFavoriteLoading = false.obs;
+
   RxInt fuelId = 0.obs, cityId = 0.obs, governorateId = 0.obs, brandId = 0.obs;
   RxString keyword = "".obs;
   var responseMessage = "";

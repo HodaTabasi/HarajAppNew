@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:haraj/utils/api/network_info.dart';
 import 'package:haraj/utils/api_controller/favorite_api/favorite_api_controller.dart';
 import 'package:haraj/utils/models/offer/post_model.dart';
+import 'package:haraj/utils/models/search_results/search_results_model.dart';
 import 'package:haraj/utils/models/store_post/store_post_model.dart';
 
 import '../../errors/exceptions.dart';
@@ -26,6 +27,20 @@ class FavoriteRepository {
       return Left(OfflineFailure());
     }
   }
+
+  Future<Either<Failure, SearchResultsModel>> getSearchResults({page}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.getSearchResults(page: page);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
 
   Future<Either<Failure, PostModel>> postFavoriteAds({id}) async {
     if (await networkInfo.isConnected) {

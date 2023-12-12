@@ -8,6 +8,9 @@ class NoResults extends StatefulWidget {
 }
 
 class _NoResultsState extends State<NoResults> {
+  final SearchBuyerController searchController =
+  Get.find<SearchBuyerController>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +35,9 @@ class _NoResultsState extends State<NoResults> {
               ),
             ),
             SizedBox(height: 15.h),
-            Container(
+        Obx(() {
+          if(searchController.showNoResultBtn.value) {
+            return Container(
               padding: EdgeInsets.all(40.h),
               child: AppElevatedButton(
                 backgroundColor: Colors.white,
@@ -48,7 +53,11 @@ class _NoResultsState extends State<NoResults> {
                 fontWeight: FontWeight.w600,
                 radius: 8,
               ),
-            )
+            );
+          } else {
+           return SizedBox(height: 0.h);
+          }
+        })
 
           ]
       ),

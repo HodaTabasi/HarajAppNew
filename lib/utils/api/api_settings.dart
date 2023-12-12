@@ -46,4 +46,6 @@ class ApiSettings {
   static const String toggleFavorite = '${_apiUrl}/post';
   // ***************************CHAT************************************
   static const String chats = '${_apiUrl}/chats';
+  // ***************************SEARCH RESULTS************************************
+  static const String searchResults = '${_apiUrl}/search-results';
 }

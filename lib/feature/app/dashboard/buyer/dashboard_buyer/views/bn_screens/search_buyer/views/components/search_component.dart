@@ -133,6 +133,7 @@ class _SearchBuyerComponentState extends State<SearchBuyerComponent> {
           DoneButton(
             title: context.localizations.search,
             onPressed: ()  {
+              searchController.showNoResultBtn.value = true;
               searchController.getIndexAds().then((value) => Get.to(() => const SearchResultBuyerScreen()));
             },
           ),),
