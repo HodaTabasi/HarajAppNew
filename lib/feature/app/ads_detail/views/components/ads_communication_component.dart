@@ -60,7 +60,7 @@ class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
 
               SocialContainer(
                 nameIcon: IconsApp.whatsapp,
-                onPressed: (){
+                onPressed: () async{
                   if (controller.adsDetail.value.whatsappConnection! == true) {
                     launchUrl(Uri.parse("https://wa.me/${controller.adsDetail.value.whatsapp}"));
                   }else{
