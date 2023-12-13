@@ -43,7 +43,7 @@ class _ShowAdsState extends State<ShowAds> {
                   priceCar: controller.ads[index].price!,
                   conditionCar: controller.ads[index].mechanicalStatus!.name!,
                   imageSeller: controller.ads[index].store!.avatar!,
-                  sellerName: controller.ads[index].sellerType!.name!,
+                  sellerName: controller.ads[index].store!.name!,
                   nameLocation:
                       controller.ads[index].store!.address!.governorate?.name ?? "",
                   isFavorite: controller.ads[index].isFavorite!,
@@ -57,7 +57,7 @@ class _ShowAdsState extends State<ShowAds> {
           },
         );
       } else {
-        return Center(
+        return const Center(
           child: Text('No data'),
         );
       }
