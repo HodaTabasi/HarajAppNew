@@ -27,7 +27,7 @@
     </queries>
 
    <application
-        android:label="hatage_app"
+        android:label="Haraj Online"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

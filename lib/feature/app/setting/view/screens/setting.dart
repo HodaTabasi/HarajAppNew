@@ -504,30 +504,8 @@ class SettingScreen extends GetView<SettingGetXController> {
                 SizedBox(
                   height: 12.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AppText(text: 'أيقاف الاشعارات',
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w300,
-                      color: ColorResource.lightGreyText3,),
-                    AppSwitchButton()
-                  ],
-                ),
                  AppDivider(height: 15.h, color: ColorResource.dividerVirticalColor, thickness: 0.5),
                SizedBox(height: 12.h,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AppText(text: 'الوضع الداكن',
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w300,
-                      color: ColorResource.lightGreyText3,),
-                    AppSwitchButton()
-                  ],
-                ),
-                AppDivider(height: 15.h, color: ColorResource.dividerVirticalColor, thickness: 0.5),
-                SizedBox(height: 12.h,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
