@@ -57,19 +57,22 @@ class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SocialContainer(
-                nameIcon: IconsApp.facebook,
-                onPressed: () async {
-                  controller.launchURL(
-                      controller.adsDetail.value.facebook!, 'facebook');
-                },
-              ),
+
               SocialContainer(
                 nameIcon: IconsApp.whatsapp,
-                onPressed: () async {
+                onPressed: (){
                   if (controller.adsDetail.value.whatsappConnection! == true) {
-                    controller.launchURL(
-                        "wa.me/${controller.adsDetail.value.whatsapp!}", 'https');
+                    launchUrl(Uri.parse("https://wa.me/${controller.adsDetail.value.whatsapp}"));
+                  }else{
+                    Fluttertoast.showToast(
+                        msg: context.localizations.not_available,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
+
                   }
                 },
               ),
@@ -77,7 +80,17 @@ class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
                 nameIcon: IconsApp.call,
                 onPressed: () async {
                   if (controller.adsDetail.value.call! == true) {
-                    controller.launchURL(controller.adsDetail.value.whatsapp!, 'tel');
+                    launchUrl(Uri.parse("tel://${controller.adsDetail.value.whatsapp}"));
+                  }else{
+                    Fluttertoast.showToast(
+                        msg: context.localizations.not_available,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
+
                   }
                 },
               ),

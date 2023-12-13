@@ -272,7 +272,9 @@
         "whatsapp_sales": "Contact us throw Whatsapp",
           "no_results_lbl": "No results found",
           "edit_filter_lbl": "Edit filter values",
-          "clear_filter_lbl": "Clear filters"
+          "clear_filter_lbl": "Clear filters",
+            "not_available": "Not available"
+
 
 
 }

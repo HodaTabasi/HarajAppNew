@@ -3,6 +3,7 @@ library ads_detail_buyer_view;
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/ads_detail/controllers/ads_detail_controller.dart';
 import 'package:haraj/feature/app/chat/view/screen/home_chat_screen.dart';
@@ -26,6 +27,7 @@ import 'package:haraj/widgets/custom_appbar.dart';
 import 'package:haraj/widgets/custom_textformfiled.dart';
 import 'package:haraj/widgets/row_divider_widget.dart';
 import 'package:haraj/widgets/social_container_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../utils/extensions/routes/custom_shap.dart';
 
