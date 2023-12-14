@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:haraj/utils/api/network_info.dart';
 import 'package:haraj/utils/api_controller/chat_api/chats_api_controller.dart';
+import 'package:haraj/utils/models/chat/chat_conversation.dart';
 import 'package:haraj/utils/models/chat/message.dart';
 import 'package:haraj/utils/models/chat/chats_model.dart';
 
@@ -42,6 +43,18 @@ class ChatsRepository {
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.sendMessage(id : id, content: content);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+  Future<Either<Failure, ChatConversation>> startChat({required String content, required chatTo, required postId}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.startChat(postId : postId,chatTo: chatTo, content: content);
         return Right(response);
       } on ServerException {
         return Left(ServerFailure());

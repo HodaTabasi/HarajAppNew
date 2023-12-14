@@ -23,7 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    controller = Get.put(ChatDetailsController(chatId: widget.chatId));
+    controller = Get.put(ChatDetailsController(chatId: widget.chatId.obs));
   }
 
   @override
@@ -62,8 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
       body: Obx(
         () => controller.loading.value && controller.chatMessages.isEmpty
             ? const Center(child: CircularProgressIndicator())
-            : controller.chatMessages.isNotEmpty
-                ? Column(
+            :  Column(
                     children: [
                       Expanded(
                         child: SingleChildScrollView(
@@ -158,9 +157,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                               ],
                                             ),
                                           ),
-                                          if(controller.chatMessages[index].sending)
+                                          if(controller.chatMessages[index].sending.value)
                                           const SizedBox(width: 10),
-                                          if(controller.chatMessages[index].sending)
+                                          if(controller.chatMessages[index].sending.value)
                                             const CupertinoActivityIndicator()
                                         ],
                                       ),
@@ -170,51 +169,52 @@ class _ChatScreenState extends State<ChatScreen> {
                               ]),
                         ),
                       ),
-                      widget.comeFrom == context.localizations.start_chat(widget.post?.createdAt ?? '',widget.post?.id ?? 0)
-                          ? Container(
-                              height: 170.h,
-                              width: double.infinity,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 14.w, vertical: 16.h),
-                              color: ColorResource.white,
-                              child: Column(
-                                children: [
-                                  AppText(
-                                    text: context.localizations.chat_message,
-                                    color: ColorResource.gray,
-                                    textAlign: TextAlign.center,
-                                    fontSize: 14.sp,
-                                  ),
-                                  SizedBox(height: 24.h),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                          child: DoneButton(
-                                              title: context.localizations.yes,
-                                              titleColor: ColorResource.white,
-                                              backgroundColor:
-                                                  ColorResource.mainColor,
-                                              borderColor:
-                                                  ColorResource.mainColor,
-                                              onPressed: () {})),
-                                      SizedBox(width: 15.w),
-                                      Expanded(
-                                          child: DoneButton(
-                                              title: context.localizations.no,
-                                              titleColor:
-                                                  ColorResource.mainColor,
-                                              backgroundColor: Colors.white,
-                                              borderColor:
-                                                  ColorResource.mainColor,
-                                              onPressed: () {})),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            )
-                          : Container(
+                      // widget.comeFrom == context.localizations.start_chat(widget.post?.createdAt ?? '',widget.post?.id ?? 0)
+                      //     ? Container(
+                      //         height: 170.h,
+                      //         width: double.infinity,
+                      //         padding: EdgeInsets.symmetric(
+                      //             horizontal: 14.w, vertical: 16.h),
+                      //         color: ColorResource.white,
+                      //         child: Column(
+                      //           children: [
+                      //             AppText(
+                      //               text: context.localizations.chat_message,
+                      //               color: ColorResource.gray,
+                      //               textAlign: TextAlign.center,
+                      //               fontSize: 14.sp,
+                      //             ),
+                      //             SizedBox(height: 24.h),
+                      //             Row(
+                      //               crossAxisAlignment:
+                      //                   CrossAxisAlignment.center,
+                      //               children: [
+                      //                 Expanded(
+                      //                     child: DoneButton(
+                      //                         title: context.localizations.yes,
+                      //                         titleColor: ColorResource.white,
+                      //                         backgroundColor:
+                      //                             ColorResource.mainColor,
+                      //                         borderColor:
+                      //                             ColorResource.mainColor,
+                      //                         onPressed: () {})),
+                      //                 SizedBox(width: 15.w),
+                      //                 Expanded(
+                      //                     child: DoneButton(
+                      //                         title: context.localizations.no,
+                      //                         titleColor:
+                      //                             ColorResource.mainColor,
+                      //                         backgroundColor: Colors.white,
+                      //                         borderColor:
+                      //                             ColorResource.mainColor,
+                      //                         onPressed: () {})),
+                      //               ],
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       )
+                      //     :
+                      Container(
                               height: 74.h,
                               width: double.infinity,
                               color: ColorResource.white,
@@ -245,7 +245,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                         ],
                                       ),
                                       child: TextField(
-                                        onSubmitted: (val)=> controller.sendMessage(),
+                                        onSubmitted: (val)=> controller.sendMessage(
+                                           chatTo: widget.otherUser?.id,
+                                          postId: widget.post?.id
+                                        ),
                                         controller: controller.chatFieldController,
                                         style: TextStyle(
                                           fontSize: 14.sp,
@@ -267,7 +270,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                     ),
                                   ),
                                   IconButton(
-                                      onPressed: controller.sendMessage,
+                                      onPressed: ()=>
+                                          controller.sendMessage(
+                                              chatTo: widget.otherUser?.id,
+                                              postId: widget.post?.id
+                                          ),
                                       icon: const Icon(
                                         Icons.send_rounded,
                                         color: ColorResource.gray,
@@ -277,9 +284,6 @@ class _ChatScreenState extends State<ChatScreen> {
                             ),
                     ],
                   )
-                : const Center(
-                    child: Text('No Messages'),
-                  ),
       ),
     );
   }

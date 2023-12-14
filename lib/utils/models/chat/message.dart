@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:haraj/utils/models/offer/client_model.dart';
 
 class Message {
@@ -7,7 +8,7 @@ class Message {
       this.isMine = false,
       this.client,
       this.createdAt,
-      this.sending = false
+      required this.sending
   });
 
   Message.fromJson(dynamic json) {
@@ -15,6 +16,7 @@ class Message {
     content = json['content'];
     isMine = json['is_mine'] ?? false;
     client = json['client_id'] != null ? ClientModel.fromJson(json['client_id']) : null;
+    sending = false.obs;
     createdAt = json['created_at'];
   }
   num? id;
@@ -22,7 +24,7 @@ class Message {
   bool isMine = false;
   ClientModel? client;
   String? createdAt;
-  bool sending = false;
+  late RxBool sending = false.obs;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

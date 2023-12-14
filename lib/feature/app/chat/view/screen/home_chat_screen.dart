@@ -41,6 +41,7 @@ class HomeChatScreen extends GetView<HomeChatController> {
 
   @override
   Widget build(BuildContext context) {
+    homeChatController.getIndexChats(pageNumber: 1);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(

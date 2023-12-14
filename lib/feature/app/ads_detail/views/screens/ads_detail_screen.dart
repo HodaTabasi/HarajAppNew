@@ -13,6 +13,8 @@ import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/get/general_getx_controller.dart';
+import 'package:haraj/utils/models/general/general_model.dart';
+import 'package:haraj/utils/models/offer/post_model.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_body_container.dart';
 import 'package:haraj/widgets/app_bottom_sheet.dart';
@@ -30,6 +32,7 @@ import 'package:haraj/widgets/social_container_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../utils/extensions/routes/custom_shap.dart';
+import '../../../../../utils/models/offer/client_model.dart';
 
 part '../components/ads_all_offers_component.dart';
 part '../components/ads_communication_component.dart';

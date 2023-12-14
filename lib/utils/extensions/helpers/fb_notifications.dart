@@ -174,7 +174,7 @@ mixin FbNotifications {
     final String? model = details['model'];
     if (model != 'chat') return false;
     final chatId = details['id'];
-    final currentActiveChatId = ChatDetailsController.to.chatId;
+    final currentActiveChatId = ChatDetailsController.to.chatId.value;
     return (
         '$chatId' == '$currentActiveChatId' &&
             Get.currentRoute == '/ChatScreen');
@@ -200,7 +200,7 @@ mixin FbNotifications {
         if(!ChatDetailsController.isPut) {
           return;
         }
-        if (ChatDetailsController.to.chatId  == chatId) {
+        if (ChatDetailsController.to.chatId.value  == chatId) {
           ChatDetailsController.to.appendMessage(chatId, message..isMine=false);
         }
       } catch (e) {
