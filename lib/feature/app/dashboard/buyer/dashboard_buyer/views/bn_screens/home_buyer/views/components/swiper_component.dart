@@ -13,13 +13,20 @@ class _SwiperComponentState extends State<SwiperComponent> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      var featuredList  =  controller.ads.where((element) => element.featured ==  true)
+          .where((element) => element.status ==  true)
+          .toList();
       if (controller.loading.value) {
         return const Center(
             child: CircularProgressIndicator(color: ColorResource.transparent));
-      } else if (controller.ads.isNotEmpty) {
+      }
+      else
+        if (featuredList.isNotEmpty) {
         if (kDebugMode) {
-          var featuredList  =  controller.ads.where((element) => element.featured =  true).toList();
           print("Featured ads : ${featuredList.length}");
+          for (var element in featuredList) { if (kDebugMode) {
+            print("element.status : ${element.featured}");
+          }}
 
         }
         return SizedBox(
@@ -28,12 +35,15 @@ class _SwiperComponentState extends State<SwiperComponent> {
           child: Swiper(
             duration: 500,
             autoplay: false,
+            loop: false,
             // itemCount: controller.ads.where((p0) => p0.featured ?? false).toList().length,
-            itemCount: controller.ads.where((element) => element.featured =  true).toList().length,
+            itemCount: featuredList.where((element) => element.featured == true)
+                .where((element) => element.status ==  true)
+                .toList().length,
             viewportFraction: 0.8,
             scale: 0.9,
             itemBuilder: (BuildContext context, int index) {
-              if (controller.ads[index].featured == true) {
+              if (featuredList[index].featured == true) {
              return InkWell(
                   onTap: (){
                     Get.to( AdsDetailScreen(productId: controller.ads[index].id!));
@@ -106,7 +116,8 @@ class _SwiperComponentState extends State<SwiperComponent> {
             },
           ),
         );
-      } else {
+      }
+        else {
         return Center(
           child: Text(''),
         );
