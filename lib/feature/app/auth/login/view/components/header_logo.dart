@@ -14,6 +14,7 @@ class _HeaderLogoState extends State<HeaderLogo> {
       assetName: IconsApp.logo,
       height: 95.h,
       width: 131.w,
+      matchTextDirection: false,
     );
   }
 }

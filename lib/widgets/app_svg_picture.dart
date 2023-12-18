@@ -6,12 +6,14 @@ class AppSvgPicture extends StatelessWidget {
       {Key? key,
       required this.assetName,
       this.color,
+      this.matchTextDirection = true,
       this.width,
       this.height,
       this.fit = BoxFit.contain})
       : super(key: key);
 
   final String assetName;
+  final bool matchTextDirection;
   Color? color;
   double? height;
   double? width;
@@ -21,7 +23,7 @@ class AppSvgPicture extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       assetName,
-      matchTextDirection: true,
+      matchTextDirection: matchTextDirection,
       height: height,
       width: width,
       color: color,
