@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       minTextAdapt: true,
       splitScreenMode: true,
+      useInheritedMediaQuery: true,
       designSize: const Size(375, 812),
       builder: (context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,

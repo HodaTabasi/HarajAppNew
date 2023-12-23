@@ -98,7 +98,33 @@ class _AdsAllOffersComponentState extends State<AdsAllOffersComponent> {
               },
               openChat: () {
                 if (controller.allOffers[index].status! == 3) {
-                  Get.to(() => ChatScreen(comeFrom: "", chatId: 0,));
+                  Get.to(() =>
+                      ChatScreen(
+                        chatId: 0, //TODO check API if there is a running chat already
+                        post: PostModel(
+                          id: controller.adsDetail.value.id,
+                          createdAt: controller.adsDetail.value.createdAt,
+                          gallery: controller.adsDetail.value.gallery,
+                          brand: GeneralModel(
+                            name: controller.adsDetail.value.brand?.name,
+                          ),
+                          car: GeneralModel(
+                            name: controller.adsDetail.value.car?.name,
+                          ),
+                          generalStatus: GeneralModel(
+                            name: controller.adsDetail.value.generalStatus?.name,
+                          ),
+                          year: controller.adsDetail.value.year,
+                          price: controller.adsDetail.value.price,
+
+                        ),
+                        otherUser:ClientModel(
+                          id: controller.adsDetail.value.sellerId,
+                          name: controller.adsDetail.value.store?.name,
+                          avatar: controller.adsDetail.value.store?.avatar,
+                        ),
+                        // post: message.post,
+                      ));
                 }
               },
             );

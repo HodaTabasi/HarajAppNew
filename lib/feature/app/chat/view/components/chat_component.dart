@@ -55,6 +55,7 @@ class _ChatComponentState extends State<ChatComponent> {
                                     chatId: controller.chatConversations[index].id!,
                                   otherUser: controller.chatConversations[index].client,
                                   post: controller.chatConversations[index].post,
+                                  //TODO send store data to the screen
 
                                 ));
                           },

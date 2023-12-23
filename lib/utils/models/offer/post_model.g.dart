@@ -101,7 +101,7 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
       call: json['call'] as bool?,
       chat: json['chat'] as bool?,
       gallery: (json['gallery'] as List<dynamic>?)
-          ?.map((e) => MyImage.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => e is String ? MyImage(0, e) : MyImage.fromJson(e))
           .toList(),
       sold: json['sold'] as bool?,
       featured: json['featured'] as bool?,

@@ -85,7 +85,7 @@ class _AppChatCarContainerState extends State<AppChatCarContainer> {
                   SizedBox(height: 10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       AppText(
                         //TODO: make lang here
@@ -94,11 +94,13 @@ class _AppChatCarContainerState extends State<AppChatCarContainer> {
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                       ),
-                      AppText(
-                        text: widget.conditionCar,
-                        color: ColorResource.gray,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
+                      Flexible(
+                        child: AppText(
+                          text: widget.conditionCar,
+                          color: ColorResource.gray,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ],
                   ),
