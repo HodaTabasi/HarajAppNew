@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -10,6 +9,8 @@ import 'package:haraj/feature/app/chat/controller/chat_details_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/models/chat/message.dart' as chat;
+import 'package:haraj/utils/models/offer/post_model.dart';
+import 'package:haraj/utils/models/seller_info/store_model.dart';
 import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 
 import '../../../feature/app/chat/controller/chat_controller.dart';
@@ -17,7 +18,6 @@ import '../../../feature/app/chat/view/screen/home_chat_screen.dart';
 import '../../../main.dart';
 
 //typedef BackgroundMessageHandler = Future<void> Function(RemoteMessage message);
-
 
 late AndroidNotificationChannel channel;
 late FlutterLocalNotificationsPlugin localNotificationsPlugin;
@@ -41,6 +41,7 @@ mixin FbNotifications {
         showBadge: true,
         playSound: true,
       );
+
     }
     localNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
@@ -58,8 +59,9 @@ mixin FbNotifications {
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
     );
-    await localNotificationsPlugin.initialize(initializationSettings, onDidReceiveNotificationResponse: (response) {
-      notificationClicked(json.decode(response.payload??''));
+    await localNotificationsPlugin.initialize(initializationSettings,
+        onDidReceiveNotificationResponse: (response) {
+      notificationClicked(json.decode(response.payload ?? ''));
     });
     //Flutter Local Notifications Plugin (FOREGROUND) - ANDROID CHANNEL
     await localNotificationsPlugin
@@ -76,11 +78,10 @@ mixin FbNotifications {
     );
   }
 
-  //iOS Notification Permission
-  Future<void> requestNotificationPermissions() async {
-    debugPrint('requestNotificationPermissions');
-    NotificationSettings notificationSettings =
-        await FirebaseMessaging.instance.requestPermission(
+
+  //ANDROID
+  static Future<void> initializeForegroundNotificationForAndroid(BuildContext context) async {
+    await FirebaseMessaging.instance.requestPermission(
       alert: true,
       badge: true,
       sound: true,
@@ -89,19 +90,6 @@ mixin FbNotifications {
       provisional: false,
       criticalAlert: false,
     );
-    if (notificationSettings.authorizationStatus ==
-        AuthorizationStatus.authorized) {
-      FirebaseMessaging.instance.requestPermission();
-      debugPrint('GRANT PERMISSION');
-    } else if (notificationSettings.authorizationStatus ==
-        AuthorizationStatus.denied) {
-      FirebaseMessaging.instance.requestPermission();
-      debugPrint('Permission Denied');
-    }
-  }
-
-  //ANDROID
-  static void initializeForegroundNotificationForAndroid(BuildContext context) {
     if (SharedPrefController().type == 2) {
       FirebaseMessaging.instance.subscribeToTopic(
           Localizations.localeOf(context).languageCode == 'en'
@@ -142,51 +130,51 @@ mixin FbNotifications {
       // lastMessageId = message.messageId;
       print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}');
-      notificationClicked( message.data);
-
+      notificationClicked(message.data);
     });
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) async{
-      if(message == null) return;
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) async {
+      if (message == null) return;
       if (kDebugMode) {
         print(
             "on-tap notification in case of app closed > terminated & background(back-button)");
       }
       print('Message data: ${message.data}');
-      notificationClicked( message.data);
+      notificationClicked(message.data);
     });
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-
   }
+
   ///Doesn't play a notification(banner, ring, and vibrate) if the current screen is the chat screen AND chatting with the same user.
 
   static preventShowingNotification(RemoteMessage remoteMessage) {
-    if(!ChatDetailsController.isPut) {
+    if (!ChatDetailsController.isPut) {
       return false;
     }
     final data = remoteMessage.data;
-    if(!data.containsKey('details')) {
+    if (!data.containsKey('details')) {
       return false;
     }
     final details = json.decode(data['details']);
-    if(!details.containsKey('model')) {
+    if (!details.containsKey('model')) {
       return false;
     }
     final String? model = details['model'];
     if (model != 'chat') return false;
     final chatId = details['id'];
     final currentActiveChatId = ChatDetailsController.to.chatId.value;
-    return (
-        '$chatId' == '$currentActiveChatId' &&
-            Get.currentRoute == '/ChatScreen');
+    return ('$chatId' == '$currentActiveChatId' &&
+        Get.currentRoute == '/ChatScreen');
   }
 
   static notificationAction(RemoteMessage remoteMessage) {
     final data = remoteMessage.data;
-    if(!data.containsKey('details')) {
+    if (!data.containsKey('details')) {
       return;
     }
     final details = json.decode(data['details']);
-    if(!details.containsKey('model')) {
+    if (!details.containsKey('model')) {
       return;
     }
     final String? model = details['model'];
@@ -197,11 +185,12 @@ mixin FbNotifications {
         chat.Message message = chat.Message.fromJson(messageBody);
         final chatId = num.tryParse('${details['id']}') ?? 0;
         HomeChatController.to.updateLastMessage(chatId, message);
-        if(!ChatDetailsController.isPut) {
+        if (!ChatDetailsController.isPut) {
           return;
         }
-        if (ChatDetailsController.to.chatId.value  == chatId) {
-          ChatDetailsController.to.appendMessage(chatId, message..isMine=false);
+        if (ChatDetailsController.to.chatId.value == chatId) {
+          ChatDetailsController.to
+              .appendMessage(chatId, message..isMine = false);
         }
       } catch (e) {
         if (kDebugMode) {
@@ -215,31 +204,32 @@ mixin FbNotifications {
     final data = remoteData;
     print('sadasdasd');
     print(data);
-    if(!data.containsKey('details')) {
+    if (!data.containsKey('details')) {
       return;
     }
     final details = json.decode(data['details']);
-    if(!details.containsKey('model')) {
+    if (!details.containsKey('model')) {
       return;
     }
     final String? model = details['model'];
     // notification chat action
     if (model == 'chat') {
       final context = Get.context;
-        final messageBody = json.decode(data['body']);
-        chat.Message message = chat.Message.fromJson(messageBody);
-        final chatId = num.tryParse('${details['id']}') ?? 0;
-        Get.to(() =>
-            ChatScreen(comeFrom: context?.localizations.chat ?? '',
-              chatId: chatId,
-              otherUser: message.client,
-              // post: message.post,
-            ));
+      final messageBody = json.decode(data['body']);
+      chat.Message message = chat.Message.fromJson(messageBody);
+      final chatId = num.tryParse('${details['id']}') ?? 0;
+      Get.to(() => ChatScreen(
+            comeFrom: context?.localizations.chat ?? '',
+            chatId: chatId,
+            otherUser: message.client,
+            post: PostModel.fromJson(messageBody['post']),
+            store: '${messageBody['client']['type']}' == '1'
+                ? Store.fromJson(messageBody['store'])
+                : null,
+            // post: message.post,
+          ));
     }
   }
-
-
-
 
   static Future<void> getToken() async {
     await FirebaseMessaging.instance.getToken().then((value) {

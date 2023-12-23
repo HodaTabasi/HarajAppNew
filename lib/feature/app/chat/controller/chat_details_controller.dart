@@ -105,7 +105,6 @@ class ChatDetailsController extends GetxController {
             .call(id:chatId.value, content:content)
             .then((value) => value.fold((failure) {
           responseMessage = mapFailureToMessage(failure);
-          loading.value = false;
           Get.snackbar(
             'Requires',
             responseMessage,
@@ -125,7 +124,6 @@ class ChatDetailsController extends GetxController {
             .call(postId:postId,chatTo: chatTo, content:content)
             .then((value) => value.fold((failure) {
           responseMessage = mapFailureToMessage(failure);
-          loading.value = false;
           Get.snackbar(
             '',
             responseMessage,
@@ -157,6 +155,7 @@ class ChatDetailsController extends GetxController {
     chatMessages
         .firstWhere((element) => element.id == messageId)
         .sending.value = false;
+    chatMessages.refresh();
   }
 
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:haraj/utils/models/general/general_model.dart';
 import 'package:haraj/utils/models/seller_info/image.dart';
 import 'package:haraj/utils/models/seller_info/store_model.dart';

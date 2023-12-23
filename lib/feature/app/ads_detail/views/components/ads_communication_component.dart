@@ -39,7 +39,7 @@ class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
             onPressed: () async {
               Get.to(() =>
                   ChatScreen(comeFrom: context.localizations.chat ?? '',
-                    chatId: 0,
+                    chatId: 0, //TODO check API if there is a running chat already
                     post: PostModel(
                       id: controller.adsDetail.value.id,
                       createdAt: controller.adsDetail.value.createdAt,
@@ -59,6 +59,8 @@ class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
                     ),
                     otherUser:ClientModel(
                       id: controller.adsDetail.value.sellerId,
+                      name: controller.adsDetail.value.store?.name,
+                      avatar: controller.adsDetail.value.store?.avatar,
                     ),
                     // post: message.post,
                   ));
