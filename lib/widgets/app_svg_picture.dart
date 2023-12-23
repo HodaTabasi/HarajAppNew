@@ -6,7 +6,7 @@ class AppSvgPicture extends StatelessWidget {
       {Key? key,
       required this.assetName,
       this.color,
-      this.matchTextDirection = true,
+      this.matchTextDirection = false,
       this.width,
       this.height,
       this.fit = BoxFit.contain})
