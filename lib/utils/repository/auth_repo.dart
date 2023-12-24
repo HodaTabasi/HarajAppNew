@@ -6,6 +6,7 @@ import 'package:haraj/utils/models/user/user_model.dart';
 import '../api/network_info.dart';
 import '../errors/exceptions.dart';
 import '../errors/failures.dart';
+import '../models/user/forget_password_resp.dart';
 import '../prefs/shared_pref_controller.dart';
 
 class AuthRepository {
@@ -52,6 +53,20 @@ class AuthRepository {
       return Left(OfflineFailure());
     }
   }
+
+  Future<Either<Failure, ForgetPasswordResp>> forgetPassword({password, password_confirmation}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.forgetPassword(password: password, password_confirmation: password_confirmation);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
 
   Future<Either<Failure, UserModel>> _getMessage(Function loginOrCreate) async {
     if (await networkInfo.isConnected) {

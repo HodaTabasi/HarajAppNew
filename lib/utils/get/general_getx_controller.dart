@@ -18,6 +18,8 @@ class GeneralGetxController extends GetxController {
   Rx<String?> nicknNameErrorText  = RxString('');
   GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   GlobalKey<FormState> newUserKey = GlobalKey<FormState>();
+  GlobalKey<FormState> addPasswordKey = GlobalKey<FormState>();
+  GlobalKey<FormState> forgetPasswordKey = GlobalKey<FormState>();
   GlobalKey<FormState> sellerProfileKey = GlobalKey<FormState>();
   GlobalKey<FormState> sellerAddressKey = GlobalKey<FormState>();
   GlobalKey<FormState> sellerStoreKey = GlobalKey<FormState>();
