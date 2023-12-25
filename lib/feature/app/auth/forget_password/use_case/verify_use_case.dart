@@ -10,6 +10,6 @@ class VerifyUseCase {
   VerifyUseCase({required this.repository});
 
   Future<Either<Failure, UserModel>> call(String code) async {
-    return await repository.verifyAndRegister(code:code);
+    return await repository.verify(code:code);
   }
 }

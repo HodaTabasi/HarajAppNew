@@ -55,10 +55,9 @@ class AuthController with Helpers {
   verify({code, hashKey}) async {
     var map = {"code": code, "device_name": await getId()};
     var url = Uri.parse(ApiSettings.verify.replaceFirst('{id}', hashKey));
-    http.Response response = await http.post(url, body: map);
-    var decodedJson = json.decode(response.body);
+    http.Response response = await http.post(url, body: map, headers: headers);
+   var decodedJson = json.decode(response.body);
 
-    print(decodedJson);
     if (response.statusCode == 200) {
       // GetStorage().write('otp', decodedJson['otp_code']);
       return UserModel.fromJson(decodedJson);

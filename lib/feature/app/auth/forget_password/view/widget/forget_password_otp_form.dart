@@ -17,8 +17,6 @@ class _ForgetPasswordOtpFormState extends State<ForgetPasswordOtpForm>{
   FocusNode? pin1FocusNode;
   FocusNode? pin2FocusNode;
   FocusNode? pin3FocusNode;
-  FocusNode? pin5FocusNode;
-  FocusNode? pin6FocusNode;
   FocusNode? pin4FocusNode;
   late String myCode;
   late String smsCode;
@@ -34,43 +32,7 @@ class _ForgetPasswordOtpFormState extends State<ForgetPasswordOtpForm>{
     pin1FocusNode = FocusNode();
     pin2FocusNode = FocusNode();
     pin3FocusNode = FocusNode();
-    pin5FocusNode = FocusNode();
-    pin6FocusNode = FocusNode();
     pin4FocusNode = FocusNode();
-    // if(Platform.isIOS){
-    //   pin1FocusNode?.addListener(() {
-    //     bool hasFocus = pin1FocusNode!.hasFocus;
-    //     if (hasFocus) {
-    //       KeyboardOverlay.showOverlay(context);
-    //     } else {
-    //       KeyboardOverlay.removeOverlay();
-    //     }
-    //   });
-    //   pin2FocusNode?.addListener(() {
-    //     bool hasFocus = pin2FocusNode!.hasFocus;
-    //     if (hasFocus) {
-    //       KeyboardOverlay.showOverlay(context);
-    //     } else {
-    //       KeyboardOverlay.removeOverlay();
-    //     }
-    //   });
-    //   pin3FocusNode?.addListener(() {
-    //     bool hasFocus = pin3FocusNode!.hasFocus;
-    //     if (hasFocus) {
-    //       KeyboardOverlay.showOverlay(context);
-    //     } else {
-    //       KeyboardOverlay.removeOverlay();
-    //     }
-    //   });
-    //   pin5FocusNode?.addListener(() {
-    //     bool hasFocus = pin5FocusNode!.hasFocus;
-    //     if (hasFocus) {
-    //       KeyboardOverlay.showOverlay(context);
-    //     } else {
-    //       KeyboardOverlay.removeOverlay();
-    //     }
-    //   });
-    // }
   }
 
   @override
@@ -84,8 +46,6 @@ class _ForgetPasswordOtpFormState extends State<ForgetPasswordOtpForm>{
     pin1FocusNode!.dispose();
     pin2FocusNode!.dispose();
     pin3FocusNode!.dispose();
-    pin5FocusNode!.dispose();
-    pin6FocusNode!.dispose();
     pin4FocusNode!.dispose();
   }
 
@@ -105,28 +65,60 @@ class _ForgetPasswordOtpFormState extends State<ForgetPasswordOtpForm>{
     return Form(
       child: Column(
         children: [
-          // SizedBox(height: 10.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 8.r,vertical: 8.0.r),
+                padding: EdgeInsets.symmetric(horizontal: 8.r,vertical: 8.0.r),
                 child: SizedBox(
                   width: getProportionateScreenWidth(50),
                   height: getProportionateScreenHeight(50),
                   child: TextFormField(
-                    controller:ForgetPasswordController.to.num1Controller,
-                    autofocus: true,
-                    focusNode: pin1FocusNode,
+                    controller: ForgetPasswordController.to.num4Controller,
+                    focusNode: pin4FocusNode,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     obscureText: false,
                     style: TextStyle(fontSize: 16),
                     keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     textAlign: TextAlign.center,
                     decoration: otpInputDecoration,
                     maxLength: 1,
                     onChanged: (value) {
-                      nextField(value, pin2FocusNode!);
+                      if (value.isEmpty) {
+                        previousField(value, pin3FocusNode!);
+                      } else {
+                        pin4FocusNode!.unfocus();
+                        onPress();
+                      }
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.r,vertical: 8.0.r),
+                child: SizedBox(
+                  width: getProportionateScreenWidth(50),
+                  height: getProportionateScreenHeight(50),
+                  child: TextFormField(
+                    controller: ForgetPasswordController.to.num3Controller,
+                    focusNode: pin3FocusNode,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    obscureText: false,
+                    style: TextStyle(fontSize: 16),
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    decoration: otpInputDecoration,
+                    maxLength: 1,
+                    onChanged: (value) {
+                      if (value.isEmpty) {
+                        previousField(value, pin2FocusNode!);
+                      } else {
+                        nextField(value, pin4FocusNode!);
+                      }
+
+                      // if(value.length == 0){
+                      //   pin2FocusNode!.requestFocus();
+                      // }
                       // _getClipboardText();
                     },
                   ),
@@ -157,67 +149,34 @@ class _ForgetPasswordOtpFormState extends State<ForgetPasswordOtpForm>{
                       // if(value.length == 0){
                       //   pin2FocusNode!.requestFocus();
                       // }
-                    // _getClipboardText();
+                      // _getClipboardText();
                     },
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.r,vertical: 8.0.r),
+                padding:  EdgeInsets.symmetric(horizontal: 8.r,vertical: 8.0.r),
                 child: SizedBox(
                   width: getProportionateScreenWidth(50),
                   height: getProportionateScreenHeight(50),
                   child: TextFormField(
-                    controller: ForgetPasswordController.to.num3Controller,
-                    focusNode: pin3FocusNode,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    controller:ForgetPasswordController.to.num1Controller,
+                    autofocus: true,
+                    focusNode: pin1FocusNode,
                     obscureText: false,
                     style: TextStyle(fontSize: 16),
                     keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     textAlign: TextAlign.center,
                     decoration: otpInputDecoration,
                     maxLength: 1,
                     onChanged: (value) {
-                      if (value.isEmpty) {
-                        previousField(value, pin2FocusNode!);
-                      } else {
-                        nextField(value, pin5FocusNode!);
-                      }
-
-                      // if(value.length == 0){
-                      //   pin2FocusNode!.requestFocus();
-                      // }
-                    // _getClipboardText();
+                      nextField(value, pin2FocusNode!);
+                      // _getClipboardText();
                     },
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.r,vertical: 8.0.r),
-                child: SizedBox(
-                  width: getProportionateScreenWidth(50),
-                  height: getProportionateScreenHeight(50),
-                  child: TextFormField(
-                    controller: ForgetPasswordController.to.num6Controller,
-                    focusNode: pin5FocusNode,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    obscureText: false,
-                    style: TextStyle(fontSize: 16),
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.center,
-                    decoration: otpInputDecoration,
-                    maxLength: 1,
-                    onChanged: (value) {
-                      if (value.isEmpty) {
-                        previousField(value, pin3FocusNode!);
-                      } else {
-                        pin5FocusNode!.unfocus();
-                        onPress();
-                      }
-                    },
-                  ),
-                ),
-              ),
+              )
             ],
           ),
         ],

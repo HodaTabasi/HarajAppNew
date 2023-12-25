@@ -11,6 +11,7 @@ class _OTPScreenState extends State<OTPScreen> {
 
   @override
   Widget build(BuildContext context) {
+    controller.loading.value  = false;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -25,7 +26,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   child: Column(
                     children: [
                       SizedBox(height: 16.h),
-                      const HeaderLogo(),
+                      HeaderLogo(showBack: true),
                       SizedBox(height: 50.h),
                       ForgetPasswordOtpForm(),
                       SizedBox(height: 25.h),

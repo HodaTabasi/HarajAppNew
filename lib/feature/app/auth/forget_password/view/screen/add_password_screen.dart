@@ -3,9 +3,11 @@ part of forget_password_view;
 class AddPasswordScreen extends StatefulWidget {
   @override
   State<AddPasswordScreen> createState() => _AddPassswordScreenState();
+
 }
 class _AddPassswordScreenState extends State<AddPasswordScreen> {
   ForgetPasswordController controller = Get.put(ForgetPasswordController());
+
   @override
   Widget build(BuildContext context) {
     controller.loading.value = false;
@@ -21,7 +23,7 @@ class _AddPassswordScreenState extends State<AddPasswordScreen> {
                   padding: EdgeInsets.only(top: 55.h),
                   child: Column(
                     children: [
-                      const HeaderLogo(),
+                      HeaderLogo(showBack: false),
                       SizedBox(height: 30.h),
                       PasswordInputField(),
                       SizedBox(height: 15.h),
@@ -47,5 +49,10 @@ class _AddPassswordScreenState extends State<AddPasswordScreen> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    SharedPrefController().clear();
+    super.dispose();
   }
 }

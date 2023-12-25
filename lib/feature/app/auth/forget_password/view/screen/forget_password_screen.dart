@@ -11,6 +11,7 @@ import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
 import 'package:haraj/utils/extensions/routes/key_routes.dart';
 import 'package:haraj/utils/get/general_getx_controller.dart';
+import 'package:haraj/utils/prefs/shared_pref_controller.dart';
 import 'package:haraj/widgets/app_elevated_button.dart';
 import 'package:haraj/widgets/app_image.dart';
 import 'package:haraj/widgets/app_svg_picture.dart';
@@ -54,12 +55,12 @@ class ForgetPasswordScreen extends GetView<ForgetPasswordController> {
                   padding: EdgeInsets.only(top: 55.h),
                   child: Column(
                     children: [
-                      const HeaderLogo(),
+                      HeaderLogo(showBack: true),
                       SizedBox(height: 30.h),
                       InputField(),
                       SizedBox(height: 5.h),
                       Obx(() {
-                        return controller.loading.isTrue
+                        return controller.reSendLoading.isTrue
                             ? const Center(child: CircularProgressIndicator())
                             : Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),

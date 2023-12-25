@@ -27,7 +27,7 @@ class ForgetPasswordController extends GetxController {
   late TextEditingController num1Controller = TextEditingController();
   late TextEditingController num2Controller = TextEditingController();
   late TextEditingController num3Controller = TextEditingController();
-  late TextEditingController num6Controller = TextEditingController();
+  late TextEditingController num4Controller = TextEditingController();
   late TextEditingController passwordController = TextEditingController();
   late TextEditingController confirmPasswordController = TextEditingController();
 
@@ -50,11 +50,10 @@ class ForgetPasswordController extends GetxController {
     num1Controller.dispose();
     num2Controller.dispose();
     num3Controller.dispose();
-    num6Controller.dispose();
+    num4Controller.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
-
-
+    SharedPrefController().clear();
     super.dispose();
   }
 
@@ -63,7 +62,7 @@ class ForgetPasswordController extends GetxController {
     num1Controller.clear();
     num2Controller.clear();
     num3Controller.clear();
-    num6Controller.clear();
+    num4Controller.clear();
     passwordController.clear();
     confirmPasswordController.clear();
   }
@@ -92,7 +91,7 @@ class ForgetPasswordController extends GetxController {
     }));
   }
 
-  Future<void> doVerify() async {
+  doVerify() async {
     return VerifyUseCase(repository: Get.find<AuthRepository>())
         .call(makeCode())
         .then((value) => value.fold((failure) {
@@ -128,12 +127,6 @@ class ForgetPasswordController extends GetxController {
     }, (user) async {
       SharedPrefController().clear();
       Get.offAll(LoginScreen());
-      //await SharedPrefController().save(user: user);
-      /*if (user.data?.type == 1) {
-        Get.offAll(CompleteProfileSellerScreen());
-      } else {
-        Get.offAll(CompleteProfileBuyerScreen());
-      }*/
     }));
   }
 
@@ -155,7 +148,7 @@ class ForgetPasswordController extends GetxController {
     if (num1Controller.text.isNotEmpty &&
         num2Controller.text.isNotEmpty &&
         num3Controller.text.isNotEmpty &&
-        num6Controller.text.isNotEmpty) {
+        num4Controller.text.isNotEmpty) {
       return true;
     }
     Get.snackbar(
@@ -183,7 +176,7 @@ class ForgetPasswordController extends GetxController {
 
 
   makeCode(){
-    return '${num1Controller.text}${num2Controller.text}${num3Controller.text}${num6Controller.text}';
+    return '${num1Controller.text}${num2Controller.text}${num3Controller.text}${num4Controller.text}';
   }
 
 

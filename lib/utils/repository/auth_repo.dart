@@ -41,6 +41,21 @@ class AuthRepository {
         code: code, hashKey: SharedPrefController().vierifyCode));
   }
 
+  Future<Either<Failure, UserModel>> verify({code}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.verify(
+            code: code, hashKey: SharedPrefController().vierifyCode);
+        return Right(response);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+
   Future<Either<Failure, verifiyResponse>> resendCode({email}) async {
     if (await networkInfo.isConnected) {
       try {

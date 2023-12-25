@@ -1,18 +1,22 @@
 part of forget_password_view;
 
 class HeaderLogo extends StatefulWidget {
-  const HeaderLogo({Key? key}) : super(key: key);
+  bool showBack ;
+
+   HeaderLogo({Key? key, required this.showBack});
 
   @override
   State<HeaderLogo> createState() => _HeaderLogoState();
 }
 
 class _HeaderLogoState extends State<HeaderLogo> {
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.topCenter,
       children: [
+        if(widget.showBack)
         const BackButton(),
         Center(
           child: AppSvgPicture(
