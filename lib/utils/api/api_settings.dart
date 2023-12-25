@@ -13,6 +13,7 @@ class ApiSettings {
   static const String changeEmail = '${_apiUrl}user/change-email';
   static const String changePassword = '${_apiUrl}user/change-password';
   static const String deleteAccount = '${_apiUrl}/account';
+  static const String forgetPassword = '${_apiUrl}/forget-password';
   //***************************PROFILE LINKS************************************
   // static const String profile = '${_apiUrl}user/profile?user_id=';
   static const String getProfile = '${_apiUrl}/profile';

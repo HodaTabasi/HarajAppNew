@@ -14,7 +14,7 @@ class _ChatComponentState extends State<ChatComponent> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (controller.loading.value) {
+      if (controller.loading.value && controller.isFirstTime.value) {
         return const Center(child: CircularProgressIndicator());
       } else if (controller.chatConversations.isNotEmpty) {
         return Column(
@@ -55,6 +55,7 @@ class _ChatComponentState extends State<ChatComponent> {
                                     chatId: controller.chatConversations[index].id!,
                                   otherUser: controller.chatConversations[index].client,
                                   post: controller.chatConversations[index].post,
+                                  //TODO send store data to the screen
 
                                 ));
                           },

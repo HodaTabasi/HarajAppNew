@@ -6,14 +6,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haraj/feature/app/chat/controller/chat_controller.dart';
 import 'package:haraj/feature/app/chat/controller/chat_details_controller.dart';
-import 'package:haraj/utils/api_controller/auth_api_controller.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
 import 'package:haraj/utils/extensions/main_extension/context_extension.dart';
-import 'package:haraj/utils/models/chat/message.dart';
 import 'package:haraj/utils/models/offer/client_model.dart';
 import 'package:haraj/utils/models/offer/post_model.dart';
+import 'package:haraj/utils/models/seller_info/store_model.dart';
 import 'package:haraj/widgets/app_body_container.dart';
 import 'package:haraj/widgets/app_chat_car_container.dart';
 import 'package:haraj/widgets/app_chat_card.dart';
@@ -41,6 +40,7 @@ class HomeChatScreen extends GetView<HomeChatController> {
 
   @override
   Widget build(BuildContext context) {
+    homeChatController.getIndexChats(pageNumber: 1);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
@@ -58,23 +58,23 @@ class HomeChatScreen extends GetView<HomeChatController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //TODO search later
             // InputField(),
             // controller.seller == 'seller'
-            SharedPrefController().type == 1
-                ? TabBarComponent(
-                    tabTitles: [
-                      context.localizations.chat,
-                      context.localizations.requests,
-                    ],
-                    tabViews: const [
-                      ChatComponent(),
-                      RequestsComponent(),
-                      // Other tab views
-                    ],
-                    height: 580.h,
-                  )
-                : SizedBox(height: 630.h, child: ChatComponent()),
+            // SharedPrefController().type == 1
+            //     ? TabBarComponent(
+            //         tabTitles: [
+            //           context.localizations.chat,
+            //           context.localizations.requests,
+            //         ],
+            //         tabViews: const [
+            //           ChatComponent(),
+            //           RequestsComponent(),
+            //           // Other tab views
+            //         ],
+            //         height: 580.h,
+            //       )
+            //     :
+            SizedBox(height: 630.h, child: ChatComponent()),
           ],
         ),
       ),

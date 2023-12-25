@@ -4,7 +4,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:haraj/feature/app/auth/forget_password/view/screen/forget_password_screen.dart';
 import 'package:haraj/feature/app/auth/login/controller/login_controller.dart';
+import 'package:haraj/feature/app/auth/register/view/screen/register_screen.dart';
 import 'package:haraj/utils/extensions/color_resource/color_resource.dart';
 import 'package:haraj/utils/extensions/icons_app/icons_app.dart';
 import 'package:haraj/utils/extensions/images_app/images_app.dart';
@@ -50,7 +52,9 @@ class LoginScreen extends GetView<LoginController> {
                       InputField(),
                       SizedBox(height: 5.h),
                       TextButtonApp(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => ForgetPasswordScreen());
+                        },
                         title: context.localizations.forget_password,
                         color: ColorResource.gray,
                         alignment: Alignment.topLeft,

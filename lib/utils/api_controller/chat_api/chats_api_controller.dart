@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:haraj/utils/api/api_settings.dart';
 import 'package:haraj/utils/extensions/helpers/helpers.dart';
+import 'package:haraj/utils/models/chat/chat_conversation.dart';
 import 'package:haraj/utils/models/chat/chats_model.dart';
 import 'package:haraj/utils/models/chat/messages_model.dart';
 import 'package:http/http.dart' as http;
@@ -54,6 +55,22 @@ class ChatsApiController with Helpers {
 
     if (response.statusCode == 201 || response.statusCode == 200) {
       return Message.fromJson(decodedJson['data']);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
+  startChat({required chatTo,required postId, required content}) async {
+    var url = Uri.parse(ApiSettings.chats);
+    http.Response response = await http.post(url, headers: headers, body: {'content' : content,'post_id' : postId.toString(), 'chat_to' : chatTo.toString()});
+    var decodedJson = json.decode(response.body);
+
+    print("mmm startChat Headers 💯=> $headers");
+    print("mmm startChat  💯=> $decodedJson");
+    print("mmm startChat  💯=> ${response.statusCode}");
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return ChatConversation.fromJson(decodedJson['data']);
     } else {
       SERVER_FAILURE_MESSAGE = decodedJson['message'];
       throw ServerException();

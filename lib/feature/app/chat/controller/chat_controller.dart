@@ -12,6 +12,7 @@ import '../../../../utils/models/meta/meta_model.dart';
 class HomeChatController extends GetxController {
   static HomeChatController get to => Get.find<HomeChatController>();
   RxBool loading = false.obs;
+  RxBool isFirstTime = true.obs;
   var responseMessage = "";
   RxList<ChatConversation> chatConversations = <ChatConversation>[].obs;
   Meta meta = Meta();
@@ -67,6 +68,10 @@ class HomeChatController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }, (response) async {
+      isFirstTime.value = false;
+      if(pageNumber == 1) {
+        chatConversations.clear();
+      }
       chatConversations.addAll(response.data ?? []);
       meta = response.meta!;
       loading.value = false;
@@ -88,6 +93,10 @@ class HomeChatController extends GetxController {
         }
       chatConversations.refresh();
     }
+  }
+  void createNewChat(ChatConversation chatConversation) {
+    chatConversations.insert(0,chatConversation);
+     chatConversations.refresh();
   }
 
 }

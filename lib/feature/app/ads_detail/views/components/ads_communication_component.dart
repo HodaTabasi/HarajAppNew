@@ -37,23 +37,42 @@ class _AdsCommunicationComponentState extends State<AdsCommunicationComponent> {
           MoreButton(
             title: context.localizations.chat,
             onPressed: () async {
-              // if (controller.adsDetail.value.chat! == true) {
-              //   //here to open chat
-              //   ChatScreen(comeFrom: context.localizations.communicate,
-              //     otherUser: ClientModel(
-              //       id: controller.adsDetail.value.sellerId,
-              //     ),
-              //     post: controller.chatConversations[index].post,
-              //
-              //   ));
-              // }
+              Get.to(() =>
+                  ChatScreen(comeFrom: context.localizations.chat ?? '',
+                    chatId: 0, //TODO check API if there is a running chat already
+                    post: PostModel(
+                      id: controller.adsDetail.value.id,
+                      createdAt: controller.adsDetail.value.createdAt,
+                      gallery: controller.adsDetail.value.gallery,
+                      brand: GeneralModel(
+                        name: controller.adsDetail.value.brand?.name,
+                      ),
+                      car: GeneralModel(
+                        name: controller.adsDetail.value.car?.name,
+                      ),
+                      generalStatus: GeneralModel(
+                        name: controller.adsDetail.value.generalStatus?.name,
+                      ),
+                      year: controller.adsDetail.value.year,
+                      price: controller.adsDetail.value.price,
+
+                    ),
+                    otherUser:ClientModel(
+                      id: controller.adsDetail.value.sellerId,
+                      name: controller.adsDetail.value.store?.name,
+                      avatar: controller.adsDetail.value.store?.avatar,
+                    ),
+                    // post: message.post,
+                  ));
             },
           ),
-          SizedBox(height: 3.h),
-          RowDividerWidget(
-            text: context.localizations.or,
+          if (controller.adsDetail.value.chat! == true)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: RowDividerWidget(
+              text: context.localizations.or,
           ),
-          SizedBox(height: 3.h),
+            ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

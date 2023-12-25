@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:haraj/utils/extensions/helpers/helpers.dart';
 import 'package:haraj/utils/models/seller_info/verify_response.dart';
+import 'package:haraj/utils/models/user/forget_password_resp.dart';
 import 'package:haraj/utils/models/user/user_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../api/api_settings.dart';
+import '../api/process_response.dart';
 import '../errors/error_const.dart';
 import '../errors/exceptions.dart';
 
@@ -53,10 +55,9 @@ class AuthController with Helpers {
   verify({code, hashKey}) async {
     var map = {"code": code, "device_name": await getId()};
     var url = Uri.parse(ApiSettings.verify.replaceFirst('{id}', hashKey));
-    http.Response response = await http.post(url, body: map);
-    var decodedJson = json.decode(response.body);
+    http.Response response = await http.post(url, body: map, headers: headers);
+   var decodedJson = json.decode(response.body);
 
-    print(decodedJson);
     if (response.statusCode == 200) {
       // GetStorage().write('otp', decodedJson['otp_code']);
       return UserModel.fromJson(decodedJson);
@@ -76,7 +77,7 @@ class AuthController with Helpers {
     var decodedJson = json.decode(response.body);
 
     print(decodedJson);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       // GetStorage().write('otp', decodedJson['otp_code']);
       return verifiyResponse.fromJson(decodedJson);
     } else {
@@ -84,6 +85,29 @@ class AuthController with Helpers {
       throw ServerException();
     }
   }
+
+  forgetPassword({password, password_confirmation}) async {
+    var map = {
+      "password": password,
+      "password_confirmation": password_confirmation,
+
+    };
+    var url = Uri.parse(ApiSettings.forgetPassword);
+    http.Response response = await http.post(url, body: map, headers: headers);
+    var decodedJson = json.decode(response.body);
+
+    print(decodedJson);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      // GetStorage().write('otp', decodedJson['otp_code']);
+      var resp = ForgetPasswordResp.fromJson(decodedJson);
+      var status = resp.status;
+      return ForgetPasswordResp.fromJson(decodedJson);
+    } else {
+      SERVER_FAILURE_MESSAGE = decodedJson['message'];
+      throw ServerException();
+    }
+  }
+
 
   socialLogin(
       {deviceName,

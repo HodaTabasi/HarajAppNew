@@ -14,8 +14,6 @@ class _AppActionsState extends State<AppActions> {
 
   @override
   void initState() {
-    //TODO dddds
-    print("Fgdfgd");
     super.initState();
     controller = Get.put(AdsDetailController(productId: widget.id));
   }
